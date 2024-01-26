@@ -10,7 +10,7 @@ TextEditingController stopController = TextEditingController();
 inPutField(
   BuildContext context,
   TextEditingController controller,
-  String hint,
+  String hint,IconData icon,
 ) =>
     Container(
       height: 50,
@@ -18,15 +18,17 @@ inPutField(
         borderRadius: BorderRadius.circular(cornerSize - 1),
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
       ),
-      padding: const EdgeInsets.fromLTRB(17, 0, 17, 4),
+      padding: const EdgeInsets.all(15),
       margin: const EdgeInsets.fromLTRB(7, 0, 7, 6),
       child: Row(
         children: [
-          Icon(
-            Icons.arrow_right,
-            color: Theme.of(context).primaryColor,
-            size: 30,
+          Center(
+            child: Icon(
+              icon,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
+          const SizedBox(width: 7),
           Expanded(
             child: TextField(
               controller: controller,
