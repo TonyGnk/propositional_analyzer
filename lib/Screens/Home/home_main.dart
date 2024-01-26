@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:propositional_analyzer/Screens/Home/home_fields.dart';
 
 import '../screen_list.dart';
 import 'mode_button_template.dart';
@@ -29,11 +30,16 @@ class _HomeState extends ConsumerState<Home> {
             const SizedBox(height: 10),
             welcomeToText,
             titleText(context),
+            const SizedBox(height: 30),
+            inPutField(context, kController, 'Set K variable'),
+            inPutField(context, nController, 'Set N variable'),
+            inPutField(context, sampleController, 'Set Sample Size'),
+            inPutField(context, stopController, 'Set Stop Size'),
             const Expanded(flex: 1, child: SizedBox()),
             modeText(context),
             const SizedBox(height: 16),
             rowOfButtons(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
           ],
         ),
       );

@@ -10,7 +10,6 @@ final stepModeProvider = StateProvider<bool>((ref) => false);
 
 closedSearch(bool compareMode) => Consumer(
       builder: (context, WidgetRef ref, __) {
-        final stepMode = ref.watch(stepModeProvider);
         return row(context, compareMode);
       },
     );
