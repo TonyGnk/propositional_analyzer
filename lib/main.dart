@@ -1,61 +1,44 @@
-import 'dart:math';
-
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:propositional_analyzer/chart.dart';
-import 'package:propositional_analyzer/function.dart';
+import 'package:universal_platform/universal_platform.dart';
+import 'package:window_manager/window_manager.dart';
 
-void main() {
-  runApp(const ProviderScope(child: MyApp()));
-}
+import 'UI/Adaptive Folder/adaptive_root.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Analyzer',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrangeAccent),
-        useMaterial3: true,
-      ),
-      debugShowMaterialGrid: false,
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (!UniversalPlatform.isWeb) {
+    await windowManager.ensureInitialized();
+    WindowOptions windowOptions = const WindowOptions(
+      //     fullScreen: false,
+      title: 'Propositional Analyzer',
+      size: Size(390, 770), //1050-660
+      //     center: false,
+      backgroundColor: Colors.transparent,
+      //     skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.normal,
+      //     windowButtonVisibility: false,
+      alwaysOnTop: true,
     );
+
+    windowManager.waitUntilReadyToShow(windowOptions, () {
+      //     await windowManager.show();
+      //     await windowManager.focus();
+    });
   }
+
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+
+  runApp(
+    ProviderScope(
+      child: buildApp(savedThemeMode: savedThemeMode),
+    ),
+  );
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer(
-        builder: (context, WidgetRef ref, __) => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Press Start to begin the analysis'),
-              FilledButton(
-                  onPressed: () => start(ref), child: const Text('Start')),
-              const Chart(),
-            ],
-          ),
-        ),
-      ),
+AdaptiveRoot buildApp({AdaptiveThemeMode? savedThemeMode}) => AdaptiveRoot(
+      savedThemeMode: savedThemeMode,
+      appTitle: 'Propositional Analyzer',
+      debugShowFloatingThemeButton: false,
     );
-  }
-}
-
-//List from 1 to 10
-List<int> list = List.generate(10, (index) => index + 1);
