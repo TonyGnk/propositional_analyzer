@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:propositional_analyzer/Screens/Result/result_main.dart';
+import 'package:propositional_analyzer/Screens/Result/result_state.dart';
 
 import '../Services/constants.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
@@ -11,6 +13,7 @@ import 'Home/home_main.dart';
 
 enum ScreenDestination {
   home,
+  result,
   settings,
   about,
 }
@@ -21,7 +24,8 @@ go(WidgetRef ref, ScreenDestination destination) {
   switch (currentScreen) {
     case ScreenDestination.home:
       homeGo(ref, destination);
-
+    case ScreenDestination.result:
+      resultGo(ref, destination);
     case ScreenDestination.about:
       aboutGo(ref, destination);
     case ScreenDestination.settings:
@@ -42,6 +46,8 @@ getCurrentScreen(ScreenDestination currentScreen) {
   switch (currentScreen) {
     case ScreenDestination.home:
       return const Home();
+    case ScreenDestination.result:
+      return const Result();
 
     case ScreenDestination.settings:
       return const Settings();

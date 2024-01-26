@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:propositional_analyzer/Screens/Home/home_fields.dart';
+import 'package:propositional_analyzer/Screens/Home/mode_button_template.dart';
+import 'package:propositional_analyzer/Screens/Result/result_state.dart';
 
 import '../screen_list.dart';
-import 'mode_button_template.dart';
-import 'home_state.dart';
 
-class Home extends ConsumerStatefulWidget {
-  const Home({super.key});
+class Result extends ConsumerStatefulWidget {
+  const Result({super.key});
 
   @override
-  ConsumerState<Home> createState() => _HomeState();
+  ConsumerState<Result> createState() => _ResultState();
 }
 
-class _HomeState extends ConsumerState<Home> {
+class _ResultState extends ConsumerState<Result> {
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      homeReturn(ref);
+      resultReturn(ref);
     });
   }
 
@@ -59,7 +59,7 @@ const welcomeToText = Text(
 );
 
 titleText(BuildContext context) => Text(
-      'Propositional Analyzer',
+      'Propositional',
       style: TextStyle(
           fontSize: 34,
           color: Theme.of(context).primaryColor,
@@ -83,7 +83,7 @@ rowOfButtons() => Consumer(
             child: ModeButtons(
               label: 'Start',
               icon: Icons.troubleshoot_outlined,
-              onTap: () => homeGo(ref, ScreenDestination.result),
+              onTap: () => resultGo(ref, ScreenDestination.about),
             ),
           ),
         ],
