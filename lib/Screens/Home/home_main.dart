@@ -24,16 +24,16 @@ class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) => animatedColumn(
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Expanded(flex: 3, child: SizedBox()),
+            const SizedBox(height: 10),
             welcomeToText,
-            titleText,
-            const Expanded(flex: 3, child: SizedBox()),
+            titleText(context),
+            const Expanded(flex: 1, child: SizedBox()),
             modeText,
             const SizedBox(height: 16),
             rowOfButtons(),
-            const Expanded(flex: 1, child: SizedBox()),
+            const SizedBox(height: 20),
           ],
         ),
       );
@@ -42,20 +42,20 @@ class _HomeState extends ConsumerState<Home> {
 const welcomeToText = Text(
   'Welcome to',
   style: TextStyle(
-    fontSize: 29,
+    fontSize: 27,
     fontFamily: 'Play',
   ),
-  textAlign: TextAlign.left,
+  textAlign: TextAlign.right,
 );
 
-const titleText = Text(
-  'Node Odyssey',
-  style: TextStyle(
-      fontSize: 36,
-      color: Color.fromRGBO(32, 102, 224, 0.9),
-      fontWeight: FontWeight.bold),
-  textAlign: TextAlign.left,
-);
+titleText(BuildContext context) => Text(
+      'Propositional Analyzer',
+      style: TextStyle(
+          fontSize: 34,
+          color: Theme.of(context).primaryColor,
+          fontWeight: FontWeight.bold),
+      textAlign: TextAlign.center,
+    );
 
 const modeText = Text(
   'Select the mode you want to use:',
@@ -63,7 +63,7 @@ const modeText = Text(
     fontSize: 15,
     fontFamily: 'Play',
   ),
-  textAlign: TextAlign.left,
+  textAlign: TextAlign.center,
 );
 
 rowOfButtons() => Consumer(
@@ -71,16 +71,8 @@ rowOfButtons() => Consumer(
         children: [
           Expanded(
             child: ModeButtons(
-              label: 'Terminal',
-              icon: Icons.terminal,
-              onTap: () => homeGo(ref, ScreenDestination.about),
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: ModeButtons(
-              label: 'GUI',
-              icon: Icons.desktop_windows_outlined,
+              label: 'Start',
+              icon: Icons.troubleshoot_outlined,
               onTap: () => homeGo(ref, ScreenDestination.about),
             ),
           ),

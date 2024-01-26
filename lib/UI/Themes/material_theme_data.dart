@@ -8,7 +8,7 @@ class MaterialThemeData extends TotalTheme {
         brightness: Brightness.light,
         useMaterial3: true,
         //#90A4AE to rgb is 144, 164, 174
-        colorSchemeSeed: const Color.fromARGB(255, 149, 173, 214),
+        //colorSchemeSeed: Colors.deepOrangeAccent,
         textTheme: TextTheme(
           displayLarge: const TextStyle(
             color: Color.fromARGB(255, 31, 31, 31),
@@ -27,13 +27,14 @@ class MaterialThemeData extends TotalTheme {
         scaffoldBackgroundColor: const Color.fromARGB(255, 245, 245, 245),
         shadowColor: const Color.fromARGB(255, 255, 255, 255),
         splashColor: const Color.fromARGB(255, 255, 255, 255),
+        primaryColor: Colors.deepOrangeAccent,
       );
 
   @override
   ThemeData dark() => ThemeData(
         brightness: Brightness.dark,
         useMaterial3: true,
-        colorSchemeSeed: const Color.fromARGB(255, 149, 173, 214),
+        //colorSchemeSeed: Colors.deepOrangeAccent,
         textTheme: TextTheme(
           displayLarge:
               const TextStyle(color: Color.fromARGB(255, 243, 243, 243)),
@@ -52,6 +53,7 @@ class MaterialThemeData extends TotalTheme {
         scaffoldBackgroundColor: const Color.fromARGB(255, 11, 11, 11),
         shadowColor: const Color.fromARGB(255, 45, 45, 45),
         splashColor: const Color.fromARGB(255, 1, 1, 1),
+        primaryColor: Colors.deepOrangeAccent,
       );
 
   static ThemeData getLightTheme() => MaterialThemeData().light();
