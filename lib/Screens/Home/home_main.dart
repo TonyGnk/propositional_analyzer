@@ -30,7 +30,7 @@ class _HomeState extends ConsumerState<Home> {
             welcomeToText,
             titleText(context),
             const Expanded(flex: 1, child: SizedBox()),
-            modeText,
+            modeText(context),
             const SizedBox(height: 16),
             rowOfButtons(),
             const SizedBox(height: 20),
@@ -57,14 +57,14 @@ titleText(BuildContext context) => Text(
       textAlign: TextAlign.center,
     );
 
-const modeText = Text(
-  'Select the mode you want to use:',
-  style: TextStyle(
-    fontSize: 15,
-    fontFamily: 'Play',
-  ),
-  textAlign: TextAlign.center,
-);
+modeText(BuildContext context) => Text(
+      'How it works?',
+      style: TextStyle(
+        fontSize: 15,
+        color: Theme.of(context).primaryColor,
+      ),
+      textAlign: TextAlign.center,
+    );
 
 rowOfButtons() => Consumer(
       builder: (context, ref, _) => Row(
