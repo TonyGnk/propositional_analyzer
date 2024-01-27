@@ -44,7 +44,6 @@ Widget resultsAppBar(
         IconButton(
           onPressed: () {
             ref.read(runOnceProvider.notifier).state = false;
-            addTrackingContainerRolling(ref);
           },
           icon: const Icon(Icons.close),
         ),

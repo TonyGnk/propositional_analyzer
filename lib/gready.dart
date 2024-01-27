@@ -5,7 +5,10 @@ import 'dart:math';
 import 'Screens/Result/track.dart';
 import 'constants.dart';
 
-Track hillClimbing(List<List<int>> problem, int M) {
+Future<Search> hillClimbing(
+  List<List<int>> problem,
+  int M,
+) async {
   List<int> vector = List.filled(N, 0);
   int h, h1, h2;
   int restarts = 0, steps = 0;
@@ -23,10 +26,9 @@ Track hillClimbing(List<List<int>> problem, int M) {
       DateTime t2 = DateTime.now();
       //print("\n\nNO SOLUTION found with hill-climbing...\n");
       print('Time spent: ${t2.difference(t1).inSeconds} secs\n');
-      return Track(
-        founded: 0,
+      return Search(
+        win: false,
         time: t2.difference(t1).inSeconds,
-        isSmall: true,
       );
     }
 
@@ -56,10 +58,9 @@ Track hillClimbing(List<List<int>> problem, int M) {
   //print("Solution found with hill-climbing!");
   //display(vector);
   //print("Time spent: ${t2.difference(t1).inSeconds} secs");
-  return Track(
-    founded: 1,
+  return Search(
+    win: true,
     time: t2.difference(t1).inSeconds,
-    isSmall: true,
   );
 }
 

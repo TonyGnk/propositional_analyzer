@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Screens/Result/result_main.dart';
 import '../Public Search Bar/closed_search.dart';
 import '../public_left_column.dart';
 import '../tracking_container.dart';
@@ -9,7 +10,6 @@ Widget trackingStage() => Consumer(
       builder: (context, ref, _) {
         final trackingList = ref.watch(trackingProvider);
         // ignore: unused_local_variable
-        final updater = ref.watch(trackUpdater);
         final isAlgorithmEnd = ref.watch(isAlgorithmEndProvider);
         return Column(
           children: [

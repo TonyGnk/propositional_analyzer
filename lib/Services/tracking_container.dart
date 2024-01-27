@@ -46,8 +46,6 @@ class TrackingList extends StatelessWidget {
         operation,
       ),
     );
-
-    addTrackingContainerRolling(ref);
   }
 }
 
@@ -149,10 +147,4 @@ getPreviousValue(int value, String operation) {
   } else {
     return 0.toString();
   }
-}
-
-final trackUpdater = StateProvider<bool>((ref) => false);
-
-void addTrackingContainerRolling(WidgetRef ref) {
-  ref.watch(trackUpdater.notifier).state = !ref.read(trackUpdater);
 }

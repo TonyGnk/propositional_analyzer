@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../constants.dart';
 import '../../gready.dart';
 import '../../new_value.dart';
-import 'result_state.dart';
-import 'track.dart';
+import '../Result copy/result_state.dart';
+import '../Result copy/track.dart';
 
 class Result extends ConsumerStatefulWidget {
   const Result({super.key});
