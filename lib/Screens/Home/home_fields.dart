@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:propositional_analyzer/Services/constants.dart';
+import '../../Services/constants.dart';
 
 TextEditingController kController = TextEditingController();
 TextEditingController nController = TextEditingController();

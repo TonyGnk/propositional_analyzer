@@ -11,7 +11,7 @@ void main() async {
   if (!UniversalPlatform.isWeb) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
-      //     fullScreen: false,
+      fullScreen: false,
       title: 'Propositional Analyzer',
       size: Size(390, 770), //1050-660
       //     center: false,

@@ -18,9 +18,12 @@ class _ChartState extends State<Chart> {
           final spots = ref.watch(spotsProvider);
           return LineChart(
             LineChartData(
+              maxY: 1,
+              minY: 0,
               lineBarsData: [
                 LineChartBarData(
-                  isCurved: true,
+                  barWidth: 1.0,
+                  isCurved: false,
                   spots: spots,
                 )
               ],

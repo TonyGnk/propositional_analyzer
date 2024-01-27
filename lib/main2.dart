@@ -1,9 +1,8 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:propositional_analyzer/chart.dart';
-import 'package:propositional_analyzer/function.dart';
+import 'chart.dart';
+import 'function.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -13,8 +12,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) => MaterialApp(
       title: 'Analyzer',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrangeAccent),
@@ -24,11 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
-  }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({required this.title, super.key});
 
   final String title;
 
@@ -38,8 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       body: Consumer(
         builder: (context, WidgetRef ref, __) => Center(
           child: Column(
@@ -54,7 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
-  }
 }
 
 //List from 1 to 10

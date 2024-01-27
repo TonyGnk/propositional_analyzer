@@ -10,7 +10,7 @@ Widget synthesizerDefault() => Consumer(builder: (context, ref, _) {
       return bodyWithAppBarGlass(
         appBar: appBar(context),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(0),
           child: getCurrentScreen(currentScreen),
         ),
       );

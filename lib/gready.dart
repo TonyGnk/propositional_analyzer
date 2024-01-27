@@ -2,9 +2,10 @@
 
 import 'dart:math';
 
-import 'package:propositional_analyzer/constants.dart';
+import 'Screens/Result/track.dart';
+import 'constants.dart';
 
-Search hillClimbing(List<List<int>> problem, int M) {
+Track hillClimbing(List<List<int>> problem, int M) {
   List<int> vector = List.filled(N, 0);
   int h, h1, h2;
   int restarts = 0, steps = 0;
@@ -21,8 +22,12 @@ Search hillClimbing(List<List<int>> problem, int M) {
     if (t.difference(t1).inSeconds > TIMEOUT) {
       DateTime t2 = DateTime.now();
       //print("\n\nNO SOLUTION found with hill-climbing...\n");
-      print("Time spent: ${t2.difference(t1).inSeconds} secs\n");
-      return Search(0, t2.difference(t1).inSeconds);
+      print('Time spent: ${t2.difference(t1).inSeconds} secs\n');
+      return Track(
+        founded: 0,
+        time: t2.difference(t1).inSeconds,
+        isSmall: true,
+      );
     }
 
     steps++;
@@ -51,7 +56,11 @@ Search hillClimbing(List<List<int>> problem, int M) {
   //print("Solution found with hill-climbing!");
   //display(vector);
   //print("Time spent: ${t2.difference(t1).inSeconds} secs");
-  return Search(1, t2.difference(t1).inSeconds);
+  return Track(
+    founded: 1,
+    time: t2.difference(t1).inSeconds,
+    isSmall: true,
+  );
 }
 
 // Initializing a vector of values for the propositions with random values

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:propositional_analyzer/Screens/Result/result_main.dart';
-import 'package:propositional_analyzer/Screens/Result/result_state.dart';
+import 'Result/result_main.dart';
+import 'Result/result_state.dart';
 
 import '../Services/constants.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';

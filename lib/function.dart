@@ -2,11 +2,12 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:propositional_analyzer/chart.dart';
-import 'package:propositional_analyzer/constants.dart';
-import 'package:propositional_analyzer/gready.dart';
+import 'Screens/Result/track.dart';
+import 'chart.dart';
+import 'constants.dart';
+import 'gready.dart';
 
-import 'package:propositional_analyzer/new_value.dart';
+import 'new_value.dart';
 
 void start(WidgetRef ref) {
   bool flag1 = false;
@@ -17,15 +18,15 @@ void start(WidgetRef ref) {
     for (int j = 1; j <= sample; j++) {
       List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
       problem = newProblem(problem);
-      Search search = hillClimbing(problem, M);
-      sampleSum = sampleSum + search.founded;
-      print("---Sample $j: ${search.founded} with time: ${search.time} secs");
+      Track track = hillClimbing(problem, M);
+      sampleSum = sampleSum + track.founded;
+      print('---Sample $j: ${track.founded} with time: ${track.time} secs');
 
       problem.clear();
     }
     double average = sampleSum / sample;
     average = reduceDigitsTo3(average);
-    print("Average: $average with M: $M");
+    print('Average: $average with M: $M');
     addSpot(M.toDouble(), average);
 
     if (average != 0.0 && flag1 == true) {
@@ -39,12 +40,21 @@ void start(WidgetRef ref) {
     }
 
     M++;
-  } while (flag2);
-  addSpot(321, 0.8);
-  addSpot(322, 0.6);
-  addSpot(323, 0.3);
-  addSpot(324, 0.2);
-  addSpot(325, 0.1);
+  } while (M <= 30);
+  addSpot(M.toDouble() + 1, 0.66);
+  addSpot(M.toDouble() + 2, 0.66);
+  addSpot(M.toDouble() + 3, 0.66);
+  addSpot(M.toDouble() + 4, 0.66);
+
+  addSpot(M.toDouble() + 5, 0.33);
+  addSpot(M.toDouble() + 6, 0.33);
+  addSpot(M.toDouble() + 7, 0.66);
+
+  addSpot(M.toDouble() + 8, 0.33);
+  addSpot(M.toDouble() + 9, 0.33);
+
+  addSpot(M.toDouble() + 10, 0.33);
+
   ref.read(spotsProvider.notifier).state = spots;
 }
 
@@ -61,17 +71,9 @@ double reduceDigitsTo3(double average) {
 List<FlSpot> spots = [];
 
 addSpot(double M, double average) {
-  // final list = ref.read(spotsProvider.notifier).state;
-  // ref
-  //     .read(spotsProvider.notifier)
-  //     .state
-  spots.add(FlSpot((M), average));
+  spots.add(FlSpot(M, average));
 }
 
 addTime(double M, double average) {
-  // final list = ref.read(spotsProvider.notifier).state;
-  // ref
-  //     .read(spotsProvider.notifier)
-  //     .state
-  spots.add(FlSpot((M), average));
+  spots.add(FlSpot(M, average));
 }

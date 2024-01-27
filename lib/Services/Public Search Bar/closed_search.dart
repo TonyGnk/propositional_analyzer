@@ -9,9 +9,7 @@ import 'main_search.dart';
 final stepModeProvider = StateProvider<bool>((ref) => false);
 
 closedSearch(bool compareMode) => Consumer(
-      builder: (context, WidgetRef ref, __) {
-        return row(context, compareMode);
-      },
+      builder: (context, WidgetRef ref, __) => row(context, compareMode),
     );
 
 row(BuildContext context, bool compareMode) => Row(

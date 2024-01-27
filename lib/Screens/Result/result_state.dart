@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:propositional_analyzer/UI/Routed%20Screen/app_bar.dart';
-import 'package:propositional_analyzer/UI/Routed%20Screen/info_icon.dart';
+import '../../UI/Routed%20Screen/app_bar.dart';
+import '../../function.dart';
 
 import '../../../Screens/screen_list.dart';
 import '../../../Services/constants.dart';
@@ -21,6 +21,10 @@ void resultReturn(WidgetRef ref) {
   ref.read(appBarPreviousScreen.notifier).state =
       ref.read(appBarCurrentScreen.notifier).state;
   ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.result;
+
+  Future.delayed(basicDuration, () {
+    start(ref);
+  });
 
   updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);

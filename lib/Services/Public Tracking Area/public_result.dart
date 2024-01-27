@@ -15,7 +15,7 @@ Widget resultPanel() => Consumer(builder: (context, ref, _) {
           const SizedBox(height: 3),
           resultsAppBar(ref, previousInput, cost, count),
           const SizedBox(height: 3),
-          Expanded(child: SizedBox()),
+          const Expanded(child: SizedBox()),
         ],
       );
     });
