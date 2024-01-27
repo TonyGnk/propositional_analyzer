@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:window_manager/window_manager.dart';
 import '../../UI/Routed%20Screen/app_bar.dart';
-import '../../function.dart';
 
 import '../../../Screens/screen_list.dart';
 import '../../../Services/constants.dart';
 
 final opacityResultState = StateProvider<double>((ref) => 1);
 
-void resultGo(WidgetRef ref, ScreenDestination destination) {
+void chartGo(WidgetRef ref, ScreenDestination destination) {
+  resetFullScreen();
+
   updateAppBarItems(ref, false);
   destination == ScreenDestination.home
       ? updateAppBarBackButton(ref, false)
@@ -17,21 +19,22 @@ void resultGo(WidgetRef ref, ScreenDestination destination) {
   goTo(ref, destination);
 }
 
-void resultReturn(WidgetRef ref) {
-  ref.read(appBarPreviousScreen.notifier).state =
-      ref.read(appBarCurrentScreen.notifier).state;
-  ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.result;
+resetFullScreen() async {
+  if (await windowManager.isFullScreen()) {
+    windowManager.setFullScreen(false);
+  }
+}
 
-  // Future.delayed(basicDuration, () {
-  //   start(ref);
-  // });
+void chartReturn(WidgetRef ref) {
+  ref.read(appBarPreviousScreen.notifier).state = ScreenDestination.home;
+  ref.read(appBarCurrentScreen.notifier).state = ScreenDestination.result;
 
   updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
-  updateAppBarLabel(ref, 'Searching...', isReturn);
+  updateAppBarLabel(ref, 'Results', isReturn);
   ref.read(opacityResultState.notifier).state = isReturn ? 1 : 0;
 }
 

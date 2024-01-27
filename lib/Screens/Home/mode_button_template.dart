@@ -83,8 +83,8 @@ class _ModeButtonsState extends State<ModeButtons> {
           setState(() {
             scale = 0.93;
             //color = Colors.grey.withOpacity(0.2);
-            color = Theme.of(context).primaryColor.withOpacity(0.4);
-            borderColor = Theme.of(context).primaryColor.withOpacity(0.3);
+            color = Theme.of(context).canvasColor.withOpacity(0.4);
+            borderColor = Theme.of(context).canvasColor.withOpacity(0.3);
           });
         },
         onExit: (event) {

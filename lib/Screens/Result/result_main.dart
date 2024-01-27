@@ -2,11 +2,13 @@
 
 import 'dart:async';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../constants.dart';
 import '../../gready.dart';
 import '../../new_value.dart';
+import '../screen_list.dart';
 import 'result_state.dart';
 import 'track.dart';
 
@@ -107,16 +109,22 @@ class _ResultState extends ConsumerState<Result> {
       );
 
   algorithm() async {
+    spots1.clear();
+    spots2.clear();
     int M = 1;
     int sampleSum = 0;
+    int timeSum = 0;
     do {
       sampleSum = 0;
+      timeSum = 0;
       for (int j = 1; j <= sample; j++) {
         List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
         problem = newProblem(problem);
         Search search = hillClimbing(problem, M);
         int founded = search.win ? 1 : 0;
         sampleSum = sampleSum + founded;
+        print('SearchTime is ${search.time}');
+        timeSum = timeSum + search.time;
 
         await Future.delayed(Duration.zero, () {
           setState(() {
@@ -146,16 +154,14 @@ class _ResultState extends ConsumerState<Result> {
 
         problem.clear();
       }
-
-      Track averageTrack = Track(
-        avg: sampleSum,
-        M: M,
-      );
+      double n = sampleSum / sample;
+      double averageTime = timeSum / sample;
+      addSpot(M.toDouble(), n, averageTime);
 
       await Future.delayed(Duration.zero, () {
         setState(() {
           //updateUi(sampleSum);
-          double n = sampleSum / sample;
+
           if (n == 1 / sample) {
             color1 = Colors.red;
           } else if (n == 2 / sample) {
@@ -170,7 +176,21 @@ class _ResultState extends ConsumerState<Result> {
 
       M++;
     } while (M < 455);
+    // spots1.add(FlSpot(M.toDouble(), 0.66));
+    // spots1.add(FlSpot(M.toDouble() + 1, 0.66));
+    // spots1.add(FlSpot(M.toDouble() + 2, 0.33));
+    resultGo(ref, ScreenDestination.chart);
   }
+}
+
+addSpot(double M, double average, double averageTime) {
+//Divide the M with the const N and keep only 1 decimal
+  M = M / N;
+  M = double.parse(M.toStringAsFixed(1));
+
+  spots1.add(FlSpot(M, average));
+  spots2.add(FlSpot(M, averageTime));
+  print('Added the spot: $M, $averageTime');
 }
 
 hillClimbing(
