@@ -239,7 +239,7 @@ class _ResultState extends ConsumerState<Result> {
     // spots1.add(FlSpot(M.toDouble(), 0.66));
     // spots1.add(FlSpot(M.toDouble() + 1, 0.66));
     // spots1.add(FlSpot(M.toDouble() + 2, 0.33));
-    // resultGo(ref, ScreenDestination.chart);
+    resultGo(ref, ScreenDestination.chart);
   }
 }
 
