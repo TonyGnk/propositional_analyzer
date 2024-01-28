@@ -29,9 +29,9 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
               # Setup the flutter environment.
-            - uses: subosito/flutter-action@v2
-              with:
-                  flutter-version: "3.13.4" # you can also specify exact version of flutter
+            - uses: cjlapao/setup-flutter@v1
+              #with:
+              #flutter-version: "3.13.4" # you can also specify exact version of flutter
 
             # Get flutter dependencies.
             - run: flutter pub get
