@@ -21,18 +21,37 @@ class Result extends ConsumerStatefulWidget {
 
 class _ResultState extends ConsumerState<Result> {
   List<Container> trackList = [];
-  Color color1 = Colors.black;
-  Color color2 = Colors.black;
+  Color color1 = Colors.orangeAccent;
+  Color color2 = Colors.yellow;
   String str = 'M0';
   String str2 = '';
+  List<double> stopsPrimary = [];
+  List<double> stopsSecondary = [];
+  double stop1 = 0.333;
+  double stop2 = 0.3331;
 
   @override
   void initState() {
     super.initState();
+    //findStops();
     Future.delayed(Duration.zero, () {
       resultReturn(ref);
     });
     algorithm();
+  }
+
+  findStops() {
+    setState(() {
+      double value = 1 / numberOfTests;
+      stopsPrimary.add(0);
+      stopsSecondary.add(0.001);
+      for (int i = 1; i < (numberOfTests - 1); i++) {
+        stopsPrimary.add(value * i);
+        stopsSecondary.add(value * i + 0.001);
+      }
+      stopsPrimary.add(1);
+      stopsSecondary.add(1.001);
+    });
   }
 
   @override
@@ -50,35 +69,43 @@ class _ResultState extends ConsumerState<Result> {
                     height: 215,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: color1,
+                      //sweep gradient
+                      gradient: SweepGradient(
+                        colors: [
+                          color1,
+                          Theme.of(context).unselectedWidgetColor,
+                        ],
+                        stops: [stop1, stop2],
+                      ),
                     ),
                   ),
                 ),
                 Container(
                   width: 200,
                   height: 200,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
+                    color: Theme.of(context).unselectedWidgetColor,
+                    //border color
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         str,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 35,
                           fontFamily: 'Play',
-                          color: Colors.black,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
                       const SizedBox(height: 10),
                       Text(
                         str2,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontFamily: 'Play',
-                          color: Colors.black,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
                     ],
@@ -109,8 +136,28 @@ class _ResultState extends ConsumerState<Result> {
       );
 
   algorithm() async {
+    await Future.delayed(Duration.zero, () {
+      setState(() {
+        double value = 1 / numberOfTests;
+        for (int i = 1; i < numberOfTests; i++) {
+          stopsPrimary.add(value * i);
+          stopsSecondary.add(value * i + 0.001);
+        }
+        stopsPrimary.add(1);
+        stopsSecondary.add(1.001);
+
+        stop1 = stopsPrimary[1];
+        stop2 = stopsSecondary[1];
+      });
+    });
+
+//
+
+//
+
     spots1.clear();
     spots2.clear();
+    List<bool> stopList = [];
     int M = 1;
     int sampleSum = 0;
     int timeSum = 0;
@@ -123,24 +170,28 @@ class _ResultState extends ConsumerState<Result> {
         Search search = hillClimbing(problem, M);
         int founded = search.win ? 1 : 0;
         sampleSum = sampleSum + founded;
-        print('SearchTime is ${search.time}');
         timeSum = timeSum + search.time;
 
         await Future.delayed(Duration.zero, () {
           setState(() {
             str2 = '$sampleSum/$numberOfTests';
+//
+
+            // print('J is $j');
+            stop1 = stopsPrimary[j - 1];
+            stop2 = stopsSecondary[j - 1];
 
             if (founded != 1) {
               trackList.add(
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.blueGrey,
+                    color: Theme.of(context).unselectedWidgetColor,
                   ),
                   margin: const EdgeInsets.only(bottom: 10),
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    'With M=$M the test $j failed',
+                    'Test $j with M=$M failed',
                     style: const TextStyle(
                       fontSize: 15,
                       fontFamily: 'Play',
@@ -163,11 +214,11 @@ class _ResultState extends ConsumerState<Result> {
           //updateUi(sampleSum);
 
           if (n == 1 / numberOfTests) {
-            color1 = Colors.red;
+            //    color1 = Colors.red;
           } else if (n == 2 / numberOfTests) {
-            color1 = Colors.yellow;
+            //   color1 = Colors.yellow;
           } else {
-            color1 = Colors.green;
+            //  color1 = Colors.green;
           }
           str = 'M$M';
           str2 = '$sampleSum/$numberOfTests';
@@ -175,11 +226,20 @@ class _ResultState extends ConsumerState<Result> {
       });
 
       M++;
-    } while (M < 455);
+      if (sampleSum == 0) {
+        stopList.add(true);
+      } else {
+        stopList.clear();
+      }
+
+      //wait 1 sec
+      //await Future.delayed(const Duration(seconds: 1));
+      //} while (M < 342);
+    } while (stopList.length != stop);
     // spots1.add(FlSpot(M.toDouble(), 0.66));
     // spots1.add(FlSpot(M.toDouble() + 1, 0.66));
     // spots1.add(FlSpot(M.toDouble() + 2, 0.33));
-    resultGo(ref, ScreenDestination.chart);
+    // resultGo(ref, ScreenDestination.chart);
   }
 }
 
@@ -190,7 +250,6 @@ addSpot(double M, double average, double averageTime) {
 
   spots1.add(FlSpot(M, average));
   spots2.add(FlSpot(M, averageTime));
-  print('Added the spot: $M, $averageTime');
 }
 
 hillClimbing(

@@ -6,7 +6,7 @@ int K = 6;
 int stop = 2;
 
 // ignore: constant_identifier_names
-const TIMEOUT = 6;
+const TIMEOUT = 3;
 
 List<FlSpot> spots1 = [];
 List<FlSpot> spots2 = [];
