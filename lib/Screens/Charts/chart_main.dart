@@ -169,7 +169,7 @@ class _ChartState extends ConsumerState<Chart> {
           gridData: const FlGridData(
             drawHorizontalLine: false,
           ),
-          maxY: isFirst ? 1 : TIMEOUT.toDouble(),
+          maxY: isFirst ? 1 : null,
           minY: isFirst ? 0 : 0,
           lineBarsData: [
             LineChartBarData(

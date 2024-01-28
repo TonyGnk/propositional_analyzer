@@ -1,8 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 
-const int sample = 3;
-const int N = 12;
-const int K = 6;
+int numberOfTests = 3;
+int N = 12;
+int K = 6;
+int stop = 2;
 
 // ignore: constant_identifier_names
 const TIMEOUT = 6;

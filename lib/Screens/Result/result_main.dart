@@ -117,7 +117,7 @@ class _ResultState extends ConsumerState<Result> {
     do {
       sampleSum = 0;
       timeSum = 0;
-      for (int j = 1; j <= sample; j++) {
+      for (int j = 1; j <= numberOfTests; j++) {
         List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
         problem = newProblem(problem);
         Search search = hillClimbing(problem, M);
@@ -128,7 +128,7 @@ class _ResultState extends ConsumerState<Result> {
 
         await Future.delayed(Duration.zero, () {
           setState(() {
-            str2 = '$sampleSum/$sample';
+            str2 = '$sampleSum/$numberOfTests';
 
             if (founded != 1) {
               trackList.add(
@@ -154,23 +154,23 @@ class _ResultState extends ConsumerState<Result> {
 
         problem.clear();
       }
-      double n = sampleSum / sample;
-      double averageTime = timeSum / sample;
+      double n = sampleSum / numberOfTests;
+      double averageTime = timeSum / numberOfTests;
       addSpot(M.toDouble(), n, averageTime);
 
       await Future.delayed(Duration.zero, () {
         setState(() {
           //updateUi(sampleSum);
 
-          if (n == 1 / sample) {
+          if (n == 1 / numberOfTests) {
             color1 = Colors.red;
-          } else if (n == 2 / sample) {
+          } else if (n == 2 / numberOfTests) {
             color1 = Colors.yellow;
           } else {
             color1 = Colors.green;
           }
           str = 'M$M';
-          str2 = '$sampleSum/$sample';
+          str2 = '$sampleSum/$numberOfTests';
         });
       });
 

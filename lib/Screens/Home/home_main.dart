@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../Services/constants.dart';
-import '../../function.dart';
 import 'home_fields.dart';
 
-import '../screen_list.dart';
-import 'mode_button_template.dart';
 import 'home_state.dart';
 import 'segmented.dart';
 import 'segmented2.dart';
@@ -40,12 +36,12 @@ class _HomeState extends ConsumerState<Home> {
               const SegmentedControl(),
               inPutField(context, kController, 'Set K variable',
                   Icons.expand_less_outlined),
-              //inPutField(context, nController, 'Set N variable',
-              //Icons.local_parking_outlined),
-              //inPutField(context, sampleController, 'Set Sample Size',
-              //Icons.workspaces_outlined),
-              //inPutField(context, stopController, 'Set Stop Size',
-              //Icons.vertical_align_bottom_outlined),
+              inPutField(context, nController, 'Set N variable',
+                  Icons.local_parking_outlined),
+              inPutField(context, sampleController, 'Set Sample Size',
+                  Icons.workspaces_outlined),
+              inPutField(context, stopController, 'Set Stop Size',
+                  Icons.vertical_align_bottom_outlined),
               const Expanded(flex: 1, child: SizedBox()),
               modeText(context),
               const SizedBox(height: 16),

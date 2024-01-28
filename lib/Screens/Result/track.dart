@@ -27,13 +27,14 @@ class Track extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             Text(
-              '$avg/$sample',
+              '$avg/$numberOfTests',
               style: TextStyle(
                 fontSize: 15,
                 fontFamily: 'Play',
                 fontWeight: FontWeight.bold,
-                color:
-                    (avg >= sample.toDouble() / 2) ? Colors.green : Colors.red,
+                color: (avg >= numberOfTests.toDouble() / 2)
+                    ? Colors.green
+                    : Colors.red,
               ),
             ),
           ],
