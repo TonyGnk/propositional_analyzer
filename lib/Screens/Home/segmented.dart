@@ -1,130 +1,216 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/constants.dart';
 
-int searchSpeed = 0;
+class SegmentedControl extends StatefulWidget {
+  const SegmentedControl({super.key});
 
-final segmentedButtonProvider =
-    StateProvider<SpeedType>((ref) => SpeedType.dpll);
+  @override
+  State<SegmentedControl> createState() => _SegmentedControlState();
+}
 
-enum SpeedType { hillClimbing, depthFirst, dpll }
+class _SegmentedControlState extends State<SegmentedControl> {
+  double tr = 0;
+  bool openedA = false;
+  bool openedB = false;
+  bool showOptionsOpacity = false;
+  bool matrix = false;
+  int selected = 3;
 
-segmentedRunner() => Consumer(
-      builder: (context, WidgetRef ref, __) {
-        final selected = ref.watch(segmentedButtonProvider);
-        return SegmentedButton(
-          segments: [
-            ButtonSegment(
-                value: SpeedType.hillClimbing,
-                label: segmentedText('Hill Climbing'),
-                tooltip: 'Delay 2 sec',
-                icon: const Icon(Icons.troubleshoot_outlined)),
-            ButtonSegment(
-                value: SpeedType.hillClimbing,
-                label: segmentedText('Hill Climbing'),
-                tooltip: 'Delay 2 sec',
-                icon: const Icon(Icons.troubleshoot_outlined)),
-            ButtonSegment(
-                value: SpeedType.depthFirst,
-                label: segmentedText('Depth First'),
-                tooltip: 'Delay 400 ms',
-                icon: const Icon(Icons.calendar_view_week)),
-            ButtonSegment(
-                value: SpeedType.dpll,
-                label: segmentedText('DPLL'),
-                tooltip: 'No delay',
-                icon: const Icon(Icons.calendar_view_month)),
+  @override
+  Widget build(BuildContext context) => AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        height: openedA ? 200 : 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(cornerSize - 1),
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+        ),
+        clipBehavior: Clip.antiAlias,
+        margin: const EdgeInsets.fromLTRB(7, 0, 7, 6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            selectItem1(0),
+            selectItem2(1),
+            selectItem3(2),
+            selectItem4(3),
           ],
-          selected: {selected},
-          onSelectionChanged: (Set<SpeedType> newSelection) {
-            ref.read(segmentedButtonProvider.notifier).state =
-                newSelection.first;
-            searchSpeed = getSpeedFromSlider(newSelection.first);
-          },
-          style: ButtonStyle(
-            visualDensity: VisualDensity.comfortable,
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(cornerSize - 2),
-              ),
-            ),
-            side: MaterialStateProperty.all<BorderSide>(
-              BorderSide(
-                color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+        ),
+      );
+
+  onPressed(int n) {
+    if (openedB) {
+      toClose(n);
+    } else {
+      toOpen(n);
+    }
+  }
+
+  toOpen(int n) async {
+    setState(() {
+      openedA = true;
+    });
+
+    await Future.delayed(const Duration(milliseconds: 100));
+    setState(() {
+      matrix = true;
+    });
+
+    await Future.delayed(const Duration(milliseconds: 250));
+    setState(() {
+      matrix = false;
+      openedB = true;
+      showOptionsOpacity = true;
+    });
+  }
+
+  toClose(int n) async {
+    setState(() {
+      matrix = false;
+      selected = n;
+    });
+    await Future.delayed(const Duration(milliseconds: 50));
+    setState(() {
+      showOptionsOpacity = false;
+    });
+    await Future.delayed(const Duration(milliseconds: 250));
+    setState(() {
+      matrix = true;
+    });
+    await Future.delayed(const Duration(milliseconds: 50));
+    setState(() {
+      openedA = false;
+    });
+    await Future.delayed(const Duration(milliseconds: 50));
+    setState(() {
+      matrix = false;
+      openedB = false;
+    });
+  }
+
+  selectItem1(int id) => animatedRow(
+        const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(cornerSize - 1),
+            topRight: Radius.circular(cornerSize - 1),
+          ),
+        ),
+        id,
+      );
+  selectItem2(int id) => animatedRow(
+        const BoxDecoration(),
+        id,
+      );
+
+  selectItem3(int id) => animatedRow(
+        const BoxDecoration(),
+        id,
+      );
+
+  selectItem4(int id) => animatedRow(
+        const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(cornerSize - 1),
+            bottomRight: Radius.circular(cornerSize - 1),
+          ),
+        ),
+        id,
+      );
+
+  animatedRow(
+    BoxDecoration decoration,
+    int id,
+  ) =>
+      !openedB
+          ? (selected == id)
+              ? openedRow(decoration, id)
+              : const SizedBox()
+          : openedRow(decoration, id);
+
+  openedRow(
+    BoxDecoration decoration,
+    int id,
+  ) =>
+      AnimatedOpacity(
+        duration: const Duration(milliseconds: 150),
+        opacity: (selected != id)
+            ? showOptionsOpacity
+                ? 1
+                : 0
+            : 1,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInOut,
+          height: 50,
+          decoration: openedB
+              ? decoration
+              : BoxDecoration(
+                  borderRadius: BorderRadius.circular(cornerSize - 1),
+                ),
+          clipBehavior: Clip.antiAlias,
+          transform: (selected == id && matrix)
+              ? Matrix4.translationValues(0, findD(id), 0)
+              : Matrix4.translationValues(0, 0, 0),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor:
+                  Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+              onTap: () => onPressed(id),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(14, 4, 14, 4),
+                child: Row(
+                  children: [
+                    Center(
+                      child: Icon(
+                        algorithmIconMap[id]!,
+                        color: Theme.of(context).canvasColor,
+                      ),
+                    ),
+                    const SizedBox(width: 7),
+                    Text(
+                      algorithmMap[id]!,
+                      style: const TextStyle(
+                        fontFamily: 'Play',
+                        fontSize: 16,
+                      ),
+                    ),
+                    const Expanded(child: SizedBox()),
+                    !openedB
+                        ? const Icon(
+                            Icons.expand_more_outlined,
+                          )
+                        : (openedA && selected == id)
+                            ? const Icon(Icons.check)
+                            : const SizedBox()
+                  ],
+                ),
               ),
             ),
           ),
-        );
-      },
-    );
+        ),
+      );
 
-segmentedText(String text) => Text(
-      text,
-      style: const TextStyle(
-        fontSize: 14,
-        fontFamily: 'Play',
-      ),
-    );
-
-getSpeedFromSlider(SpeedType type) {
-  switch (type) {
-    case SpeedType.hillClimbing:
-      return 2000;
-    case SpeedType.depthFirst:
-      return 400;
-    case SpeedType.dpll:
-      return 0;
+  double findD(int id) {
+    if (!openedB) {
+      return id * 50;
+    } else {
+      return id * (-50);
+    }
   }
 }
 
-//Provider for switcher
-final switcherProvider = StateProvider<bool>((ref) => true);
-bool avoidVisitedIsDisable = false;
+Map<int, String> algorithmMap = {
+  0: 'Hill Climbing',
+  1: 'DepthFirst',
+  2: 'DPLL',
+  3: 'Walkstat',
+};
 
-//This Switch a enables an optimization for the algorithm
-customSwitch() => Consumer(
-      builder: (context, ref, _) {
-        final switcher = ref.watch(switcherProvider);
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            children: [
-              Expanded(child: Text('Avoid the visited nodes')),
-              Switch(
-                value: switcher,
-                onChanged: (newValue) {
-                  ref.read(switcherProvider.notifier).state = newValue;
-                  avoidVisitedIsDisable = !newValue;
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-
-final enableTimer = StateProvider<bool>((ref) => true);
-int timeLimit = 55;
-
-timerSwitch() => Consumer(
-      builder: (context, ref, _) {
-        final timer = ref.watch(enableTimer);
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            children: [
-              //Stops the algorithm search after 60 seconds
-              Expanded(child: Text('Time limit to 60 seconds ')),
-              Switch(
-                value: timer,
-                onChanged: (newValue) {
-                  ref.read(enableTimer.notifier).state = newValue;
-                  timeLimit = newValue ? 60 : 600;
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
+Map<int, IconData> algorithmIconMap = {
+  0: Icons.power_input_outlined,
+  1: Icons.grid_goldenratio_outlined,
+  2: Icons.join_right_sharp,
+  3: Icons.stacked_bar_chart_outlined,
+};

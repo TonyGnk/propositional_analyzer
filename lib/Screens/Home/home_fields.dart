@@ -19,7 +19,7 @@ inPutField(
         borderRadius: BorderRadius.circular(cornerSize - 1),
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
       ),
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(14),
       margin: const EdgeInsets.fromLTRB(7, 0, 7, 6),
       child: Row(
         children: [
@@ -37,6 +37,7 @@ inPutField(
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: hint,
+                hintStyle: hintStyle(),
               ),
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
@@ -47,3 +48,11 @@ inPutField(
         ],
       ),
     );
+
+hintStyle() => TextStyle(
+      fontFamily: 'Play',
+      fontSize: 16,
+      color: Colors.grey[600],
+    );
+
+textStyle() => TextStyle();
