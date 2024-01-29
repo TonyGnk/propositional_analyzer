@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fullscreen_window/fullscreen_window.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
 import '../../UI/Routed%20Screen/app_bar.dart';
@@ -27,6 +28,7 @@ void chartReturn(WidgetRef ref) {
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateAppBarLabel(ref, 'Results', isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
+  ref.read(appBarBackButtonTimes.notifier).state = isReturn ? 2 : 1;
 }
 
 animatedColumn(Widget child) => Consumer(
@@ -42,5 +44,7 @@ resetFullScreen() async {
     if (await windowManager.isFullScreen()) {
       windowManager.setFullScreen(false);
     }
+  } else if (UniversalPlatform.isWeb) {
+    FullScreenWindow.setFullScreen(false);
   }
 }

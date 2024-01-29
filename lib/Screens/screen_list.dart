@@ -37,15 +37,15 @@ goTo(WidgetRef ref, ScreenDestination destination) async {
   });
 }
 
-goBack(
-  WidgetRef ref,
-) async {
+goBack(WidgetRef ref, [int times = 1]) async {
   screenGo[screenStack.last]!(
     ref,
     screenStack[screenStack.length - 2],
   );
   Future.delayed(basicDuration, () {
-    screenStack.removeLast();
+    for (int i = 0; i < times; i++) {
+      screenStack.removeLast();
+    }
     ref.read(currentScreenProvider.notifier).state = screenStack.last;
   });
 }

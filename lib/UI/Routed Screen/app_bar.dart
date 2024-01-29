@@ -14,6 +14,7 @@ final appBarLabel = StateProvider<String?>((ref) => null);
 final appBarLabelOpacity = StateProvider<double>((ref) => 0);
 final appBarCurrentScreen = StateProvider<ScreenDestination?>((ref) => null);
 final appBarPreviousScreen = StateProvider<ScreenDestination?>((ref) => null);
+final appBarBackButtonTimes = StateProvider<int>((ref) => 1);
 
 Widget adaptAppBar() => Consumer(builder: (context, ref, _) {
       final isEnable = ref.watch(appBarIsEnableProvider);
@@ -39,6 +40,7 @@ Widget row(BuildContext context) => Consumer(
         final previousScreen = ref.watch(appBarPreviousScreen);
         final customIcon1 = ref.watch(appBarCustomIcon1);
         final customIconOpacity = ref.watch(appBarCustomIconOpacity);
+        final backButtonTimes = ref.watch(appBarBackButtonTimes);
         return Row(
           children: [
             const SizedBox(width: 2),
@@ -48,7 +50,7 @@ Widget row(BuildContext context) => Consumer(
               child: isEnableBackButton
                   ? appBarIcon(
                       const Icon(Icons.arrow_back_ios_outlined),
-                      () => goBack(ref),
+                      () => goBack(ref, backButtonTimes),
                     )
                   : const SizedBox(),
             ),

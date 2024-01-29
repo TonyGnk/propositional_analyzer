@@ -15,7 +15,7 @@ const newLoadButton = ButtonTemplate(
   title: 'Load (Soon...)',
   slogan: 'Load from your storage',
   icon: Icons.file_upload_outlined,
-  screenDestination: ScreenDestination.chart,
+  screenDestination: ScreenDestination.create,
 );
 
 class ButtonTemplate extends ConsumerStatefulWidget {

@@ -94,6 +94,10 @@ class _ResultState extends ConsumerState<Result> {
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
+                      IconButton(
+                        onPressed: () => algorithm(),
+                        icon: const Icon(Icons.refresh),
+                      ),
                     ],
                   ),
                 ),
@@ -129,17 +133,18 @@ class _ResultState extends ConsumerState<Result> {
           stopsPrimary.add(value * i);
           stopsSecondary.add(value * i + 0.001);
         }
-        if (numberOfTests == 1) {
-          stopsPrimary.add(1);
-          stopsSecondary.add(1.001);
-        }
+        stopsPrimary.add(1);
+        stopsSecondary.add(1.001);
 
         stop1 = stopsPrimary[0];
         stop2 = stopsSecondary[0];
+        print('stopsPrimary: $stopsPrimary');
+        print('stopsSecondary: $stopsSecondary');
+        for (int j = 1; j <= numberOfTests; j++) {
+          print("J $j");
+        }
       });
     });
-
-//
 
 //
 
@@ -153,7 +158,8 @@ class _ResultState extends ConsumerState<Result> {
       sampleSum = 0;
       timeSum = 0;
       //await Future.delayed(Duration(days: 1));
-      for (int j = 1; j < numberOfTests; j++) {
+      for (int j = 1; j <= numberOfTests; j++) {
+        // await Future.delayed(Duration(seconds: 1));
         List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
         problem = newProblem(problem);
         Search search = hillClimbing(problem, M);
