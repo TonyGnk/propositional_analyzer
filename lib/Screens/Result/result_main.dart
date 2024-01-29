@@ -256,7 +256,7 @@ hillClimbing(
 
   while (h > 0) {
     DateTime t = DateTime.now();
-    if (t.difference(t1).inSeconds > TIMEOUT) {
+    if (t.difference(t1).inSeconds > timeOut) {
       DateTime t2 = DateTime.now();
       //print("\n\nNO SOLUTION found with hill-climbing...\n");
       return Search(

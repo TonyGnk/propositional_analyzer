@@ -27,7 +27,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
           color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
         ),
         clipBehavior: Clip.antiAlias,
-        margin: const EdgeInsets.fromLTRB(7, 0, 7, 6),
+        margin: const EdgeInsets.fromLTRB(7, 0, 7, 9),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

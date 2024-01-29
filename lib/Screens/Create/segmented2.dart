@@ -37,23 +37,23 @@ rowOfButtons() => Consumer(
               icon: Icons.troubleshoot_outlined,
               onTap: () {
                 //Check if kController is empty and if not then assign the value to k parse to int before
-                if (kController.text.isNotEmpty) {
-                  K = int.parse(kController.text);
-                } else {
-                  K = 6;
-                }
-                //Check if nController is empty and if not then assign the value to n parse to int before
-                if (nController.text.isNotEmpty) {
-                  N = int.parse(nController.text);
-                } else {
-                  N = 12;
-                }
-                //sample
-                if (sampleController.text.isNotEmpty) {
-                  numberOfTests = int.parse(sampleController.text);
-                } else {
-                  numberOfTests = 3;
-                }
+                // if (kController.text.isNotEmpty) {
+                //   K = int.parse(kController.text);
+                // } else {
+                //   K = 6;
+                // }
+                // //Check if nController is empty and if not then assign the value to n parse to int before
+                // if (nController.text.isNotEmpty) {
+                //   N = int.parse(nController.text);
+                // } else {
+                //   N = 12;
+                // }
+                // //sample
+                // if (sampleController.text.isNotEmpty) {
+                //   numberOfTests = int.parse(sampleController.text);
+                // } else {
+                //   numberOfTests = 3;
+                // }
                 goTo(ref, ScreenDestination.result);
               },
             ),
