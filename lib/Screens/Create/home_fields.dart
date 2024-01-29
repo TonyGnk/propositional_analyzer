@@ -54,5 +54,3 @@ hintStyle() => TextStyle(
       fontSize: 16,
       color: Colors.grey[600],
     );
-
-textStyle() => TextStyle();

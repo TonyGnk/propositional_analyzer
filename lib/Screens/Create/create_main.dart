@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'home_fields.dart';
 import 'segmented.dart';
-import 'segmented2.dart';
 import 'create_state.dart';
+import 'segmented2.dart';
+import 'sliders.dart';
 
 class Create extends ConsumerStatefulWidget {
   const Create({super.key});
@@ -38,6 +39,7 @@ class _CreateState extends ConsumerState<Create> {
                   Icons.workspaces_outlined),
               inPutField(context, stopController, 'Set Stop Size',
                   Icons.vertical_align_bottom_outlined),
+              const BasicSlider(),
               const Expanded(flex: 1, child: SizedBox()),
               modeText(context),
               const SizedBox(height: 16),

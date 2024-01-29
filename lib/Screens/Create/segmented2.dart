@@ -54,7 +54,7 @@ rowOfButtons() => Consumer(
                 } else {
                   numberOfTests = 3;
                 }
-                homeGo(ref, ScreenDestination.result);
+                goTo(ref, ScreenDestination.result);
               },
             ),
           ),

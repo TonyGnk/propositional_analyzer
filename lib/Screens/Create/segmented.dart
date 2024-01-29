@@ -15,7 +15,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
   bool openedB = false;
   bool showOptionsOpacity = false;
   bool matrix = false;
-  int selected = 3;
+  int selected = 0;
 
   @override
   Widget build(BuildContext context) => AnimatedContainer(

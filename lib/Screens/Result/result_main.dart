@@ -40,20 +40,6 @@ class _ResultState extends ConsumerState<Result> {
     algorithm();
   }
 
-  findStops() {
-    setState(() {
-      double value = 1 / numberOfTests;
-      stopsPrimary.add(0);
-      stopsSecondary.add(0.001);
-      for (int i = 1; i < (numberOfTests - 1); i++) {
-        stopsPrimary.add(value * i);
-        stopsSecondary.add(value * i + 0.001);
-      }
-      stopsPrimary.add(1);
-      stopsSecondary.add(1.001);
-    });
-  }
-
   @override
   Widget build(BuildContext context) => Column(
         children: [
@@ -143,11 +129,13 @@ class _ResultState extends ConsumerState<Result> {
           stopsPrimary.add(value * i);
           stopsSecondary.add(value * i + 0.001);
         }
-        stopsPrimary.add(1);
-        stopsSecondary.add(1.001);
+        if (numberOfTests == 1) {
+          stopsPrimary.add(1);
+          stopsSecondary.add(1.001);
+        }
 
-        stop1 = stopsPrimary[1];
-        stop2 = stopsSecondary[1];
+        stop1 = stopsPrimary[0];
+        stop2 = stopsSecondary[0];
       });
     });
 
@@ -164,7 +152,8 @@ class _ResultState extends ConsumerState<Result> {
     do {
       sampleSum = 0;
       timeSum = 0;
-      for (int j = 1; j <= numberOfTests; j++) {
+      //await Future.delayed(Duration(days: 1));
+      for (int j = 1; j < numberOfTests; j++) {
         List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
         problem = newProblem(problem);
         Search search = hillClimbing(problem, M);
@@ -175,9 +164,7 @@ class _ResultState extends ConsumerState<Result> {
         await Future.delayed(Duration.zero, () {
           setState(() {
             str2 = '$sampleSum/$numberOfTests';
-//
 
-            // print('J is $j');
             stop1 = stopsPrimary[j - 1];
             stop2 = stopsSecondary[j - 1];
 
@@ -239,7 +226,7 @@ class _ResultState extends ConsumerState<Result> {
     // spots1.add(FlSpot(M.toDouble(), 0.66));
     // spots1.add(FlSpot(M.toDouble() + 1, 0.66));
     // spots1.add(FlSpot(M.toDouble() + 2, 0.33));
-    resultGo(ref, ScreenDestination.chart);
+    goTo(ref, ScreenDestination.chart);
   }
 }
 
