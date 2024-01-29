@@ -29,7 +29,7 @@ class _CreateState extends ConsumerState<Create> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 10),
+              const SizedBox(height: 4),
               const SegmentedControl(),
               group(
                 context,
@@ -43,9 +43,9 @@ class _CreateState extends ConsumerState<Create> {
               ),
               const Expanded(flex: 1, child: SizedBox()),
               // modeText(context),
-              const SizedBox(height: 16),
+              //const SizedBox(height: 8),
+              helpContainer(),
               analyzeContainer(),
-              const SizedBox(height: 10),
             ],
           ),
         ),

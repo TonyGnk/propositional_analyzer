@@ -24,8 +24,9 @@ class AnalyzeButton extends StatefulWidget {
 }
 
 class _AnalyzeButtonState extends State<AnalyzeButton> {
-  late Color color = Colors.grey.withOpacity(0.1);
-  late Color borderColor = Colors.white.withOpacity(0.2);
+  late Color color = Colors.deepOrangeAccent.withOpacity(0.5);
+  late Color color2 = Colors.deepOrangeAccent.withOpacity(0.5);
+  late Color borderColor = Colors.deepOrangeAccent.withOpacity(0);
   late Timer timer;
   late AlignmentGeometry alignmentGeometryA =
       alignmentGeometryList[gradientIndex];
@@ -81,40 +82,39 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
   Widget build(BuildContext context) => MouseRegion(
         onEnter: (event) {
           setState(() {
-            scale = 0.99;
-            //color = Colors.grey.withOpacity(0.2);
-            color = Theme.of(context).canvasColor.withOpacity(0.4);
-            borderColor = Theme.of(context).canvasColor.withOpacity(0.3);
+            scale = 0.97;
           });
         },
         onExit: (event) {
           setState(() {
             scale = 1.0;
-            color = Colors.grey.withOpacity(0.1);
-            borderColor = Colors.white.withOpacity(0.2);
           });
         },
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
-          onTap: () {
+          onTap: () async {
             setState(() {
               color = Colors.grey.withOpacity(0.1);
-              borderColor = Colors.white.withOpacity(0.2);
+              color2 = Colors.deepOrangeAccent.withOpacity(0.4);
+              borderColor =
+                  Colors.deepOrangeAccent.withOpacity(1).withOpacity(0.4);
             });
+            //wait 30 seconds
+            await Future.delayed(const Duration(seconds: 3));
             widget.onTap();
           },
           child: AnimatedScale(
             scale: scale,
             duration: basicDuration,
             child: AnimatedContainer(
-              margin: const EdgeInsets.fromLTRB(7, 0, 7, 9),
+              margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
               duration: const Duration(seconds: 1),
-              height: 55,
+              height: 52,
               decoration: BoxDecoration(
                 //color: color,
                 gradient: LinearGradient(
                   colors: [
-                    Colors.grey.withOpacity(0.1),
+                    color2,
                     color,
                   ],
                   begin: alignmentGeometryA,

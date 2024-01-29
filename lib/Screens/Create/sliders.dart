@@ -14,7 +14,7 @@ group(BuildContext context, double height, List<Widget> list) => Container(
         ),
       ),
       padding: const EdgeInsets.fromLTRB(0, 15, 0, 4),
-      margin: const EdgeInsets.fromLTRB(7, 0, 7, 9),
+      margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
       child:
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: list),
     );
