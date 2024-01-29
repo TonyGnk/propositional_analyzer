@@ -24,7 +24,7 @@ environment:
 dependencies:
     flutter:
         sdk: flutter
-    fl_chart: ^0.66.1
+    fl_chart: ^0.65.0
     permission_handler: ^10.4.5
     path_provider: ^2.0.5
     flutter_svg: ^2.0.9

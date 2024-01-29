@@ -29,9 +29,6 @@ class _CreateState extends ConsumerState<Create> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 10),
-              welcomeToText,
-              titleText(context),
-              const SizedBox(height: 30),
               const SegmentedControl(),
               inPutField(context, kController, 'Set K variable',
                   Icons.expand_less_outlined),
