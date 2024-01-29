@@ -6,7 +6,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../constants.dart';
-import '../../gready.dart';
+import '../../algorithms/gready.dart';
 import '../../new_value.dart';
 import '../screen_list.dart';
 import 'result_state.dart';
@@ -162,7 +162,7 @@ class _ResultState extends ConsumerState<Result> {
         // await Future.delayed(Duration(seconds: 1));
         List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
         problem = newProblem(problem);
-        Search search = hillClimbing(problem, M);
+        Search search = await hillClimbing(problem, M);
         int founded = search.win ? 1 : 0;
         sampleSum = sampleSum + founded;
         timeSum = timeSum + search.time;
@@ -243,62 +243,4 @@ addSpot(double M, double average, double averageTime) {
 
   spots1.add(FlSpot(M, average));
   spots2.add(FlSpot(M, averageTime));
-}
-
-hillClimbing(
-  List<List<int>> problem,
-  int M,
-) {
-  List<int> vector = List.filled(N, 0);
-  int h, h1, h2;
-  int restarts = 0, steps = 0;
-  int bestChange;
-
-  DateTime t1 = DateTime.now();
-
-  // Initialization steps
-  vector = initialize(vector);
-  h = count(vector, problem, M);
-
-  while (h > 0) {
-    DateTime t = DateTime.now();
-    if (t.difference(t1).inSeconds > timeOut) {
-      DateTime t2 = DateTime.now();
-      //print("\n\nNO SOLUTION found with hill-climbing...\n");
-      return Search(
-        win: false,
-        time: t2.difference(t1).inSeconds,
-      );
-    }
-
-    steps++;
-    h2 = h;
-    bestChange = -1;
-    for (int i = 0; i < N; i++) {
-      vector[i] = -vector[i];
-      h1 = count(vector, problem, M);
-      if (h1 < h2) {
-        h2 = h1;
-        bestChange = i;
-      }
-      vector[i] = -vector[i];
-    }
-
-    if (bestChange >= 0) {
-      vector[bestChange] = -vector[bestChange];
-    } else {
-      vector = initialize(vector);
-      restarts++;
-    }
-    h = count(vector, problem, M);
-  }
-
-  DateTime t2 = DateTime.now();
-  //print("Solution found with hill-climbing!");
-  //display(vector);
-  //print("Time spent: ${t2.difference(t1).inSeconds} secs");
-  return Search(
-    win: true,
-    time: t2.difference(t1).inSeconds,
-  );
 }

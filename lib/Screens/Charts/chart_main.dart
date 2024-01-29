@@ -96,7 +96,6 @@ class _ChartState extends ConsumerState<Chart> {
         ),
       );
 
-  //Handle the full screen
   bool isFullScreen = false;
   fullScreen(bool isFirst) async {
     if (UniversalPlatform.isWindows) {

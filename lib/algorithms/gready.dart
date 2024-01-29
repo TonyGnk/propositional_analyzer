@@ -2,10 +2,10 @@
 
 import 'dart:math';
 
-import 'Screens/Result/track.dart';
-import 'constants.dart';
+import '../Screens/Result/track.dart';
+import '../constants.dart';
 
-Future<Search> hillClimbing(
+hillClimbing(
   List<List<int>> problem,
   int M,
 ) async {
@@ -21,11 +21,10 @@ Future<Search> hillClimbing(
   h = count(vector, problem, M);
 
   while (h > 0) {
+    await Future.delayed(Duration.zero, () {});
     DateTime t = DateTime.now();
     if (t.difference(t1).inSeconds > timeOut) {
       DateTime t2 = DateTime.now();
-      //print("\n\nNO SOLUTION found with hill-climbing...\n");
-      print('Time spent: ${t2.difference(t1).inSeconds} secs\n');
       return Search(
         win: false,
         time: t2.difference(t1).inSeconds,
@@ -56,7 +55,6 @@ Future<Search> hillClimbing(
 
   DateTime t2 = DateTime.now();
   //print("Solution found with hill-climbing!");
-  //display(vector);
   //print("Time spent: ${t2.difference(t1).inSeconds} secs");
   return Search(
     win: true,
@@ -78,7 +76,6 @@ List<int> initialize(List<int> vector) {
   return vector;
 }
 
-// This function counts how many of the sentences are not satisfied by the current assignment of truth values to the propositions.
 int count(List<int> vector, List<List<int>> problem, int M) {
   int c = 0, satisfied;
   for (int i = 0; i < M; i++) {
@@ -94,14 +91,4 @@ int count(List<int> vector, List<List<int>> problem, int M) {
   }
 
   return M - c;
-}
-
-void display(List<int> vector) {
-  for (var i = 0; i < vector.length; i++) {
-    if (vector[i] == 1) {
-      print('P${i + 1}=true');
-    } else {
-      print('P${i + 1}=false');
-    }
-  }
 }
