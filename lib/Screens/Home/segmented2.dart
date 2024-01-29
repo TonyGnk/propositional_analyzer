@@ -64,6 +64,24 @@ createButton(BuildContext context) => Consumer(
       ),
     );
 
+loadButton(BuildContext context) => Consumer(
+      builder: (context, ref, _) => FilledButton.icon(
+        icon: Icon(
+          Icons.create_outlined,
+          color: Theme.of(context).canvasColor,
+        ),
+        onPressed: () {},
+        label: Text(
+          'Load',
+          style: TextStyle(
+            fontSize: 15,
+            color: Theme.of(context).canvasColor,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+
 rowOfButtons() => Consumer(
       builder: (context, ref, _) => Row(
         children: [

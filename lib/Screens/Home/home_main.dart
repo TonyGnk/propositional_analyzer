@@ -33,7 +33,7 @@ class _HomeState extends ConsumerState<Home> {
               welcomeToText,
               titleText(context),
               const Expanded(flex: 1, child: SizedBox()),
-              modeText(context),
+              loadButton(context),
               const SizedBox(height: 16),
               createButton(context),
               const SizedBox(height: 10),
