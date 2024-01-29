@@ -15,7 +15,7 @@ Widget infoIcon() => Consumer(builder: (context, ref, _) {
                 Icon(Icons.info_outlined,
                     color: Theme.of(context).colorScheme.onBackground),
                 () {
-                  go(ref, ScreenDestination.about);
+                  goTo(ref, ScreenDestination.about);
                 },
                 'About App',
               )

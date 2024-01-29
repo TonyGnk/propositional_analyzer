@@ -5,60 +5,19 @@ import '../../Services/constants.dart';
 import '../screen_list.dart';
 import 'home_state.dart';
 
-createButton(BuildContext context) => Consumer(
-      builder: (context, ref, _) => FilledButton.icon(
-        icon: Icon(
-          Icons.create_outlined,
-          color: Theme.of(context).canvasColor,
-        ),
-        onPressed: () => homeGo(ref, ScreenDestination.create),
-        label: Text(
-          'Create',
-          style: TextStyle(
-            fontSize: 15,
-            color: Theme.of(context).canvasColor,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
+const newCreateButton = ButtonTemplate(
+  title: 'Create',
+  slogan: 'Create your simulation!',
+  icon: Icons.science_outlined,
+  screenDestination: ScreenDestination.create,
+);
 
-loadButton(BuildContext context) => Consumer(
-      builder: (context, ref, _) => FilledButton.icon(
-        icon: Icon(
-          Icons.create_outlined,
-          color: Theme.of(context).canvasColor,
-        ),
-        onPressed: () {},
-        label: Text(
-          'Load',
-          style: TextStyle(
-            fontSize: 15,
-            color: Theme.of(context).canvasColor,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
-
-newCreateButton() => const ButtonTemplate(
-      //Create your simulation with Propositional analyzer. Set your variables and your propositions and see the result for a large sample of tests.
-      title: 'Create',
-      slogan: 'Create your simulation!',
-      //simulater icon
-      icon: Icons.science_outlined,
-      screenDestination: ScreenDestination.create,
-    );
-
-//newLoadButton
-//Load your existing simulation and see the results in charts
-newLoadButton() => const ButtonTemplate(
-      //Load your existing simulation and see the results in charts
-      title: 'Load',
-      slogan: 'Load your simulation!',
-      icon: Icons.file_upload_outlined,
-      screenDestination: ScreenDestination.chart,
-    );
+const newLoadButton = ButtonTemplate(
+  title: 'Load',
+  slogan: 'Load your simulation!',
+  icon: Icons.file_upload_outlined,
+  screenDestination: ScreenDestination.chart,
+);
 
 class ButtonTemplate extends ConsumerStatefulWidget {
   const ButtonTemplate({
@@ -111,7 +70,7 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
           child: GestureDetector(
             onTap: () {
               setState(() {});
-              homeGo(ref, widget.screenDestination);
+              goTo(ref, widget.screenDestination);
             },
             child: AnimatedScale(
               scale: scale,
@@ -178,15 +137,6 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
               color: Theme.of(context).canvasColor,
             ),
           ),
-          // Text(
-          //   widget.description,
-          //   style: const TextStyle(
-          //     fontSize: 18,
-          //     fontFamily: 'Play',
-          //   ),
-          //   softWrap: true,
-          //   overflow: TextOverflow.fade,
-          // ),
         ],
       );
 }

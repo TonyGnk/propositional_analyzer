@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Screens/screen_list.dart';
 import '../../Services/constants.dart';
+import '../Adaptive Folder/synthesizer.dart';
 import 'info_icon.dart';
 import 'theme_icon.dart';
 
@@ -47,7 +48,7 @@ Widget row(BuildContext context) => Consumer(
               child: isEnableBackButton
                   ? appBarIcon(
                       const Icon(Icons.arrow_back_ios_outlined),
-                      () => go(ref, previousScreen ?? ScreenDestination.home),
+                      () => goBack(ref),
                     )
                   : const SizedBox(),
             ),

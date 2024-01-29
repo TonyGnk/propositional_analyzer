@@ -1,5 +1,5 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../chart.dart';
 import 'Charts/chart_main.dart';
 import 'Charts/chart_state.dart';
 import 'Create/create_main.dart';
@@ -25,52 +25,46 @@ enum ScreenDestination {
   about,
 }
 
-//Create the go function with ref and a destination. Reads switch appBarCurrentScreen if is ScreenDestination.terminal call terminalGo etc.
-go(WidgetRef ref, ScreenDestination destination) {
-  final currentScreen = ref.read(currentScreenProvider.notifier).state;
-  switch (currentScreen) {
-    case ScreenDestination.home:
-      homeGo(ref, destination);
-
-    case ScreenDestination.create:
-      createGo(ref, destination);
-    case ScreenDestination.result:
-      resultGo(ref, destination);
-    case ScreenDestination.chart:
-      chartGo(ref, destination);
-    case ScreenDestination.about:
-      aboutGo(ref, destination);
-    case ScreenDestination.settings:
-      settingsGo(ref, destination);
-
-    default:
-      homeGo(ref, destination);
-  }
-}
-
 goTo(WidgetRef ref, ScreenDestination destination) async {
+  //call map screen go with
+  screenGo[screenStack.last]!(
+    ref,
+    destination,
+  );
   Future.delayed(basicDuration, () {
     ref.read(currentScreenProvider.notifier).state = destination;
+    screenStack.add(destination);
   });
 }
 
-getCurrentScreen(ScreenDestination currentScreen) {
-  switch (currentScreen) {
-    case ScreenDestination.home:
-      return const Home();
-    case ScreenDestination.create:
-      return const Create();
-    case ScreenDestination.result:
-      return const Result();
-    case ScreenDestination.chart:
-      return const Chart();
-
-    case ScreenDestination.settings:
-      return const Settings();
-    case ScreenDestination.about:
-      return const AboutScreen();
-
-    default:
-      return const Home();
-  }
+goBack(
+  WidgetRef ref,
+) async {
+  screenGo[screenStack.last]!(
+    ref,
+    screenStack[screenStack.length - 2],
+  );
+  Future.delayed(basicDuration, () {
+    screenStack.removeLast();
+    ref.read(currentScreenProvider.notifier).state = screenStack.last;
+  });
 }
+
+final Map<ScreenDestination, Widget> screenMap = {
+  ScreenDestination.home: const Home(),
+  ScreenDestination.create: const Create(),
+  ScreenDestination.result: const Result(),
+  ScreenDestination.chart: const Chart(),
+  ScreenDestination.settings: const Settings(),
+  ScreenDestination.about: const AboutScreen(),
+};
+
+final Map<ScreenDestination, void Function(WidgetRef, ScreenDestination)>
+    screenGo = {
+  ScreenDestination.home: homeGo,
+  ScreenDestination.create: createGo,
+  ScreenDestination.result: resultGo,
+  ScreenDestination.chart: chartGo,
+  ScreenDestination.settings: settingsGo,
+  ScreenDestination.about: aboutGo,
+};

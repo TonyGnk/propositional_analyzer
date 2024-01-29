@@ -10,9 +10,7 @@ Widget synthesizerDefault() => Consumer(builder: (context, ref, _) {
       return bodyWithAppBarGlass(
         appBar: appBar(context),
         body: Padding(
-          padding: const EdgeInsets.all(0),
-          child: getCurrentScreen(currentScreen),
-        ),
+            padding: const EdgeInsets.all(0), child: screenMap[currentScreen]!),
       );
     });
 
@@ -21,5 +19,7 @@ Widget appBar(BuildContext context) => Consumer(
     );
 
 final currentScreenProvider = StateProvider<ScreenDestination>(
-  (ref) => ScreenDestination.chart,
+  (ref) => ScreenDestination.home,
 );
+
+final List<ScreenDestination> screenStack = [ScreenDestination.home];
