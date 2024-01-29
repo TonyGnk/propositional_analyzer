@@ -57,7 +57,7 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
         builder: (context, ref, _) => MouseRegion(
           onEnter: (event) {
             setState(() {
-              scale = 0.96;
+              scale = 0.97;
             });
           },
           onExit: (event) {

@@ -5,6 +5,8 @@ import 'dart:async';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fullscreen_window/fullscreen_window.dart';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
 import '../../constants.dart';
 import 'chart_state.dart';
@@ -63,17 +65,7 @@ class _ChartState extends ConsumerState<Chart> {
                   ? const Icon(Icons.fullscreen)
                   : const Icon(Icons.fullscreen_exit),
               onPressed: () async {
-                if (await windowManager.isFullScreen()) {
-                  setState(() {
-                    show2 = true;
-                  });
-                  windowManager.setFullScreen(false);
-                } else {
-                  setState(() {
-                    show2 = false;
-                  });
-                  windowManager.setFullScreen(true);
-                }
+                fullScreen(false);
               },
             ),
           ],
@@ -97,22 +89,44 @@ class _ChartState extends ConsumerState<Chart> {
                   ? const Icon(Icons.fullscreen)
                   : const Icon(Icons.fullscreen_exit),
               onPressed: () async {
-                if (await windowManager.isFullScreen()) {
-                  setState(() {
-                    show1 = true;
-                  });
-                  windowManager.setFullScreen(false);
-                } else {
-                  setState(() {
-                    show1 = false;
-                  });
-                  windowManager.setFullScreen(true);
-                }
+                fullScreen(false);
               },
             ),
           ],
         ),
       );
+
+  //Handle the full screen
+  bool isFullScreen = false;
+  fullScreen(bool isFirst) async {
+    if (UniversalPlatform.isWindows) {
+      if (await windowManager.isFullScreen()) {
+        setState(() {
+          isFirst ? show1 = true : show2 = true;
+        });
+        windowManager.setFullScreen(false);
+      } else {
+        setState(() {
+          isFirst ? show1 = false : show2 = false;
+        });
+        windowManager.setFullScreen(true);
+      }
+    } else if (UniversalPlatform.isWeb) {
+      if (isFullScreen) {
+        setState(() {
+          isFirst ? show1 = true : show2 = true;
+        });
+        FullScreenWindow.setFullScreen(false);
+        isFullScreen = false;
+      } else {
+        setState(() {
+          isFirst ? show1 = false : show2 = false;
+        });
+        FullScreenWindow.setFullScreen(true);
+        isFullScreen = true;
+      }
+    }
+  }
 
   lineChart(bool isFirst) => LineChart(
         LineChartData(
