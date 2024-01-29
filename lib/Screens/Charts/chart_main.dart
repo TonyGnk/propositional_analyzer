@@ -38,7 +38,7 @@ class _ChartState extends ConsumerState<Chart> {
         child: Column(
           children: [
             show1 ? row1() : const SizedBox(),
-            // show1 ? Expanded(child: lineChart(true)) : const SizedBox(),
+            show1 ? Expanded(child: lineChart(true)) : const SizedBox(),
             // (show1 && show2) ? const SizedBox(height: 20) : const SizedBox(),
             // show2 ? row2() : const SizedBox(),
             // show2 ? Expanded(child: lineChart(false)) : const SizedBox(),

@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../chart.dart';
 import 'Charts/chart_main.dart';
 import 'Charts/chart_state.dart';
+import 'Create/create_main.dart';
+import 'Create/create_state.dart';
 import 'Result/result_main.dart';
 import 'Result/result_state.dart';
 
@@ -16,6 +18,7 @@ import 'Home/home_main.dart';
 
 enum ScreenDestination {
   home,
+  create,
   result,
   chart,
   settings,
@@ -28,6 +31,9 @@ go(WidgetRef ref, ScreenDestination destination) {
   switch (currentScreen) {
     case ScreenDestination.home:
       homeGo(ref, destination);
+
+    case ScreenDestination.create:
+      createGo(ref, destination);
     case ScreenDestination.result:
       resultGo(ref, destination);
     case ScreenDestination.chart:
@@ -52,6 +58,8 @@ getCurrentScreen(ScreenDestination currentScreen) {
   switch (currentScreen) {
     case ScreenDestination.home:
       return const Home();
+    case ScreenDestination.create:
+      return const Create();
     case ScreenDestination.result:
       return const Result();
     case ScreenDestination.chart:
