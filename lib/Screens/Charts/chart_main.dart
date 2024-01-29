@@ -33,15 +33,15 @@ class _ChartState extends ConsumerState<Chart> {
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
+  Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             show1 ? row1() : const SizedBox(),
-            show1 ? Expanded(child: lineChart(true)) : const SizedBox(),
-            (show1 && show2) ? const SizedBox(height: 20) : const SizedBox(),
-            show2 ? row2() : const SizedBox(),
-            show2 ? Expanded(child: lineChart(false)) : const SizedBox(),
+            // show1 ? Expanded(child: lineChart(true)) : const SizedBox(),
+            // (show1 && show2) ? const SizedBox(height: 20) : const SizedBox(),
+            // show2 ? row2() : const SizedBox(),
+            // show2 ? Expanded(child: lineChart(false)) : const SizedBox(),
           ],
         ),
       );

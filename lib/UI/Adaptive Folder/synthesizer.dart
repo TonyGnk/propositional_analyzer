@@ -21,5 +21,5 @@ Widget appBar(BuildContext context) => Consumer(
     );
 
 final currentScreenProvider = StateProvider<ScreenDestination>(
-  (ref) => ScreenDestination.home,
+  (ref) => ScreenDestination.chart,
 );
