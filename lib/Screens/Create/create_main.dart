@@ -33,16 +33,16 @@ class _CreateState extends ConsumerState<Create> {
               const SegmentedControl(),
               group(
                 context,
-                188,
+                183,
                 [slideK(), slideN(), slideTests()],
               ),
               group(
                 context,
-                132,
+                129,
                 [slideStop(), slideTime()],
               ),
               const Expanded(flex: 1, child: SizedBox()),
-              modeText(context),
+              // modeText(context),
               const SizedBox(height: 16),
               rowOfButtons(),
               const SizedBox(height: 10),
@@ -56,7 +56,7 @@ class _CreateState extends ConsumerState<Create> {
         currentValue: K.toDouble(),
         min: 1,
         max: 10,
-        hint: 'Set K variable',
+        hint: 'Variable K=$K',
         iconData: Icons.expand_less_outlined,
         function: (value) {
           setState(() {
@@ -69,7 +69,7 @@ class _CreateState extends ConsumerState<Create> {
         currentValue: N.toDouble(),
         min: 1,
         max: 13,
-        hint: 'Set N variable',
+        hint: 'Variable N=$N',
         iconData: Icons.local_parking_outlined,
         function: (value) {
           setState(() {
@@ -82,7 +82,8 @@ class _CreateState extends ConsumerState<Create> {
         currentValue: numberOfTests.toDouble(),
         min: 1,
         max: 10,
-        hint: 'Set Number of Tests',
+        hint: 'Make $numberOfTests',
+        extraHint: (numberOfTests == 1) ? 'test' : 'tests',
         iconData: Icons.workspaces_outlined,
         function: (value) {
           setState(() {
@@ -95,7 +96,9 @@ class _CreateState extends ConsumerState<Create> {
         currentValue: stop.toDouble(),
         min: 1,
         max: 10,
-        hint: 'Set Stop Size',
+        //Σταμάτα όταν έχεις 3 συνεχόμενες αποτυχίες
+        hint: 'Stop after $stop',
+        extraHint: (stop == 1) ? 'failure' : 'failures',
         iconData: Icons.remove_done_outlined,
         function: (value) {
           setState(() {
@@ -106,10 +109,11 @@ class _CreateState extends ConsumerState<Create> {
 
   slideTime() => SliderExample(
         currentValue: timeOut.toDouble(),
-        min: 2,
-        max: 240,
-        hint: 'Set Time Size',
+        min: 1,
+        max: 29,
+        hint: 'Stop test after ${timeText[timeOut.toInt()]!}',
         iconData: Icons.timer,
+        isTime: true,
         function: (value) {
           setState(() {
             timeOut = value.toInt();

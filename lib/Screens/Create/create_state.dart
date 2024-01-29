@@ -21,7 +21,7 @@ createReturn(WidgetRef ref) {
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
-  updateAppBarLabel(ref, 'Create', isReturn);
+  updateAppBarLabel(ref, 'New Analysis', isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
 }
 
