@@ -15,10 +15,8 @@ group(BuildContext context, double height, List<Widget> list) => Container(
       ),
       padding: const EdgeInsets.fromLTRB(0, 15, 0, 4),
       margin: const EdgeInsets.fromLTRB(7, 0, 7, 9),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          //Using generate show every list item and split theme with a divider
-          children: list),
+      child:
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: list),
     );
 
 class SliderExample extends StatefulWidget {
@@ -59,7 +57,7 @@ class _SliderExampleState extends State<SliderExample> {
                 color: Theme.of(context).canvasColor,
               ),
             ),
-            const SizedBox(width: 4),
+            const SizedBox(width: 1),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +65,15 @@ class _SliderExampleState extends State<SliderExample> {
                 children: [
                   Text(
                     '     ${widget.hint} ${widget.extraHint}',
-                    style: hintStyle(),
+                    style: TextStyle(
+                      fontFamily: 'Play',
+                      fontSize: 16,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onBackground
+                          .withOpacity(0.9),
+                      height: 0.4,
+                    ),
                   ),
                   widget.isTime
                       ? sliderForTime()

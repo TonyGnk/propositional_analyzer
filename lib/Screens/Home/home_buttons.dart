@@ -3,18 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/constants.dart';
 import '../screen_list.dart';
-import 'home_state.dart';
 
 const newCreateButton = ButtonTemplate(
-  title: 'Create',
-  slogan: 'Create your simulation!',
+  title: 'New', //Create a new analysis, set variables, n,k, etc
+  slogan: 'Create a new analysis',
   icon: Icons.science_outlined,
   screenDestination: ScreenDestination.create,
 );
 
 const newLoadButton = ButtonTemplate(
-  title: 'Load',
-  slogan: 'Load your simulation!',
+  title: 'Load (Soon...)',
+  slogan: 'Load from your storage',
   icon: Icons.file_upload_outlined,
   screenDestination: ScreenDestination.chart,
 );

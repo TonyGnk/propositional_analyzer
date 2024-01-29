@@ -190,12 +190,16 @@ class _SegmentedControlState extends State<SegmentedControl> {
                         color: Theme.of(context).canvasColor,
                       ),
                     ),
-                    const SizedBox(width: 7),
+                    const SizedBox(width: 15),
                     Text(
                       algorithmMap[id]!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Play',
                         fontSize: 16,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onBackground
+                            .withOpacity(0.9),
                       ),
                     ),
                     const Expanded(child: SizedBox()),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../constants.dart';
+import 'create_helper.dart';
 import 'segmented.dart';
 import 'create_state.dart';
-import 'segmented2.dart';
 import 'sliders.dart';
 
 class Create extends ConsumerStatefulWidget {
@@ -44,7 +44,7 @@ class _CreateState extends ConsumerState<Create> {
               const Expanded(flex: 1, child: SizedBox()),
               // modeText(context),
               const SizedBox(height: 16),
-              rowOfButtons(),
+              analyzeContainer(),
               const SizedBox(height: 10),
             ],
           ),

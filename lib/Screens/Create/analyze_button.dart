@@ -7,8 +7,8 @@ import '../../Services/constants.dart';
 
 final isHoveredProviderModernButton = StateProvider<bool>((ref) => false);
 
-class ModeButtons extends StatefulWidget {
-  const ModeButtons({
+class AnalyzeButton extends StatefulWidget {
+  const AnalyzeButton({
     required this.label,
     required this.icon,
     required this.onTap,
@@ -20,10 +20,10 @@ class ModeButtons extends StatefulWidget {
   final VoidCallback onTap;
 
   @override
-  State<ModeButtons> createState() => _ModeButtonsState();
+  State<AnalyzeButton> createState() => _AnalyzeButtonState();
 }
 
-class _ModeButtonsState extends State<ModeButtons> {
+class _AnalyzeButtonState extends State<AnalyzeButton> {
   late Color color = Colors.grey.withOpacity(0.1);
   late Color borderColor = Colors.white.withOpacity(0.2);
   late Timer timer;
@@ -81,7 +81,7 @@ class _ModeButtonsState extends State<ModeButtons> {
   Widget build(BuildContext context) => MouseRegion(
         onEnter: (event) {
           setState(() {
-            scale = 0.93;
+            scale = 0.99;
             //color = Colors.grey.withOpacity(0.2);
             color = Theme.of(context).canvasColor.withOpacity(0.4);
             borderColor = Theme.of(context).canvasColor.withOpacity(0.3);
@@ -107,8 +107,9 @@ class _ModeButtonsState extends State<ModeButtons> {
             scale: scale,
             duration: basicDuration,
             child: AnimatedContainer(
+              margin: const EdgeInsets.fromLTRB(7, 0, 7, 9),
               duration: const Duration(seconds: 1),
-              height: 80,
+              height: 55,
               decoration: BoxDecoration(
                 //color: color,
                 gradient: LinearGradient(
@@ -121,9 +122,10 @@ class _ModeButtonsState extends State<ModeButtons> {
                 ),
                 border: Border.all(
                   color: borderColor,
-                  width: 2.5,
+                  width: 1.5,
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(cornerSize + 1)),
               ),
               clipBehavior: Clip.antiAlias,
               child: theColumn(context),
@@ -135,15 +137,17 @@ class _ModeButtonsState extends State<ModeButtons> {
   Widget theColumn(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            widget.icon,
-            size: 27,
+          Center(
+            child: Icon(
+              widget.icon,
+              size: 24,
+            ),
           ),
           const SizedBox(width: 8),
           Text(
             widget.label,
             style: const TextStyle(
-              fontSize: 21,
+              fontSize: 19,
               fontFamily: 'Play',
             ),
           ),

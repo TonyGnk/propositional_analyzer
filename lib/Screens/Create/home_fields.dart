@@ -37,7 +37,6 @@ inPutField(
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: hint,
-                hintStyle: hintStyle(),
               ),
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
@@ -47,11 +46,4 @@ inPutField(
           ),
         ],
       ),
-    );
-
-hintStyle() => TextStyle(
-      fontFamily: 'Play',
-      fontSize: 16,
-      color: Colors.grey[600],
-      height: 0.4,
     );
