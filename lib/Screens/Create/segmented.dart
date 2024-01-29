@@ -11,7 +11,7 @@ class SegmentedControl extends StatefulWidget {
 
 class _SegmentedControlState extends State<SegmentedControl> {
   double tr = 0;
-  bool openedA = false;
+  bool openedMenu = false;
   bool openedB = false;
   bool showOptionsOpacity = false;
   bool matrix = false;
@@ -21,10 +21,14 @@ class _SegmentedControlState extends State<SegmentedControl> {
   Widget build(BuildContext context) => AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
-        height: openedA ? 200 : 50,
+        height: openedMenu ? 202 : 52,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(cornerSize - 1),
           color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+            width: 1,
+          ),
         ),
         clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.fromLTRB(7, 0, 7, 9),
@@ -35,12 +39,13 @@ class _SegmentedControlState extends State<SegmentedControl> {
             selectItem2(1),
             selectItem3(2),
             selectItem4(3),
+            selectItem5(4),
           ],
         ),
       );
 
   onPressed(int n) {
-    if (openedB) {
+    if (openedMenu) {
       toClose(n);
     } else {
       toOpen(n);
@@ -49,7 +54,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
 
   toOpen(int n) async {
     setState(() {
-      openedA = true;
+      openedMenu = true;
     });
 
     await Future.delayed(const Duration(milliseconds: 100));
@@ -59,8 +64,8 @@ class _SegmentedControlState extends State<SegmentedControl> {
 
     await Future.delayed(const Duration(milliseconds: 250));
     setState(() {
-      matrix = false;
       openedB = true;
+      matrix = false;
       showOptionsOpacity = true;
     });
   }
@@ -80,7 +85,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
     });
     await Future.delayed(const Duration(milliseconds: 50));
     setState(() {
-      openedA = false;
+      openedMenu = false;
     });
     await Future.delayed(const Duration(milliseconds: 50));
     setState(() {
@@ -90,6 +95,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
   }
 
   selectItem1(int id) => animatedRow(
+        50,
         const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(cornerSize - 1),
@@ -99,16 +105,30 @@ class _SegmentedControlState extends State<SegmentedControl> {
         id,
       );
   selectItem2(int id) => animatedRow(
+        50,
         const BoxDecoration(),
         id,
       );
 
   selectItem3(int id) => animatedRow(
+        50,
         const BoxDecoration(),
         id,
       );
 
   selectItem4(int id) => animatedRow(
+        50,
+        const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(cornerSize - 1),
+            bottomRight: Radius.circular(cornerSize - 1),
+          ),
+        ),
+        id,
+      );
+
+  selectItem5(int id) => animatedRow(
+        0,
         const BoxDecoration(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(cornerSize - 1),
@@ -119,18 +139,20 @@ class _SegmentedControlState extends State<SegmentedControl> {
       );
 
   animatedRow(
+    double height,
     BoxDecoration decoration,
     int id,
   ) =>
       !openedB
           ? (selected == id)
-              ? openedRow(decoration, id)
+              ? openedRow(decoration, id, height)
               : const SizedBox()
-          : openedRow(decoration, id);
+          : openedRow(decoration, id, height);
 
   openedRow(
     BoxDecoration decoration,
     int id,
+    double height,
   ) =>
       AnimatedOpacity(
         duration: const Duration(milliseconds: 150),
@@ -142,7 +164,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeInOut,
-          height: 50,
+          height: height,
           decoration: openedB
               ? decoration
               : BoxDecoration(
@@ -181,7 +203,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
                         ? const Icon(
                             Icons.expand_more_outlined,
                           )
-                        : (openedA && selected == id)
+                        : (openedMenu && selected == id)
                             ? const Icon(Icons.check)
                             : const SizedBox()
                   ],
@@ -194,7 +216,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
 
   double findD(int id) {
     if (!openedB) {
-      return id * 50;
+      return id * (50);
     } else {
       return id * (-50);
     }
@@ -206,6 +228,7 @@ Map<int, String> algorithmMap = {
   1: 'DepthFirst',
   2: 'DPLL',
   3: 'Walkstat',
+  4: 'Genetic',
 };
 
 Map<int, IconData> algorithmIconMap = {
@@ -213,4 +236,5 @@ Map<int, IconData> algorithmIconMap = {
   1: Icons.grid_goldenratio_outlined,
   2: Icons.join_right_sharp,
   3: Icons.stacked_bar_chart_outlined,
+  4: Icons.dangerous_outlined,
 };
