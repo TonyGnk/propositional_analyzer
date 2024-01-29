@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../Home/home_fields.dart';
-import '../Home/segmented.dart';
-import '../Home/segmented2.dart';
+import 'home_fields.dart';
+import 'segmented.dart';
+import 'segmented2.dart';
 import 'create_state.dart';
 
 class Create extends ConsumerStatefulWidget {

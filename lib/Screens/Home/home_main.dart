@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'home_fields.dart';
 
+import 'hom_title.dart';
+import 'home_buttons.dart';
 import 'home_state.dart';
-import 'segmented.dart';
-import 'segmented2.dart';
 
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});
@@ -24,18 +23,20 @@ class _HomeState extends ConsumerState<Home> {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 27),
         child: animatedColumn(
           Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 10),
               welcomeToText,
               titleText(context),
-              const Expanded(flex: 1, child: SizedBox()),
-              loadButton(context),
-              const SizedBox(height: 16),
-              createButton(context),
+              const Expanded(child: SizedBox()),
+              newCreateButton(),
+              const SizedBox(height: 6),
+              newLoadButton(),
+              const Expanded(flex: 2, child: SizedBox()),
               const SizedBox(height: 10),
             ],
           ),
