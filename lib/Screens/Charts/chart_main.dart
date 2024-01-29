@@ -46,7 +46,7 @@ class _ChartState extends ConsumerState<Chart> {
         ),
       );
 
-  row1() => Padding(
+  row1() => Container(
         padding: const EdgeInsets.symmetric(horizontal: 44),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +80,7 @@ class _ChartState extends ConsumerState<Chart> {
         ),
       );
 
-  row2() => Padding(
+  row2() => Container(
         padding: const EdgeInsets.symmetric(horizontal: 44),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
