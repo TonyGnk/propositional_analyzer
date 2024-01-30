@@ -14,8 +14,8 @@ const newCreateButton = ButtonTemplate(
 );
 
 const newLoadButton = ButtonTemplate(
-  title: 'Load (Soon...)',
-  slogan: 'Load from your storage',
+  title: 'Load',
+  slogan: 'Now Available!',
   icon: Icons.file_upload_outlined,
   isLoading: true,
   screenDestination: ScreenDestination.chart,

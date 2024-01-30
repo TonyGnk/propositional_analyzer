@@ -49,6 +49,8 @@ loadAnalysis(WidgetRef ref) async {
     goTo(ref, ScreenDestination.chart);
     print(stringFile);
 
+    spots1.clear();
+    spots2.clear();
     //For every line in the String create a spot
     for (String line in stringFile.split('\n')) {
       List<String> values = line.split(',');
