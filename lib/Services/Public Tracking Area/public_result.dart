@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../public_left_column.dart';
-import '../tracking_container.dart';
 
 Widget resultPanel() => Consumer(builder: (context, ref, _) {
       // ignore: unused_local_variable

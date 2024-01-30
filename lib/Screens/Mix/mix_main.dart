@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Charts/chart_main.dart';
-import '../Create/create_main.dart';
-import '../Create/segmented.dart';
-import '../Create/sliders.dart';
 import '../screen_list.dart';
 import 'mix_state.dart';
 

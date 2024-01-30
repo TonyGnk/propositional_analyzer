@@ -35,13 +35,10 @@ class _LineChartSample2State extends State<LineChartSample2> {
     switch (value.toInt()) {
       case 2:
         text = const Text('MAR', style: style);
-        break;
       case 5:
         text = const Text('JUN', style: style);
-        break;
       case 8:
         text = const Text('SEP', style: style);
-        break;
       default:
         text = const Text('', style: style);
         break;
@@ -62,13 +59,10 @@ class _LineChartSample2State extends State<LineChartSample2> {
     switch (value.toInt()) {
       case 1:
         text = '10K';
-        break;
       case 3:
         text = '30k';
-        break;
       case 5:
         text = '50k';
-        break;
       default:
         return Container();
     }
@@ -126,10 +120,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
               switch (flSpot.x.toInt()) {
                 case 1:
                   textAlign = TextAlign.left;
-                  break;
                 case 5:
                   textAlign = TextAlign.right;
-                  break;
                 default:
                   textAlign = TextAlign.center;
               }

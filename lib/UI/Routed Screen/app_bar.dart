@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Screens/screen_list.dart';
 import '../../Services/constants.dart';
-import '../Adaptive Folder/synthesizer.dart';
 import 'info_icon.dart';
 import 'theme_icon.dart';
 
@@ -37,7 +36,7 @@ Widget row(BuildContext context) => Consumer(
         final labelOpacity = ref.watch(appBarLabelOpacity);
         final isEnableThemeButton =
             ref.watch(appBarIsEnableThemeButtonProvider);
-        final previousScreen = ref.watch(appBarPreviousScreen);
+        //final previousScreen = ref.watch(appBarPreviousScreen);
         final customIcon1 = ref.watch(appBarCustomIcon1);
         final customIconOpacity = ref.watch(appBarCustomIconOpacity);
         final backButtonTimes = ref.watch(appBarBackButtonTimes);

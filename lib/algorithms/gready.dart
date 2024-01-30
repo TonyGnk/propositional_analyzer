@@ -11,7 +11,7 @@ hillClimbing(
 ) async {
   List<int> vector = List.filled(N, 0);
   int h, h1, h2;
-  int restarts = 0, steps = 0;
+  //int restarts = 0, steps = 0;
   int bestChange;
 
   DateTime t1 = DateTime.now();
@@ -31,7 +31,7 @@ hillClimbing(
       );
     }
 
-    steps++;
+    //steps++;
     h2 = h;
     bestChange = -1;
     for (int i = 0; i < N; i++) {
@@ -48,7 +48,7 @@ hillClimbing(
       vector[bestChange] = -vector[bestChange];
     } else {
       vector = initialize(vector);
-      restarts++;
+      //restarts++;
     }
     h = count(vector, problem, M);
   }

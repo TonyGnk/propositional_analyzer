@@ -9,7 +9,6 @@ import '../../algorithms/depth_first.dart';
 import '../../constants.dart';
 import '../../algorithms/gready.dart';
 import '../../new_value.dart';
-import '../Mix/mix_main.dart';
 import '../screen_list.dart';
 import 'result_state.dart';
 import 'track.dart';
@@ -143,7 +142,7 @@ class _ResultState extends ConsumerState<Result> {
         print('stopsPrimary: $stopsPrimary');
         print('stopsSecondary: $stopsSecondary');
         for (int j = 1; j <= numberOfTests; j++) {
-          print("J $j");
+          print('J $j');
         }
       });
     });

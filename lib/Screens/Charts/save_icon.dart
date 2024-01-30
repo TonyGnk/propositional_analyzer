@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsaver/jSaver.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 import '../../constants.dart';
 import '../screen_list.dart';
@@ -42,40 +43,37 @@ saveAnalysis() async {
 loadAnalysis(WidgetRef ref) async {
   print('Load Analysis');
 
-  FilePickerResult? result = await FilePicker.platform.pickFiles();
+  FilePickerResult? result =
+      await FilePicker.platform.pickFiles(allowedExtensions: ['txt', 'csv']);
 
-  if (result != null) {
-    Uint8List bytes = result.files.single.bytes!;
-    String stringFile = utf8.decode(bytes);
-
-    // File file = File(result.files.single.path!);
-    // String stringFile = file.readAsStringSync();
-    // goTo(ref, ScreenDestination.chart);
-    print(stringFile);
-
-    spots1.clear();
-    spots2.clear();
-    //For every line in the String create a spot
-    for (String line in stringFile.split('\n')) {
-      List<String> values = line.split(',');
-      spots1.add(FlSpot(double.parse(values[0]), double.parse(values[1])));
-      spots2.add(FlSpot(double.parse(values[0]), double.parse(values[2])));
+  if (UniversalPlatform.isWindows) {
+    if (result != null && result.files.isNotEmpty) {
+      File file = File(result.files.single.path!);
+      String stringFile = file.readAsStringSync();
+      spots1.clear();
+      spots2.clear();
+      for (String line in stringFile.split('\n')) {
+        List<String> values = line.split(',');
+        spots1.add(FlSpot(double.parse(values[0]), double.parse(values[1])));
+        spots2.add(FlSpot(double.parse(values[0]), double.parse(values[2])));
+        goTo(ref, ScreenDestination.chart);
+      }
+    } else {
+      // User canceled the picker
     }
-  } else {
-    // User canceled the picker
+  }
+  if (result != null && result.files.isNotEmpty) {
+    final bytes = result.files.first.bytes;
+    if (bytes != null) {
+      String stringFile = utf8.decode(bytes);
+      spots1.clear();
+      spots2.clear();
+      for (String line in stringFile.split('\n')) {
+        List<String> values = line.split(',');
+        spots1.add(FlSpot(double.parse(values[0]), double.parse(values[1])));
+        spots2.add(FlSpot(double.parse(values[0]), double.parse(values[2])));
+        goTo(ref, ScreenDestination.chart);
+      }
+    }
   }
 }
-
-
-// loadAnalysis(WidgetRef ref) async {
-//   print('Load Analysis');
-
-//   FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-//   if (result != null) {
-//     Uint8List bytes = result.files.single.bytes!;
-//     String stringFile = utf8.decode(bytes);
-//     goTo(ref, ScreenDestination.chart);
-//     print(stringFile);
-//   }
-// }

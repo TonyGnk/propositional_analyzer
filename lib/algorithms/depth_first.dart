@@ -5,7 +5,6 @@
 	using Depth-First Search.
 */
 
-import 'dart:async';
 import 'dart:core';
 
 import '../Screens/Result/track.dart';
@@ -60,7 +59,7 @@ depthFirst(List<List<int>> problem, int M) async {
 class StackItem {
   StackItem();
 
-  List<List<int>> _items = [];
+  final List<List<int>> _items = [];
 
   void push(List<int> item) {
     _items.add(item);
