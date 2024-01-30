@@ -43,8 +43,7 @@ saveAnalysis() async {
 loadAnalysis() async {
   print('Load Analysis');
 
-  FilePickerResult? result =
-      await FilePicker.platform.pickFiles(allowedExtensions: ['txt', 'csv']);
+  FilePickerResult? result = await FilePicker.platform.pickFiles();
 
   if (UniversalPlatform.isWindows) {
     if (result != null && result.files.isNotEmpty) {
@@ -64,18 +63,19 @@ loadAnalysis() async {
     } else {
       // User canceled the picker
     }
-  }
-  if (result != null && result.files.isNotEmpty) {
-    final bytes = result.files.first.bytes;
-    if (bytes != null) {
-      String stringFile = utf8.decode(bytes);
-      spots1.clear();
-      spots2.clear();
-      for (String line in stringFile.split('\n')) {
-        List<String> values = line.split(',');
-        spots1.add(FlSpot(double.parse(values[0]), double.parse(values[1])));
-        spots2.add(FlSpot(double.parse(values[0]), double.parse(values[2])));
-        return true;
+  } else {
+    if (result != null && result.files.isNotEmpty) {
+      final bytes = result.files.first.bytes;
+      if (bytes != null) {
+        String stringFile = utf8.decode(bytes);
+        spots1.clear();
+        spots2.clear();
+        for (String line in stringFile.split('\n')) {
+          List<String> values = line.split(',');
+          spots1.add(FlSpot(double.parse(values[0]), double.parse(values[1])));
+          spots2.add(FlSpot(double.parse(values[0]), double.parse(values[2])));
+          return true;
+        }
       }
     }
   }
