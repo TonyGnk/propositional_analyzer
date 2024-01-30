@@ -89,7 +89,7 @@ class _ChartState extends ConsumerState<Chart> {
                   ? const Icon(Icons.fullscreen)
                   : const Icon(Icons.fullscreen_exit),
               onPressed: () async {
-                fullScreen(false);
+                fullScreen(true);
               },
             ),
           ],
