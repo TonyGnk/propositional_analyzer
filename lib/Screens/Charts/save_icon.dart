@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -44,9 +45,12 @@ loadAnalysis(WidgetRef ref) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles();
 
   if (result != null) {
-    File file = File(result.files.single.path!);
-    String stringFile = file.readAsStringSync();
-    goTo(ref, ScreenDestination.chart);
+    Uint8List bytes = result.files.single.bytes!;
+    String stringFile = utf8.decode(bytes);
+
+    // File file = File(result.files.single.path!);
+    // String stringFile = file.readAsStringSync();
+    // goTo(ref, ScreenDestination.chart);
     print(stringFile);
 
     spots1.clear();
@@ -61,3 +65,17 @@ loadAnalysis(WidgetRef ref) async {
     // User canceled the picker
   }
 }
+
+
+// loadAnalysis(WidgetRef ref) async {
+//   print('Load Analysis');
+
+//   FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+//   if (result != null) {
+//     Uint8List bytes = result.files.single.bytes!;
+//     String stringFile = utf8.decode(bytes);
+//     goTo(ref, ScreenDestination.chart);
+//     print(stringFile);
+//   }
+// }
