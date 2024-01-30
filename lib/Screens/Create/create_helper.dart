@@ -32,12 +32,7 @@ analyzeContainer() => Consumer(
         label: 'Analyze',
         icon: Icons.troubleshoot_outlined,
         onTap: () {
-          if (MediaQuery.of(context).size.width > 650) {
-            ref.read(secondaryScreenProvider.notifier).state =
-                ScreenDestination.result;
-          } else {
-            goTo(ref, ScreenDestination.result);
-          }
+          goTo(ref, ScreenDestination.result);
         },
       ),
     );

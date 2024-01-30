@@ -73,13 +73,15 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
           },
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
-            onTap: () {
+            onTap: () async {
               setState(() {});
               (widget.isLoading)
-                  ? {
-                      screenStack.add(ScreenDestination.create),
-                      loadAnalysis(ref)
-                    }
+                  ? (await loadAnalysis())
+                      ? {
+                          screenStack.add(ScreenDestination.create),
+                          goTo(ref, widget.screenDestination)
+                        }
+                      : null
                   : goTo(ref, widget.screenDestination);
             },
             child: AnimatedScale(

@@ -40,7 +40,7 @@ saveAnalysis() async {
   final v = await _jSaverPlugin.saveFromData(data: data, name: 'analysis.txt');
 }
 
-loadAnalysis(WidgetRef ref) async {
+loadAnalysis() async {
   print('Load Analysis');
 
   FilePickerResult? result =
@@ -50,14 +50,17 @@ loadAnalysis(WidgetRef ref) async {
     if (result != null && result.files.isNotEmpty) {
       File file = File(result.files.single.path!);
       String stringFile = file.readAsStringSync();
+      print(stringFile);
       spots1.clear();
       spots2.clear();
-      for (String line in stringFile.split('\n')) {
+      List<String> lines = stringFile.split('\n');
+      //in Lines without the last
+      for (String line in lines.sublist(0, lines.length - 1)) {
         List<String> values = line.split(',');
         spots1.add(FlSpot(double.parse(values[0]), double.parse(values[1])));
         spots2.add(FlSpot(double.parse(values[0]), double.parse(values[2])));
-        goTo(ref, ScreenDestination.chart);
       }
+      return true;
     } else {
       // User canceled the picker
     }
@@ -72,7 +75,7 @@ loadAnalysis(WidgetRef ref) async {
         List<String> values = line.split(',');
         spots1.add(FlSpot(double.parse(values[0]), double.parse(values[1])));
         spots2.add(FlSpot(double.parse(values[0]), double.parse(values[2])));
-        goTo(ref, ScreenDestination.chart);
+        return true;
       }
     }
   }
