@@ -81,7 +81,7 @@ class _CreateState extends ConsumerState<Create> {
   slideTests() => SliderExample(
         currentValue: numberOfTests.toDouble(),
         min: 1,
-        max: 10,
+        max: 15,
         hint: 'Make $numberOfTests',
         extraHint: (numberOfTests == 1) ? 'test' : 'tests',
         iconData: Icons.workspaces_outlined,

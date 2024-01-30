@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../algorithms/depth_first.dart';
 import '../../constants.dart';
 import '../../algorithms/gready.dart';
 import '../../new_value.dart';
@@ -162,7 +163,7 @@ class _ResultState extends ConsumerState<Result> {
         // await Future.delayed(Duration(seconds: 1));
         List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
         problem = newProblem(problem);
-        Search search = await hillClimbing(problem, M);
+        Search search = await runAlgorithm(problem, M);
         int founded = search.win ? 1 : 0;
         sampleSum = sampleSum + founded;
         timeSum = timeSum + search.time;
@@ -243,4 +244,12 @@ addSpot(double M, double average, double averageTime) {
 
   spots1.add(FlSpot(M, average));
   spots2.add(FlSpot(M, averageTime));
+}
+
+runAlgorithm(List<List<int>> problem, int M) async {
+  if (selected == 0) {
+    return await hillClimbing(problem, M);
+  } else if (selected == 1) {
+    return await depthFirst(problem, M);
+  }
 }

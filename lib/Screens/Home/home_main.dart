@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../algorithms/depth_first.dart';
+import '../../constants.dart';
+import '../../new_value.dart';
 import 'hom_title.dart';
 import 'home_buttons.dart';
 import 'home_state.dart';
@@ -38,6 +41,15 @@ class _HomeState extends ConsumerState<Home> {
               newLoadButton,
               const Expanded(flex: 2, child: SizedBox()),
               const SizedBox(height: 10),
+              // TextButton(
+              //     child: Text('Start'),
+              //     onPressed: () async {
+              //       int M = 599;
+              //       List<List<int>> problem =
+              //           List.generate(M, (i) => List.filled(K, 0));
+              //       problem = newProblem(problem);
+              //       depthFirst(problem, M);
+              //     })
             ],
           ),
         ),

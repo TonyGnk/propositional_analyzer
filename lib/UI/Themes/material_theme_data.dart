@@ -8,7 +8,7 @@ class MaterialThemeData extends TotalTheme {
         brightness: Brightness.light,
         useMaterial3: true,
         //#90A4AE to rgb is 144, 164, 174
-        colorSchemeSeed: Colors.orangeAccent,
+        colorSchemeSeed: Colors.deepOrangeAccent,
         textTheme: TextTheme(
           displayLarge: const TextStyle(
             color: Color.fromARGB(255, 31, 31, 31),
@@ -27,7 +27,7 @@ class MaterialThemeData extends TotalTheme {
         scaffoldBackgroundColor: const Color.fromARGB(255, 245, 245, 245),
         shadowColor: const Color.fromARGB(255, 255, 255, 255),
         splashColor: const Color.fromARGB(255, 255, 255, 255),
-        canvasColor: Colors.orangeAccent,
+        canvasColor: Colors.deepOrangeAccent,
         unselectedWidgetColor: Colors.orange[100],
       );
 

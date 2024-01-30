@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Services/constants.dart';
+import '../../constants.dart';
 
 class SegmentedControl extends StatefulWidget {
   const SegmentedControl({super.key});
@@ -15,7 +16,6 @@ class _SegmentedControlState extends State<SegmentedControl> {
   bool openedB = false;
   bool showOptionsOpacity = false;
   bool matrix = false;
-  int selected = 0;
 
   @override
   Widget build(BuildContext context) => AnimatedContainer(
