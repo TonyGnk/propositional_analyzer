@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  file_saver
   fullscreen_window
   permission_handler_windows
   screen_retriever

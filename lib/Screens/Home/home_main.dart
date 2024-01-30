@@ -1,9 +1,11 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../algorithms/depth_first.dart';
-import '../../constants.dart';
-import '../../new_value.dart';
+import '../Charts/save_icon.dart';
 import 'hom_title.dart';
 import 'home_buttons.dart';
 import 'home_state.dart';
@@ -39,7 +41,7 @@ class _HomeState extends ConsumerState<Home> {
               newCreateButton,
               const SizedBox(height: 6),
               newLoadButton,
-              const Expanded(flex: 2, child: SizedBox()),
+              const Expanded(flex: 1, child: SizedBox()),
               const SizedBox(height: 10),
               // TextButton(
               //     child: Text('Start'),

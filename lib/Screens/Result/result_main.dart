@@ -9,6 +9,7 @@ import '../../algorithms/depth_first.dart';
 import '../../constants.dart';
 import '../../algorithms/gready.dart';
 import '../../new_value.dart';
+import '../Mix/mix_main.dart';
 import '../screen_list.dart';
 import 'result_state.dart';
 import 'track.dart';
@@ -234,6 +235,12 @@ class _ResultState extends ConsumerState<Result> {
     // spots1.add(FlSpot(M.toDouble() + 1, 0.66));
     // spots1.add(FlSpot(M.toDouble() + 2, 0.33));
     goTo(ref, ScreenDestination.chart);
+    // if (MediaQuery.of(context).size.width > 650) {
+    //   ref.read(secondaryScreenProvider.notifier).state =
+    //       ScreenDestination.about;
+    //   ref.read(secondaryScreenProvider.notifier).state =
+    //       ScreenDestination.chart;
+    // }
   }
 }
 

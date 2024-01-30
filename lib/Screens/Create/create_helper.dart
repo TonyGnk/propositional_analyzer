@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Mix/mix_main.dart';
 import '../screen_list.dart';
 import 'analyze_button.dart';
 import 'instructions_button.dart';
@@ -31,7 +32,12 @@ analyzeContainer() => Consumer(
         label: 'Analyze',
         icon: Icons.troubleshoot_outlined,
         onTap: () {
-          goTo(ref, ScreenDestination.result);
+          if (MediaQuery.of(context).size.width > 650) {
+            ref.read(secondaryScreenProvider.notifier).state =
+                ScreenDestination.result;
+          } else {
+            goTo(ref, ScreenDestination.result);
+          }
         },
       ),
     );

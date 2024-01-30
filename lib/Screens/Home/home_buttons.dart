@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/constants.dart';
+import '../../UI/Adaptive Folder/synthesizer.dart';
+import '../Charts/save_icon.dart';
 import '../screen_list.dart';
 
 const newCreateButton = ButtonTemplate(
@@ -15,7 +17,8 @@ const newLoadButton = ButtonTemplate(
   title: 'Load (Soon...)',
   slogan: 'Load from your storage',
   icon: Icons.file_upload_outlined,
-  screenDestination: ScreenDestination.create,
+  isLoading: true,
+  screenDestination: ScreenDestination.chart,
 );
 
 class ButtonTemplate extends ConsumerStatefulWidget {
@@ -24,8 +27,11 @@ class ButtonTemplate extends ConsumerStatefulWidget {
     required this.slogan,
     required this.icon,
     required this.screenDestination,
+    this.isLoading = false,
     super.key,
   });
+
+  final bool isLoading;
 
   //Label
   final String title;
@@ -69,7 +75,12 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
           child: GestureDetector(
             onTap: () {
               setState(() {});
-              goTo(ref, widget.screenDestination);
+              (widget.isLoading)
+                  ? {
+                      screenStack.add(ScreenDestination.create),
+                      loadAnalysis(ref)
+                    }
+                  : goTo(ref, widget.screenDestination);
             },
             child: AnimatedScale(
               scale: scale,

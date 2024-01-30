@@ -26,29 +26,29 @@ class _CreateState extends ConsumerState<Create> {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(8),
         child: animatedColumn(
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 4),
-              const SegmentedControl(),
-              group(
-                context,
-                183,
-                [slideK(), slideN(), slideTests()],
-              ),
-              group(
-                context,
-                129,
-                [slideStop(), slideTime()],
-              ),
-              const Expanded(flex: 1, child: SizedBox()),
-              // modeText(context),
-              //const SizedBox(height: 8),
-              helpContainer(),
-              analyzeContainer(),
-            ],
-          ),
+          createColumn(),
         ),
+      );
+
+  createColumn() => Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 4),
+          const SegmentedControl(),
+          group(
+            context,
+            183,
+            [slideK(), slideN(), slideTests()],
+          ),
+          group(
+            context,
+            129,
+            [slideStop(), slideTime()],
+          ),
+          const Expanded(flex: 1, child: SizedBox()),
+          helpContainer(),
+          analyzeContainer(),
+        ],
       );
 
 //
