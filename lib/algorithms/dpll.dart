@@ -18,14 +18,17 @@ class DPLL {
     Map<String, bool> modelTrue = Map.from(model);
     modelTrue[p] = true;
 
-    if (DPLL_Satisfiable(reduce(clauses, p, true), modelTrue)) {
+    Set<Set<int>>? reducedTrue = reduce(clauses, p, true);
+    if (reducedTrue != null && DPLL_Satisfiable(reducedTrue, modelTrue)) {
       model.addAll(modelTrue);
       return true;
     }
 
     Map<String, bool> modelFalse = Map.from(model);
     modelFalse[p] = false;
-    if (DPLL_Satisfiable(reduce(clauses, p, false), modelFalse)) {
+
+    Set<Set<int>>? reducedFalse = reduce(clauses, p, false);
+    if (reducedFalse != null && DPLL_Satisfiable(reducedFalse, modelFalse)) {
       model.addAll(modelFalse);
       return true;
     }
@@ -45,11 +48,10 @@ class DPLL {
         }
       }
     }
-    //If no unassigned variable is found, then the clauses are either all true or all false and that means that the problem is solved.
     return '';
   }
 
-  Set<Set<int>> reduce(
+  Set<Set<int>>? reduce(
     Set<Set<int>> clauses,
     String p,
     bool value,
@@ -66,9 +68,10 @@ class DPLL {
         Set<int> reducedClause = clause
             .where((literal) => literal != (value ? variable : -variable))
             .toSet();
-        if (reducedClause.isNotEmpty) {
-          reducedClauses.add(reducedClause);
+        if (reducedClause.isEmpty) {
+          return null; // Return null if a clause becomes empty
         }
+        reducedClauses.add(reducedClause);
       }
     }
     return reducedClauses;
