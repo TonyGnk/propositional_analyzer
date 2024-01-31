@@ -8,7 +8,7 @@ class MaterialThemeData extends TotalTheme {
         brightness: Brightness.light,
         useMaterial3: true,
         //#90A4AE to rgb is 144, 164, 174
-        colorSchemeSeed: Color.fromRGBO(255, 110, 64, 1),
+        colorSchemeSeed: const Color.fromRGBO(255, 110, 64, 1),
         textTheme: TextTheme(
           displayLarge: const TextStyle(
             color: Color.fromARGB(255, 31, 31, 31),

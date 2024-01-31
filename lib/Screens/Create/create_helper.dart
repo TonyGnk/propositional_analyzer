@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../Mix/mix_main.dart';
 import '../screen_list.dart';
 import 'analyze_button.dart';
 import 'instructions_button.dart';
