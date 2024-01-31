@@ -29,6 +29,7 @@ class MaterialThemeData extends TotalTheme {
         splashColor: const Color.fromARGB(255, 255, 255, 255),
         canvasColor: Colors.deepOrangeAccent,
         unselectedWidgetColor: Colors.orange[100],
+        dividerColor: Colors.grey[400],
       );
 
   @override
@@ -56,6 +57,7 @@ class MaterialThemeData extends TotalTheme {
         splashColor: const Color.fromARGB(255, 1, 1, 1),
         canvasColor: Colors.deepOrangeAccent,
         unselectedWidgetColor: Colors.grey[800],
+        dividerColor: Colors.grey[700],
       );
 
   static ThemeData getLightTheme() => MaterialThemeData().light();

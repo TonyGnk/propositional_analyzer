@@ -2,11 +2,13 @@
 
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../Services/global_variables.dart';
 import 'root_config.dart';
 import '../Theme Services/ui_change.dart';
 import '../Themes/material_theme_data.dart';
 
-class AdaptiveRoot extends StatefulWidget {
+class AdaptiveRoot extends ConsumerStatefulWidget {
   const AdaptiveRoot({
     required this.appTitle,
     this.savedThemeMode,
@@ -23,15 +25,17 @@ class AdaptiveRoot extends StatefulWidget {
   final bool debugShowFloatingThemeButton;
 
   @override
-  State<AdaptiveRoot> createState() => _AdaptiveRootState();
+  ConsumerState<AdaptiveRoot> createState() => _AdaptiveRootState();
 }
 
-class _AdaptiveRootState extends State<AdaptiveRoot> {
+class _AdaptiveRootState extends ConsumerState<AdaptiveRoot>
+    with WidgetsBindingObserver {
   TotalTheme? theme;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     setUiTheme();
   }
 
@@ -40,6 +44,14 @@ class _AdaptiveRootState extends State<AdaptiveRoot> {
     setState(() {
       this.theme = theme;
     });
+  }
+
+  @override
+  void didChangeMetrics() {
+    bool newState = View.of(context).physicalSize.width > 500;
+    if (ref.read(isDesktopProvider.notifier).state != newState) {
+      ref.read(isDesktopProvider.notifier).state = newState;
+    }
   }
 
   @override

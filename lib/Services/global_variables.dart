@@ -1,4 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 int numberOfTests = 3;
 int N = 12;
@@ -30,3 +31,5 @@ Duration basicDuration4 = Duration(
 Duration basicDuration5 = Duration(
   milliseconds: basicDuration.inMilliseconds + 500,
 );
+
+final isDesktopProvider = StateProvider<bool>((ref) => true);

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Themes/material_theme_data.dart';
-import '../Themes/oneui_theme_data.dart';
 
 Future<String?> getPref() async {
   final prefs = await SharedPreferences.getInstance();
@@ -19,9 +18,7 @@ Future<TotalTheme> getUITheme() async {
   if (savedTheme == null) {
     return MaterialThemeData();
   }
-  return savedTheme.toString() == 'ONEUI'
-      ? OneUIThemeData()
-      : MaterialThemeData();
+  return MaterialThemeData();
 }
 
 //Create a function. Call getUiTheme. If the theme is material, return 0. If the theme is oneui, return 1.
@@ -37,13 +34,8 @@ Future<int> getUiTheme() async {
 Future<void> toggleUI(BuildContext context, String action) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('UITHEME', action);
-  if (action == 'oneUi') {
-    AdaptiveTheme.of(context).setTheme(
-        light: OneUIThemeData.getLightTheme(),
-        dark: OneUIThemeData.getDarkTheme());
-  } else {
-    AdaptiveTheme.of(context).setTheme(
-        light: MaterialThemeData.getLightTheme(),
-        dark: MaterialThemeData.getDarkTheme());
-  }
+
+  AdaptiveTheme.of(context).setTheme(
+      light: MaterialThemeData.getLightTheme(),
+      dark: MaterialThemeData.getDarkTheme());
 }

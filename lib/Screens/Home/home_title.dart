@@ -10,7 +10,7 @@ const welcomeToText = Text(
 );
 
 titleText(BuildContext context) => Text(
-      'Propositional Analyzer',
+      'Propositional\nAnalyzer',
       style: TextStyle(
           fontSize: 34,
           color: Theme.of(context).canvasColor,
