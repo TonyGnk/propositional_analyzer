@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,7 @@ import '../../algorithms/dpll.dart';
 import '../../algorithms/gready.dart';
 import '../../algorithms/new_value.dart';
 import 'result_main.dart';
+import 'track.dart';
 
 initializeCircle() {
   stopsPrimary = [];
@@ -40,7 +43,21 @@ runAlgorithm() async {
   } else if (selected == 1) {
     return await depthFirst(problem);
   } else if (selected == 2) {
-    //return await depthFirstDPLL(problem);
+    DPLL dpll = DPLL();
+    Map<String, bool> model = {};
+    Set<Set<int>> newProblem;
+    newProblem = Set<Set<int>>.from(problem.map((e) => e.toSet()));
+    //Call dpll.DPLL_Satisfiable(newProblem, model);
+    //If does return a value until the time limit "timeOut" then return false
+    try {
+      bool result = await dpll.DPLL_Satisfiable(newProblem, model)
+          .timeout(Duration(seconds: timeOut));
+      return result
+          ? const Search(win: true, time: 0)
+          : const Search(win: false, time: 0);
+    } on TimeoutException catch (_) {
+      return const Search(win: false, time: 0);
+    }
   }
   problem.clear();
 }

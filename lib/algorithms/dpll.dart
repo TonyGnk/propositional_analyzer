@@ -5,7 +5,7 @@
 import 'dart:core';
 
 class DPLL {
-  bool DPLL_Satisfiable(Set<Set<int>> clauses, Map<String, bool> model) {
+  DPLL_Satisfiable(Set<Set<int>> clauses, Map<String, bool> model) async {
     if (clauses.isEmpty) {
       return true;
     }
@@ -19,7 +19,7 @@ class DPLL {
     modelTrue[p] = true;
 
     Set<Set<int>>? reducedTrue = reduce(clauses, p, true);
-    if (reducedTrue != null && DPLL_Satisfiable(reducedTrue, modelTrue)) {
+    if (reducedTrue != null && await DPLL_Satisfiable(reducedTrue, modelTrue)) {
       model.addAll(modelTrue);
       return true;
     }
@@ -28,7 +28,8 @@ class DPLL {
     modelFalse[p] = false;
 
     Set<Set<int>>? reducedFalse = reduce(clauses, p, false);
-    if (reducedFalse != null && DPLL_Satisfiable(reducedFalse, modelFalse)) {
+    if (reducedFalse != null &&
+        await DPLL_Satisfiable(reducedFalse, modelFalse)) {
       model.addAll(modelFalse);
       return true;
     }
@@ -61,6 +62,7 @@ class DPLL {
     reducedClauses.removeWhere((clause) =>
         (value && clause.contains(-variable)) ||
         (!value && clause.contains(variable)));
+    Set<Set<int>> tempClauses = {};
     for (Set<int> clause in reducedClauses) {
       // Remove falsified literals and add the clause to the reduced set
       Set<int> reducedClause = clause
@@ -69,8 +71,9 @@ class DPLL {
       if (reducedClause.isEmpty) {
         return null; // Return null if a clause becomes empty
       }
-      reducedClauses.add(reducedClause);
+      tempClauses.add(reducedClause);
     }
+    reducedClauses.addAll(tempClauses);
     return reducedClauses;
   }
 }
