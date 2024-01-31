@@ -20,6 +20,8 @@
 		"**/.dart_tool": true,
 		"**/.github": false,
 		"**/linux": true,
+		"**/.idea": true,
+		"**/build": true,
 		"**/android": true,
 		//hide readme
 		// hide .vscode

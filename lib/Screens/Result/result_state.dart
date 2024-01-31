@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../UI/Routed%20Screen/app_bar.dart';
 
 import '../../../Screens/screen_list.dart';
-import '../../../Services/constants.dart';
+import '../../Services/global_variables.dart';
 
 final opacity = StateProvider<double>((ref) => 1);
 

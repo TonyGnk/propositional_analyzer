@@ -6,7 +6,7 @@ import 'package:window_manager/window_manager.dart';
 import '../../UI/Routed%20Screen/app_bar.dart';
 
 import '../../../Screens/screen_list.dart';
-import '../../../Services/constants.dart';
+import '../../Services/global_variables.dart';
 import 'save_icon.dart';
 
 final opacity = StateProvider<double>((ref) => 1);

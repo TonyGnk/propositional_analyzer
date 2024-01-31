@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Screens/screen_list.dart';
-import '../../Services/constants.dart';
+import '../../Services/global_variables.dart';
 import 'app_bar.dart';
 
 Widget infoIcon() => Consumer(builder: (context, ref, _) {

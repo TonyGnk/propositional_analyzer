@@ -9,7 +9,7 @@ import 'Mix/mix_state.dart';
 import 'Result/result_main.dart';
 import 'Result/result_state.dart';
 
-import '../Services/constants.dart';
+import '../Services/global_variables.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
 import '../UI/Screens/About/about_main.dart';
 import '../UI/Screens/About/about_state.dart';

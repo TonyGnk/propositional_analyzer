@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Services/constants.dart';
+import '../../Services/global_variables.dart';
 import 'home_fields.dart';
 
 group(BuildContext context, double height, List<Widget> list) => Container(

@@ -14,18 +14,12 @@ void main() async {
       fullScreen: false,
       title: 'Propositional Analyzer',
       size: Size(1050, 660), //380-770 1050-660
-      //     center: false,
       backgroundColor: Colors.transparent,
-      //     skipTaskbar: false,
       titleBarStyle: TitleBarStyle.normal,
-      //     windowButtonVisibility: false,
       alwaysOnTop: true,
     );
 
-    windowManager.waitUntilReadyToShow(windowOptions, () {
-      //     await windowManager.show();
-      //     await windowManager.focus();
-    });
+    windowManager.waitUntilReadyToShow(windowOptions, () {});
   }
 
   final savedThemeMode = await AdaptiveTheme.getThemeMode();

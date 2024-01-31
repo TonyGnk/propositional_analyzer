@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Services/constants.dart';
+import '../../Services/global_variables.dart';
 import '../../constants.dart';
 
 class SegmentedControl extends StatefulWidget {
