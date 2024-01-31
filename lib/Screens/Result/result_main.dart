@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../algorithms/depth_first.dart';
 import '../../constants.dart';
 import '../../algorithms/gready.dart';
-import '../../new_value.dart';
+import '../../algorithms/new_value.dart';
 import '../screen_list.dart';
 import 'result_state.dart';
 import 'track.dart';

@@ -5,7 +5,6 @@ int N = 12;
 int K = 6;
 int stop = 2;
 
-// ignore: constant_identifier_names
 int timeOut = 30;
 
 int selected = 0;

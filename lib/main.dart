@@ -13,7 +13,7 @@ void main() async {
     WindowOptions windowOptions = const WindowOptions(
       fullScreen: false,
       title: 'Propositional Analyzer',
-      size: Size(380, 770), //1050-660
+      size: Size(1050, 660), //380-770 1050-660
       //     center: false,
       backgroundColor: Colors.transparent,
       //     skipTaskbar: false,
