@@ -56,23 +56,20 @@ class DPLL {
     String p,
     bool value,
   ) {
-    Set<Set<int>> reducedClauses = {};
+    Set<Set<int>> reducedClauses = Set.from(clauses);
     int variable = int.parse(p);
-    for (Set<int> clause in clauses) {
-      if (value && clause.contains(-variable)) {
-        continue; // Skip this clause because it's satisfied
-      } else if (!value && clause.contains(variable)) {
-        continue; // Skip this clause because it's satisfied
-      } else {
-        // Remove falsified literals and add the clause to the reduced set
-        Set<int> reducedClause = clause
-            .where((literal) => literal != (value ? variable : -variable))
-            .toSet();
-        if (reducedClause.isEmpty) {
-          return null; // Return null if a clause becomes empty
-        }
-        reducedClauses.add(reducedClause);
+    reducedClauses.removeWhere((clause) =>
+        (value && clause.contains(-variable)) ||
+        (!value && clause.contains(variable)));
+    for (Set<int> clause in reducedClauses) {
+      // Remove falsified literals and add the clause to the reduced set
+      Set<int> reducedClause = clause
+          .where((literal) => literal != (value ? variable : -variable))
+          .toSet();
+      if (reducedClause.isEmpty) {
+        return null; // Return null if a clause becomes empty
       }
+      reducedClauses.add(reducedClause);
     }
     return reducedClauses;
   }

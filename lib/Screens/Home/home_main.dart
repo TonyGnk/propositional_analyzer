@@ -52,12 +52,9 @@ class _HomeState extends ConsumerState<Home> {
               onPressed: () {
                 DPLL dpll = DPLL();
                 Set<Set<int>> problem = {
-                  {1, 2, 3, 4, 5},
-                  {-1, -2},
-                  {-2, -3},
-                  {-3, -4},
-                  {-4, -5},
-                  {-5, -1}
+                  {1, -2}, //P1 and (NOT) P2
+                  {-1, 2}, //(NOT) P1 and P2
+                  {-1, -2} //(NOT) P1 and (NOT) P2
                 };
                 // Define an empty model
                 Map<String, bool> model = {};
