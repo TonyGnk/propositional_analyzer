@@ -1,5 +1,5 @@
 // ignore_for_file: avoid_print
-
+///The boolean satisfiability problem is a problem of finding an assignment of truth values to a set of propositional symbols that satisfies a given set of clauses. A clause is a disjunction of literals, where a literal is either a propositional symbol or its negation.
 import 'dart:core';
 
 import '../Screens/Result/track.dart';
@@ -23,16 +23,19 @@ depthFirst(List<List<int>> problem) async {
 
   // While the stack is not empty.. repeat
   while (head.isNotEmpty) {
+    await Future.delayed(Duration.zero, () {});
     currentTime = DateTime.now();
     if (currentTime.difference(startTime).inSeconds > timeOut) {
       print('Timeout');
       return Search(
-          win: false, time: currentTime.difference(startTime).inSeconds);
+        win: false,
+        time: currentTime.difference(startTime).inSeconds,
+      );
     }
 
     // Retract the top element from the stack.
     head.pop();
-    if (solution(vector, problem, M)) {
+    if (solution(vector, problem)) {
       endTime = DateTime.now();
       print('Solution found: $vector');
       return Search(win: true, time: endTime.difference(startTime).inSeconds);
@@ -54,8 +57,8 @@ class StackItem {
 
   final List<List<int>> _items = [];
 
-  void push(List<int> item) {
-    _items.add(item);
+  void push(List<int> newItem) {
+    _items.add(newItem);
   }
 
   void pop() {

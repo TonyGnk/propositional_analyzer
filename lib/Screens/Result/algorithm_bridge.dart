@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../Services/global_variables.dart';
 import '../../algorithms/depth_first.dart';
+import '../../algorithms/dpll.dart';
 import '../../algorithms/gready.dart';
 import '../../algorithms/new_value.dart';
 import 'result_main.dart';
@@ -38,6 +39,8 @@ runAlgorithm() async {
     return await hillClimbing(problem);
   } else if (selected == 1) {
     return await depthFirst(problem);
+  } else if (selected == 2) {
+    //return await depthFirstDPLL(problem);
   }
   problem.clear();
 }
