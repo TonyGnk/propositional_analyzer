@@ -1,7 +1,7 @@
 // This function creates randomly a new problem. Takes a 2D list
 import 'dart:math';
 
-import '../constants.dart';
+import '../Services/global_variables.dart';
 
 List<List<int>> newProblem(List<List<int>> problem) {
   int M = problem.length;

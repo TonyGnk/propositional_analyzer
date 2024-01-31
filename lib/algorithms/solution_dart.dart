@@ -1,5 +1,5 @@
 // Check whether a vector is a complete assignment and it is also valid.
-import '../constants.dart';
+import '../Services/global_variables.dart';
 
 bool valid(List<int> vector, List<List<int>> problem, int M) {
   int i, j;

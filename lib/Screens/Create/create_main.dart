@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../constants.dart';
+import '../../Services/global_variables.dart';
 import 'create_helper.dart';
 import 'segmented.dart';
 import 'create_state.dart';

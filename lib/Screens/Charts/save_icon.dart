@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:jsaver/jSaver.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-import '../../constants.dart';
+import '../../Services/global_variables.dart';
 
 saveIcon() => IconButton(
       tooltip: 'Save Analysis',

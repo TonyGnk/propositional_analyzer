@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
+import '../../Services/global_variables.dart';
 
 class Track extends StatelessWidget {
   const Track({

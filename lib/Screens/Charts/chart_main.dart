@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
-import '../../constants.dart';
+import '../../Services/global_variables.dart';
 import 'chart_state.dart';
 
 class Chart extends ConsumerStatefulWidget {

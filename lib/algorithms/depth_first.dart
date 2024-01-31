@@ -8,7 +8,7 @@
 import 'dart:core';
 
 import '../Screens/Result/track.dart';
-import '../constants.dart';
+import '../Services/global_variables.dart';
 import 'generate_children.dart';
 import 'solution_dart.dart';
 
