@@ -14,7 +14,7 @@ import 'solution_dart.dart';
 
 StackItem head = StackItem();
 
-depthFirst(List<List<int>> problem, int M) async {
+depthFirst(List<List<int>> problem) async {
   DateTime startTime;
   DateTime currentTime;
   DateTime endTime;

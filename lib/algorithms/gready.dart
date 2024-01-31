@@ -7,7 +7,6 @@ import '../Services/global_variables.dart';
 
 hillClimbing(
   List<List<int>> problem,
-  int M,
 ) async {
   List<int> vector = List.filled(N, 0);
   int h, h1, h2;

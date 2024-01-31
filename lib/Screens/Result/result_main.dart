@@ -2,14 +2,11 @@
 
 import 'dart:async';
 
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../algorithms/depth_first.dart';
 import '../../Services/global_variables.dart';
-import '../../algorithms/gready.dart';
-import '../../algorithms/new_value.dart';
 import '../screen_list.dart';
+import 'algorithm_bridge.dart';
 import 'result_state.dart';
 import 'track.dart';
 
@@ -20,21 +17,21 @@ class Result extends ConsumerStatefulWidget {
   ConsumerState<Result> createState() => _ResultState();
 }
 
+List<double> stopsPrimary = [];
+List<double> stopsSecondary = [];
+double stop1 = 0.333;
+double stop2 = 0.3331;
+
 class _ResultState extends ConsumerState<Result> {
   List<Container> trackList = [];
   Color color1 = Colors.orangeAccent;
   Color color2 = Colors.yellow;
   String str = 'M0';
   String str2 = '';
-  List<double> stopsPrimary = [];
-  List<double> stopsSecondary = [];
-  double stop1 = 0.333;
-  double stop2 = 0.3331;
 
   @override
   void initState() {
     super.initState();
-    //findStops();
     Future.delayed(Duration.zero, () {
       resultReturn(ref);
     });
@@ -95,10 +92,6 @@ class _ResultState extends ConsumerState<Result> {
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
-                      IconButton(
-                        onPressed: () => algorithm(),
-                        icon: const Icon(Icons.refresh),
-                      ),
                     ],
                   ),
                 ),
@@ -129,41 +122,18 @@ class _ResultState extends ConsumerState<Result> {
   algorithm() async {
     await Future.delayed(Duration.zero, () {
       setState(() {
-        double value = 1 / numberOfTests;
-        for (int i = 1; i < numberOfTests; i++) {
-          stopsPrimary.add(value * i);
-          stopsSecondary.add(value * i + 0.001);
-        }
-        stopsPrimary.add(1);
-        stopsSecondary.add(1.001);
-
-        stop1 = stopsPrimary[0];
-        stop2 = stopsSecondary[0];
-        print('stopsPrimary: $stopsPrimary');
-        print('stopsSecondary: $stopsSecondary');
-        for (int j = 1; j <= numberOfTests; j++) {
-          print('J $j');
-        }
+        initializeCircle();
       });
     });
-
-//
-
-    spots1.clear();
-    spots2.clear();
+    initializingData();
     List<bool> stopList = [];
-    int M = 1;
     int sampleSum = 0;
     int timeSum = 0;
     do {
       sampleSum = 0;
       timeSum = 0;
-      //await Future.delayed(Duration(days: 1));
       for (int j = 1; j <= numberOfTests; j++) {
-        // await Future.delayed(Duration(seconds: 1));
-        List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
-        problem = newProblem(problem);
-        Search search = await runAlgorithm(problem, M);
+        Search search = await runAlgorithm();
         int founded = search.win ? 1 : 0;
         sampleSum = sampleSum + founded;
         timeSum = timeSum + search.time;
@@ -177,14 +147,9 @@ class _ResultState extends ConsumerState<Result> {
 
             if (founded != 1) {
               trackList.add(
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Theme.of(context).unselectedWidgetColor,
-                  ),
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
+                trackContainer(
+                  context,
+                  Text(
                     'Test $j with M=$M failed',
                     style: const TextStyle(
                       fontSize: 15,
@@ -196,8 +161,6 @@ class _ResultState extends ConsumerState<Result> {
             }
           });
         });
-
-        problem.clear();
       }
       double n = sampleSum / numberOfTests;
       double averageTime = timeSum / numberOfTests;
@@ -205,15 +168,6 @@ class _ResultState extends ConsumerState<Result> {
 
       await Future.delayed(Duration.zero, () {
         setState(() {
-          //updateUi(sampleSum);
-
-          if (n == 1 / numberOfTests) {
-            //    color1 = Colors.red;
-          } else if (n == 2 / numberOfTests) {
-            //   color1 = Colors.yellow;
-          } else {
-            //  color1 = Colors.green;
-          }
           str = 'M$M';
           str2 = '$sampleSum/$numberOfTests';
         });
@@ -226,36 +180,9 @@ class _ResultState extends ConsumerState<Result> {
         stopList.clear();
       }
 
-      //wait 1 sec
       //await Future.delayed(const Duration(seconds: 1));
       //} while (M < 342);
     } while (stopList.length != stop);
-    // spots1.add(FlSpot(M.toDouble(), 0.66));
-    // spots1.add(FlSpot(M.toDouble() + 1, 0.66));
-    // spots1.add(FlSpot(M.toDouble() + 2, 0.33));
     goTo(ref, ScreenDestination.chart);
-    // if (MediaQuery.of(context).size.width > 650) {
-    //   ref.read(secondaryScreenProvider.notifier).state =
-    //       ScreenDestination.about;
-    //   ref.read(secondaryScreenProvider.notifier).state =
-    //       ScreenDestination.chart;
-    // }
-  }
-}
-
-addSpot(double M, double average, double averageTime) {
-//Divide the M with the const N and keep only 1 decimal
-  M = M / N;
-  M = double.parse(M.toStringAsFixed(1));
-
-  spots1.add(FlSpot(M, average));
-  spots2.add(FlSpot(M, averageTime));
-}
-
-runAlgorithm(List<List<int>> problem, int M) async {
-  if (selected == 0) {
-    return await hillClimbing(problem, M);
-  } else if (selected == 1) {
-    return await depthFirst(problem, M);
   }
 }

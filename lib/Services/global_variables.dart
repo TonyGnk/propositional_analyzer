@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 int numberOfTests = 3;
 int N = 12;
 int K = 6;
+int M = 1;
 int stop = 2;
 
 int timeOut = 30;
