@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Services/global_variables.dart';
@@ -23,9 +24,8 @@ double stop1 = 0.333;
 double stop2 = 0.3331;
 
 class _ResultState extends ConsumerState<Result> {
-  List<Container> trackList = [];
+  List<TrackContainer> trackList = [];
   Color color1 = Colors.orangeAccent;
-  Color color2 = Colors.yellow;
   String str = 'M0';
   String str2 = '';
 
@@ -39,81 +39,102 @@ class _ResultState extends ConsumerState<Result> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context) {
+    final isDesktop = ref.watch(isDesktopProvider);
+    return animatedColumn(
+      isDesktop ? desktopView(isDesktop) : mobileView(),
+    );
+  }
+
+  mobileView() => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          circle(),
+          const SizedBox(height: 20),
+          Expanded(
+            child: trackListContainer(
+              context,
+              ListView.builder(
+                controller: controller,
+                dragStartBehavior: DragStartBehavior.down,
+                itemBuilder: (context, index) => trackList[index],
+                itemCount: trackList.length,
+              ),
+            ),
+          ),
+        ],
+      );
+
+  desktopView(bool isDesktop) => Row(
         children: [
           SizedBox(
-            height: 320,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Transform.rotate(
-                  angle: 4.7124,
-                  child: Container(
-                    width: 215,
-                    height: 215,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      //sweep gradient
-                      gradient: SweepGradient(
-                        colors: [
-                          color1,
-                          Theme.of(context).unselectedWidgetColor,
-                        ],
-                        stops: [stop1, stop2],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).unselectedWidgetColor,
-                    //border color
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        str,
-                        style: TextStyle(
-                          fontSize: 35,
-                          fontFamily: 'Play',
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        str2,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Play',
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            width: 280,
+            child: trackListContainer(
+              context,
+              ListView.builder(
+                controller: controller,
+                dragStartBehavior: DragStartBehavior.down,
+                itemBuilder: (context, index) => trackList[index],
+                itemCount: trackList.length,
+              ),
             ),
           ),
           Expanded(
+            child: Center(child: circle(isDesktop)),
+          ),
+          //circle(),
+        ],
+      );
+
+  circle([bool isDesktop = false]) => Stack(
+        alignment: Alignment.center,
+        children: [
+          Transform.rotate(
+            angle: 4.7124,
             child: Container(
+              width: isDesktop ? 335 : 215,
+              height: isDesktop ? 335 : 215,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
+                shape: BoxShape.circle,
+                gradient: SweepGradient(
+                  colors: [
+                    color1,
+                    Theme.of(context).unselectedWidgetColor,
+                  ],
+                  stops: [stop1, stop2],
                 ),
-                color: Theme.of(context).shadowColor,
               ),
-              padding: const EdgeInsets.all(20),
-              clipBehavior: Clip.antiAlias,
-              child: ListView.builder(
-                itemBuilder: (context, index) =>
-                    trackList[trackList.length - 1 - index],
-                itemCount: trackList.length,
-              ),
+            ),
+          ),
+          Container(
+            width: isDesktop ? 320 : 200,
+            height: isDesktop ? 320 : 200,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Theme.of(context).unselectedWidgetColor,
+              //border color
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  str,
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontFamily: 'Play',
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  str2,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Play',
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -147,9 +168,8 @@ class _ResultState extends ConsumerState<Result> {
 
             if (founded != 1) {
               trackList.add(
-                trackContainer(
-                  context,
-                  Text(
+                TrackContainer(
+                  child: Text(
                     'Test $j with M=$M failed',
                     style: const TextStyle(
                       fontSize: 15,
@@ -158,6 +178,7 @@ class _ResultState extends ConsumerState<Result> {
                   ),
                 ),
               );
+              scrollDown();
             }
           });
         });

@@ -68,7 +68,7 @@ class _CreateState extends ConsumerState<Create> {
               ],
             ),
             const SizedBox(height: 4),
-            DesktopSegmented(),
+            const DesktopSegmented(),
             const Expanded(flex: 1, child: SizedBox()),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
