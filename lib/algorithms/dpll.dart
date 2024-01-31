@@ -66,7 +66,9 @@ class DPLL {
         Set<int> reducedClause = clause
             .where((literal) => literal != (value ? variable : -variable))
             .toSet();
-        reducedClauses.add(reducedClause);
+        if (reducedClause.isNotEmpty) {
+          reducedClauses.add(reducedClause);
+        }
       }
     }
     return reducedClauses;

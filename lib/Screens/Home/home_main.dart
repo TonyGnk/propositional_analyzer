@@ -47,28 +47,28 @@ class _HomeState extends ConsumerState<Home> {
             const SizedBox(height: 6),
             newLoadButton,
             const Expanded(flex: 1, child: SizedBox()),
-            // TextButton(
-            //   child: const Text('Run'),
-            //   onPressed: () {
-            //     DPLL dpll = DPLL();
-            //     Set<Set<int>> problem = {
-            //       {1, 2, 3, 4, 5},
-            //       {-1, -2},
-            //       {-2, -3},
-            //       {-3, -4},
-            //       {-4, -5},
-            //       {-5, -1}
-            //     };
-            //     // Define an empty model
-            //     Map<String, bool> model = {};
+            TextButton(
+              child: const Text('Run'),
+              onPressed: () {
+                DPLL dpll = DPLL();
+                Set<Set<int>> problem = {
+                  {1, 2, 3, 4, 5},
+                  {-1, -2},
+                  {-2, -3},
+                  {-3, -4},
+                  {-4, -5},
+                  {-5, -1}
+                };
+                // Define an empty model
+                Map<String, bool> model = {};
 
-            //     // Call the DPLL_Satisfiable method
-            //     bool result = dpll.DPLL_Satisfiable(problem, model);
+                // Call the DPLL_Satisfiable method
+                bool result = dpll.DPLL_Satisfiable(problem, model);
 
-            //     // Print the result
-            //     print(result ? "Satisfiable" : "Unsatisfiable");
-            //   },
-            // ),
+                // Print the result
+                print(result ? "Satisfiable" : "Unsatisfiable");
+              },
+            ),
             const SizedBox(height: 10),
           ],
         ),
