@@ -6,9 +6,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
-import 'package:universal_platform/universal_platform.dart';
-import 'package:window_manager/window_manager.dart';
 import '../../Services/global_variables.dart';
+import '../../UI/Routed Screen/app_bar.dart';
 import 'chart_state.dart';
 
 class Chart extends ConsumerStatefulWidget {
@@ -18,9 +17,10 @@ class Chart extends ConsumerStatefulWidget {
   ConsumerState<Chart> createState() => _ChartState();
 }
 
+bool show1 = true;
+bool show2 = true;
+
 class _ChartState extends ConsumerState<Chart> {
-  bool show1 = true;
-  bool show2 = true;
   List<Color> gradientColors = [
     const Color.fromRGBO(199, 109, 35, 1),
     const Color.fromRGBO(167, 123, 3, 1),
@@ -35,95 +35,82 @@ class _ChartState extends ConsumerState<Chart> {
   }
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            show1 ? row1() : const SizedBox(),
-            show1 ? Expanded(child: lineChart(true)) : const SizedBox(),
-            (show1 && show2) ? const SizedBox(height: 20) : const SizedBox(),
-            show2 ? row2() : const SizedBox(),
-            show2 ? Expanded(child: lineChart(false)) : const SizedBox(),
-          ],
+  Widget build(BuildContext context) => Consumer(
+        builder: (context, ref, _) => Container(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              show1 ? row(true) : const SizedBox(),
+              show1 ? Expanded(child: lineChart(true)) : const SizedBox(),
+              (show1 && show2) ? const SizedBox(height: 20) : const SizedBox(),
+              show2 ? row(false) : const SizedBox(),
+              show2 ? Expanded(child: lineChart(false)) : const SizedBox(),
+            ],
+          ),
         ),
       );
 
-  row1() => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 44),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Attainability to M/N',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+  row(bool isFirst) => Consumer(
+        builder: (context, ref, _) => Container(
+          padding: const EdgeInsets.symmetric(horizontal: 44),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                isFirst ? 'Attainability to M/N' : 'Execution Time to M/N',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            IconButton(
-              icon: show2
-                  ? const Icon(Icons.fullscreen)
-                  : const Icon(Icons.fullscreen_exit),
-              onPressed: () async {
-                fullScreen(false);
-              },
-            ),
-          ],
+              IconButton(
+                icon: isFullScreen
+                    ? const Icon(Icons.fullscreen_exit)
+                    : const Icon(Icons.fullscreen),
+                onPressed: () async {
+                  fullScreen(ref, isFirst);
+                },
+              )
+              //findIcon(isFirst, ref),
+            ],
+          ),
         ),
       );
 
-  row2() => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 44),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Execution Time to M/N',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            IconButton(
-              icon: show1
-                  ? const Icon(Icons.fullscreen)
-                  : const Icon(Icons.fullscreen_exit),
-              onPressed: () async {
-                fullScreen(true);
-              },
-            ),
-          ],
-        ),
-      );
+  findIcon(isFirst, WidgetRef ref) => isFirst
+      ? IconButton(
+          icon: isFullScreen
+              ? const Icon(Icons.fullscreen_exit)
+              : const Icon(Icons.fullscreen),
+          onPressed: () async {
+            //  fullScreen(ref);
+          },
+        )
+      : IconButton(
+          icon: isFullScreen
+              ? const Icon(Icons.fullscreen_exit)
+              : const Icon(Icons.fullscreen),
+          onPressed: () async {
+            //fullScreen2(ref);
+          },
+        );
 
   bool isFullScreen = false;
-  fullScreen(bool isFirst) async {
-    if (UniversalPlatform.isWindows) {
-      if (await windowManager.isFullScreen()) {
-        setState(() {
-          isFirst ? show1 = true : show2 = true;
-        });
-        windowManager.setFullScreen(false);
-      } else {
-        setState(() {
-          isFirst ? show1 = false : show2 = false;
-        });
-        windowManager.setFullScreen(true);
-      }
-    } else if (UniversalPlatform.isWeb) {
-      if (isFullScreen) {
-        setState(() {
-          isFirst ? show1 = true : show2 = true;
-        });
-        FullScreenWindow.setFullScreen(false);
+  fullScreen(WidgetRef ref, bool isFirst) async {
+    if (isFullScreen) {
+      setState(() {
+        isFirst ? show2 = true : show1 = true;
+        ref.read(appBarIsEnableProvider.notifier).state = true;
         isFullScreen = false;
-      } else {
-        setState(() {
-          isFirst ? show1 = false : show2 = false;
-        });
-        FullScreenWindow.setFullScreen(true);
+      });
+      FullScreenWindow.setFullScreen(false);
+    } else {
+      setState(() {
+        isFirst ? show2 = false : show1 = false;
+        ref.read(appBarIsEnableProvider.notifier).state = false;
         isFullScreen = true;
-      }
+      });
+      FullScreenWindow.setFullScreen(true);
     }
   }
 

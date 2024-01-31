@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../Services/global_variables.dart';
-import '../../Services/global_variables.dart';
 
 class SegmentedControl extends StatefulWidget {
   const SegmentedControl({super.key});

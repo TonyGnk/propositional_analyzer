@@ -16,7 +16,7 @@ void main() async {
       size: Size(1050, 660), //380-770 1050-660
       backgroundColor: Colors.transparent,
       titleBarStyle: TitleBarStyle.normal,
-      alwaysOnTop: true,
+      // alwaysOnTop: true,
     );
 
     windowManager.waitUntilReadyToShow(windowOptions, () {});

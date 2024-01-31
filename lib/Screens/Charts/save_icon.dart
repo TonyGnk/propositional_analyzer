@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -33,12 +35,10 @@ saveAnalysis() async {
   //Create a Uint8List from the String
   Uint8List data = Uint8List.fromList(stringFile.codeUnits);
 
-  final v = await _jSaverPlugin.saveFromData(data: data, name: 'analysis.txt');
+  await _jSaverPlugin.saveFromData(data: data, name: 'analysis.txt');
 }
 
 loadAnalysis() async {
-  print('Load Analysis');
-
   FilePickerResult? result = await FilePicker.platform.pickFiles();
 
   if (UniversalPlatform.isWindows) {

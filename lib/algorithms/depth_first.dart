@@ -1,10 +1,5 @@
 // ignore_for_file: avoid_print
 
-/*
-	Solving the Propositional (Boolean) Satisfiability problem
-	using Depth-First Search.
-*/
-
 import 'dart:core';
 
 import '../Screens/Result/track.dart';
@@ -18,7 +13,6 @@ depthFirst(List<List<int>> problem) async {
   DateTime startTime;
   DateTime currentTime;
   DateTime endTime;
-  List<int>? temp;
 
   var vector = List<int>.filled(N, 0);
   head = StackItem();
@@ -37,7 +31,7 @@ depthFirst(List<List<int>> problem) async {
     }
 
     // Retract the top element from the stack.
-    temp = head.pop();
+    head.pop();
     if (solution(vector, problem, M)) {
       endTime = DateTime.now();
       print('Solution found: $vector');
@@ -46,7 +40,6 @@ depthFirst(List<List<int>> problem) async {
       generateChildren(vector, problem, M);
     }
 
-    //wait 3 sec
     //await Future.delayed(const Duration(seconds: 3), () {});
   }
   endTime = DateTime.now();
@@ -65,11 +58,10 @@ class StackItem {
     _items.add(item);
   }
 
-  List<int>? pop() {
-    if (_items.isEmpty) {
-      return null;
+  void pop() {
+    if (_items.isNotEmpty) {
+      _items.removeLast();
     }
-    return _items.removeLast();
   }
 
   List<int>? peek() {
