@@ -140,14 +140,14 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
           Center(
             child: Icon(
               widget.icon,
-              size: 24,
+              size: 23,
             ),
           ),
           const SizedBox(width: 8),
           Text(
             widget.label,
             style: const TextStyle(
-              fontSize: 19,
+              fontSize: 17,
               fontFamily: 'Play',
             ),
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Services/global_variables.dart';
 import 'create_helper.dart';
+import 'desktop_segmented.dart';
 import 'segmented.dart';
 import 'create_state.dart';
 import 'sliders.dart';
@@ -23,10 +24,66 @@ class _CreateState extends ConsumerState<Create> {
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8),
-        child: animatedColumn(
-          createColumn(),
+  Widget build(BuildContext context) {
+    final isDesktop = ref.watch(isDesktopProvider);
+    return animatedColumn(
+      isDesktop ? desktopView() : mobileView(),
+    );
+  }
+
+  mobileView() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: createColumn(),
+      );
+
+  desktopView() => desktopFrame(
+        context,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 7),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: group(
+                    context,
+                    183,
+                    [slideK(), slideN(), slideTests()],
+                  ),
+                ),
+                Expanded(
+                  child: group(
+                    context,
+                    183,
+                    [
+                      const Expanded(child: SizedBox()),
+                      slideStop(),
+                      const Expanded(child: SizedBox()),
+                      slideTime(),
+                      const Expanded(child: SizedBox()),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            DesktopSegmented(),
+            const Expanded(flex: 1, child: SizedBox()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: 173,
+                  child: helpContainer(),
+                ),
+                SizedBox(
+                  width: 172,
+                  child: analyzeContainer(),
+                ),
+              ],
+            ),
+          ],
         ),
       );
 
@@ -121,3 +178,20 @@ class _CreateState extends ConsumerState<Create> {
         },
       );
 }
+
+desktopFrame(BuildContext context, Column column) => Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          constraints: const BoxConstraints(maxHeight: 470),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Theme.of(context).dividerColor),
+            color: Theme.of(context).dividerColor.withOpacity(0.1),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          width: 800,
+          child: column,
+        ),
+      ],
+    );
