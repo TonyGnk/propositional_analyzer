@@ -8,6 +8,7 @@ import '../../algorithms/depth_first.dart';
 import '../../algorithms/dpll.dart';
 import '../../algorithms/gready.dart';
 import '../../algorithms/new_value.dart';
+import '../../algorithms/walk_sat.dart';
 import 'result_main.dart';
 import 'track.dart';
 
@@ -58,6 +59,8 @@ runAlgorithm() async {
     } on TimeoutException catch (_) {
       return const Search(win: false, time: 0);
     }
+  } else if (selected == 3) {
+    return await walkSat(problem);
   }
   problem.clear();
 }
