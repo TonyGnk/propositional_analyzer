@@ -5,9 +5,7 @@ import 'dart:math';
 import '../Screens/Search/Search Share/track.dart';
 import '../global_variables.dart';
 
-hillClimbing(
-  List<List<int>> problem,
-) async {
+hillClimbing(List<List<int>> problem) async {
   List<int> vector = List.filled(N, 0);
   int h, h1, h2;
   //int restarts = 0, steps = 0;

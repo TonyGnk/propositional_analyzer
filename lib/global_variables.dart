@@ -1,13 +1,14 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-int numberOfTests = 3;
-int N = 12;
+int numberOfTests = 1;
+int N = 7;
 int K = 6;
 int M = 1;
-int stop = 2;
+int stop = 1;
 
-int timeOut = 30;
+int timeOut = 2;
 
 int selected = 0;
 bool selectedHill = true;
@@ -22,6 +23,8 @@ List<FlSpot> spotsHill = [];
 List<FlSpot> spotsDepth = [];
 List<FlSpot> spotsDPLL = [];
 List<FlSpot> spotsWalk = [];
+
+final player = AudioPlayer();
 
 const double cornerSize = 16;
 

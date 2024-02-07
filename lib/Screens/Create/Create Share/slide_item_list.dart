@@ -6,7 +6,7 @@ import 'slide_item.dart';
 slideK(Function(int value) function) => SliderItem(
       currentValue: K.toDouble(),
       min: 1,
-      max: 10,
+      max: 15,
       hint: 'Variable K=$K',
       iconData: Icons.expand_less_outlined,
       function: function,
@@ -15,7 +15,7 @@ slideK(Function(int value) function) => SliderItem(
 slideN(Function(int value) updateN) => SliderItem(
       currentValue: N.toDouble(),
       min: 1,
-      max: 13,
+      max: 15,
       hint: 'Variable N=$N',
       iconData: Icons.local_parking_outlined,
       function: updateN,

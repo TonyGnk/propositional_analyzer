@@ -1,4 +1,4 @@
-// This function creates randomly a new problem. Takes a 2D list
+// This function creates randomly a new SAT problem. Takes a 2D list
 import 'dart:math';
 
 import '../global_variables.dart';

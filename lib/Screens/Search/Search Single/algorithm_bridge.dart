@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:fl_chart/fl_chart.dart';
@@ -10,9 +12,9 @@ import '../../../algorithms/gready.dart';
 import '../../../algorithms/new_value.dart';
 import '../../../algorithms/walk_sat.dart';
 import '../Search Share/track.dart';
-import 'search_single_main.dart';
+import 'search_single_desktop.dart';
 
-initializeCircle() {
+initializeData() {
   stopsPrimary = [];
   stopsSecondary = [];
   stop1 = 0.333;
@@ -28,9 +30,7 @@ initializeCircle() {
 
   stop1 = stopsPrimary[0];
   stop2 = stopsSecondary[0];
-}
 
-initializingData() {
   M = 1;
   spots1.clear();
   spots2.clear();
@@ -63,6 +63,21 @@ runAlgorithm() async {
     return await walkSat(problem);
   }
   problem.clear();
+}
+
+addTrack(List<TrackContainer> trackList, int j) {
+  trackList.add(
+    TrackContainer(
+      child: Text(
+        'Test $j with M=$M failed',
+        style: const TextStyle(
+          fontSize: 15,
+          fontFamily: 'Play',
+        ),
+      ),
+    ),
+  );
+  scrollDown();
 }
 
 addSpot(double M, double average, double averageTime) {

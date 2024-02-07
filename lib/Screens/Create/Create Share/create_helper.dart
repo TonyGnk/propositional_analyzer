@@ -10,22 +10,6 @@ const String depth = 'Depth First Search';
 const String dpll = 'DPLL';
 const String walksat = 'WalkSAT';
 
-modeText(BuildContext context) => TextButton.icon(
-      icon: Icon(
-        Icons.help_outline_outlined,
-        color: Theme.of(context).canvasColor,
-      ),
-      onPressed: () {},
-      label: Text(
-        'How it works?',
-        style: TextStyle(
-          fontSize: 15,
-          color: Theme.of(context).canvasColor,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-
 analyzeContainer() => Consumer(
       builder: (context, ref, _) => AnalyzeButton(
         label: 'Analyze',
