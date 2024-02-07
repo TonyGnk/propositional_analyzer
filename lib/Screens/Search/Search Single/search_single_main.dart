@@ -204,6 +204,6 @@ class _SearchSingleState extends ConsumerState<SearchSingle> {
       //await Future.delayed(const Duration(seconds: 1));
       //} while (M < 342);
     } while (stopList.length != stop);
-    goTo(ref, ScreenDestination.chart);
+    goTo(ref, ScreenDestination.chartSingle);
   }
 }

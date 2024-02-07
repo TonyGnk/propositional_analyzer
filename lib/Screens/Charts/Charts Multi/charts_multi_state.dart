@@ -3,15 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
-import '../../UI/Routed%20Screen/app_bar.dart';
+import '../../../Services/global_variables.dart';
+import '../../../UI/Routed Screen/app_bar.dart';
+import 'save_icon.dart';
 
 import '../../../Screens/screen_list.dart';
-import '../../Services/global_variables.dart';
-import 'save_icon.dart';
 
 final opacity = StateProvider<double>((ref) => 1);
 
-void chartComparisonGo(WidgetRef ref, ScreenDestination destination) {
+void chartsMultiGo(WidgetRef ref, ScreenDestination destination) {
   resetFullScreen();
 
   updateAppBarItems(ref, false);
@@ -21,7 +21,7 @@ void chartComparisonGo(WidgetRef ref, ScreenDestination destination) {
   }
 }
 
-void chartComparisonReturn(WidgetRef ref) {
+void chartsMultiReturn(WidgetRef ref) {
   updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
 }

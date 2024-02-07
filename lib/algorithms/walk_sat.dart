@@ -4,7 +4,7 @@ import 'dart:math';
 
 import '../Screens/Search/Search Share/track.dart';
 import '../Services/global_variables.dart';
-import '../al2.dart';
+import 'al2.dart';
 
 walkSat(List<List<int>> problem) async {
   final Random random = Random();

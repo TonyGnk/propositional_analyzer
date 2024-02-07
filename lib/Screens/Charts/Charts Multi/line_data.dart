@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../Services/global_variables.dart';
+import '../../../Services/global_variables.dart';
 
 // Color #FFD180
 Color orange1 = const Color.fromRGBO(255, 209, 128, 1);

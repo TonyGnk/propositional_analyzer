@@ -6,22 +6,22 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
-import '../../Services/global_variables.dart';
-import '../../UI/Routed Screen/app_bar.dart';
-import 'chart_comparison_state.dart';
+import '../../../Services/global_variables.dart';
+import '../../../UI/Routed Screen/app_bar.dart';
+import 'charts_multi_state.dart';
 import 'line_data.dart';
 
-class ChartComparison extends ConsumerStatefulWidget {
-  const ChartComparison({super.key});
+class ChartMulti extends ConsumerStatefulWidget {
+  const ChartMulti({super.key});
 
   @override
-  ConsumerState<ChartComparison> createState() => _ChartState();
+  ConsumerState<ChartMulti> createState() => _ChartMultiState();
 }
 
 bool show1 = true;
 bool show2 = true;
 
-class _ChartState extends ConsumerState<ChartComparison> {
+class _ChartMultiState extends ConsumerState<ChartMulti> {
   List<Color> gradientColors = [
     const Color.fromRGBO(199, 109, 35, 1),
     const Color.fromRGBO(167, 123, 3, 1),
@@ -31,7 +31,7 @@ class _ChartState extends ConsumerState<ChartComparison> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      chartComparisonReturn(ref);
+      chartsMultiReturn(ref);
     });
   }
 

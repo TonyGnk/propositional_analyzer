@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'Charts Comparison/chart_comparison_state.dart';
-import 'Charts Comparison/charts_comparison_main.dart';
-import 'Charts/chart_main.dart';
-import 'Charts/chart_state.dart';
+import 'Charts/Charts Multi/charts_multi_main.dart';
+import 'Charts/Charts Multi/charts_multi_state.dart';
+import 'Charts/Charts Single/charts_single_main.dart';
+import 'Charts/Charts Single/charts_single_state.dart';
 import 'Create/Create Multi/create_multi_main.dart';
 import 'Create/Create Multi/create_multi_state.dart';
 import 'Create/Create Single/create_single_main.dart';
 import 'Create/Create Single/create_single_state.dart';
-
 import '../Services/global_variables.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
 import '../UI/Screens/About/about_main.dart';
@@ -26,8 +25,8 @@ enum ScreenDestination {
   home,
   createSingle,
   searchSingle,
-  chart,
-  chartComparison,
+  chartSingle,
+  chartMulti,
   searchMulti,
   createMulti,
   mix,
@@ -63,8 +62,8 @@ final Map<ScreenDestination, Widget> screenMap = {
   ScreenDestination.home: const Home(),
   ScreenDestination.createSingle: const CreateSingle(),
   ScreenDestination.searchSingle: const SearchSingle(),
-  ScreenDestination.chart: const Chart(),
-  ScreenDestination.chartComparison: const ChartComparison(),
+  ScreenDestination.chartSingle: const ChartSingle(),
+  ScreenDestination.chartMulti: const ChartMulti(),
   ScreenDestination.searchMulti: const SearchMulti(),
   ScreenDestination.createMulti: const CreateMulti(),
   ScreenDestination.settings: const Settings(),
@@ -76,8 +75,8 @@ final Map<ScreenDestination, void Function(WidgetRef, ScreenDestination)>
   ScreenDestination.home: homeGo,
   ScreenDestination.createSingle: createSingleGo,
   ScreenDestination.searchSingle: searchSingleGo,
-  ScreenDestination.chart: chartGo,
-  ScreenDestination.chartComparison: chartComparisonGo,
+  ScreenDestination.chartSingle: chartsSingleGo,
+  ScreenDestination.chartMulti: chartsMultiGo,
   ScreenDestination.createMulti: createMultiGo,
   ScreenDestination.searchMulti: searchMultiGo,
   ScreenDestination.settings: settingsGo,

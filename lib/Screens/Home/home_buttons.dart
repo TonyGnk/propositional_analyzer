@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/global_variables.dart';
 import '../../UI/Adaptive Folder/synthesizer.dart';
-import '../Charts/save_icon.dart';
+import '../Charts/Charts Single/save_icon.dart';
 import '../screen_list.dart';
 
 const newCreateButton = ButtonTemplate(
@@ -18,7 +18,7 @@ const newLoadButton = ButtonTemplate(
   slogan: 'Now Available!',
   icon: Icons.file_upload_outlined,
   isLoading: true,
-  screenDestination: ScreenDestination.chart,
+  screenDestination: ScreenDestination.chartSingle,
 );
 
 class ButtonTemplate extends ConsumerStatefulWidget {

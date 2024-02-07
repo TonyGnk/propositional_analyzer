@@ -294,6 +294,6 @@ class _SearchMultiState extends ConsumerState<SearchMulti> {
       //} while (M < 342);
     } while (stopList.length != stop);
     fixSpots();
-    goTo(ref, ScreenDestination.chartComparison);
+    goTo(ref, ScreenDestination.chartMulti);
   }
 }

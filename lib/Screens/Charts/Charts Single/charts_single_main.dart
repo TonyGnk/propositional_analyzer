@@ -6,21 +6,21 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
-import '../../Services/global_variables.dart';
-import '../../UI/Routed Screen/app_bar.dart';
-import 'chart_state.dart';
+import '../../../Services/global_variables.dart';
+import '../../../UI/Routed Screen/app_bar.dart';
+import 'charts_single_state.dart';
 
-class Chart extends ConsumerStatefulWidget {
-  const Chart({super.key});
+class ChartSingle extends ConsumerStatefulWidget {
+  const ChartSingle({super.key});
 
   @override
-  ConsumerState<Chart> createState() => _ChartState();
+  ConsumerState<ChartSingle> createState() => _ChartSingleState();
 }
 
 bool show1 = true;
 bool show2 = true;
 
-class _ChartState extends ConsumerState<Chart> {
+class _ChartSingleState extends ConsumerState<ChartSingle> {
   List<Color> gradientColors = [
     const Color.fromRGBO(199, 109, 35, 1),
     const Color.fromRGBO(167, 123, 3, 1),
@@ -30,7 +30,7 @@ class _ChartState extends ConsumerState<Chart> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      chartReturn(ref);
+      chartsSingleReturn(ref);
     });
   }
 
