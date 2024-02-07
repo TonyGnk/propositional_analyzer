@@ -56,12 +56,12 @@ class _SegmentedControlState extends State<SegmentedControl> {
       openedMenu = true;
     });
 
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 30));
     setState(() {
       matrix = true;
     });
 
-    await Future.delayed(const Duration(milliseconds: 250));
+    await Future.delayed(const Duration(milliseconds: 180));
     setState(() {
       openedB = true;
       matrix = false;
@@ -74,11 +74,11 @@ class _SegmentedControlState extends State<SegmentedControl> {
       matrix = false;
       selected = n;
     });
-    await Future.delayed(const Duration(milliseconds: 50));
+    await Future.delayed(const Duration(milliseconds: 40));
     setState(() {
       showOptionsOpacity = false;
     });
-    await Future.delayed(const Duration(milliseconds: 250));
+    await Future.delayed(const Duration(milliseconds: 200));
     setState(() {
       matrix = true;
     });
