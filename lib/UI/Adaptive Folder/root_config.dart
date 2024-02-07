@@ -24,7 +24,7 @@ Widget rootConfig(
           darkTheme: darkTheme,
           debugShowCheckedModeBanner: false,
           home: Scaffold(
-            body: synthesizerDefault(),
+            body: synthesizer(),
           )),
     );
 

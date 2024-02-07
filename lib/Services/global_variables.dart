@@ -14,6 +14,11 @@ int selected = 0;
 List<FlSpot> spots1 = [];
 List<FlSpot> spots2 = [];
 
+List<FlSpot> spotsHill = [];
+List<FlSpot> spotsDepth = [];
+List<FlSpot> spotsDPLL = [];
+List<FlSpot> spotsWalk = [];
+
 const double cornerSize = 16;
 
 const Duration basicDuration = Duration(milliseconds: 200);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services/global_variables.dart';
+import '../../../Services/global_variables.dart';
 
 final isHoveredProviderModernButton = StateProvider<bool>((ref) => false);
 

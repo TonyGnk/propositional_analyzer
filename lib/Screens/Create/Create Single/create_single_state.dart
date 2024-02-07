@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services/global_variables.dart';
-import '../../UI/Routed Screen/app_bar.dart';
-import '../screen_list.dart';
+import '../../../Services/global_variables.dart';
+import '../../../UI/Routed Screen/app_bar.dart';
+import '../../screen_list.dart';
 
 final opacity = StateProvider<double>((ref) => 0);
 
-createGo(WidgetRef ref, ScreenDestination destination) {
+createSingleGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
 
   if (destination == ScreenDestination.home) {
@@ -15,7 +15,7 @@ createGo(WidgetRef ref, ScreenDestination destination) {
   }
 }
 
-createReturn(WidgetRef ref) {
+createSingleReturn(WidgetRef ref) {
   updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
 }

@@ -5,7 +5,7 @@ import '../../Screens/screen_list.dart';
 import '../Adaptive Templates/body_with_appbar.dart';
 import '../Routed Screen/app_bar.dart';
 
-Widget synthesizerDefault() => Consumer(builder: (context, ref, _) {
+Widget synthesizer() => Consumer(builder: (context, ref, _) {
       final currentScreen = ref.watch(currentScreenProvider);
       return bodyWithAppBarGlass(
         appBar: appBar(context),
@@ -18,7 +18,7 @@ Widget appBar(BuildContext context) => Consumer(
     );
 
 final currentScreenProvider = StateProvider<ScreenDestination>(
-  (ref) => ScreenDestination.home,
+  (ref) => ScreenDestination.createMulti,
 );
 
-final List<ScreenDestination> screenStack = [ScreenDestination.home];
+final List<ScreenDestination> screenStack = [ScreenDestination.createMulti];

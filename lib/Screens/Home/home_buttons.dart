@@ -10,7 +10,7 @@ const newCreateButton = ButtonTemplate(
   title: 'New', //Create a new analysis, set variables, n,k, etc
   slogan: 'Create a new analysis',
   icon: Icons.science_outlined,
-  screenDestination: ScreenDestination.create,
+  screenDestination: ScreenDestination.createSingle,
 );
 
 const newLoadButton = ButtonTemplate(
@@ -78,7 +78,7 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
               (widget.isLoading)
                   ? (await loadAnalysis())
                       ? {
-                          screenStack.add(ScreenDestination.create),
+                          screenStack.add(ScreenDestination.createSingle),
                           goTo(ref, widget.screenDestination)
                         }
                       : null

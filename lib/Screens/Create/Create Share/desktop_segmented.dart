@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Services/global_variables.dart';
+import '../../../Services/global_variables.dart';
 import 'segmented.dart';
 
 class DesktopSegmented extends StatefulWidget {

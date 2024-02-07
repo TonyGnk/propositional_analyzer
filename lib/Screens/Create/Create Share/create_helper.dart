@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../screen_list.dart';
+import '../../screen_list.dart';
 import 'analyze_button.dart';
 import 'instructions_button.dart';
 

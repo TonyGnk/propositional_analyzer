@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../Services/global_variables.dart';
-import 'create_helper.dart';
-import 'desktop_segmented.dart';
-import 'segmented.dart';
-import 'create_state.dart';
-import 'sliders.dart';
+import '../../../Services/global_variables.dart';
+import '../../screen_list.dart';
+import '../Create Share/analyze_button.dart';
+import '../Create Share/create_helper.dart';
+import '../Create Share/desktop_segmented.dart';
+import '../Create Share/segmented.dart';
+import '../Create Share/sliders.dart';
+import 'create_multi_state.dart';
 
-class Create extends ConsumerStatefulWidget {
-  const Create({super.key});
+class CreateMulti extends ConsumerStatefulWidget {
+  const CreateMulti({super.key});
 
   @override
-  ConsumerState<Create> createState() => _CreateState();
+  ConsumerState<CreateMulti> createState() => _CreateState();
 }
 
-class _CreateState extends ConsumerState<Create> {
+class _CreateState extends ConsumerState<CreateMulti> {
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      createReturn(ref);
+      createMultiReturn(ref);
     });
   }
 
@@ -109,6 +111,16 @@ class _CreateState extends ConsumerState<Create> {
       );
 
 //
+  analyzeContainer() => Consumer(
+        builder: (context, ref, _) => AnalyzeButton(
+          label: 'Analyze',
+          icon: Icons.troubleshoot_outlined,
+          onTap: () {
+            goTo(ref, ScreenDestination.search);
+          },
+        ),
+      );
+
   slideK() => SliderExample(
         currentValue: K.toDouble(),
         min: 1,

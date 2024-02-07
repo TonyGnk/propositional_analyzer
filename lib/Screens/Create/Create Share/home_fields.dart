@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../Services/global_variables.dart';
+import '../../../Services/global_variables.dart';
 
 TextEditingController kController = TextEditingController();
 TextEditingController nController = TextEditingController();
