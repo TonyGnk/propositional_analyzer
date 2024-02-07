@@ -39,6 +39,8 @@ class _CreateState extends ConsumerState<CreateMulti> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 8),
+            const SegmentedControlMulti(),
+            const SizedBox(height: 4),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,8 +66,6 @@ class _CreateState extends ConsumerState<CreateMulti> {
                 ),
               ],
             ),
-            const SizedBox(height: 4),
-            const SegmentedControlMulti(),
             const Expanded(flex: 1, child: SizedBox()),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

@@ -44,6 +44,8 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 8),
+            const DesktopSegmented(),
+            const SizedBox(height: 4),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -69,8 +71,6 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
                 ),
               ],
             ),
-            const SizedBox(height: 4),
-            const DesktopSegmented(),
             const Expanded(flex: 1, child: SizedBox()),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
