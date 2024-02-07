@@ -18,8 +18,8 @@ group(BuildContext context, double height, List<Widget> list) => Container(
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: list),
     );
 
-class SliderExample extends StatefulWidget {
-  const SliderExample({
+class SliderItem extends StatefulWidget {
+  const SliderItem({
     required this.currentValue,
     required this.function,
     required this.max,
@@ -41,10 +41,10 @@ class SliderExample extends StatefulWidget {
   final bool isTime;
 
   @override
-  State<SliderExample> createState() => _SliderExampleState();
+  State<SliderItem> createState() => _SliderItemState();
 }
 
-class _SliderExampleState extends State<SliderExample> {
+class _SliderItemState extends State<SliderItem> {
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -90,7 +90,7 @@ class _SliderExampleState extends State<SliderExample> {
                           min: widget.min,
                           divisions: (widget.max - widget.min).round(),
                           onChanged: (double value) {
-                            widget.function(value);
+                            widget.function(value.toInt());
                           },
                         ),
                 ],
