@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/global_variables.dart';
-import '../../algorithms/dpll.dart';
-import '../Search/Search Share/track.dart';
 import '../shared.dart';
 import 'home_buttons.dart';
 import 'home_state.dart';
@@ -45,27 +43,10 @@ class _HomeState extends ConsumerState<Home> {
             const Expanded(child: SizedBox()),
             newCreateButton,
             const SizedBox(height: 6),
+            newCreateMultiButton,
+            const SizedBox(height: 6),
             newLoadButton,
             const Expanded(flex: 1, child: SizedBox()),
-            // TextButton(
-            //   child: const Text('Run'),
-            //   onPressed: () {
-            //     DPLL dpll = DPLL();
-            //     Set<Set<int>> problem = {
-            //       {1, -2}, //P1 and (NOT) P2
-            //       {-1, 2}, //(NOT) P1 and P2
-            //       {-1, -2} //(NOT) P1 and (NOT) P2
-            //     };
-            //     // Define an empty model
-            //     Map<String, bool> model = {};
-
-            //     // Call the DPLL_Satisfiable method
-            //     bool result = dpll.DPLL_Satisfiable(problem, model);
-
-            //     // Print the result
-            //     print(result ? "Satisfiable" : "Unsatisfiable");
-            //   },
-            // ),
             const SizedBox(height: 10),
           ],
         ),
@@ -80,6 +61,7 @@ class _HomeState extends ConsumerState<Home> {
             titleText(context),
             const Expanded(flex: 5, child: SizedBox()),
             newCreateButton,
+            newCreateMultiButton,
             newLoadButton,
             const Expanded(flex: 5, child: SizedBox()),
           ],

@@ -6,11 +6,21 @@ import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../Charts/Charts Single/save_icon.dart';
 import '../screen_list.dart';
 
+//Create a new analysis with one Algorithm
 const newCreateButton = ButtonTemplate(
   title: 'New', //Create a new analysis, set variables, n,k, etc
   slogan: 'Create a new analysis',
-  icon: Icons.science_outlined,
+  icon: Icons.show_chart_outlined,
   screenDestination: ScreenDestination.createSingle,
+);
+
+//Create a new analysis with multiple Algorithms/Compare each other
+const newCreateMultiButton = ButtonTemplate(
+  //Create a new multiple analysis with multiple Algorithms/Compare each other
+  title: 'New Multiple',
+  slogan: 'Create a new multiple analysis',
+  icon: Icons.stacked_line_chart_outlined,
+  screenDestination: ScreenDestination.createMulti,
 );
 
 const newLoadButton = ButtonTemplate(

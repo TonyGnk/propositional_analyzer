@@ -18,7 +18,7 @@ Widget appBar(BuildContext context) => Consumer(
     );
 
 final currentScreenProvider = StateProvider<ScreenDestination>(
-  (ref) => ScreenDestination.createMulti,
+  (ref) => ScreenDestination.home,
 );
 
-final List<ScreenDestination> screenStack = [ScreenDestination.createMulti];
+final List<ScreenDestination> screenStack = [ScreenDestination.home];
