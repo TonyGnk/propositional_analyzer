@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../Services/global_variables.dart';
+import '../../../global_variables.dart';
 
 group(BuildContext context, double height, List<Widget> list) => Container(
       height: height,

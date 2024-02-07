@@ -3,7 +3,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../Services/global_variables.dart';
+import '../../global_variables.dart';
 import 'root_config.dart';
 import '../Theme Services/ui_change.dart';
 import '../Themes/material_theme_data.dart';

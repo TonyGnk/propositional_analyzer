@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
-import '../../../Services/global_variables.dart';
+import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
 
 import '../../../Screens/screen_list.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../Services/global_variables.dart';
+import '../../../global_variables.dart';
 import '../../screen_list.dart';
 import '../Create Share/Segmented/segmented_multi.dart';
 import '../Create Share/analyze_button.dart';

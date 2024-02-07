@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services/global_variables.dart';
+import '../../global_variables.dart';
 import '../../UI/Routed Screen/app_bar.dart';
 import '../../UI/Routed Screen/info_icon.dart';
 import '../screen_list.dart';

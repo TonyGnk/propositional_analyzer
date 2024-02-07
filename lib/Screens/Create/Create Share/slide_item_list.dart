@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../Services/global_variables.dart';
+import '../../../global_variables.dart';
 import 'slide_item.dart';
 
 slideK(Function(int value) function) => SliderItem(

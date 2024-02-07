@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Services/global_variables.dart';
+import '../../../global_variables.dart';
 import '../Create Share/create_helper.dart';
 import '../Create Share/Segmented/desktop_segmented.dart';
 import '../Create Share/Segmented/segmented.dart';

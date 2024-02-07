@@ -1,7 +1,7 @@
 import 'dart:core';
 
 import '../Screens/Search/Search Share/track.dart';
-import '../Services/global_variables.dart';
+import '../global_variables.dart';
 import 'generate_children.dart';
 import 'solution_dart.dart';
 

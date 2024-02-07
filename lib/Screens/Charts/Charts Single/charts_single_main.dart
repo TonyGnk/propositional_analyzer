@@ -6,7 +6,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
-import '../../../Services/global_variables.dart';
+import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
 import 'charts_single_state.dart';
 

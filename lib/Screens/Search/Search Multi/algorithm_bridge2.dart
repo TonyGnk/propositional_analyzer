@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../../Services/global_variables.dart';
+import '../../../global_variables.dart';
 import '../../../algorithms/depth_first.dart';
 import '../../../algorithms/dpll.dart';
 import '../../../algorithms/gready.dart';

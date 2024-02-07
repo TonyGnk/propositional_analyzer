@@ -6,7 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Services/global_variables.dart';
+import '../../../global_variables.dart';
 import '../../screen_list.dart';
 import '../Search Share/track.dart';
 import 'algorithm_bridge2.dart';

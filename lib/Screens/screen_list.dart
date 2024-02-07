@@ -8,7 +8,7 @@ import 'Create/Create Multi/create_multi_main.dart';
 import 'Create/Create Multi/create_multi_state.dart';
 import 'Create/Create Single/create_single_main.dart';
 import 'Create/Create Single/create_single_state.dart';
-import '../Services/global_variables.dart';
+import '../global_variables.dart';
 import '../UI/Adaptive Folder/synthesizer.dart';
 import '../UI/Screens/About/about_main.dart';
 import '../UI/Screens/About/about_state.dart';

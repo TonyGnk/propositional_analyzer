@@ -3,7 +3,7 @@
 import 'dart:math';
 
 import '../Screens/Search/Search Share/track.dart';
-import '../Services/global_variables.dart';
+import '../global_variables.dart';
 
 hillClimbing(
   List<List<int>> problem,

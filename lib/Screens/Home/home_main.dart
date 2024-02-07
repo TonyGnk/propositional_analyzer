@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services/global_variables.dart';
+import '../../global_variables.dart';
 import '../shared.dart';
 import 'home_buttons.dart';
 import 'home_state.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Services/global_variables.dart';
+import '../../global_variables.dart';
 import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../Charts/Charts Single/save_icon.dart';
 import '../screen_list.dart';
