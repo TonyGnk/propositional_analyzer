@@ -21,7 +21,7 @@ createMultiReturn(WidgetRef ref) {
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
-  updateAppBarLabel(ref, 'New Analysis', isReturn);
+  updateAppBarLabel(ref, 'New Multiple Analysis', isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
 }
 
