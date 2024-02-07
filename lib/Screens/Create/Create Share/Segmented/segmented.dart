@@ -20,7 +20,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
   Widget build(BuildContext context) => AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
-        height: openedMenu ? 202 : 52,
+        height: openedMenu ? 186 : 48,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(cornerSize - 1),
           color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
@@ -56,12 +56,12 @@ class _SegmentedControlState extends State<SegmentedControl> {
       openedMenu = true;
     });
 
-    await Future.delayed(const Duration(milliseconds: 30));
+    await Future.delayed(const Duration(milliseconds: 40));
     setState(() {
       matrix = true;
     });
 
-    await Future.delayed(const Duration(milliseconds: 180));
+    await Future.delayed(const Duration(milliseconds: 200));
     setState(() {
       openedB = true;
       matrix = false;
@@ -94,7 +94,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
   }
 
   selectItem1(int id) => animatedRow(
-        50,
+        46,
         const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(cornerSize - 1),
@@ -103,12 +103,12 @@ class _SegmentedControlState extends State<SegmentedControl> {
         ),
         id,
       );
-  selectItem2(int id) => animatedRow(50, const BoxDecoration(), id);
+  selectItem2(int id) => animatedRow(46, const BoxDecoration(), id);
 
-  selectItem3(int id) => animatedRow(50, const BoxDecoration(), id);
+  selectItem3(int id) => animatedRow(46, const BoxDecoration(), id);
 
   selectItem4(int id) => animatedRow(
-        50,
+        46,
         const BoxDecoration(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(cornerSize - 1),

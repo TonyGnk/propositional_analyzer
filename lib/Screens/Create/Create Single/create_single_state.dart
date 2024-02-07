@@ -22,6 +22,7 @@ createSingleReturn(WidgetRef ref) {
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateAppBarLabel(ref, 'New Analysis', isReturn);
+  updateAppBarCustomIcon1(ref, saveIcon3(), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
 }
 
@@ -31,4 +32,26 @@ animatedColumn(Widget child) => Consumer(
         duration: basicDuration,
         child: child,
       ),
+    );
+
+saveIcon2() => IconButton(
+      tooltip: 'Save Analysis',
+      selectedIcon: const Icon(Icons.volume_up_outlined),
+      style: ButtonStyle(
+        fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
+      ),
+      onPressed: () {},
+      icon: const Icon(Icons.save),
+      highlightColor: Colors.grey.withOpacity(0.2),
+    );
+
+saveIcon3() => IconButton(
+      tooltip: 'Play a sound at the end',
+      selectedIcon: const Icon(Icons.volume_up_outlined),
+      style: ButtonStyle(
+        fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
+      ),
+      onPressed: () {},
+      icon: const Icon(Icons.save),
+      highlightColor: Colors.grey.withOpacity(0.2),
     );
