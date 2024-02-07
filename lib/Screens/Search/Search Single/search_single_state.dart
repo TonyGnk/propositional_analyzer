@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../UI/Routed%20Screen/app_bar.dart';
 
 import '../../../Screens/screen_list.dart';
-import '../../Services/global_variables.dart';
+import '../../../Services/global_variables.dart';
+import '../../../UI/Routed Screen/app_bar.dart';
 
 final opacity = StateProvider<double>((ref) => 1);
 
-void searchGo(WidgetRef ref, ScreenDestination destination) {
+void searchSingleGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
 }
 
-void searchReturn(WidgetRef ref) {
+void searchSingleReturn(WidgetRef ref) {
   updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
 }

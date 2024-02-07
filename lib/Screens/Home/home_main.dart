@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Services/global_variables.dart';
 import '../../algorithms/dpll.dart';
-import '../Result/track.dart';
+import '../Search/Search Share/track.dart';
 import '../shared.dart';
 import 'home_buttons.dart';
 import 'home_state.dart';

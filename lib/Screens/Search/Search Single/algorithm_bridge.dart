@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../Services/global_variables.dart';
-import '../../algorithms/depth_first.dart';
-import '../../algorithms/dpll.dart';
-import '../../algorithms/gready.dart';
-import '../../algorithms/new_value.dart';
-import '../../algorithms/walk_sat.dart';
-import '../Result/track.dart';
-import 'search_main.dart';
+import '../../../Services/global_variables.dart';
+import '../../../algorithms/depth_first.dart';
+import '../../../algorithms/dpll.dart';
+import '../../../algorithms/gready.dart';
+import '../../../algorithms/new_value.dart';
+import '../../../algorithms/walk_sat.dart';
+import '../Search Share/track.dart';
+import 'search_single_main.dart';
 
 initializeCircle() {
   stopsPrimary = [];
@@ -65,34 +65,12 @@ runAlgorithm() async {
   problem.clear();
 }
 
-addSpotHill(double M, double average, double averageTime) {
+addSpot(double M, double average, double averageTime) {
   M = M / N;
   M = double.parse(M.toStringAsFixed(1));
 
-  spotsHill.add(FlSpot(M, average));
-  //spots2.add(FlSpot(M, averageTime));
-}
-
-addSpotDepth(double M, double average, double averageTime) {
-  M = M / N;
-  M = double.parse(M.toStringAsFixed(1));
-
-  spotsDepth.add(FlSpot(M, average));
-  //spots2.add(FlSpot(M, averageTime));
-}
-
-//If spotsDepth is larger than spotsHill add empty spots to spotsHill to be equal
-fixSpots() {
-  // if (spotsDepth.length > spotsHill.length) {
-  //   for (int i = spotsHill.length; i < spotsDepth.length; i++) {
-  //     spotsHill.add(FlSpot(i.toDouble(), 0));
-  //   }
-  // }
-  // if (spotsHill.length > spotsDepth.length) {
-  //   for (int i = spotsDepth.length; i < spotsHill.length; i++) {
-  //     spotsDepth.add(FlSpot(i.toDouble(), 0));
-  //   }
-  // }
+  spots1.add(FlSpot(M, average));
+  spots2.add(FlSpot(M, averageTime));
 }
 
 class TrackContainer extends StatelessWidget {

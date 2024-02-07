@@ -1,8 +1,6 @@
-// ignore_for_file: avoid_print
-///The boolean satisfiability problem is a problem of finding an assignment of truth values to a set of propositional symbols that satisfies a given set of clauses. A clause is a disjunction of literals, where a literal is either a propositional symbol or its negation.
 import 'dart:core';
 
-import '../Screens/Result/track.dart';
+import '../Screens/Search/Search Share/track.dart';
 import '../Services/global_variables.dart';
 import 'generate_children.dart';
 import 'solution_dart.dart';

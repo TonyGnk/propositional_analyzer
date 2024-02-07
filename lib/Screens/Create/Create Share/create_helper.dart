@@ -31,7 +31,7 @@ analyzeContainer() => Consumer(
         label: 'Analyze',
         icon: Icons.troubleshoot_outlined,
         onTap: () {
-          goTo(ref, ScreenDestination.result);
+          goTo(ref, ScreenDestination.searchSingle);
         },
       ),
     );

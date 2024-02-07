@@ -5,17 +5,17 @@ import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../Services/global_variables.dart';
-import '../Result/track.dart';
-import '../screen_list.dart';
-import 'algorithm_bridge2.dart';
-import 'search_state.dart';
+import '../../../Services/global_variables.dart';
+import '../../screen_list.dart';
+import '../Search Share/track.dart';
+import 'algorithm_bridge.dart';
+import 'search_single_state.dart';
 
-class SearchComparison extends ConsumerStatefulWidget {
-  const SearchComparison({super.key});
+class SearchSingle extends ConsumerStatefulWidget {
+  const SearchSingle({super.key});
 
   @override
-  ConsumerState<SearchComparison> createState() => _ResultState();
+  ConsumerState<SearchSingle> createState() => _SearchSingleState();
 }
 
 List<double> stopsPrimary = [];
@@ -23,7 +23,7 @@ List<double> stopsSecondary = [];
 double stop1 = 0.333;
 double stop2 = 0.3331;
 
-class _ResultState extends ConsumerState<SearchComparison> {
+class _SearchSingleState extends ConsumerState<SearchSingle> {
   List<TrackContainer> trackList = [];
   Color color1 = Colors.orangeAccent;
   String str = 'M0';
@@ -33,7 +33,7 @@ class _ResultState extends ConsumerState<SearchComparison> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      searchReturn(ref);
+      searchSingleReturn(ref);
     });
     algorithm();
   }
@@ -144,7 +144,6 @@ class _ResultState extends ConsumerState<SearchComparison> {
     await Future.delayed(Duration.zero, () {
       setState(() {
         initializeCircle();
-        selected = 0;
       });
     });
     initializingData();
@@ -186,7 +185,7 @@ class _ResultState extends ConsumerState<SearchComparison> {
       }
       double n = sampleSum / numberOfTests;
       double averageTime = timeSum / numberOfTests;
-      addSpotHill(M.toDouble(), n, averageTime);
+      addSpot(M.toDouble(), n, averageTime);
 
       await Future.delayed(Duration.zero, () {
         setState(() {
@@ -205,94 +204,6 @@ class _ResultState extends ConsumerState<SearchComparison> {
       //await Future.delayed(const Duration(seconds: 1));
       //} while (M < 342);
     } while (stopList.length != stop);
-    //goTo(ref, ScreenDestination.chart);
-
-    //
-
-    //
-
-    //
-
-    //
-
-    //
-
-    //
-
-    //
-
-    //
-
-    //
-
-    //
-
-    await Future.delayed(Duration.zero, () {
-      setState(() {
-        initializeCircle();
-        selected = 3;
-      });
-    });
-    initializingData();
-    stopList = [];
-    sampleSum = 0;
-    timeSum = 0;
-    M = 1;
-    do {
-      sampleSum = 0;
-      timeSum = 0;
-      for (int j = 1; j <= numberOfTests; j++) {
-        Search search = await runAlgorithm();
-        int founded = search.win ? 1 : 0;
-        sampleSum = sampleSum + founded;
-        timeSum = timeSum + search.time;
-
-        await Future.delayed(Duration.zero, () {
-          setState(() {
-            str2 = '$sampleSum/$numberOfTests';
-
-            stop1 = stopsPrimary[j - 1];
-            stop2 = stopsSecondary[j - 1];
-
-            if (founded != 1) {
-              trackList.add(
-                TrackContainer(
-                  child: Text(
-                    'Test $j with M=$M failed',
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontFamily: 'Play',
-                    ),
-                  ),
-                ),
-              );
-              scrollDown();
-            }
-          });
-        });
-      }
-      double n = sampleSum / numberOfTests;
-      double averageTime = timeSum / numberOfTests;
-      addSpotDepth(M.toDouble(), n, averageTime);
-
-      await Future.delayed(Duration.zero, () {
-        setState(() {
-          str = 'M$M';
-          str2 = '$sampleSum/$numberOfTests';
-        });
-      });
-
-      M++;
-      if (sampleSum == 0) {
-        stopList.add(true);
-      } else {
-        stopList.clear();
-      }
-
-      //await Future.delayed(const Duration(seconds: 1));
-      //} while (M < 342);
-    } while (stopList.length != stop);
-    fixSpots();
-    goTo(ref, ScreenDestination.chartComparison);
+    goTo(ref, ScreenDestination.chart);
   }
 }

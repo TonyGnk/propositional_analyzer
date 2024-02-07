@@ -116,7 +116,7 @@ class _CreateState extends ConsumerState<CreateMulti> {
           label: 'Analyze',
           icon: Icons.troubleshoot_outlined,
           onTap: () {
-            goTo(ref, ScreenDestination.search);
+            goTo(ref, ScreenDestination.searchMulti);
           },
         ),
       );
