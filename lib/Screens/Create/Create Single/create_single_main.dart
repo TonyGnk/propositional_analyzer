@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Services/global_variables.dart';
 import '../Create Share/create_helper.dart';
-import '../Create Share/desktop_segmented.dart';
-import '../Create Share/segmented.dart';
+import '../Create Share/Segmented/desktop_segmented.dart';
+import '../Create Share/Segmented/segmented.dart';
 import '../Create Share/slide_item.dart';
 import '../Create Share/slide_item_list.dart';
 import 'create_single_state.dart';

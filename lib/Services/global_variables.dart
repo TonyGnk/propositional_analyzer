@@ -10,6 +10,10 @@ int stop = 2;
 int timeOut = 30;
 
 int selected = 0;
+bool selectedHill = true;
+bool selectedDepth = false;
+bool selectedDPLL = false;
+bool selectedWalk = true;
 
 List<FlSpot> spots1 = [];
 List<FlSpot> spots2 = [];

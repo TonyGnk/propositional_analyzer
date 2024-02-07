@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Services/global_variables.dart';
 import '../../screen_list.dart';
+import '../Create Share/Segmented/segmented_multi.dart';
 import '../Create Share/analyze_button.dart';
 import '../Create Share/create_helper.dart';
-import '../Create Share/desktop_segmented.dart';
-import '../Create Share/segmented.dart';
+import '../Create Share/Segmented/desktop_segmented.dart';
 import '../Create Share/slide_item.dart';
 import '../Create Share/slide_item_list.dart';
 import 'create_multi_state.dart';
@@ -66,7 +66,7 @@ class _CreateState extends ConsumerState<CreateMulti> {
               ],
             ),
             const SizedBox(height: 4),
-            const DesktopSegmented(),
+            const SegmentedControlMulti(),
             const Expanded(flex: 1, child: SizedBox()),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -91,10 +91,16 @@ class _CreateState extends ConsumerState<CreateMulti> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 4),
-            const SegmentedControl(),
-            group(context, 183,
-                [slideK(updateK), slideN(updateN), slideTests(updateTests)]),
-            group(context, 129, [slideStop(updateStop), slideTime(updateTime)]),
+            const SegmentedControlMulti(),
+            group(context, 183, [
+              slideK(updateK),
+              slideN(updateN),
+              slideTests(updateTests),
+            ]),
+            group(context, 129, [
+              slideStop(updateStop),
+              slideTime(updateTime),
+            ]),
             const Expanded(flex: 1, child: SizedBox()),
             helpContainer(),
             analyzeContainer(),

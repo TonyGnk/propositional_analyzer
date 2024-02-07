@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../Services/global_variables.dart';
+import '../../../../Services/global_variables.dart';
+import 'segmented_share.dart';
 
 class SegmentedControl extends StatefulWidget {
   const SegmentedControl({super.key});
@@ -10,7 +11,6 @@ class SegmentedControl extends StatefulWidget {
 }
 
 class _SegmentedControlState extends State<SegmentedControl> {
-  double tr = 0;
   bool openedMenu = false;
   bool openedB = false;
   bool showOptionsOpacity = false;
@@ -103,17 +103,9 @@ class _SegmentedControlState extends State<SegmentedControl> {
         ),
         id,
       );
-  selectItem2(int id) => animatedRow(
-        50,
-        const BoxDecoration(),
-        id,
-      );
+  selectItem2(int id) => animatedRow(50, const BoxDecoration(), id);
 
-  selectItem3(int id) => animatedRow(
-        50,
-        const BoxDecoration(),
-        id,
-      );
+  selectItem3(int id) => animatedRow(50, const BoxDecoration(), id);
 
   selectItem4(int id) => animatedRow(
         50,
@@ -191,7 +183,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
                     ),
                     const SizedBox(width: 15),
                     Text(
-                      algorithmMap[id]!,
+                      algorithmNamesMap[id]!,
                       style: TextStyle(
                         fontFamily: 'Play',
                         fontSize: 16,
@@ -225,19 +217,3 @@ class _SegmentedControlState extends State<SegmentedControl> {
     }
   }
 }
-
-Map<int, String> algorithmMap = {
-  0: 'Hill Climbing',
-  1: 'DepthFirst',
-  2: 'DPLL',
-  3: 'Walkstat',
-  4: 'Genetic',
-};
-
-Map<int, IconData> algorithmIconMap = {
-  0: Icons.power_input_outlined,
-  1: Icons.grid_goldenratio_outlined,
-  2: Icons.join_right_sharp,
-  3: Icons.stacked_bar_chart_outlined,
-  4: Icons.dangerous_outlined,
-};

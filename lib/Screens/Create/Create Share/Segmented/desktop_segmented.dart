@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../Services/global_variables.dart';
-import 'segmented.dart';
+import '../../../../Services/global_variables.dart';
+import 'segmented_share.dart';
 
 class DesktopSegmented extends StatefulWidget {
   const DesktopSegmented({super.key});
@@ -98,9 +98,9 @@ class _DesktopSegmentedState extends State<DesktopSegmented> {
                         color: Theme.of(context).canvasColor,
                       ),
                     ),
-                    const SizedBox(width: 4),
+                    const SizedBox(width: 5),
                     Text(
-                      algorithmMap[id]!,
+                      algorithmNamesMap[id]!,
                       style: TextStyle(
                         fontFamily: 'Play',
                         fontSize: 16,
