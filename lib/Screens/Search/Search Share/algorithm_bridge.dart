@@ -66,36 +66,12 @@ runAlgorithm() async {
 Map<Algorithms, Function> algorithmMap = {
   Algorithms.hillClimbing: hillClimbing,
   Algorithms.depthFirst: depthFirst,
-  //Algorithms.dpll: dpll,
   Algorithms.walkSat: walkSat,
 };
 
 runAlgorithmNew(Algorithms type) async {
   List<List<int>> problem = newProblem();
-  if (selected == 0) {
-    return await hillClimbing(problem);
-  } else if (selected == 1) {
-    return await depthFirst(problem);
-  } else if (selected == 2) {
-    DPLL dpll = DPLL();
-    Map<String, bool> model = {};
-    Set<Set<int>> newProblem;
-    newProblem = Set<Set<int>>.from(problem.map((e) => e.toSet()));
-    //Call dpll.DPLL_Satisfiable(newProblem, model);
-    //If does return a value until the time limit "timeOut" then return false
-    try {
-      bool result = await dpll.DPLL_Satisfiable(newProblem, model)
-          .timeout(Duration(seconds: timeOut));
-      return result
-          ? const Search(win: true, time: 0)
-          : const Search(win: false, time: 0);
-    } on TimeoutException catch (_) {
-      return const Search(win: false, time: 0);
-    }
-  } else if (selected == 3) {
-    return await walkSat(problem);
-  }
-  problem.clear();
+  return algorithmMap[type]!(problem);
 }
 
 addTrack(List<TrackContainer> trackList, int j) {

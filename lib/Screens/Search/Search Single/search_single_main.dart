@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 import '../../../global_variables.dart';
 import '../../screen_list.dart';
@@ -90,8 +91,12 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
         stopList.clear();
       }
     } while (stopList.length != stop);
-    await player.setSource(DeviceFileSource('assets/audio/finish.mp3'));
+    await player.setSource(DeviceFileSource(songPath));
     await player.resume();
     goTo(ref, ScreenDestination.chartSingle);
   }
 }
+
+String songPath = (UniversalPlatform.isWeb)
+    ? 'assets/assets/audio/finish.mp3'
+    : 'assets/audio/finish.mp3';

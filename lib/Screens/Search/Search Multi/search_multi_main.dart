@@ -33,7 +33,10 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     Future.delayed(Duration.zero, () {
       searchMultiReturn(ref);
     });
-    if (selectedHill) algorithm(Algorithms.hillClimbing);
+    if (selectedHill) {
+      print('Hill Climbing');
+      algorithm(Algorithms.hillClimbing);
+    }
   }
 
   callCircle(bool value) => circle(context, str, str2, stop1, stop2, value);
