@@ -12,11 +12,6 @@ import '../Search Share/search_circle.dart';
 import 'search_single_layout.dart';
 import 'search_single_state.dart';
 
-List<double> stopsPrimary = [];
-List<double> stopsSecondary = [];
-double stop1 = 0.333;
-double stop2 = 0.3331;
-
 class SearchSingleState extends ConsumerState<SearchSingle> {
   List<TrackContainer> trackList = [];
   String str = 'M0';

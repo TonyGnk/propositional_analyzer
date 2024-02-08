@@ -16,6 +16,8 @@ bool selectedDepth = false;
 bool selectedDPLL = false;
 bool selectedWalk = true;
 
+bool speakerOn = true;
+
 List<FlSpot> spots1 = [];
 List<FlSpot> spots2 = [];
 

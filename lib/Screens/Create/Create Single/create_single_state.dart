@@ -22,7 +22,7 @@ createSingleReturn(WidgetRef ref) {
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateAppBarLabel(ref, 'New Analysis', isReturn);
-  updateAppBarCustomIcon1(ref, saveIcon3(), isReturn);
+  updateAppBarCustomIcon1(ref, speakerIcon(), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
 }
 
@@ -34,24 +34,23 @@ animatedColumn(Widget child) => Consumer(
       ),
     );
 
-saveIcon2() => IconButton(
-      tooltip: 'Save Analysis',
-      selectedIcon: const Icon(Icons.volume_up_outlined),
-      style: ButtonStyle(
-        fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
-      ),
-      onPressed: () {},
-      icon: const Icon(Icons.save),
-      highlightColor: Colors.grey.withOpacity(0.2),
+speakerIcon() => Consumer(
+      builder: (context, ref, _) {
+        final isMute = ref.watch(isMuteProvider);
+        return IconButton(
+          isSelected: isMute,
+          tooltip: 'Play Sound At The End',
+          selectedIcon: const Icon(Icons.volume_off_outlined),
+          style: ButtonStyle(
+            fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
+            foregroundColor: MaterialStateProperty.all<Color>(
+                Theme.of(context).colorScheme.onBackground),
+          ),
+          onPressed: () => ref.read(isMuteProvider.notifier).state = !isMute,
+          icon: const Icon(Icons.volume_up_outlined),
+          highlightColor: Colors.grey.withOpacity(0.2),
+        );
+      },
     );
 
-saveIcon3() => IconButton(
-      tooltip: 'Play a sound at the end',
-      selectedIcon: const Icon(Icons.volume_up_outlined),
-      style: ButtonStyle(
-        fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
-      ),
-      onPressed: () {},
-      icon: const Icon(Icons.save),
-      highlightColor: Colors.grey.withOpacity(0.2),
-    );
+final isMuteProvider = StateProvider<bool>((ref) => true);

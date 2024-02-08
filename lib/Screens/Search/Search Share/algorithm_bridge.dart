@@ -10,7 +10,11 @@ import '../../../algorithms/gready.dart';
 import '../../../algorithms/new_value.dart';
 import '../../../algorithms/walk_sat.dart';
 import 'track.dart';
-import '../Search Single/search_single_main.dart';
+
+List<double> stopsPrimary = [];
+List<double> stopsSecondary = [];
+double stop1 = 0.333;
+double stop2 = 0.3331;
 
 initializeData() {
   stopsPrimary = [];

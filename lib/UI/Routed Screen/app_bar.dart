@@ -115,9 +115,9 @@ updateAppBarLabel(WidgetRef ref, String label, bool isReturn) {
 }
 
 // A provider for a custom icon in the app bar
-final appBarCustomIcon1 = StateProvider<IconButton?>((ref) => null);
+final appBarCustomIcon1 = StateProvider<Widget?>((ref) => null);
 final appBarCustomIconOpacity = StateProvider<double>((ref) => 0);
-updateAppBarCustomIcon1(WidgetRef ref, IconButton iconButton, bool isReturn) {
+updateAppBarCustomIcon1(WidgetRef ref, Widget iconButton, bool isReturn) {
   isReturn
       ? {
           ref.read(appBarCustomIcon1.notifier).state = iconButton,

@@ -16,11 +16,6 @@ import '../Search Share/track.dart';
 import 'search_multi_layout.dart';
 import 'search_multi_state.dart';
 
-List<double> stopsPrimary = [];
-List<double> stopsSecondary = [];
-double stop1 = 0.333;
-double stop2 = 0.3331;
-
 class SearchMultiState extends ConsumerState<SearchMulti> {
   List<TrackContainer> trackList = [];
   Color color1 = Colors.orangeAccent;
