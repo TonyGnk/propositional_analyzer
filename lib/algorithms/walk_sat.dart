@@ -16,7 +16,6 @@ walkSat(List<List<int>> problem) async {
   //Create a random assignment of true and false to the variables
   var solution = List.generate(N, (index) => random.nextBool());
   // await Future.delayed(Duration(seconds: 2), () {});
-  // print('Tag0');
   while (true) {
     await Future.delayed(Duration.zero, () {});
     DateTime time = DateTime.now();

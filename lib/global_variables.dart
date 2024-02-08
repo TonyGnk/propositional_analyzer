@@ -8,7 +8,7 @@ int K = 6;
 int M = 1;
 int stop = 1;
 
-int timeOut = 22; //TODO: change to 2
+int timeOut = 2;
 
 int selected = 0;
 bool selectedHill = true;
