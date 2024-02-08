@@ -3,8 +3,8 @@ import 'dart:math';
 
 import '../global_variables.dart';
 
-List<List<int>> newProblem(List<List<int>> problem) {
-  int M = problem.length;
+List<List<int>> newProblem() {
+  List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
   Random rand = Random();
 
   for (int i = 0; i < M; i++) {

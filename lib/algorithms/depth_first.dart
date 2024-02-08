@@ -21,6 +21,7 @@ depthFirst(List<List<int>> problem) async {
     nowTime = DateTime.now();
     await Future.delayed(Duration.zero, () {});
     if (nowTime.difference(startTime).inSeconds > timeOut) {
+      print('Time out in Depth First Search');
       return const Search(win: false);
     }
 

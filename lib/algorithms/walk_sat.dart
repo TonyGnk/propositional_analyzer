@@ -14,7 +14,6 @@ walkSat(List<List<int>> problem) async {
   DateTime t1 = DateTime.now();
 
   //Create a random assignment of true and false to the variables
-  print('The walkSat is started!');
   var solution = List.generate(N, (index) => random.nextBool());
   // await Future.delayed(Duration(seconds: 2), () {});
   // print('Tag0');
@@ -22,6 +21,7 @@ walkSat(List<List<int>> problem) async {
     await Future.delayed(Duration.zero, () {});
     DateTime time = DateTime.now();
     if (time.difference(t1).inSeconds > timeOut) {
+      print('Time out in Walk Sat');
       return const Search(win: false);
     }
 

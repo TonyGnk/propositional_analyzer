@@ -37,8 +37,7 @@ initializeData() {
 }
 
 runAlgorithm() async {
-  List<List<int>> problem = List.generate(M, (i) => List.filled(K, 0));
-  problem = newProblem(problem);
+  List<List<int>> problem = newProblem();
   if (selected == 0) {
     return await hillClimbing(problem);
   } else if (selected == 1) {
