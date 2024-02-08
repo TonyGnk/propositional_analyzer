@@ -211,9 +211,9 @@ class _SegmentedControlState extends State<SegmentedControl> {
 
   double findD(int id) {
     if (!openedB) {
-      return id * (50);
+      return id * (46);
     } else {
-      return id * (-50);
+      return id * (-46);
     }
   }
 }
