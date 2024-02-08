@@ -6,18 +6,37 @@ import 'al2.dart';
 import 'generate_children.dart';
 import 'solution_dart.dart';
 
-StackItem head = StackItem();
+//StackItem head = StackItem();
+List<List<bool?>> stackItems = [];
 
 depthFirst(List<List<int>> problem) async {
   DateTime startTime, nowTime;
+  int steps = 0;
+  int stepsUnmet = 0;
 
   var vector = List<bool?>.filled(N, null);
-  head = StackItem();
-  head.push(vector);
+  stackItems.clear();
+  //head.push(vector);
+  //Add at the start
+  stackItems.insert(0, vector);
   startTime = DateTime.now();
 
+  // for (var i = 0; i < head.items.length; i++) {
+  //   print('Stack: $i ${head.items[i]}');
+  // }
+  print('Stack: $stackItems');
+
+  print('\n');
+
   // While the stack is not empty.. repeat
-  while (head.isNotEmpty) {
+  while (stackItems.isNotEmpty) {
+    //remove from the start
+    vector = stackItems.removeAt(0);
+    //vector = head.pop()!;
+    //print('New Vector: $vector');
+
+    steps++;
+    print('Step: $steps');
     nowTime = DateTime.now();
     await Future.delayed(Duration.zero, () {});
     if (nowTime.difference(startTime).inSeconds > timeOut) {
@@ -26,20 +45,38 @@ depthFirst(List<List<int>> problem) async {
     }
 
     if (complete(vector)) {
-      List<bool> completeVector = vector.map((e) => e ?? false).toList();
-      final List<int> unmetClauses = findUnmetIndexes(completeVector, problem);
-      if (unmetClauses.isEmpty) {
+      if (valid(vector, problem)) {
+        print('Solution: $vector');
         return Search(
           win: true,
           time: nowTime.difference(startTime).inSeconds,
         );
       }
+      // List<bool> completeVector = vector.map((e) => e ?? false).toList();
+      // final List<int> unmetClauses = findUnmetIndexes(completeVector, problem);
+      // print('Unmet Clauses: $unmetClauses');
+      // stepsUnmet++;
+      // if (unmetClauses.isEmpty) {
+      //   print('Solution: $completeVector');
+      //   return Search(
+      //     win: true,
+      //     time: nowTime.difference(startTime).inSeconds,
+      //   );
+      // }
     } else {
-      generateChildren(vector, problem, M);
+      generateChildren(vector, problem);
     }
 
-    vector = head.pop()!;
+    //Display all the vectors in the stack
+    // for (var i = 0; i < stackItems.length; i++) {
+    //   print('Stack: $i ${stackItems[i]}');
+    // }
+
+    //wait 2sec for the next step
+    //await Future.delayed(const Duration(seconds: 9), () {});
   }
+  print('Unmet Steps: $stepsUnmet');
+  print('Steps: $steps');
   return const Search(win: false);
 }
 
@@ -48,19 +85,23 @@ depthFirst(List<List<int>> problem) async {
 class StackItem {
   StackItem();
 
-  final List<List<bool?>> _items = [];
+  final List<List<bool?>> items = [];
 
   void push(List<bool?> newItem) {
-    _items.add(newItem);
+    items.add(newItem);
   }
 
   List<bool?>? pop() {
-    if (_items.isNotEmpty) {
-      return _items.removeLast();
+    if (items.isNotEmpty) {
+      return items.removeLast();
     } else {
       return null;
     }
   }
 
-  bool get isNotEmpty => _items.isNotEmpty;
+  void clear() {
+    items.clear();
+  }
+
+  bool get isNotEmpty => items.isNotEmpty;
 }

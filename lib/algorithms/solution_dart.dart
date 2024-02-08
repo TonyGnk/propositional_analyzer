@@ -11,25 +11,37 @@ complete(List<bool?> vector) {
   return true;
 }
 
-// bool valid(List<int> vector, List<List<int>> problem, int M) {
-//   int i, j;
-//   bool satisfiable = false;
+bool valid(List<bool?> vector, List<List<int>> problem) {
+  int i, j;
+  bool satisfiable = false;
 
-//   for (i = 0; i < M; i++) {
-//     // Check if the clause is satisfied
-//     satisfiable = false;
-//     for (j = 0; j < K; j++) {
-//       if ((problem[i][j] > 0 && vector[problem[i][j] - 1] >= 0) ||
-//           (problem[i][j] < 0 && vector[-problem[i][j] - 1] <= 0)) {
-//         satisfiable = true;
-//       }
-//     }
-//     if (!satisfiable) {
-//       return false;
-//     }
-//   }
-//   return true;
-// }
+  // Convert the  vector to a list of integers. If true 1, if false -1 if null 0
+  List<int> vectorInt = [];
+  for (i = 0; i < N; i++) {
+    if (vector[i] == true) {
+      vectorInt.add(1);
+    } else if (vector[i] == false) {
+      vectorInt.add(-1);
+    } else {
+      vectorInt.add(0);
+    }
+  }
+
+  for (i = 0; i < M; i++) {
+    // Check if the clause is satisfied
+    satisfiable = false;
+    for (j = 0; j < K; j++) {
+      if ((problem[i][j] > 0 && vectorInt[problem[i][j] - 1] >= 0) ||
+          (problem[i][j] < 0 && vectorInt[-problem[i][j] - 1] <= 0)) {
+        satisfiable = true;
+      }
+    }
+    if (!satisfiable) {
+      return false;
+    }
+  }
+  return true;
+}
 
 // This function checks whether a current partial assignment is already invalid.
 // In order for a partial assignment to be invalid, there should exist a sentence such that
