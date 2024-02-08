@@ -96,7 +96,10 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
         stopList.clear();
       }
     } while (stopList.length != stop);
-    await player.play(DeviceFileSource('assets/audio/finish.mp3'));
+    //.setSource(DeviceFileSource('assets/audio/finish.mp3'));
+    await player.setSource(DeviceFileSource('assets/audio/finish.mp3'));
+    await player.resume();
+    //await player.play(DeviceFileSource('assets/audio/finish.mp3'));
     goTo(ref, ScreenDestination.chartSingle);
   }
 }
