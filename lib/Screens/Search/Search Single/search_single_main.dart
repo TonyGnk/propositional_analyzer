@@ -90,7 +90,8 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
         stopList.clear();
       }
     } while (stopList.length != stop);
-    await player.play(DeviceFileSource('assets/audio/finish.mp3'));
+    await player.setSource(DeviceFileSource('assets/audio/finish.mp3'));
+    await player.resume();
     goTo(ref, ScreenDestination.chartSingle);
   }
 }

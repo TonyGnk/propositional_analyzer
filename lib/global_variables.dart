@@ -24,6 +24,8 @@ List<FlSpot> spotsDepth = [];
 List<FlSpot> spotsDPLL = [];
 List<FlSpot> spotsWalk = [];
 
+enum Algorithms { hillClimbing, depthFirst, dpll, walkSat }
+
 final player = AudioPlayer();
 
 const double cornerSize = 16;

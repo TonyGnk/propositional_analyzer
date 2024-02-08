@@ -33,7 +33,7 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     Future.delayed(Duration.zero, () {
       searchMultiReturn(ref);
     });
-    algorithm();
+    if (selectedHill) algorithm(Algorithms.hillClimbing);
   }
 
   callCircle(bool value) => circle(context, str, str2, stop1, stop2, value);
@@ -57,7 +57,7 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     );
   }
 
-  algorithm() async {
+  algorithm(Algorithms type) async {
     await Future.delayed(Duration.zero, () => setState(() => initializeData()));
     List<bool> stopList = [];
     int sampleSum = 0;
@@ -69,7 +69,7 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
       timeSum = 0;
 
       for (int j = 1; j <= numberOfTests; j++) {
-        solution = await runAlgorithm();
+        solution = await runAlgorithmNew(type);
         founded = solution.win ? 1 : 0;
         sampleSum = sampleSum + founded;
         timeSum = timeSum + solution.time;
@@ -96,10 +96,8 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
         stopList.clear();
       }
     } while (stopList.length != stop);
-    //.setSource(DeviceFileSource('assets/audio/finish.mp3'));
     await player.setSource(DeviceFileSource('assets/audio/finish.mp3'));
     await player.resume();
-    //await player.play(DeviceFileSource('assets/audio/finish.mp3'));
     goTo(ref, ScreenDestination.chartSingle);
   }
 }
