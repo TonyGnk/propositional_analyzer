@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 Map<int, String> algorithmNamesMap = {
   0: 'Hill Climbing',
-  1: 'Error-DepthFirst',
-  2: 'Error-DPLL',
+  1: 'DepthFirst',
+  2: 'DPLL (Error)',
   3: 'Walkstat',
   4: 'Genetic',
 };

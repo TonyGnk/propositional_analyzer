@@ -9,10 +9,10 @@ import '../../../algorithms/dpll.dart';
 import '../../../algorithms/gready.dart';
 import '../../../algorithms/new_value.dart';
 import '../../../algorithms/walk_sat.dart';
-import '../Search Share/track.dart';
-import 'search_multi_main.dart';
+import 'track.dart';
+import '../Search Single/search_single_main.dart';
 
-initializeCircle() {
+initializeData() {
   stopsPrimary = [];
   stopsSecondary = [];
   stop1 = 0.333;
@@ -28,9 +28,7 @@ initializeCircle() {
 
   stop1 = stopsPrimary[0];
   stop2 = stopsSecondary[0];
-}
 
-initializingData() {
   M = 1;
   spots1.clear();
   spots2.clear();
@@ -64,34 +62,27 @@ runAlgorithm() async {
   problem.clear();
 }
 
-addSpotHill(double M, double average, double averageTime) {
+addTrack(List<TrackContainer> trackList, int j) {
+  trackList.add(
+    TrackContainer(
+      child: Text(
+        'Test $j with M=$M failed',
+        style: const TextStyle(
+          fontSize: 15,
+          fontFamily: 'Play',
+        ),
+      ),
+    ),
+  );
+  scrollDown();
+}
+
+addSpot(double M, double average, double averageTime) {
   M = M / N;
   M = double.parse(M.toStringAsFixed(1));
 
-  spotsHill.add(FlSpot(M, average));
-  //spots2.add(FlSpot(M, averageTime));
-}
-
-addSpotDepth(double M, double average, double averageTime) {
-  M = M / N;
-  M = double.parse(M.toStringAsFixed(1));
-
-  spotsDepth.add(FlSpot(M, average));
-  //spots2.add(FlSpot(M, averageTime));
-}
-
-//If spotsDepth is larger than spotsHill add empty spots to spotsHill to be equal
-fixSpots() {
-  // if (spotsDepth.length > spotsHill.length) {
-  //   for (int i = spotsHill.length; i < spotsDepth.length; i++) {
-  //     spotsHill.add(FlSpot(i.toDouble(), 0));
-  //   }
-  // }
-  // if (spotsHill.length > spotsDepth.length) {
-  //   for (int i = spotsDepth.length; i < spotsHill.length; i++) {
-  //     spotsDepth.add(FlSpot(i.toDouble(), 0));
-  //   }
-  // }
+  spots1.add(FlSpot(M, average));
+  spots2.add(FlSpot(M, averageTime));
 }
 
 class TrackContainer extends StatelessWidget {

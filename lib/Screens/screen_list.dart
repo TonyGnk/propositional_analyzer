@@ -16,9 +16,10 @@ import '../UI/Screens/settings.dart';
 import '../UI/Screens/settings_state.dart';
 import 'Home/home_state.dart';
 import 'Home/home_main.dart';
+import 'Search/Search Multi/search_multi_layout.dart';
 import 'Search/Search Multi/search_multi_main.dart';
 import 'Search/Search Multi/search_multi_state.dart';
-import 'Search/Search Single/search_single_main.dart';
+import 'Search/Search Single/search_single_layout.dart';
 import 'Search/Search Single/search_single_state.dart';
 
 enum ScreenDestination {
