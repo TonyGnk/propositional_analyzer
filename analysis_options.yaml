@@ -1,7 +1,7 @@
 include: package:flutter_lints/flutter.yaml
 linter:
   rules:
-    avoid_print: true  # Uncomment to disable the `avoid_print` rule
+    avoid_print: false  # Uncomment to disable the `avoid_print` rule
     prefer_relative_imports: true
     always_put_required_named_parameters_first: true
     avoid_unnecessary_containers: true

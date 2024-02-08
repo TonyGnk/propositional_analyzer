@@ -16,16 +16,13 @@ walkSat(List<List<int>> problem) async {
   //Create a random assignment of true and false to the variables
   print('The walkSat is started!');
   var solution = List.generate(N, (index) => random.nextBool());
+  // await Future.delayed(Duration(seconds: 2), () {});
+  // print('Tag0');
   while (true) {
-    //await Future.delayed(Duration(seconds: 3), () {});
     await Future.delayed(Duration.zero, () {});
-    DateTime t = DateTime.now();
-    if (t.difference(t1).inSeconds > timeOut) {
-      DateTime t2 = DateTime.now();
-      return Search(
-        win: false,
-        time: t2.difference(t1).inSeconds,
-      );
+    DateTime time = DateTime.now();
+    if (time.difference(t1).inSeconds > timeOut) {
+      return const Search(win: false);
     }
 
     //Collect all the unmet indexes in a list
@@ -33,7 +30,7 @@ walkSat(List<List<int>> problem) async {
     if (unmetClauses.isEmpty) {
       return Search(
         win: true,
-        time: t.difference(t1).inSeconds,
+        time: time.difference(t1).inSeconds,
       );
     }
 

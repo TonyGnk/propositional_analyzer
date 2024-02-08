@@ -21,6 +21,7 @@ findUnmetIndexes(List<bool> solution, List<List<int>> problem) {
   //Iterate through each clause and check if it is satisfied or not
   for (var i = 0; i < problem.length; i++) {
     //This is a row in the problem like [1, -2]
+
     var clause = problem[i];
     var clauseSatisfied = false;
 

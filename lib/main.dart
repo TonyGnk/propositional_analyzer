@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
+import 'algorithms/playground.dart';
 
 import 'UI/Adaptive Folder/adaptive_root.dart';
 
-void main() async {
+void main2() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (!UniversalPlatform.isWeb) {
     await windowManager.ensureInitialized();
@@ -36,3 +37,7 @@ AdaptiveRoot buildApp({AdaptiveThemeMode? savedThemeMode}) => AdaptiveRoot(
       appTitle: 'Propositional Analyzer',
       debugShowFloatingThemeButton: false,
     );
+
+void main() async {
+  myFunction();
+}

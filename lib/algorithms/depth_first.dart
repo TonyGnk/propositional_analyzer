@@ -2,50 +2,44 @@ import 'dart:core';
 
 import '../Screens/Search/Search Share/track.dart';
 import '../global_variables.dart';
+import 'al2.dart';
 import 'generate_children.dart';
 import 'solution_dart.dart';
 
 StackItem head = StackItem();
 
 depthFirst(List<List<int>> problem) async {
-  DateTime startTime;
-  DateTime currentTime;
-  DateTime endTime;
+  DateTime startTime, nowTime;
 
-  var vector = List<int>.filled(N, 0);
+  var vector = List<bool?>.filled(N, null);
   head = StackItem();
   head.push(vector);
-
-  // Save the starting time
   startTime = DateTime.now();
 
   // While the stack is not empty.. repeat
   while (head.isNotEmpty) {
+    nowTime = DateTime.now();
     await Future.delayed(Duration.zero, () {});
-    currentTime = DateTime.now();
-    if (currentTime.difference(startTime).inSeconds > timeOut) {
-      print('Timeout');
-      return Search(
-        win: false,
-        time: currentTime.difference(startTime).inSeconds,
-      );
+    if (nowTime.difference(startTime).inSeconds > timeOut) {
+      return const Search(win: false);
     }
 
-    // Retract the top element from the stack.
-    head.pop();
-    if (solution(vector, problem)) {
-      endTime = DateTime.now();
-      print('Solution found: $vector');
-      return Search(win: true, time: endTime.difference(startTime).inSeconds);
+    if (complete(vector)) {
+      List<bool> completeVector = vector.map((e) => e ?? false).toList();
+      final List<int> unmetClauses = findUnmetIndexes(completeVector, problem);
+      if (unmetClauses.isEmpty) {
+        return Search(
+          win: true,
+          time: nowTime.difference(startTime).inSeconds,
+        );
+      }
     } else {
       generateChildren(vector, problem, M);
     }
 
-    //await Future.delayed(const Duration(seconds: 3), () {});
+    vector = head.pop()!;
   }
-  endTime = DateTime.now();
-  print('No solution exists!');
-  return Search(win: false, time: endTime.difference(startTime).inSeconds);
+  return const Search(win: false);
 }
 
 //_____________________________________________________________________
@@ -53,23 +47,18 @@ depthFirst(List<List<int>> problem) async {
 class StackItem {
   StackItem();
 
-  final List<List<int>> _items = [];
+  final List<List<bool?>> _items = [];
 
-  void push(List<int> newItem) {
+  void push(List<bool?> newItem) {
     _items.add(newItem);
   }
 
-  void pop() {
+  List<bool?>? pop() {
     if (_items.isNotEmpty) {
-      _items.removeLast();
-    }
-  }
-
-  List<int>? peek() {
-    if (_items.isEmpty) {
+      return _items.removeLast();
+    } else {
       return null;
     }
-    return _items.last;
   }
 
   bool get isNotEmpty => _items.isNotEmpty;
