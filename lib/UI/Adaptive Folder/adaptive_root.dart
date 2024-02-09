@@ -48,7 +48,7 @@ class _AdaptiveRootState extends ConsumerState<AdaptiveRoot>
 
   @override
   void didChangeMetrics() {
-    bool newState = View.of(context).physicalSize.width > 500;
+    bool newState = View.of(context).physicalSize.width > 550;
     if (ref.read(isDesktopProvider.notifier).state != newState) {
       ref.read(isDesktopProvider.notifier).state = newState;
     }

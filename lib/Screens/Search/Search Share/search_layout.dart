@@ -15,14 +15,39 @@ desktopView(
       children: [
         SizedBox(
           width: 330,
-          child: trackListContainer(
-            context,
-            ListView.builder(
-              controller: controller,
-              dragStartBehavior: DragStartBehavior.down,
-              itemBuilder: (context, index) => trackList[index],
-              itemCount: trackList.length,
-            ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    M,
+                    style: const TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    T,
+                    style: const TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: trackListContainer(
+                  context,
+                  ListView.builder(
+                    controller: controller,
+                    dragStartBehavior: DragStartBehavior.down,
+                    itemBuilder: (context, index) => trackList[index],
+                    itemCount: trackList.length,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         Expanded(
@@ -43,7 +68,6 @@ mobileView(
         Expanded(
           child: child,
         ),
-        const SizedBox(height: 0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -63,7 +87,6 @@ mobileView(
             ),
           ],
         ),
-        const SizedBox(height: 0),
         Expanded(
           child: trackListContainer(
             context,
