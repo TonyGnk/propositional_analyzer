@@ -108,7 +108,7 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     } while (countOfFalseHasMore() != runningList.length);
     print('All tests are done');
     playSound();
-    goTo(ref, ScreenDestination.chartMulti);
+    //goTo(ref, ScreenDestination.chartMulti);
   }
 
   algorithm(Algorithms type, List<List<List<int>>> problemList) async {
