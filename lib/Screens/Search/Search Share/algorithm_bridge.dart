@@ -73,16 +73,15 @@ Map<Algorithms, Function> algorithmMap = {
   Algorithms.walkSat: walkSat,
 };
 
-runAlgorithmNew(Algorithms type) async {
-  List<List<int>> problem = newProblem();
-  return algorithmMap[type]!(problem);
-}
+// runAlgorithmNew(Algorithms type) async {
+//   return
+// }
 
-addTrack(List<TrackContainer> trackList, int j) {
+addTrack(List<TrackContainer> trackList, int j, [String type = '']) {
   trackList.add(
     TrackContainer(
       child: Text(
-        'Test $j with M=$M failed',
+        '$type Test $j with M=$M failed',
         style: const TextStyle(
           fontSize: 15,
           fontFamily: 'Play',
@@ -155,4 +154,75 @@ scrollDown() async {
       curve: Curves.fastOutSlowIn,
     );
   }
+}
+
+//_____________________________________________________________
+List<Algorithms> runningList = [];
+checkWhichRunning() {
+  hillHasMore = true;
+  depthHasMore = true;
+  dpllHasMore = true;
+  walkHasMore = true;
+  runningList.clear();
+  if (selectedHill) runningList.add(Algorithms.hillClimbing);
+  if (selectedDepth) runningList.add(Algorithms.depthFirst);
+  if (selectedWalk) runningList.add(Algorithms.walkSat);
+}
+
+bool hillHasMore = true;
+bool depthHasMore = true;
+bool dpllHasMore = true;
+bool walkHasMore = true;
+
+bool findHasMore(Algorithms type) {
+  if (type == Algorithms.hillClimbing) return hillHasMore;
+  if (type == Algorithms.depthFirst) return depthHasMore;
+  if (type == Algorithms.dpll) return dpllHasMore;
+  if (type == Algorithms.walkSat) return walkHasMore;
+  return false;
+}
+
+bool setHasMore(Algorithms type, bool value) {
+  if (type == Algorithms.hillClimbing) hillHasMore = value;
+  if (type == Algorithms.depthFirst) depthHasMore = value;
+  if (type == Algorithms.dpll) dpllHasMore = value;
+  if (type == Algorithms.walkSat) walkHasMore = value;
+  return value;
+}
+
+int countOfFalseHasMore() {
+  int count = 0;
+  if (!hillHasMore) count++;
+  if (!depthHasMore) count++;
+  if (!dpllHasMore) count++;
+  if (!walkHasMore) count++;
+  return count;
+}
+
+List<bool> hillStopList = [];
+List<bool> depthStopList = [];
+List<bool> dpllStopList = [];
+List<bool> walkStopList = [];
+
+//if sampleSum==0 add true to the right stopList else clear it
+addStopList(int sampleSum, Algorithms type) {
+  if (sampleSum == 0) {
+    if (type == Algorithms.hillClimbing) hillStopList.add(true);
+    if (type == Algorithms.depthFirst) depthStopList.add(true);
+    if (type == Algorithms.dpll) dpllStopList.add(true);
+    if (type == Algorithms.walkSat) walkStopList.add(true);
+  } else {
+    if (type == Algorithms.hillClimbing) hillStopList.clear();
+    if (type == Algorithms.depthFirst) depthStopList.clear();
+    if (type == Algorithms.dpll) dpllStopList.clear();
+    if (type == Algorithms.walkSat) walkStopList.clear();
+  }
+}
+
+bool isStopListLengthEqualToStop(Algorithms type) {
+  if (type == Algorithms.hillClimbing) return hillStopList.length == stop;
+  if (type == Algorithms.depthFirst) return depthStopList.length == stop;
+  if (type == Algorithms.dpll) return dpllStopList.length == stop;
+  if (type == Algorithms.walkSat) return walkStopList.length == stop;
+  return false;
 }

@@ -6,6 +6,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../algorithms/new_value.dart';
 import '../../../global_variables.dart';
 import '../../screen_list.dart';
 import '../Search Share/algorithm_bridge.dart';
@@ -56,71 +57,62 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     );
   }
 
-  //Checks the values selectedHill, Depth etc. and runs the algorithm when the previous algorithm is finished
   multipleScheduler() async {
-    //Print all values selected
-    print('Hill:$selectedHill, Depth:$selectedDepth, Walk:$selectedWalk');
-    bool isEnd = true;
-    if (selectedHill) {
-      trackList.add(TrackContainer(child: Text('Hill Climbing')));
-      isEnd = false;
-      print('Hill Climbing');
-      isEnd = await algorithm(Algorithms.hillClimbing);
-    }
-    if (selectedDepth && isEnd) {
-      trackList.add(TrackContainer(child: Text('Depth First')));
-      isEnd = false;
-      print('Depth First');
-      isEnd = await algorithm(Algorithms.depthFirst);
-    }
-    if (selectedWalk && isEnd) {
-      trackList.add(TrackContainer(child: Text('Walk Sat')));
-      isEnd = false;
-      print('Walk Sat');
-      isEnd = await algorithm(Algorithms.walkSat);
-    }
+    await Future.delayed(Duration.zero, () => setState(() => initializeData()));
+    List<List<List<int>>> problemList = [];
+    checkWhichRunning();
+
+    do {
+      problemList.clear();
+      for (int i = 0; i < numberOfTests; i++) {
+        problemList.add(newProblem());
+      }
+      for (Algorithms type in runningList) {
+        if (findHasMore(type)) {
+          print('$type has more tests $M');
+          await algorithm(type, problemList);
+        }
+      }
+      M++;
+    } while (countOfFalseHasMore() != runningList.length);
+    print('All tests are done');
   }
 
-  Future<bool> algorithm(Algorithms type) async {
-    await Future.delayed(Duration.zero, () => setState(() => initializeData()));
-    List<bool> stopList = [];
+  algorithm(Algorithms type, List<List<List<int>>> problemList) async {
     int sampleSum = 0;
     Search solution;
     int founded;
     int timeSum = 0;
-    do {
-      sampleSum = 0;
-      timeSum = 0;
 
-      for (int j = 1; j <= numberOfTests; j++) {
-        solution = await runAlgorithmNew(type);
-        founded = solution.win ? 1 : 0;
-        sampleSum = sampleSum + founded;
-        timeSum = timeSum + solution.time;
-        await Future.delayed(Duration.zero, () {
-          setState(() {
-            str = 'M$M';
-            str2 = '$sampleSum/$numberOfTests';
+    sampleSum = 0;
+    timeSum = 0;
 
-            stop1 = stopsPrimary[j - 1];
-            stop2 = stopsSecondary[j - 1];
+    for (int j = 1; j <= numberOfTests; j++) {
+      solution = await algorithmMap[type]!(problemList[j - 1]);
+      founded = solution.win ? 1 : 0;
+      sampleSum = sampleSum + founded;
+      timeSum = timeSum + solution.time;
+      await Future.delayed(Duration.zero, () {
+        setState(() {
+          str = 'M$M';
+          str2 = '$sampleSum/$numberOfTests';
 
-            if (founded != 1) addTrack(trackList, j);
-          });
+          stop1 = stopsPrimary[j - 1];
+          stop2 = stopsSecondary[j - 1];
+
+          if (founded != 1) addTrack(trackList, j, type.toString());
         });
-      }
-      double n = sampleSum / numberOfTests;
-      double averageTime = timeSum / numberOfTests;
-      addSpot(M.toDouble(), n, averageTime);
+      });
+    }
+    double n = sampleSum / numberOfTests;
+    double averageTime = timeSum / numberOfTests;
+    addSpot(M.toDouble(), n, averageTime);
 
-      M++;
-      if (sampleSum == 0) {
-        stopList.add(true);
-      } else {
-        stopList.clear();
-      }
-    } while (stopList.length != stop);
-    return true;
+    addStopList(sampleSum, type);
+
+    if (isStopListLengthEqualToStop(type)) {
+      setHasMore(type, false);
+    }
     //await player.setSource(DeviceFileSource('assets/audio/finish.mp3'));
     //await player.resume();
     //goTo(ref, ScreenDestination.chartSingle);
