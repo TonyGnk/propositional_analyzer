@@ -1,10 +1,13 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 import '../../../global_variables.dart';
+import '../../Charts/Charts Multi/line_data.dart';
 import '../../screen_list.dart';
+import '../Search Multi/multi_chart_bar.dart';
 import '../Search Share/search_layout.dart';
 import '../Search Share/track.dart';
 import '../Search Share/algorithm_bridge.dart';
@@ -26,8 +29,6 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
     algorithm();
   }
 
-  callCircle(bool value) => circle(context, str, str2, stop1, stop2, value);
-
   @override
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
@@ -37,15 +38,48 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
               context,
               isDesktop,
               trackList,
-              callCircle(true),
+              str,
+              str2,
+              chart(),
             )
           : mobileView(
               context,
               trackList,
-              callCircle(false),
+              str,
+              str2,
+              chart(),
             ),
     );
   }
+
+  chart() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6.0),
+        child: LineChart(
+          duration: const Duration(milliseconds: 1000),
+          LineChartData(
+            minY: 0,
+            maxY: 1.01,
+            minX: spotsHillSearch.first.x,
+            maxX: spotsHillSearch.last.x,
+            lineTouchData: const LineTouchData(enabled: false),
+            clipData: const FlClipData.all(),
+            gridData: const FlGridData(
+              show: true,
+              drawVerticalLine: false,
+            ),
+            borderData: FlBorderData(show: false),
+            lineBarsData: [
+              line(spotsHillSearch, orange1),
+              line(spotsDepthSearch, orange2),
+              line(spotsDPLLSearch, orange3),
+              line(spotsWalkSearch, orange4),
+            ],
+            titlesData: const FlTitlesData(
+              show: false,
+            ),
+          ),
+        ),
+      );
 
   algorithm() async {
     await Future.delayed(Duration.zero, () => setState(() => initializeData()));
@@ -65,7 +99,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
         timeSum = timeSum + solution.time;
         await Future.delayed(Duration.zero, () {
           setState(() {
-            str = 'M$M';
+            str = 'M=$M';
             str2 = '$sampleSum/$numberOfTests';
 
             stop1 = stopsPrimary[j - 1];

@@ -21,7 +21,7 @@ createSingleReturn(WidgetRef ref) {
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
-  updateAppBarLabel(ref, 'New Analysis', isReturn);
+  updateAppBarLabel(ref, 'Single Analysis', isReturn);
   updateAppBarCustomIcon1(ref, speakerIcon(), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
 }

@@ -9,11 +9,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../algorithms/new_value.dart';
 import '../../../global_variables.dart';
+import '../../Charts/Charts Multi/line_data.dart';
 import '../../screen_list.dart';
 import '../Search Share/algorithm_bridge.dart';
 import '../Search Share/search_circle.dart';
 import '../Search Share/search_layout.dart';
 import '../Search Share/track.dart';
+import 'multi_chart_bar.dart';
 import 'search_multi_layout.dart';
 import 'search_multi_state.dart';
 
@@ -31,10 +33,6 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
       searchMultiReturn(ref);
     });
     multipleScheduler();
-    // if (selectedHill) {
-    //   print('Hill Climbing');
-    //   algorithm(Algorithms.hillClimbing);
-    // }
   }
 
   callCircle(bool value) => circle(context, str, str2, stop1, stop2, value);
@@ -43,53 +41,52 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
     return animatedColumn(
-      // isDesktop
-      //     ? desktopView(
-      //         context,
-      //         isDesktop,
-      //         trackList,
-      //         callCircle(true),
-      //       )
-      //     :
-      mobileView(
-        context,
-        trackList,
-        chart(),
-        // callCircle(false),
-      ),
+      isDesktop
+          ? desktopView(
+              context,
+              isDesktop,
+              trackList,
+              str,
+              str2,
+              chart(),
+            )
+          : mobileView(
+              context,
+              trackList,
+              str,
+              str2,
+              chart(),
+            ),
     );
   }
 
-  chart() => LineChart(
-        LineChartData(
-          minY: 0,
-          maxY: 1.01,
-          minX: spots1Hill.first.x,
-          maxX: spots1Hill.last.x,
-          lineTouchData: const LineTouchData(enabled: false),
-          clipData: const FlClipData.all(),
-          gridData: const FlGridData(
-            show: true,
-            drawVerticalLine: false,
-          ),
-          borderData: FlBorderData(show: false),
-          lineBarsData: [
-            sinLine(spotsHillSearch),
-          ],
-          titlesData: const FlTitlesData(
-            show: false,
+  chart() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6.0),
+        child: LineChart(
+          duration: const Duration(milliseconds: 1000),
+          LineChartData(
+            minY: 0,
+            maxY: 1.01,
+            minX: spotsHillSearch.first.x,
+            maxX: spotsHillSearch.last.x,
+            lineTouchData: const LineTouchData(enabled: false),
+            clipData: const FlClipData.all(),
+            gridData: const FlGridData(
+              show: true,
+              drawVerticalLine: false,
+            ),
+            borderData: FlBorderData(show: false),
+            lineBarsData: [
+              line(spotsHillSearch, orange1),
+              line(spotsDepthSearch, orange2),
+              line(spotsDPLLSearch, orange3),
+              line(spotsWalkSearch, orange4),
+            ],
+            titlesData: const FlTitlesData(
+              show: false,
+            ),
           ),
         ),
-      );
-
-  LineChartBarData sinLine(List<FlSpot> points) => LineChartBarData(
-        spots: points,
-        dotData: const FlDotData(show: false),
-        gradient: LinearGradient(
-          colors: [Colors.blue.withOpacity(0), Colors.blue],
-          stops: const [0.1, 1.0],
-        ),
-        barWidth: 4,
       );
 
   multipleScheduler() async {
@@ -104,7 +101,6 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
       }
       for (Algorithms type in runningList) {
         if (findHasMore(type)) {
-          print('$type has more tests $M');
           await algorithm(type, problemList);
         }
       }
@@ -112,8 +108,6 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     } while (countOfFalseHasMore() != runningList.length);
     print('All tests are done');
     playSound();
-    print(
-        'Hill $hillHasMore, Depth $depthHasMore, DPLL $dpllHasMore, Walk $walkHasMore');
     goTo(ref, ScreenDestination.chartMulti);
   }
 
@@ -133,8 +127,8 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
       timeSum = timeSum + solution.time;
       await Future.delayed(Duration.zero, () {
         setState(() {
-          str = 'M$M';
-          str2 = '$sampleSum/$numberOfTests';
+          str = 'M=$M';
+          str2 = 'Test $sampleSum/$numberOfTests';
 
           stop1 = stopsPrimary[j - 1];
           stop2 = stopsSecondary[j - 1];
@@ -156,9 +150,6 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     if (isStopListLengthEqualToStop(type)) {
       setHasMore(type, false);
     }
-    //await player.setSource(DeviceFileSource('assets/audio/finish.mp3'));
-    //await player.resume();
-    //goTo(ref, ScreenDestination.chartSingle);
   }
 
   addMultipleSpot(
@@ -170,29 +161,37 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     M = M / N;
     M = double.parse(M.toStringAsFixed(1));
 
-    while (spotsHillSearch.length > 30) {
-      spotsHillSearch.removeAt(0);
-    }
-
     if (type == Algorithms.hillClimbing) {
       spotsHillSearch.add(FlSpot(M, average));
       spots1Hill.add(FlSpot(M, average));
       spots2Hill.add(FlSpot(M, averageTime));
+      while (spotsHillSearch.length > 30) {
+        spotsHillSearch.removeAt(0);
+      }
     }
     if (type == Algorithms.depthFirst) {
       spotsDepthSearch.add(FlSpot(M, average));
       spots1Depth.add(FlSpot(M, average));
       spots2Depth.add(FlSpot(M, averageTime));
+      while (spotsDepthSearch.length > 30) {
+        spotsDepthSearch.removeAt(0);
+      }
     }
     if (type == Algorithms.dpll) {
       spotsDPLLSearch.add(FlSpot(M, average));
       spots1DPLL.add(FlSpot(M, average));
       spots2DPLL.add(FlSpot(M, averageTime));
+      while (spotsDPLLSearch.length > 30) {
+        spotsDPLLSearch.removeAt(0);
+      }
     }
     if (type == Algorithms.walkSat) {
       spotsWalkSearch.add(FlSpot(M, average));
       spots1Walk.add(FlSpot(M, average));
       spots2Walk.add(FlSpot(M, averageTime));
+      while (spotsWalkSearch.length > 30) {
+        spotsWalkSearch.removeAt(0);
+      }
     }
   }
 }

@@ -154,7 +154,7 @@ trackListContainer(BuildContext context, Widget child) => MouseRegion(
           ),
         ),
         margin: const EdgeInsets.all(12),
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(14),
         clipBehavior: Clip.antiAlias,
         child: child,
       ),

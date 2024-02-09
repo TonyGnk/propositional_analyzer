@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../global_variables.dart';
 import '../shared.dart';
-import 'exploration_chart.dart';
 import 'home_buttons.dart';
 import 'home_state.dart';
 import 'home_title.dart';

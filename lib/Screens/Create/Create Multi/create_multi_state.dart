@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
 import '../../screen_list.dart';
+import '../Create Single/create_single_state.dart';
 
 final opacity = StateProvider<double>((ref) => 0);
 
@@ -21,7 +22,8 @@ createMultiReturn(WidgetRef ref) {
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
-  updateAppBarLabel(ref, 'New Multiple Analysis', isReturn);
+  updateAppBarLabel(ref, 'Multiple Analysis', isReturn);
+  updateAppBarCustomIcon1(ref, speakerIcon(), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
 }
 

@@ -1,19 +1,20 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../Home/exploration_chart.dart';
 import 'algorithm_bridge.dart';
 
 desktopView(
   BuildContext context,
   bool isDesktop,
   List<TrackContainer> trackList,
-  Widget callCircle,
+  String M,
+  String T,
+  Widget child,
 ) =>
     Row(
       children: [
         SizedBox(
-          width: 280,
+          width: 330,
           child: trackListContainer(
             context,
             ListView.builder(
@@ -25,45 +26,44 @@ desktopView(
           ),
         ),
         Expanded(
-          child: Center(child: callCircle),
+          child: Center(child: child),
         ),
       ],
     );
 
-// mobileView(
-//   BuildContext context,
-//   List<TrackContainer> trackList,
-//   Widget callCircle,
-// ) =>
-//     Column(
-//       children: [
-//         callCircle,
-//         const SizedBox(height: 20),
-//         Expanded(
-//           child: trackListContainer(
-//             context,
-//             ListView.builder(
-//               controller: controller,
-//               dragStartBehavior: DragStartBehavior.down,
-//               itemBuilder: (context, index) => trackList[index],
-//               itemCount: trackList.length,
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-
 mobileView(
   BuildContext context,
   List<TrackContainer> trackList,
-  Widget callCircle,
+  String M,
+  String T,
+  Widget child,
 ) =>
     Column(
       children: [
         Expanded(
-          child: callCircle,
+          child: child,
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              M,
+              style: const TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              T,
+              style: const TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 0),
         Expanded(
           child: trackListContainer(
             context,
