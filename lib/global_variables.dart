@@ -21,10 +21,14 @@ bool speakerOn = true;
 List<FlSpot> spots1 = [];
 List<FlSpot> spots2 = [];
 
-List<FlSpot> spotsHill = [];
-List<FlSpot> spotsDepth = [];
-List<FlSpot> spotsDPLL = [];
-List<FlSpot> spotsWalk = [];
+List<FlSpot> spots1Hill = [];
+List<FlSpot> spots2Hill = [];
+List<FlSpot> spots1Depth = [];
+List<FlSpot> spots2Depth = [];
+List<FlSpot> spots1DPLL = [];
+List<FlSpot> spots2DPLL = [];
+List<FlSpot> spots1Walk = [];
+List<FlSpot> spots2Walk = [];
 
 enum Algorithms { hillClimbing, depthFirst, dpll, walkSat }
 

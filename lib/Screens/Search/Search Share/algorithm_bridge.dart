@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 import '../../../global_variables.dart';
 import '../../../algorithms/depth_first.dart';
@@ -36,6 +38,14 @@ initializeData() {
   M = 1;
   spots1.clear();
   spots2.clear();
+  spots1Hill.clear();
+  spots2Hill.clear();
+  spots1Depth.clear();
+  spots2Depth.clear();
+  spots1DPLL.clear();
+  spots2DPLL.clear();
+  spots1Walk.clear();
+  spots2Walk.clear();
 }
 
 runAlgorithm() async {
@@ -83,12 +93,13 @@ addTrack(List<TrackContainer> trackList, int j, [String type = '']) {
       child: Text(
         '$type Test $j with M=$M failed',
         style: const TextStyle(
-          fontSize: 15,
+          fontSize: 14,
           fontFamily: 'Play',
         ),
       ),
     ),
   );
+  print('$type Test $j with M=$M failed');
   scrollDown();
 }
 
@@ -155,6 +166,17 @@ scrollDown() async {
     );
   }
 }
+
+playSound() async {
+  if (speakerOn) {
+    await player.setSource(DeviceFileSource(songPath));
+    await player.resume();
+  }
+}
+
+String songPath = (UniversalPlatform.isWeb)
+    ? 'assets/assets/audio/finish.mp3'
+    : 'assets/audio/finish.mp3';
 
 //_____________________________________________________________
 List<Algorithms> runningList = [];
@@ -225,4 +247,31 @@ bool isStopListLengthEqualToStop(Algorithms type) {
   if (type == Algorithms.dpll) return dpllStopList.length == stop;
   if (type == Algorithms.walkSat) return walkStopList.length == stop;
   return false;
+}
+
+addMultipleSpot(
+  double M,
+  double average,
+  double averageTime,
+  Algorithms type,
+) {
+  M = M / N;
+  M = double.parse(M.toStringAsFixed(1));
+
+  if (type == Algorithms.hillClimbing) {
+    spots1Hill.add(FlSpot(M, average));
+    spots2Hill.add(FlSpot(M, averageTime));
+  }
+  if (type == Algorithms.depthFirst) {
+    spots1Depth.add(FlSpot(M, average));
+    spots2Depth.add(FlSpot(M, averageTime));
+  }
+  if (type == Algorithms.dpll) {
+    spots1DPLL.add(FlSpot(M, average));
+    spots2DPLL.add(FlSpot(M, averageTime));
+  }
+  if (type == Algorithms.walkSat) {
+    spots1Walk.add(FlSpot(M, average));
+    spots2Walk.add(FlSpot(M, averageTime));
+  }
 }

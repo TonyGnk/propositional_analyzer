@@ -20,7 +20,6 @@ walkSat(List<List<int>> problem) async {
     await Future.delayed(Duration.zero, () {});
     DateTime time = DateTime.now();
     if (time.difference(t1).inSeconds > timeOut) {
-      print('Time out in Walk Sat');
       return const Search(win: false);
     }
 

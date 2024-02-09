@@ -86,12 +86,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
         stopList.clear();
       }
     } while (stopList.length != stop);
-    await player.setSource(DeviceFileSource(songPath));
-    await player.resume();
+    playSound();
     goTo(ref, ScreenDestination.chartSingle);
   }
 }
-
-String songPath = (UniversalPlatform.isWeb)
-    ? 'assets/assets/audio/finish.mp3'
-    : 'assets/audio/finish.mp3';

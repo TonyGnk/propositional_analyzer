@@ -76,6 +76,10 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
       M++;
     } while (countOfFalseHasMore() != runningList.length);
     print('All tests are done');
+    playSound();
+    print(
+        'Hill $hillHasMore, Depth $depthHasMore, DPLL $dpllHasMore, Walk $walkHasMore');
+    goTo(ref, ScreenDestination.chartMulti);
   }
 
   algorithm(Algorithms type, List<List<List<int>>> problemList) async {
@@ -106,7 +110,7 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     }
     double n = sampleSum / numberOfTests;
     double averageTime = timeSum / numberOfTests;
-    addSpot(M.toDouble(), n, averageTime);
+    addMultipleSpot(M.toDouble(), n, averageTime, type);
 
     addStopList(sampleSum, type);
 

@@ -167,7 +167,7 @@ class _ChartMultiState extends ConsumerState<ChartMulti> {
           ),
           maxY: isFirst ? 1 : null,
           minY: isFirst ? 0 : 0,
-          lineBarsData: linesChartBarData(),
+          lineBarsData: isFirst ? linesChartBarData() : linesChartBarData2(),
         ),
       );
 }
