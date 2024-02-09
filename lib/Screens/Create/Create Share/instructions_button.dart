@@ -5,8 +5,8 @@ import '../../../global_variables.dart';
 
 final isHoveredProviderModernButton = StateProvider<bool>((ref) => false);
 
-class InstructionsButton extends StatefulWidget {
-  const InstructionsButton({
+class ExamplesButton extends StatefulWidget {
+  const ExamplesButton({
     required this.label,
     required this.icon,
     required this.onTap,
@@ -18,10 +18,10 @@ class InstructionsButton extends StatefulWidget {
   final VoidCallback onTap;
 
   @override
-  State<InstructionsButton> createState() => _InstructionsButtonState();
+  State<ExamplesButton> createState() => _ExamplesButtonState();
 }
 
-class _InstructionsButtonState extends State<InstructionsButton> {
+class _ExamplesButtonState extends State<ExamplesButton> {
   int gradientIndex = 0;
   late double scale = 1.0;
 

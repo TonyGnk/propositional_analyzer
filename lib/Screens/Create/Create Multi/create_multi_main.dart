@@ -72,7 +72,7 @@ class _CreateState extends ConsumerState<CreateMulti> {
               children: [
                 SizedBox(
                   width: 173,
-                  child: helpContainer(),
+                  child: examplesContainer(),
                 ),
                 SizedBox(
                   width: 172,
@@ -101,7 +101,7 @@ class _CreateState extends ConsumerState<CreateMulti> {
               slideTime(updateTime),
             ]),
             const Expanded(flex: 1, child: SizedBox()),
-            helpContainer(),
+            examplesContainer(),
             analyzeContainer(),
           ],
         ),

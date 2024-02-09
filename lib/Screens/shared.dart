@@ -4,7 +4,7 @@ desktopFrame(BuildContext context, Column column) => Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          constraints: const BoxConstraints(maxHeight: 470),
+          constraints: const BoxConstraints(maxHeight: 550),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Theme.of(context).dividerColor),

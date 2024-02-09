@@ -77,7 +77,7 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
               children: [
                 SizedBox(
                   width: 173,
-                  child: helpContainer(),
+                  child: examplesContainer(),
                 ),
                 SizedBox(
                   width: 172,
@@ -105,7 +105,7 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
             [slideStop(updateStop), slideTime(updateTime)],
           ),
           const Expanded(flex: 1, child: SizedBox()),
-          helpContainer(),
+          examplesContainer(),
           analyzeContainer(),
         ],
       );

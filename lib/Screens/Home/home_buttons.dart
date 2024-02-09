@@ -31,12 +31,19 @@ const newLoadButton = ButtonTemplate(
   screenDestination: ScreenDestination.chartSingle,
 );
 
+const helpContainer = ButtonTemplate(
+  title: 'Instructions',
+  slogan: 'How to use the app',
+  icon: Icons.help_outline_outlined,
+  //screenDestination: ScreenDestination.home,
+);
+
 class ButtonTemplate extends ConsumerStatefulWidget {
   const ButtonTemplate({
     required this.title,
     required this.slogan,
     required this.icon,
-    required this.screenDestination,
+    this.screenDestination,
     this.isLoading = false,
     super.key,
   });
@@ -53,7 +60,7 @@ class ButtonTemplate extends ConsumerStatefulWidget {
   final IconData icon;
 
   //ScreenDestination
-  final ScreenDestination screenDestination;
+  final ScreenDestination? screenDestination;
 
   @override
   ConsumerState<ButtonTemplate> createState() => _ButtonTemplateState();
@@ -89,10 +96,10 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
                   ? (await loadAnalysis())
                       ? {
                           screenStack.add(ScreenDestination.createSingle),
-                          goTo(ref, widget.screenDestination)
+                          goTo(ref, widget.screenDestination!)
                         }
                       : null
-                  : goTo(ref, widget.screenDestination);
+                  : goTo(ref, widget.screenDestination!);
             },
             child: AnimatedScale(
               scale: scale,

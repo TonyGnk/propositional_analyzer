@@ -20,10 +20,10 @@ analyzeContainer() => Consumer(
       ),
     );
 
-helpContainer() => Consumer(
-      builder: (context, ref, _) => InstructionsButton(
-        label: 'Instructions',
-        icon: Icons.help_outline_outlined,
+examplesContainer() => Consumer(
+      builder: (context, ref, _) => ExamplesButton(
+        label: 'Examples',
+        icon: Icons.library_books_outlined,
         onTap: () {
           //goTo(ref, ScreenDestination.result);
         },
