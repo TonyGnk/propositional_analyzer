@@ -62,31 +62,31 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
 
   chart() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 6.0),
-        child: LineChart(
-          duration: const Duration(milliseconds: 1000),
-          LineChartData(
-            minY: 0,
-            maxY: 1.01,
-            minX: spotsHillSearch.first.x,
-            maxX: spotsHillSearch.last.x,
-            lineTouchData: const LineTouchData(enabled: false),
-            clipData: const FlClipData.all(),
-            gridData: const FlGridData(
-              show: true,
-              drawVerticalLine: false,
-            ),
-            borderData: FlBorderData(show: false),
-            lineBarsData: [
-              line(spotsHillSearch, orange1),
-              line(spotsDepthSearch, orange2),
-              line(spotsDPLLSearch, orange3),
-              line(spotsWalkSearch, orange4),
-            ],
-            titlesData: const FlTitlesData(
-              show: false,
-            ),
-          ),
-        ),
+        child: isNotEmptyMultiSpots()
+            ? LineChart(
+                duration: const Duration(milliseconds: 1000),
+                LineChartData(
+                  minY: 0,
+                  maxY: 1.01,
+                  lineTouchData: const LineTouchData(enabled: false),
+                  clipData: const FlClipData.all(),
+                  gridData: const FlGridData(
+                    show: true,
+                    drawVerticalLine: false,
+                  ),
+                  borderData: FlBorderData(show: false),
+                  lineBarsData: [
+                    line(spotsHillSearch, orange1),
+                    line(spotsDepthSearch, orange2),
+                    line(spotsDPLLSearch, orange3),
+                    line(spotsWalkSearch, orange4),
+                  ],
+                  titlesData: const FlTitlesData(
+                    show: false,
+                  ),
+                ),
+              )
+            : const Center(child: SizedBox()),
       );
 
   multipleScheduler() async {
@@ -108,7 +108,7 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     } while (countOfFalseHasMore() != runningList.length);
     print('All tests are done');
     playSound();
-    //goTo(ref, ScreenDestination.chartMulti);
+    goTo(ref, ScreenDestination.chartMulti);
   }
 
   algorithm(Algorithms type, List<List<List<int>>> problemList) async {

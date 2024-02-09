@@ -54,31 +54,28 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
 
   chart() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 6.0),
-        child: LineChart(
-          duration: const Duration(milliseconds: 1000),
-          LineChartData(
-            minY: 0,
-            maxY: 1.01,
-            minX: spotsHillSearch.first.x,
-            maxX: spotsHillSearch.last.x,
-            lineTouchData: const LineTouchData(enabled: false),
-            clipData: const FlClipData.all(),
-            gridData: const FlGridData(
-              show: true,
-              drawVerticalLine: false,
-            ),
-            borderData: FlBorderData(show: false),
-            lineBarsData: [
-              line(spotsHillSearch, orange1),
-              line(spotsDepthSearch, orange2),
-              line(spotsDPLLSearch, orange3),
-              line(spotsWalkSearch, orange4),
-            ],
-            titlesData: const FlTitlesData(
-              show: false,
-            ),
-          ),
-        ),
+        child: spotsSearch.isNotEmpty
+            ? LineChart(
+                duration: const Duration(milliseconds: 1000),
+                LineChartData(
+                  minY: 0,
+                  maxY: 1.01,
+                  lineTouchData: const LineTouchData(enabled: false),
+                  clipData: const FlClipData.all(),
+                  gridData: const FlGridData(
+                    show: true,
+                    drawVerticalLine: false,
+                  ),
+                  borderData: FlBorderData(show: false),
+                  lineBarsData: [
+                    line(spotsSearch, orange4),
+                  ],
+                  titlesData: const FlTitlesData(
+                    show: false,
+                  ),
+                ),
+              )
+            : const Center(child: SizedBox()),
       );
 
   algorithm() async {
@@ -111,7 +108,12 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
       }
       double n = sampleSum / numberOfTests;
       double averageTime = timeSum / numberOfTests;
-      addSpot(M.toDouble(), n, averageTime);
+
+      await Future.delayed(Duration.zero, () {
+        setState(() {
+          addSpot(M.toDouble(), n, averageTime);
+        });
+      });
 
       M++;
       if (sampleSum == 0) {
@@ -122,5 +124,17 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
     } while (stopList.length != stop);
     playSound();
     goTo(ref, ScreenDestination.chartSingle);
+  }
+
+  addSpot(double M, double average, double averageTime) {
+    M = M / N;
+    M = double.parse(M.toStringAsFixed(1));
+
+    spotsSearch.add(FlSpot(M, average));
+    spots1.add(FlSpot(M, average));
+    spots2.add(FlSpot(M, averageTime));
+    while (spotsHillSearch.length > 30) {
+      spotsSearch.removeAt(0);
+    }
   }
 }

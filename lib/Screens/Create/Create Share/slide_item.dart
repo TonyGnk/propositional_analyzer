@@ -56,7 +56,7 @@ class _SliderItemState extends State<SliderItem> {
                 color: Theme.of(context).canvasColor,
               ),
             ),
-            const SizedBox(width: 1),
+            //const SizedBox(width: 1),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -36,6 +36,7 @@ initializeData() {
   stop2 = stopsSecondary[0];
 
   M = 1;
+  spotsSearch.clear();
   spots1.clear();
   spots2.clear();
   spots1Hill.clear();
@@ -105,14 +106,6 @@ addTrack(List<TrackContainer> trackList, int j, [String type = '']) {
   );
   print('$type Test $j with M=$M failed');
   scrollDown();
-}
-
-addSpot(double M, double average, double averageTime) {
-  M = M / N;
-  M = double.parse(M.toStringAsFixed(1));
-
-  spots1.add(FlSpot(M, average));
-  spots2.add(FlSpot(M, averageTime));
 }
 
 class TrackContainer extends StatelessWidget {
@@ -250,5 +243,15 @@ bool isStopListLengthEqualToStop(Algorithms type) {
   if (type == Algorithms.depthFirst) return depthStopList.length == stop;
   if (type == Algorithms.dpll) return dpllStopList.length == stop;
   if (type == Algorithms.walkSat) return walkStopList.length == stop;
+  return false;
+}
+
+//at least one is not empty
+isNotEmptyMultiSpots() {
+  //spotsHillSearch
+  if (spotsHillSearch.isNotEmpty) return true;
+  if (spotsDepthSearch.isNotEmpty) return true;
+  if (spotsDPLLSearch.isNotEmpty) return true;
+  if (spotsWalkSearch.isNotEmpty) return true;
   return false;
 }
