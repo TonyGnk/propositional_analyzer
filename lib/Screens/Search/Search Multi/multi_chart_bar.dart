@@ -1,8 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../Charts/Charts Multi/line_data.dart';
-
 LineChartBarData line(
   List<FlSpot> points,
   Color color,
@@ -11,7 +9,7 @@ LineChartBarData line(
       spots: points,
       dotData: const FlDotData(show: false),
       gradient: LinearGradient(
-        colors: [orange1.withOpacity(0), orange1],
+        colors: [color.withOpacity(0), color],
         stops: const [0.1, 1.0],
       ),
       barWidth: 4,

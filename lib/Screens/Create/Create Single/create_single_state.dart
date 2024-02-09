@@ -46,7 +46,11 @@ speakerIcon() => Consumer(
             foregroundColor: MaterialStateProperty.all<Color>(
                 Theme.of(context).colorScheme.onBackground),
           ),
-          onPressed: () => ref.read(isMuteProvider.notifier).state = !isMute,
+          onPressed: () {
+            ref.read(isMuteProvider.notifier).state = !isMute;
+            speakerOn = isMute;
+            print('speakerOn: $isMute');
+          },
           icon: const Icon(Icons.volume_up_outlined),
           highlightColor: Colors.grey.withOpacity(0.2),
         );
