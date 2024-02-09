@@ -46,6 +46,10 @@ initializeData() {
   spots2DPLL.clear();
   spots1Walk.clear();
   spots2Walk.clear();
+  spotsHillSearch.clear();
+  spotsDepthSearch.clear();
+  spotsDPLLSearch.clear();
+  spotsWalkSearch.clear();
 }
 
 runAlgorithm() async {
@@ -247,31 +251,4 @@ bool isStopListLengthEqualToStop(Algorithms type) {
   if (type == Algorithms.dpll) return dpllStopList.length == stop;
   if (type == Algorithms.walkSat) return walkStopList.length == stop;
   return false;
-}
-
-addMultipleSpot(
-  double M,
-  double average,
-  double averageTime,
-  Algorithms type,
-) {
-  M = M / N;
-  M = double.parse(M.toStringAsFixed(1));
-
-  if (type == Algorithms.hillClimbing) {
-    spots1Hill.add(FlSpot(M, average));
-    spots2Hill.add(FlSpot(M, averageTime));
-  }
-  if (type == Algorithms.depthFirst) {
-    spots1Depth.add(FlSpot(M, average));
-    spots2Depth.add(FlSpot(M, averageTime));
-  }
-  if (type == Algorithms.dpll) {
-    spots1DPLL.add(FlSpot(M, average));
-    spots2DPLL.add(FlSpot(M, averageTime));
-  }
-  if (type == Algorithms.walkSat) {
-    spots1Walk.add(FlSpot(M, average));
-    spots2Walk.add(FlSpot(M, averageTime));
-  }
 }

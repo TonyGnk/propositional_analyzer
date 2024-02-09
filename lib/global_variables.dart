@@ -30,6 +30,11 @@ List<FlSpot> spots2DPLL = [];
 List<FlSpot> spots1Walk = [];
 List<FlSpot> spots2Walk = [];
 
+List<FlSpot> spotsHillSearch = [];
+List<FlSpot> spotsDepthSearch = [];
+List<FlSpot> spotsDPLLSearch = [];
+List<FlSpot> spotsWalkSearch = [];
+
 enum Algorithms { hillClimbing, depthFirst, dpll, walkSat }
 
 final player = AudioPlayer();

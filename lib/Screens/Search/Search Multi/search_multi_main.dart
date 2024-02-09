@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -42,20 +43,54 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
     return animatedColumn(
-      isDesktop
-          ? desktopView(
-              context,
-              isDesktop,
-              trackList,
-              callCircle(true),
-            )
-          : mobileView(
-              context,
-              trackList,
-              callCircle(false),
-            ),
+      // isDesktop
+      //     ? desktopView(
+      //         context,
+      //         isDesktop,
+      //         trackList,
+      //         callCircle(true),
+      //       )
+      //     :
+      mobileView(
+        context,
+        trackList,
+        chart(),
+        // callCircle(false),
+      ),
     );
   }
+
+  chart() => LineChart(
+        LineChartData(
+          minY: 0,
+          maxY: 1.01,
+          minX: spots1Hill.first.x,
+          maxX: spots1Hill.last.x,
+          lineTouchData: const LineTouchData(enabled: false),
+          clipData: const FlClipData.all(),
+          gridData: const FlGridData(
+            show: true,
+            drawVerticalLine: false,
+          ),
+          borderData: FlBorderData(show: false),
+          lineBarsData: [
+            sinLine(spotsHillSearch),
+          ],
+          titlesData: const FlTitlesData(
+            show: false,
+          ),
+        ),
+      );
+
+  LineChartBarData sinLine(List<FlSpot> points) => LineChartBarData(
+        spots: points,
+        dotData: const FlDotData(show: false),
+        gradient: LinearGradient(
+          colors: [Colors.blue.withOpacity(0), Colors.blue],
+          stops: const [0.1, 1.0],
+        ),
+        barWidth: 4,
+      );
 
   multipleScheduler() async {
     await Future.delayed(Duration.zero, () => setState(() => initializeData()));
@@ -110,7 +145,11 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     }
     double n = sampleSum / numberOfTests;
     double averageTime = timeSum / numberOfTests;
-    addMultipleSpot(M.toDouble(), n, averageTime, type);
+    await Future.delayed(Duration.zero, () {
+      setState(() {
+        addMultipleSpot(M.toDouble(), n, averageTime, type);
+      });
+    });
 
     addStopList(sampleSum, type);
 
@@ -120,5 +159,40 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     //await player.setSource(DeviceFileSource('assets/audio/finish.mp3'));
     //await player.resume();
     //goTo(ref, ScreenDestination.chartSingle);
+  }
+
+  addMultipleSpot(
+    double M,
+    double average,
+    double averageTime,
+    Algorithms type,
+  ) {
+    M = M / N;
+    M = double.parse(M.toStringAsFixed(1));
+
+    while (spotsHillSearch.length > 30) {
+      spotsHillSearch.removeAt(0);
+    }
+
+    if (type == Algorithms.hillClimbing) {
+      spotsHillSearch.add(FlSpot(M, average));
+      spots1Hill.add(FlSpot(M, average));
+      spots2Hill.add(FlSpot(M, averageTime));
+    }
+    if (type == Algorithms.depthFirst) {
+      spotsDepthSearch.add(FlSpot(M, average));
+      spots1Depth.add(FlSpot(M, average));
+      spots2Depth.add(FlSpot(M, averageTime));
+    }
+    if (type == Algorithms.dpll) {
+      spotsDPLLSearch.add(FlSpot(M, average));
+      spots1DPLL.add(FlSpot(M, average));
+      spots2DPLL.add(FlSpot(M, averageTime));
+    }
+    if (type == Algorithms.walkSat) {
+      spotsWalkSearch.add(FlSpot(M, average));
+      spots1Walk.add(FlSpot(M, average));
+      spots2Walk.add(FlSpot(M, averageTime));
+    }
   }
 }

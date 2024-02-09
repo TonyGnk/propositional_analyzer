@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../Home/exploration_chart.dart';
 import 'algorithm_bridge.dart';
 
 desktopView(
@@ -29,6 +30,29 @@ desktopView(
       ],
     );
 
+// mobileView(
+//   BuildContext context,
+//   List<TrackContainer> trackList,
+//   Widget callCircle,
+// ) =>
+//     Column(
+//       children: [
+//         callCircle,
+//         const SizedBox(height: 20),
+//         Expanded(
+//           child: trackListContainer(
+//             context,
+//             ListView.builder(
+//               controller: controller,
+//               dragStartBehavior: DragStartBehavior.down,
+//               itemBuilder: (context, index) => trackList[index],
+//               itemCount: trackList.length,
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+
 mobileView(
   BuildContext context,
   List<TrackContainer> trackList,
@@ -36,7 +60,9 @@ mobileView(
 ) =>
     Column(
       children: [
-        callCircle,
+        Expanded(
+          child: callCircle,
+        ),
         const SizedBox(height: 20),
         Expanded(
           child: trackListContainer(

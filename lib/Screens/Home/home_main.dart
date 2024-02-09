@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../global_variables.dart';
 import '../shared.dart';
+import 'exploration_chart.dart';
 import 'home_buttons.dart';
 import 'home_state.dart';
 import 'home_title.dart';
@@ -27,6 +28,7 @@ class _HomeState extends ConsumerState<Home> {
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
     return animatedColumn(
+      //const LineChartSample10()
       isDesktop ? desktopView() : mobileView(),
     );
   }
