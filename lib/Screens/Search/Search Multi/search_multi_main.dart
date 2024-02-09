@@ -3,7 +3,6 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,6 +17,7 @@ import 'search_multi_state.dart';
 
 class SearchMultiState extends ConsumerState<SearchMulti> {
   List<TrackContainer> trackList = [];
+
   Color color1 = Colors.orangeAccent;
   String str = 'M0';
   String str2 = '';
@@ -28,10 +28,11 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     Future.delayed(Duration.zero, () {
       searchMultiReturn(ref);
     });
-    if (selectedHill) {
-      print('Hill Climbing');
-      algorithm(Algorithms.hillClimbing);
-    }
+    multipleScheduler();
+    // if (selectedHill) {
+    //   print('Hill Climbing');
+    //   algorithm(Algorithms.hillClimbing);
+    // }
   }
 
   callCircle(bool value) => circle(context, str, str2, stop1, stop2, value);
@@ -55,7 +56,32 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     );
   }
 
-  algorithm(Algorithms type) async {
+  //Checks the values selectedHill, Depth etc. and runs the algorithm when the previous algorithm is finished
+  multipleScheduler() async {
+    //Print all values selected
+    print('Hill:$selectedHill, Depth:$selectedDepth, Walk:$selectedWalk');
+    bool isEnd = true;
+    if (selectedHill) {
+      trackList.add(TrackContainer(child: Text('Hill Climbing')));
+      isEnd = false;
+      print('Hill Climbing');
+      isEnd = await algorithm(Algorithms.hillClimbing);
+    }
+    if (selectedDepth && isEnd) {
+      trackList.add(TrackContainer(child: Text('Depth First')));
+      isEnd = false;
+      print('Depth First');
+      isEnd = await algorithm(Algorithms.depthFirst);
+    }
+    if (selectedWalk && isEnd) {
+      trackList.add(TrackContainer(child: Text('Walk Sat')));
+      isEnd = false;
+      print('Walk Sat');
+      isEnd = await algorithm(Algorithms.walkSat);
+    }
+  }
+
+  Future<bool> algorithm(Algorithms type) async {
     await Future.delayed(Duration.zero, () => setState(() => initializeData()));
     List<bool> stopList = [];
     int sampleSum = 0;
@@ -94,8 +120,9 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
         stopList.clear();
       }
     } while (stopList.length != stop);
-    await player.setSource(DeviceFileSource('assets/audio/finish.mp3'));
-    await player.resume();
-    goTo(ref, ScreenDestination.chartSingle);
+    return true;
+    //await player.setSource(DeviceFileSource('assets/audio/finish.mp3'));
+    //await player.resume();
+    //goTo(ref, ScreenDestination.chartSingle);
   }
 }

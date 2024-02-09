@@ -107,8 +107,14 @@ class _CreateState extends ConsumerState<CreateMulti> {
         ),
       );
 
-  updateK(int value) => setState(() => K = value.toInt());
-  updateN(int value) => setState(() => N = value.toInt());
+  updateK(int value) => setState(() {
+        K = value.toInt();
+        if (K > N) N = K;
+      });
+  updateN(int value) => setState(() {
+        N = value.toInt();
+        if (N < K) K = N;
+      });
   updateTests(int value) => setState(() => numberOfTests = value.toInt());
   updateStop(int value) => setState(() => stop = value.toInt());
   updateTime(int value) => setState(() => timeOut = value.toInt());

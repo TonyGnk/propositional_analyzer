@@ -28,7 +28,6 @@ depthFirst(List<List<int>> problem) async {
 
     if (complete(vector)) {
       if (valid(vector, problem)) {
-        print('Depth First Solution: $vector');
         return Search(
           win: true,
           time: nowTime.difference(startTime).inSeconds,
