@@ -23,7 +23,7 @@ analyzeContainer() => Consumer(
 examplesContainer() => Consumer(
       builder: (context, ref, _) => ExamplesButton(
         label: 'Examples',
-        icon: Icons.library_books_outlined,
+        icon: Icons.subscriptions_outlined,
         onTap: () {
           //goTo(ref, ScreenDestination.result);
         },
