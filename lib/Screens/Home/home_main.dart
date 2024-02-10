@@ -39,7 +39,7 @@ class _HomeState extends ConsumerState<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 10),
-            welcomeToText,
+            welcomeToText(context),
             titleText(context),
             const Expanded(child: SizedBox()),
             newCreateButton,
@@ -60,7 +60,7 @@ class _HomeState extends ConsumerState<Home> {
         Column(
           children: [
             const Expanded(flex: 3, child: SizedBox()),
-            welcomeToText,
+            welcomeToText(context),
             titleText(context),
             const Expanded(flex: 5, child: SizedBox()),
             newCreateButton,
