@@ -22,12 +22,13 @@ depthFirst(List<List<int>> problem) async {
     nowTime = DateTime.now();
     await Future.delayed(Duration.zero, () {});
     if (nowTime.difference(startTime).inSeconds > timeOut) {
-      print('Time out in Depth First');
+      //print('Time out in Depth First');
       return const Search(win: false);
     }
 
     if (complete(vector)) {
       if (valid(vector, problem)) {
+        //print('The solution is: $vector');
         return Search(
           win: true,
           time: nowTime.difference(startTime).inSeconds,

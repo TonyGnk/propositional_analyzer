@@ -1,79 +1,100 @@
-// ignore_for_file: avoid_print
-// DPLL algorithm
-//
-///The boolean satisfiability problem is a problem of finding an assignment of truth values to a set of propositional symbols that satisfies a given set of clauses. A clause is a disjunction of literals, where a literal is either a propositional symbol or its negation.
-import 'dart:core';
+// Implementation of the DPLL algorithm.
+// Input: List<List<int>> clauses for example [[1, 2], [-1, 3]
+// Output: a List<bool> of the model that satisfies the clauses for example [true, false]
 
-class DPLL {
-  DPLL_Satisfiable(Set<Set<int>> clauses, Map<String, bool> model) async {
-    if (clauses.isEmpty) {
-      return true;
+//Helper function findUnmetIndexes(List<bool> solution, List<List<int>> problem) finds the indexes of the clauses that are not satisfied by the solution.
+
+//Variable N is the number of variables in the problem.
+
+import '../Screens/Search/Search Share/track.dart';
+import '../global_variables.dart';
+import 'solution_dart.dart';
+
+DateTime startTimeDPLL = DateTime.now();
+DateTime nowTimeDPLL = DateTime.now();
+
+solveWithDpll(List<List<int>> clauses) async {
+  //Create a list of N nulls
+  List<bool?> solution = List.filled(N, null);
+  setLiteralFrequencyList(clauses);
+  print(literalFrequencyOrder);
+  startTimeDPLL = DateTime.now();
+
+  //Call the recursive function with the solution and the problem
+  bool result = dpllRecursive2(solution, clauses, 0);
+
+  if (result) {
+    return Search(
+        win: true, time: nowTimeDPLL.difference(startTimeDPLL).inSeconds);
+  } else {
+    return const Search(win: false);
+  }
+}
+
+//Recursive function that tries to find a solution
+dpllRecursive2(
+  List<bool?> solution,
+  List<List<int>> problem,
+  int depth,
+) {
+  //print('Depth: $depth');
+  nowTimeDPLL = DateTime.now();
+  if (nowTimeDPLL.difference(startTimeDPLL).inSeconds > timeOut) {
+    //print('Time out in Depth First');
+    return false;
+  }
+
+  if (!solution.contains(null)) {
+    return true;
+  } else {
+    int index = literalFrequencyOrder[depth];
+    //print('Index: $index');
+
+    //Create a copy of the solution with the variable set to true
+    List<bool?> solutionTrue = List.from(solution);
+    solutionTrue[index - 1] = true;
+
+    //Create a copy of the solution with the variable set to false
+    List<bool?> solutionFalse = List.from(solution);
+    solutionFalse[index - 1] = false;
+
+    //If the solution with the variable set to true is valid then return true
+    if (valid(solutionTrue, problem)) {
+      if (dpllRecursive2(solutionTrue, problem, depth + 1)) {
+        return true;
+      }
     }
-    if (clauses.any((clause) => clause.isEmpty)) {
-      return false;
-    }
 
-    String p = selectUnassignedVariable(clauses, model);
-
-    Map<String, bool> modelTrue = Map.from(model);
-    modelTrue[p] = true;
-
-    Set<Set<int>>? reducedTrue = reduce(clauses, p, true);
-    if (reducedTrue != null && await DPLL_Satisfiable(reducedTrue, modelTrue)) {
-      model.addAll(modelTrue);
-      return true;
-    }
-
-    Map<String, bool> modelFalse = Map.from(model);
-    modelFalse[p] = false;
-
-    Set<Set<int>>? reducedFalse = reduce(clauses, p, false);
-    if (reducedFalse != null &&
-        await DPLL_Satisfiable(reducedFalse, modelFalse)) {
-      model.addAll(modelFalse);
-      return true;
+    //If the solution with the variable set to false is valid then return true
+    if (valid(solutionFalse, problem)) {
+      if (dpllRecursive2(solutionFalse, problem, depth + 1)) {
+        return true;
+      }
     }
 
     return false;
   }
+}
 
-  String selectUnassignedVariable(
-    Set<Set<int>> clauses,
-    Map<String, bool> model,
-  ) {
-    for (Set<int> clause in clauses) {
-      for (int literal in clause) {
-        String variable = literal.abs().toString();
-        if (!model.containsKey(variable)) {
-          return variable;
-        }
+List<int> literalFrequencyOrder = [];
+void setLiteralFrequencyList(List<List<int>> problem) {
+  Map<int, int> literalFrequency = {};
+
+  // Calculate the frequency of each literal in the problem
+  for (var clause in problem) {
+    for (var literal in clause) {
+      int absoluteLiteral = literal.abs();
+      if (literalFrequency.containsKey(absoluteLiteral)) {
+        literalFrequency[absoluteLiteral] =
+            (literalFrequency[absoluteLiteral] ?? 0) + 1;
+      } else {
+        literalFrequency[absoluteLiteral] = 1;
       }
     }
-    return '';
   }
 
-  Set<Set<int>>? reduce(
-    Set<Set<int>> clauses,
-    String p,
-    bool value,
-  ) {
-    Set<Set<int>> reducedClauses = Set.from(clauses);
-    int variable = int.parse(p);
-    reducedClauses.removeWhere((clause) =>
-        (value && clause.contains(-variable)) ||
-        (!value && clause.contains(variable)));
-    Set<Set<int>> tempClauses = {};
-    for (Set<int> clause in reducedClauses) {
-      // Remove falsified literals and add the clause to the reduced set
-      Set<int> reducedClause = clause
-          .where((literal) => literal != (value ? variable : -variable))
-          .toSet();
-      if (reducedClause.isEmpty) {
-        return null; // Return null if a clause becomes empty
-      }
-      tempClauses.add(reducedClause);
-    }
-    reducedClauses.addAll(tempClauses);
-    return reducedClauses;
-  }
+  // Sort the literals map by frequency and store it to literalFrequencyOrder list
+  //print('Without sort: $literalFrequency');
+  literalFrequencyOrder = literalFrequency.keys.toList()
+    ..sort((a, b) => literalFrequency[b]!.compareTo(literalFrequency[a]!));
 }
