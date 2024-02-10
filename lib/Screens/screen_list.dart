@@ -16,6 +16,8 @@ import '../UI/Screens/settings.dart';
 import '../UI/Screens/settings_state.dart';
 import 'Home/home_state.dart';
 import 'Home/home_main.dart';
+import 'Instructions/instructions_main.dart';
+import 'Instructions/instructions_state.dart';
 import 'Search/Search Multi/search_multi_layout.dart';
 import 'Search/Search Multi/search_multi_main.dart';
 import 'Search/Search Multi/search_multi_state.dart';
@@ -33,6 +35,7 @@ enum ScreenDestination {
   mix,
   settings,
   about,
+  instructions,
 }
 
 goTo(WidgetRef ref, ScreenDestination destination) async {
@@ -69,6 +72,7 @@ final Map<ScreenDestination, Widget> screenMap = {
   ScreenDestination.createMulti: const CreateMulti(),
   ScreenDestination.settings: const Settings(),
   ScreenDestination.about: const AboutScreen(),
+  ScreenDestination.instructions: const Instructions(),
 };
 
 final Map<ScreenDestination, void Function(WidgetRef, ScreenDestination)>
@@ -82,4 +86,5 @@ final Map<ScreenDestination, void Function(WidgetRef, ScreenDestination)>
   ScreenDestination.searchMulti: searchMultiGo,
   ScreenDestination.settings: settingsGo,
   ScreenDestination.about: aboutGo,
+  ScreenDestination.instructions: instructionsGo,
 };

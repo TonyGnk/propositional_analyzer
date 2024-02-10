@@ -8,7 +8,6 @@ import 'theme_icon.dart';
 
 final appBarIsEnableProvider = StateProvider<bool>((ref) => true);
 final appBarIsFilledProvider = StateProvider<bool>((ref) => false);
-final appBarIsEnableThemeButtonProvider = StateProvider<bool>((ref) => true);
 final appBarLabel = StateProvider<String?>((ref) => null);
 final appBarLabelOpacity = StateProvider<double>((ref) => 0);
 final appBarCurrentScreen = StateProvider<ScreenDestination?>((ref) => null);
@@ -40,6 +39,9 @@ Widget row(BuildContext context) => Consumer(
         final customIcon1 = ref.watch(appBarCustomIcon1);
         final customIconOpacity = ref.watch(appBarCustomIconOpacity);
         final backButtonTimes = ref.watch(appBarBackButtonTimes);
+        final themeIconOpacity = ref.watch(appBarIsEnableThemeButtonOpacity);
+        final isEnableInfoButton = ref.watch(appBarIsEnableInfoButtonProvider);
+        final infoIconOpacity = ref.watch(appBarIsEnableInfoButtonOpacity);
         return Row(
           children: [
             const SizedBox(width: 2),
@@ -67,8 +69,18 @@ Widget row(BuildContext context) => Consumer(
               duration: basicDuration,
               child: customIcon1 ?? const SizedBox(),
             ),
-            themeIcon(context, ref, isEnableThemeButton),
-            infoIcon(),
+            AnimatedOpacity(
+              opacity: themeIconOpacity,
+              duration: basicDuration,
+              child: isEnableThemeButton
+                  ? themeIcon(context, ref)
+                  : const SizedBox(),
+            ),
+            AnimatedOpacity(
+              opacity: infoIconOpacity,
+              duration: basicDuration,
+              child: isEnableInfoButton ? infoIcon() : const SizedBox(),
+            ),
             const SizedBox(width: 2),
           ],
         );
@@ -144,6 +156,39 @@ updateAppBarBackButton(WidgetRef ref, bool isReturn) {
           ref.read(appBarBackButtonOpacity.notifier).state = 0,
           Future.delayed(basicDuration, () {
             ref.read(appBarIsEnableBackButton.notifier).state = false;
+          })
+        };
+}
+
+final appBarIsEnableThemeButtonProvider = StateProvider<bool>((ref) => true);
+final appBarIsEnableThemeButtonOpacity = StateProvider<double>((ref) => 1);
+updateThemeButton(WidgetRef ref, bool isReturn) {
+  isReturn
+      ? {
+          ref.read(appBarIsEnableThemeButtonProvider.notifier).state = true,
+          ref.read(appBarIsEnableThemeButtonOpacity.notifier).state = 1
+        }
+      : {
+          ref.read(appBarIsEnableThemeButtonOpacity.notifier).state = 0,
+          Future.delayed(basicDuration, () {
+            ref.read(appBarIsEnableThemeButtonProvider.notifier).state = false;
+          })
+        };
+}
+
+//InfoButton
+final appBarIsEnableInfoButtonProvider = StateProvider<bool>((ref) => true);
+final appBarIsEnableInfoButtonOpacity = StateProvider<double>((ref) => 1);
+updateInfoButton(WidgetRef ref, bool isReturn) {
+  isReturn
+      ? {
+          ref.read(appBarIsEnableInfoButtonProvider.notifier).state = true,
+          ref.read(appBarIsEnableInfoButtonOpacity.notifier).state = 1
+        }
+      : {
+          ref.read(appBarIsEnableInfoButtonOpacity.notifier).state = 0,
+          Future.delayed(basicDuration, () {
+            ref.read(appBarIsEnableInfoButtonProvider.notifier).state = false;
           })
         };
 }

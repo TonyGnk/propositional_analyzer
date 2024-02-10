@@ -35,7 +35,7 @@ const helpContainer = ButtonTemplate(
   title: 'Instructions',
   slogan: 'How to use the app',
   icon: Icons.help_outline_outlined,
-  //screenDestination: ScreenDestination.home,
+  screenDestination: ScreenDestination.instructions,
 );
 
 class ButtonTemplate extends ConsumerStatefulWidget {

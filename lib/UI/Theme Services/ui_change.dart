@@ -4,7 +4,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Themes/material_theme_data.dart';
+import '../material_theme_data.dart';
 
 Future<String?> getPref() async {
   final prefs = await SharedPreferences.getInstance();
