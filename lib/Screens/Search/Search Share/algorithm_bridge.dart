@@ -60,6 +60,7 @@ runAlgorithm() async {
   } else if (selected == 1) {
     return await depthFirst(problem);
   } else if (selected == 2) {
+    print('DPLL');
     return await solveWithDpll(problem);
   } else if (selected == 3) {
     return await walkSat(problem);
@@ -71,6 +72,7 @@ runAlgorithm() async {
 Map<Algorithms, Function> algorithmMap = {
   Algorithms.hillClimbing: hillClimbing,
   Algorithms.depthFirst: depthFirst,
+  Algorithms.dpll: solveWithDpll,
   Algorithms.walkSat: walkSat,
 };
 
@@ -171,6 +173,7 @@ checkWhichRunning() {
   runningList.clear();
   if (selectedHill) runningList.add(Algorithms.hillClimbing);
   if (selectedDepth) runningList.add(Algorithms.depthFirst);
+  if (selectedDPLL) runningList.add(Algorithms.dpll);
   if (selectedWalk) runningList.add(Algorithms.walkSat);
 }
 

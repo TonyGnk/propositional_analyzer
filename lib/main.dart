@@ -5,6 +5,7 @@ import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'UI/Adaptive Folder/adaptive_root.dart';
+import 'algorithms/playground.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,8 @@ void main() async {
   }
 
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
+
+  //myFunction();
 
   runApp(
     ProviderScope(

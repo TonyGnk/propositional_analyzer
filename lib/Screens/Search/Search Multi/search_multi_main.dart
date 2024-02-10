@@ -76,10 +76,18 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
                   ),
                   borderData: FlBorderData(show: false),
                   lineBarsData: [
-                    line(spotsHillSearch, orange1),
-                    line(spotsDepthSearch, orange2),
-                    line(spotsDPLLSearch, orange3),
-                    line(spotsWalkSearch, orange4),
+                    spotsHillSearch.isNotEmpty
+                        ? line(spotsHillSearch, orange1)
+                        : line(emptySpots, orange1),
+                    spotsDepthSearch.isNotEmpty
+                        ? line(spotsDepthSearch, orange2)
+                        : line(emptySpots, orange2),
+                    spotsDPLLSearch.isNotEmpty
+                        ? line(spotsDPLLSearch, orange3)
+                        : line(emptySpots, orange3),
+                    spotsWalkSearch.isNotEmpty
+                        ? line(spotsWalkSearch, orange4)
+                        : line(emptySpots, orange4),
                   ],
                   titlesData: const FlTitlesData(
                     show: false,

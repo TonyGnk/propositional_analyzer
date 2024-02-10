@@ -8,9 +8,9 @@ import 'new_value.dart';
 import 'walk_sat.dart';
 
 myFunction() async {
-  N = 7; //12;
-  M = 392; //400; //23;
-  K = 6; //6;
+  N = 3; //12;
+  M = 22; //400; //23;
+  K = 3; //6;
 
   //List<List<int>> problem = [
   // [10, -2, -11, -6, -1, -7],

@@ -14,3 +14,7 @@ LineChartBarData line(
       ),
       barWidth: 4,
     );
+
+List<FlSpot> emptySpots = [
+  const FlSpot(0, 0),
+];

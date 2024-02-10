@@ -16,12 +16,13 @@ DateTime nowTimeDPLL = DateTime.now();
 solveWithDpll(List<List<int>> clauses) async {
   //Create a list of N nulls
   List<bool?> solution = List.filled(N, null);
+
   setLiteralFrequencyList(clauses);
-  print(literalFrequencyOrder);
+  //print(literalFrequencyOrder);
   startTimeDPLL = DateTime.now();
 
   //Call the recursive function with the solution and the problem
-  bool result = dpllRecursive2(solution, clauses, 0);
+  bool result = dpllRecursive(solution, clauses, 0);
 
   if (result) {
     return Search(
@@ -32,12 +33,13 @@ solveWithDpll(List<List<int>> clauses) async {
 }
 
 //Recursive function that tries to find a solution
-dpllRecursive2(
+dpllRecursive(
   List<bool?> solution,
   List<List<int>> problem,
   int depth,
 ) {
-  //print('Depth: $depth');
+  //print('\nDepth: $depth');
+
   nowTimeDPLL = DateTime.now();
   if (nowTimeDPLL.difference(startTimeDPLL).inSeconds > timeOut) {
     //print('Time out in Depth First');
@@ -48,7 +50,6 @@ dpllRecursive2(
     return true;
   } else {
     int index = literalFrequencyOrder[depth];
-    //print('Index: $index');
 
     //Create a copy of the solution with the variable set to true
     List<bool?> solutionTrue = List.from(solution);
@@ -60,14 +61,14 @@ dpllRecursive2(
 
     //If the solution with the variable set to true is valid then return true
     if (valid(solutionTrue, problem)) {
-      if (dpllRecursive2(solutionTrue, problem, depth + 1)) {
+      if (dpllRecursive(solutionTrue, problem, depth + 1)) {
         return true;
       }
     }
 
     //If the solution with the variable set to false is valid then return true
     if (valid(solutionFalse, problem)) {
-      if (dpllRecursive2(solutionFalse, problem, depth + 1)) {
+      if (dpllRecursive(solutionFalse, problem, depth + 1)) {
         return true;
       }
     }
@@ -78,6 +79,7 @@ dpllRecursive2(
 
 List<int> literalFrequencyOrder = [];
 void setLiteralFrequencyList(List<List<int>> problem) {
+  literalFrequencyOrder = [];
   Map<int, int> literalFrequency = {};
 
   // Calculate the frequency of each literal in the problem
@@ -90,6 +92,13 @@ void setLiteralFrequencyList(List<List<int>> problem) {
       } else {
         literalFrequency[absoluteLiteral] = 1;
       }
+    }
+  }
+
+  //If N>K add the missing literals to the frequency map with frequency 0
+  for (int i = 1; i <= N; i++) {
+    if (!literalFrequency.containsKey(i)) {
+      literalFrequency[i] = 0;
     }
   }
 
