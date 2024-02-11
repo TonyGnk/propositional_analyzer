@@ -198,14 +198,14 @@ class MaterialThemeData extends TotalTheme {
         menuButtonTheme: MenuButtonThemeData(
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(
-              const Color.fromARGB(255, 114, 103, 96),
+              const Color.fromARGB(255, 73, 71, 69),
             ),
           ),
         ),
         cardTheme: const CardTheme(
           //#002222
           elevation: 0,
-          color: Color.fromARGB(255, 31, 28, 27),
+          color: Color.fromARGB(255, 36, 32, 31),
           surfaceTintColor: Color.fromARGB(255, 31, 28, 27),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(cornerSize)),

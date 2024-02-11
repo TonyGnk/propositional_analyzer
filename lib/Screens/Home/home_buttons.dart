@@ -117,7 +117,6 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
         elevation: elev.toDouble(),
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
             border: Border.all(
               color: Theme.of(context)
                   .menuButtonTheme

@@ -108,7 +108,15 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
           const SegmentedControl(),
           const Expanded(flex: 1, child: SizedBox()),
           //examplesContainer(),
-          analyzeContainer(),
+          buttonRow(),
+          //analyzeContainer(),
+        ],
+      );
+
+  buttonRow() => Row(
+        children: [
+          Expanded(child: examplesContainer()),
+          Expanded(child: analyzeContainer()),
         ],
       );
 
