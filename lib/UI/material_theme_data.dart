@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
+import '../global_variables.dart';
+
 class MaterialThemeData extends TotalTheme {
   @override
   ThemeData light() => ThemeData(
@@ -42,7 +44,7 @@ class MaterialThemeData extends TotalTheme {
           color: Color.fromARGB(255, 243, 241, 240),
           surfaceTintColor: Color.fromARGB(255, 243, 241, 240),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(14)),
+            borderRadius: BorderRadius.all(Radius.circular(cornerSize)),
           ),
         ),
         colorScheme: const ColorScheme(
@@ -130,9 +132,11 @@ class MaterialThemeData extends TotalTheme {
         cardTheme: const CardTheme(
           //#002222
           elevation: 0,
-          color: Color.fromARGB(255, 34, 31, 29),
+          color: Color.fromARGB(255, 31, 28, 27),
+          surfaceTintColor: Color.fromARGB(255, 31, 28, 27),
+
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(14)),
+            borderRadius: BorderRadius.all(Radius.circular(cornerSize)),
           ),
         ),
         colorScheme: const ColorScheme(

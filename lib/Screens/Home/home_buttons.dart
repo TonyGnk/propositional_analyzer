@@ -69,7 +69,7 @@ class ButtonTemplate extends ConsumerStatefulWidget {
 class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
   //late scale 1.0
   late double scale = 1.0;
-  late int elev = 5;
+  late int elev = 4;
 
   @override
   void initState() {
@@ -88,7 +88,7 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
           onExit: (event) {
             setState(() {
               scale = 1.0;
-              elev = 5;
+              elev = 4;
             });
           },
           cursor: SystemMouseCursors.click,
@@ -107,26 +107,23 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
             child: AnimatedScale(
               scale: scale,
               duration: basicDuration,
-              child: container(elev),
+              child: container(),
             ),
           ),
         ),
       );
 
-  container(int elev) => Card(
+  container() => Card(
         elevation: elev.toDouble(),
         child: Container(
-          //height: 130,
-          //constraints max width 400 min 200
           decoration: BoxDecoration(
-              // color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-              // border: Border.all(
-              //   color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
-              // ),
-              // borderRadius: BorderRadius.circular(cornerSize),
-              ),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+            // border: Border.all(
+            //   color: Theme.of(context).colorScheme.secondary.withOpacity(1.0),
+            // ),
+            borderRadius: BorderRadius.circular(cornerSize),
+          ),
           padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.only(bottom: 11),
           clipBehavior: Clip.antiAlias,
           child: row(),
         ),

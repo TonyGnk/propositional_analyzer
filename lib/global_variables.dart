@@ -40,7 +40,7 @@ enum Algorithms { hillClimbing, depthFirst, dpll, walkSat }
 
 final player = AudioPlayer();
 
-const double cornerSize = 16;
+const double cornerSize = 13;
 
 const Duration basicDuration = Duration(milliseconds: 200);
 Duration basicDuration1 = Duration(
