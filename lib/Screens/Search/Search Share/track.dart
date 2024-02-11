@@ -2,42 +2,66 @@ import 'package:flutter/material.dart';
 
 import '../../../global_variables.dart';
 
-class Track extends StatelessWidget {
-  const Track({
-    required this.M,
-    this.avg = 0,
+bool hover = false;
+trackListContainer(BuildContext context, Widget child) => MouseRegion(
+      onEnter: (event) {
+        hover = true;
+      },
+      onExit: (event) {
+        hover = false;
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Card(
+          // color: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 3,
+          child: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(cornerSize),
+              ),
+              //color: Theme.of(context).shadowColor,
+              // border: Border.all(
+              //   color: Theme.of(context)
+              //       .menuButtonTheme
+              //       .style!
+              //       .foregroundColor!
+              //       .resolve({})!,
+              // ),
+            ),
+            padding: const EdgeInsets.only(top: 11), //14
+            clipBehavior: Clip.antiAlias,
+            child: child,
+          ),
+        ),
+      ),
+    );
+
+class TrackContainer extends StatelessWidget {
+  const TrackContainer({
+    required this.child,
     super.key,
   });
-  final int avg;
-  final int M;
+
+  final Widget child;
 
   @override
-  Widget build(BuildContext context) => Container(
-        color: Theme.of(context).shadowColor,
-        padding: const EdgeInsets.fromLTRB(50, 9, 9, 9),
-        margin: const EdgeInsets.all(2.0),
-        child: Row(
-          children: [
-            const Icon(
-              Icons.assignment_outlined,
-            ),
-            const SizedBox(width: 10),
-            Text(
-              'Test M$M',
-            ),
-            const SizedBox(width: 10),
-            Text(
-              '$avg/$numberOfTests',
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: 'Play',
-                fontWeight: FontWeight.bold,
-                color: (avg >= numberOfTests.toDouble() / 2)
-                    ? Colors.green
-                    : Colors.red,
-              ),
-            ),
-          ],
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(left: 11, right: 11, bottom: 11),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).dividerColor.withOpacity(0.7),
+            borderRadius: BorderRadius.circular(cornerSize),
+            //color: Theme.of(context).unselectedWidgetColor,
+            // border: Border(
+            //   bottom: BorderSide(
+            //     color: Theme.of(context).dividerColor,
+            //     width: 1,
+            //   ),
+            // ),
+          ),
+          padding: const EdgeInsets.all(10),
+          child: child,
         ),
       );
 }

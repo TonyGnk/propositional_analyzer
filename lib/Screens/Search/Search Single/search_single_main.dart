@@ -40,19 +40,19 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
               trackList,
               str,
               str2,
-              chart(),
+              chart(context),
             )
           : mobileView(
               context,
               trackList,
               str,
               str2,
-              chart(),
+              chart(context),
             ),
     );
   }
 
-  chart() => Padding(
+  chart(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 6.0),
         child: spotsSearch.isNotEmpty
             ? LineChart(
@@ -68,7 +68,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
                   ),
                   borderData: FlBorderData(show: false),
                   lineBarsData: [
-                    line(spotsSearch, orange4),
+                    line(spotsSearch, Theme.of(context).colorScheme.primary),
                   ],
                   titlesData: const FlTitlesData(
                     show: false,
@@ -123,7 +123,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
       }
     } while (stopList.length != stop);
     playSound();
-    goTo(ref, ScreenDestination.chartSingle);
+    //goTo(ref, ScreenDestination.chartSingle);
   }
 
   addSpot(double M, double average, double averageTime) {
@@ -133,7 +133,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
     spotsSearch.add(FlSpot(M, average));
     spots1.add(FlSpot(M, average));
     spots2.add(FlSpot(M, averageTime));
-    while (spotsHillSearch.length > 30) {
+    while (spotsSearch.length > 30) {
       spotsSearch.removeAt(0);
     }
   }

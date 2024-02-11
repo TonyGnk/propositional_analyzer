@@ -96,51 +96,6 @@ addTrack(List<TrackContainer> trackList, int j, [String type = '']) {
   scrollDown();
 }
 
-class TrackContainer extends StatelessWidget {
-  const TrackContainer({
-    required this.child,
-    super.key,
-  });
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(cornerSize - 2),
-          color: Theme.of(context).unselectedWidgetColor,
-        ),
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.all(10),
-        child: child,
-      );
-}
-
-bool hover = false;
-trackListContainer(BuildContext context, Widget child) => MouseRegion(
-      onEnter: (event) {
-        hover = true;
-      },
-      onExit: (event) {
-        hover = false;
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(cornerSize + 5),
-          ),
-          color: Theme.of(context).shadowColor,
-          border: Border.all(
-            color: Theme.of(context).dividerColor,
-          ),
-        ),
-        margin: const EdgeInsets.all(12),
-        padding: const EdgeInsets.all(14),
-        clipBehavior: Clip.antiAlias,
-        child: child,
-      ),
-    );
-
 ScrollController controller = ScrollController();
 scrollDown() async {
   if (!hover) {
