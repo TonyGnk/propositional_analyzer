@@ -100,7 +100,7 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
         child: GestureDetector(
           onTap: () async {
             setState(() {
-              color = Color.fromARGB(255, 10, 10, 10).withOpacity(0.8);
+              color = const Color.fromARGB(255, 10, 10, 10).withOpacity(0.8);
               borderColor =
                   Colors.deepOrangeAccent.withOpacity(1).withOpacity(0.4);
               isFade = true;
