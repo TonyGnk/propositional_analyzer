@@ -60,7 +60,7 @@ Widget row(BuildContext context) => Consumer(
               duration: basicDuration,
               child: Text(
                 label ?? '',
-                style: const TextStyle(fontSize: 19, fontFamily: 'Play'),
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
             const Expanded(child: SizedBox()),
