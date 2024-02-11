@@ -60,6 +60,13 @@ class MaterialThemeData extends TotalTheme {
             fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
           ),
         ),
+        dropdownMenuTheme: DropdownMenuThemeData(
+          menuStyle: MenuStyle(
+            surfaceTintColor: MaterialStateProperty.all<Color>(
+              const Color.fromARGB(255, 243, 241, 240),
+            ),
+          ),
+        ),
         menuButtonTheme: MenuButtonThemeData(
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(
@@ -115,9 +122,11 @@ class MaterialThemeData extends TotalTheme {
           brightness: Brightness.light,
         ),
         secondaryHeaderColor: const Color.fromARGB(255, 232, 232, 232),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 218, 209, 202),
+        splashColor: const Color.fromARGB(255, 224, 219, 215),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 224, 219, 215),
+        //scaffoldBackgroundColor: const Color.fromARGB(255, 218, 209, 202),
         shadowColor: const Color.fromARGB(255, 255, 255, 255),
-        splashColor: const Color.fromARGB(255, 255, 255, 255),
+        // splashColor: const Color.fromARGB(255, 255, 255, 255),
         canvasColor: Colors.deepOrangeAccent,
         unselectedWidgetColor: Colors.orange[100],
         dividerColor: Colors.grey[400],
@@ -178,6 +187,12 @@ class MaterialThemeData extends TotalTheme {
               const Color.fromARGB(255, 255, 246, 242).withOpacity(0.1),
             ),
             fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
+          ),
+        ),
+        dropdownMenuTheme: DropdownMenuThemeData(
+          menuStyle: MenuStyle(
+            surfaceTintColor: MaterialStateProperty.all<Color>(
+                Color.fromARGB(255, 151, 30, 30)),
           ),
         ),
         menuButtonTheme: MenuButtonThemeData(

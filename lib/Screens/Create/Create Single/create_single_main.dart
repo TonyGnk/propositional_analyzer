@@ -92,20 +92,22 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
   createColumn() => Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 4),
-          const SegmentedControl(),
+          //const SizedBox(height: 2),
           group(
             context,
             183,
             [slideK(updateK), slideN(updateN), slideTests(updateTests)],
           ),
+          const SizedBox(height: 5),
           group(
             context,
             129,
             [slideStop(updateStop), slideTime(updateTime)],
           ),
+          const SizedBox(height: 5),
+          const SegmentedControl(),
           const Expanded(flex: 1, child: SizedBox()),
-          examplesContainer(),
+          //examplesContainer(),
           analyzeContainer(),
         ],
       );

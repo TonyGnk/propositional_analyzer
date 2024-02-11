@@ -18,12 +18,9 @@ class _SegmentedControlState extends State<SegmentedControl> {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(7, 0, 7, 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Card(
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-            height: openedMenu ? 186 : 48,
+          child: DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(cornerSize),
               border: Border.all(
@@ -34,16 +31,31 @@ class _SegmentedControlState extends State<SegmentedControl> {
                     .resolve({})!,
               ),
             ),
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                selectItem1(0),
-                selectItem2(1),
-                selectItem3(2),
-                selectItem4(3),
-                selectItem5(4),
-              ],
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              height: openedMenu ? 184 : 46,
+              // decoration: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(cornerSize),
+              //   border: Border.all(
+              //     color: Theme.of(context)
+              //         .menuButtonTheme
+              //         .style!
+              //         .foregroundColor!
+              //         .resolve({})!,
+              //   ),
+              // ),
+              //clipBehavior: Clip.antiAlias,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  selectItem1(0),
+                  selectItem2(1),
+                  selectItem3(2),
+                  selectItem4(3),
+                  selectItem5(4),
+                ],
+              ),
             ),
           ),
         ),
@@ -103,8 +115,8 @@ class _SegmentedControlState extends State<SegmentedControl> {
         46,
         const BoxDecoration(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(cornerSize - 1),
-            topRight: Radius.circular(cornerSize - 1),
+            topLeft: Radius.circular(cornerSize),
+            topRight: Radius.circular(cornerSize),
           ),
         ),
         id,
@@ -117,8 +129,8 @@ class _SegmentedControlState extends State<SegmentedControl> {
         46,
         const BoxDecoration(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(cornerSize - 1),
-            bottomRight: Radius.circular(cornerSize - 1),
+            bottomLeft: Radius.circular(cornerSize),
+            bottomRight: Radius.circular(cornerSize),
           ),
         ),
         id,
@@ -128,8 +140,8 @@ class _SegmentedControlState extends State<SegmentedControl> {
         0,
         const BoxDecoration(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(cornerSize - 1),
-            bottomRight: Radius.circular(cornerSize - 1),
+            bottomLeft: Radius.circular(cornerSize),
+            bottomRight: Radius.circular(cornerSize),
           ),
         ),
         id,
@@ -165,7 +177,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
           decoration: openedB
               ? decoration
               : BoxDecoration(
-                  borderRadius: BorderRadius.circular(cornerSize - 1),
+                  borderRadius: BorderRadius.circular(cornerSize),
                 ),
           clipBehavior: Clip.antiAlias,
           transform: (selected == id && matrix)
@@ -174,8 +186,8 @@ class _SegmentedControlState extends State<SegmentedControl> {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              splashColor:
-                  Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+              overlayColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(255, 139, 120, 112).withOpacity(0.1)),
               onTap: () => onPressed(id),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(14, 4, 14, 4),
@@ -184,7 +196,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
                     Center(
                       child: Icon(
                         algorithmIconMap[id]!,
-                        color: Theme.of(context).canvasColor,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     const SizedBox(width: 15),
@@ -194,11 +206,15 @@ class _SegmentedControlState extends State<SegmentedControl> {
                     ),
                     const Expanded(child: SizedBox()),
                     !openedB
-                        ? const Icon(
+                        ? Icon(
                             Icons.expand_more_outlined,
+                            color: Theme.of(context).colorScheme.primary,
                           )
                         : (openedMenu && selected == id)
-                            ? const Icon(Icons.check)
+                            ? Icon(
+                                Icons.check,
+                                color: Theme.of(context).colorScheme.primary,
+                              )
                             : const SizedBox()
                   ],
                 ),

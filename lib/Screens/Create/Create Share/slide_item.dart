@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../global_variables.dart';
 
 group(BuildContext context, double height, List<Widget> list) => Padding(
-      padding: const EdgeInsets.fromLTRB(7, 0, 7, 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Card(
         child: Container(
           height: height,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(cornerSize),
-            //color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
             border: Border.all(
               color: Theme.of(context)
                   .menuButtonTheme

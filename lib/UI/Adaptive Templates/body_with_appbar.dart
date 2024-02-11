@@ -36,8 +36,8 @@ class BackgroundWall extends StatelessWidget {
                 Theme.of(context).scaffoldBackgroundColor
               ],
               stops: const [
-                0.1,
-                0.6
+                0.01,
+                0.6,
               ]),
         ),
       );
