@@ -5,7 +5,7 @@ import '../../../global_variables.dart';
 group(BuildContext context, double height, List<Widget> list) => Container(
       height: height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(cornerSize - 1),
+        borderRadius: BorderRadius.circular(cornerSize),
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
         border: Border.all(
           color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),

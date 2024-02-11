@@ -173,7 +173,7 @@ class MaterialThemeData extends TotalTheme {
         menuButtonTheme: MenuButtonThemeData(
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(
-              Color.fromARGB(255, 114, 103, 96),
+              const Color.fromARGB(255, 114, 103, 96),
             ),
           ),
         ),
