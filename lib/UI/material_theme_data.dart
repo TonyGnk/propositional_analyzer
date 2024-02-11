@@ -39,6 +39,11 @@ class MaterialThemeData extends TotalTheme {
             color: Color.fromARGB(255, 22, 22, 22),
             fontFamily: 'Play',
           ),
+          bodyMedium: const TextStyle(
+            fontSize: 16,
+            color: Color.fromARGB(255, 22, 22, 22),
+            fontFamily: 'Play',
+          ),
           bodySmall: TextStyle(
             color: const Color.fromARGB(255, 31, 31, 31).withOpacity(0.8),
             fontFamily: 'Play',
@@ -152,6 +157,11 @@ class MaterialThemeData extends TotalTheme {
             color: Color.fromARGB(255, 255, 246, 242),
             fontFamily: 'Play',
             fontWeight: FontWeight.w500,
+          ),
+          bodyMedium: const TextStyle(
+            fontSize: 16,
+            color: Color.fromARGB(255, 255, 246, 242),
+            fontFamily: 'Play',
           ),
           bodySmall: TextStyle(
             color: const Color.fromARGB(255, 232, 232, 232).withOpacity(0.8),

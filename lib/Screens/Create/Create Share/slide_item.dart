@@ -2,20 +2,27 @@ import 'package:flutter/material.dart';
 
 import '../../../global_variables.dart';
 
-group(BuildContext context, double height, List<Widget> list) => Container(
-      height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(cornerSize),
-        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-          width: 1,
+group(BuildContext context, double height, List<Widget> list) => Padding(
+      padding: const EdgeInsets.fromLTRB(7, 0, 7, 8),
+      child: Card(
+        child: Container(
+          height: height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(cornerSize),
+            //color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+            border: Border.all(
+              color: Theme.of(context)
+                  .menuButtonTheme
+                  .style!
+                  .foregroundColor!
+                  .resolve({})!,
+            ),
+          ),
+          padding: const EdgeInsets.fromLTRB(0, 15, 0, 4),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start, children: list),
         ),
       ),
-      padding: const EdgeInsets.fromLTRB(0, 15, 0, 4),
-      margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
-      child:
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: list),
     );
 
 class SliderItem extends StatefulWidget {
@@ -53,10 +60,9 @@ class _SliderItemState extends State<SliderItem> {
             Center(
               child: Icon(
                 widget.iconData,
-                color: Theme.of(context).canvasColor,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            //const SizedBox(width: 1),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -64,15 +70,10 @@ class _SliderItemState extends State<SliderItem> {
                 children: [
                   Text(
                     '     ${widget.hint} ${widget.extraHint}',
-                    style: TextStyle(
-                      fontFamily: 'Play',
-                      fontSize: 16,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onBackground
-                          .withOpacity(0.9),
-                      height: 0.4,
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(height: 0.4),
                   ),
                   widget.isTime
                       ? sliderForTime()

@@ -17,29 +17,35 @@ class _SegmentedControlState extends State<SegmentedControl> {
   bool matrix = false;
 
   @override
-  Widget build(BuildContext context) => AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeInOut,
-        height: openedMenu ? 186 : 48,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(cornerSize - 1),
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-            width: 1,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.fromLTRB(7, 0, 7, 8),
+        child: Card(
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            height: openedMenu ? 186 : 48,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(cornerSize),
+              border: Border.all(
+                color: Theme.of(context)
+                    .menuButtonTheme
+                    .style!
+                    .foregroundColor!
+                    .resolve({})!,
+              ),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                selectItem1(0),
+                selectItem2(1),
+                selectItem3(2),
+                selectItem4(3),
+                selectItem5(4),
+              ],
+            ),
           ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            selectItem1(0),
-            selectItem2(1),
-            selectItem3(2),
-            selectItem4(3),
-            selectItem5(4),
-          ],
         ),
       );
 
@@ -184,14 +190,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
                     const SizedBox(width: 15),
                     Text(
                       algorithmNamesMap[id]!,
-                      style: TextStyle(
-                        fontFamily: 'Play',
-                        fontSize: 16,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onBackground
-                            .withOpacity(0.9),
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const Expanded(child: SizedBox()),
                     !openedB
