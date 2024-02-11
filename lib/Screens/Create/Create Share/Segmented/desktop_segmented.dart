@@ -17,26 +17,33 @@ class _DesktopSegmentedState extends State<DesktopSegmented> {
   bool showOptionsOpacity = false;
 
   @override
-  Widget build(BuildContext context) => Container(
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(cornerSize - 1),
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-            width: 1,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Card(
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(cornerSize),
+              border: Border.all(
+                color: Theme.of(context)
+                    .menuButtonTheme
+                    .style!
+                    .foregroundColor!
+                    .resolve({})!,
+              ),
+            ),
+            clipBehavior: Clip.antiAlias,
+            // margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                selectItem1(0),
+                selectItem2(1),
+                selectItem3(2),
+                selectItem4(3),
+              ],
+            ),
           ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            selectItem1(0),
-            selectItem2(1),
-            selectItem3(2),
-            selectItem4(3),
-          ],
         ),
       );
 
@@ -61,29 +68,30 @@ class _DesktopSegmentedState extends State<DesktopSegmented> {
   ) =>
       Expanded(
         flex: flex,
-        child: Container(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
           margin: const EdgeInsets.all(5),
           height: 50,
           decoration: (id == selected)
               ? BoxDecoration(
-                  color:
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(cornerSize - 3),
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(cornerSize - 2),
                   border: Border.all(
                     color: Theme.of(context)
                         .colorScheme
                         .secondary
                         .withOpacity(0.2),
-                    width: 1,
                   ),
                 )
               : BoxDecoration(
-                  borderRadius: BorderRadius.circular(cornerSize - 3),
+                  borderRadius: BorderRadius.circular(cornerSize - 2),
                 ),
           clipBehavior: Clip.antiAlias,
           child: Material(
             color: Colors.transparent,
             child: InkWell(
+              overlayColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(255, 139, 120, 112).withOpacity(0.1)),
               splashColor:
                   Theme.of(context).colorScheme.secondary.withOpacity(0.1),
               onTap: () => onPressed(id),
@@ -95,20 +103,17 @@ class _DesktopSegmentedState extends State<DesktopSegmented> {
                     Center(
                       child: Icon(
                         algorithmIconMap[id]!,
-                        color: Theme.of(context).canvasColor,
+                        color: (id == selected)
+                            ? Theme.of(context).textTheme.headlineLarge!.color
+                            : Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     const SizedBox(width: 5),
                     Text(
                       algorithmNamesMap[id]!,
-                      style: TextStyle(
-                        fontFamily: 'Play',
-                        fontSize: 16,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onBackground
-                            .withOpacity(0.9),
-                      ),
+                      style: (id == selected)
+                          ? Theme.of(context).textTheme.headlineLarge
+                          : Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),

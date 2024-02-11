@@ -100,7 +100,7 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
         child: GestureDetector(
           onTap: () async {
             setState(() {
-              color = Colors.grey.withOpacity(0.1);
+              color = Color.fromARGB(255, 10, 10, 10).withOpacity(0.8);
               borderColor =
                   Colors.deepOrangeAccent.withOpacity(1).withOpacity(0.4);
               isFade = true;
@@ -136,7 +136,7 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
               ),
               border: Border.all(
                 color: borderColor,
-                width: 1.5,
+                width: 2,
               ),
               borderRadius:
                   const BorderRadius.all(Radius.circular(cornerSize + 1)),
