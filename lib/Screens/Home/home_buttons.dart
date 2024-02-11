@@ -118,9 +118,13 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-            // border: Border.all(
-            //   color: Theme.of(context).colorScheme.secondary.withOpacity(1.0),
-            // ),
+            border: Border.all(
+              color: Theme.of(context)
+                  .menuButtonTheme
+                  .style!
+                  .foregroundColor!
+                  .resolve({})!,
+            ),
             borderRadius: BorderRadius.circular(cornerSize),
           ),
           padding: const EdgeInsets.all(10),

@@ -55,6 +55,13 @@ class MaterialThemeData extends TotalTheme {
             fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
           ),
         ),
+        menuButtonTheme: MenuButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(
+              const Color.fromARGB(255, 243, 241, 240),
+            ),
+          ),
+        ),
         cardTheme: const CardTheme(
           //E0FFFF
           elevation: 2,
@@ -163,12 +170,18 @@ class MaterialThemeData extends TotalTheme {
             fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
           ),
         ),
+        menuButtonTheme: MenuButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(
+              Color.fromARGB(255, 114, 103, 96),
+            ),
+          ),
+        ),
         cardTheme: const CardTheme(
           //#002222
           elevation: 0,
           color: Color.fromARGB(255, 31, 28, 27),
           surfaceTintColor: Color.fromARGB(255, 31, 28, 27),
-
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(cornerSize)),
           ),
