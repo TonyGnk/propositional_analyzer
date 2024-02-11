@@ -60,12 +60,12 @@ class MaterialThemeData extends TotalTheme {
             fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
           ),
         ),
-        dropdownMenuTheme: DropdownMenuThemeData(
-          menuStyle: MenuStyle(
-            surfaceTintColor: MaterialStateProperty.all<Color>(
-              const Color.fromARGB(255, 243, 241, 240),
-            ),
-          ),
+        sliderTheme: SliderThemeData(
+          thumbColor: const Color.fromRGBO(161, 64, 0, 1),
+          activeTrackColor:
+              const Color.fromRGBO(161, 64, 0, 1).withOpacity(0.7),
+          inactiveTrackColor:
+              const Color.fromRGBO(161, 64, 0, 1).withOpacity(0.2),
         ),
         menuButtonTheme: MenuButtonThemeData(
           style: ButtonStyle(
@@ -84,8 +84,7 @@ class MaterialThemeData extends TotalTheme {
           ),
         ),
         colorScheme: const ColorScheme(
-          //#6ff7f6
-          primary: Color.fromRGBO(161, 64, 0, 1), //to hex is #A14000
+          primary: Color.fromRGBO(161, 64, 0, 1),
 
           //
 
@@ -189,11 +188,12 @@ class MaterialThemeData extends TotalTheme {
             fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
           ),
         ),
-        dropdownMenuTheme: DropdownMenuThemeData(
-          menuStyle: MenuStyle(
-            surfaceTintColor: MaterialStateProperty.all<Color>(
-                Color.fromARGB(255, 151, 30, 30)),
-          ),
+        sliderTheme: SliderThemeData(
+          thumbColor: const Color.fromARGB(255, 230, 126, 78),
+          activeTrackColor:
+              const Color.fromARGB(255, 230, 126, 78).withOpacity(0.7),
+          inactiveTrackColor:
+              const Color.fromARGB(255, 230, 126, 78).withOpacity(0.2),
         ),
         menuButtonTheme: MenuButtonThemeData(
           style: ButtonStyle(

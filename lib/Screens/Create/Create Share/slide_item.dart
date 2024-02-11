@@ -77,14 +77,6 @@ class _SliderItemState extends State<SliderItem> {
                   widget.isTime
                       ? sliderForTime()
                       : Slider(
-                          thumbColor:
-                              Theme.of(context).canvasColor.withOpacity(1),
-                          activeColor:
-                              Theme.of(context).canvasColor.withOpacity(0.6),
-                          inactiveColor: Theme.of(context)
-                              .colorScheme
-                              .secondary
-                              .withOpacity(0.2),
                           value: widget.currentValue,
                           max: widget.max,
                           min: widget.min,
@@ -101,9 +93,6 @@ class _SliderItemState extends State<SliderItem> {
       );
 
   sliderForTime() => Slider(
-        thumbColor: Theme.of(context).canvasColor.withOpacity(1),
-        activeColor: Theme.of(context).canvasColor.withOpacity(0.6),
-        inactiveColor: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
         value: timeMap[widget.currentValue.toInt()]!.toDouble(),
         max: widget.max,
         min: widget.min,
