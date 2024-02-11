@@ -12,10 +12,12 @@ class AnalyzeButton extends StatefulWidget {
     required this.label,
     required this.icon,
     required this.onTap,
+    required this.currentPrimary,
     super.key,
   });
 
   final String label;
+  final Color currentPrimary;
   final IconData icon;
   final VoidCallback onTap;
 
@@ -25,7 +27,6 @@ class AnalyzeButton extends StatefulWidget {
 
 class _AnalyzeButtonState extends State<AnalyzeButton> {
   late Color color = Colors.deepOrangeAccent.withOpacity(0.5);
-  late Color color2 = Colors.deepOrangeAccent.withOpacity(0.5);
   late Color borderColor = Colors.deepOrangeAccent.withOpacity(0);
   late Timer timer;
   late AlignmentGeometry alignmentGeometryA =
@@ -54,9 +55,12 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
   ];
   int gradientIndex = 0;
   late double scale = 1.0;
+  int elev = 4;
+  bool isFade = false;
 
   @override
   void initState() {
+    color = widget.currentPrimary;
     super.initState();
     _updateGradientType();
     timer = Timer.periodic(const Duration(milliseconds: 1100), (Timer t) {
@@ -83,11 +87,13 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
         onEnter: (event) {
           setState(() {
             scale = 0.97;
+            elev = 2;
           });
         },
         onExit: (event) {
           setState(() {
             scale = 1.0;
+            elev = 4;
           });
         },
         cursor: SystemMouseCursors.click,
@@ -95,9 +101,9 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
           onTap: () async {
             setState(() {
               color = Colors.grey.withOpacity(0.1);
-              color2 = Colors.deepOrangeAccent.withOpacity(0.4);
               borderColor =
                   Colors.deepOrangeAccent.withOpacity(1).withOpacity(0.4);
+              isFade = true;
             });
             //wait 30 seconds
             await Future.delayed(const Duration(seconds: 3));
@@ -106,30 +112,37 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
           child: AnimatedScale(
             scale: scale,
             duration: basicDuration,
-            child: AnimatedContainer(
-              margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
-              duration: const Duration(seconds: 1),
-              height: 52,
-              decoration: BoxDecoration(
-                //color: color,
-                gradient: LinearGradient(
-                  colors: [
-                    color2,
-                    color,
-                  ],
-                  begin: alignmentGeometryA,
-                  end: alignmentGeometryB,
-                ),
-                border: Border.all(
-                  color: borderColor,
-                  width: 1.5,
-                ),
-                borderRadius:
-                    const BorderRadius.all(Radius.circular(cornerSize + 1)),
+            child: container(),
+          ),
+        ),
+      );
+
+  container() => Padding(
+        padding: const EdgeInsets.fromLTRB(7, 0, 7, 8),
+        child: Card(
+          elevation: elev.toDouble(),
+          child: AnimatedContainer(
+            duration: const Duration(seconds: 1),
+            height: 52,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                  isFade ? color : Theme.of(context).colorScheme.primary
+                    ..withOpacity(0.8),
+                ],
+                begin: alignmentGeometryA,
+                end: alignmentGeometryB,
               ),
-              clipBehavior: Clip.antiAlias,
-              child: theColumn(context),
+              border: Border.all(
+                color: borderColor,
+                width: 1.5,
+              ),
+              borderRadius:
+                  const BorderRadius.all(Radius.circular(cornerSize + 1)),
             ),
+            clipBehavior: Clip.antiAlias,
+            child: theColumn(context),
           ),
         ),
       );
@@ -141,15 +154,13 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
             child: Icon(
               widget.icon,
               size: 23,
+              color: Theme.of(context).textTheme.headlineLarge!.color,
             ),
           ),
           const SizedBox(width: 8),
           Text(
             widget.label,
-            style: const TextStyle(
-              fontSize: 17,
-              fontFamily: 'Play',
-            ),
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
         ],
       );

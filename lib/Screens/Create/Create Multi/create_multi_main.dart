@@ -102,7 +102,7 @@ class _CreateState extends ConsumerState<CreateMulti> {
             ]),
             const Expanded(flex: 1, child: SizedBox()),
             examplesContainer(),
-            analyzeContainer(),
+            analyzeContainer(true),
           ],
         ),
       );
@@ -118,17 +118,6 @@ class _CreateState extends ConsumerState<CreateMulti> {
   updateTests(int value) => setState(() => numberOfTests = value.toInt());
   updateStop(int value) => setState(() => stop = value.toInt());
   updateTime(int value) => setState(() => timeOut = value.toInt());
-
-//
-  analyzeContainer() => Consumer(
-        builder: (context, ref, _) => AnalyzeButton(
-          label: 'Analyze',
-          icon: Icons.troubleshoot_outlined,
-          onTap: () {
-            goTo(ref, ScreenDestination.searchMulti);
-          },
-        ),
-      );
 }
 
 desktopFrame(BuildContext context, Column column) => Column(

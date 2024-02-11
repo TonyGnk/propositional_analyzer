@@ -23,7 +23,8 @@ class ExamplesButton extends StatefulWidget {
 
 class _ExamplesButtonState extends State<ExamplesButton> {
   int gradientIndex = 0;
-  late double scale = 1.0;
+  double scale = 1.0;
+  int elev = 4;
 
   @override
   void initState() {
@@ -40,12 +41,13 @@ class _ExamplesButtonState extends State<ExamplesButton> {
         onEnter: (event) {
           setState(() {
             scale = 0.97;
-            //color = Colors.grey.withOpacity(0.2);
+            elev = 2;
           });
         },
         onExit: (event) {
           setState(() {
             scale = 1.0;
+            elev = 4;
           });
         },
         cursor: SystemMouseCursors.click,
@@ -57,28 +59,36 @@ class _ExamplesButtonState extends State<ExamplesButton> {
           child: AnimatedScale(
             scale: scale,
             duration: basicDuration,
-            child: AnimatedContainer(
-              margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
-              duration: const Duration(seconds: 1),
-              height: 52,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.1),
-                border: Border.all(
-                  color: Colors.grey.withOpacity(0.3),
-                  width: 1.5,
-                ),
-                borderRadius:
-                    const BorderRadius.all(Radius.circular(cornerSize + 1)),
+            child: container(context),
+          ),
+        ),
+      );
+
+  container(BuildContext context) => Padding(
+        padding: const EdgeInsets.fromLTRB(7, 0, 7, 8),
+        child: Card(
+          elevation: elev.toDouble(),
+          child: Container(
+            height: 52,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Theme.of(context)
+                    .menuButtonTheme
+                    .style!
+                    .foregroundColor!
+                    .resolve({})!,
               ),
-              clipBehavior: Clip.antiAlias,
-              child: theColumn(context),
+              borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
             ),
+            clipBehavior: Clip.antiAlias,
+            child: theColumn(context),
           ),
         ),
       );
 
   Widget theColumn(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
             child: Icon(
@@ -89,10 +99,7 @@ class _ExamplesButtonState extends State<ExamplesButton> {
           const SizedBox(width: 8),
           Text(
             widget.label,
-            style: const TextStyle(
-              fontSize: 17,
-              fontFamily: 'Play',
-            ),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ],
       );

@@ -10,12 +10,15 @@ const String depth = 'Depth First Search';
 const String dpll = 'DPLL';
 const String walksat = 'WalkSAT';
 
-analyzeContainer() => Consumer(
+analyzeContainer([bool multi = false]) => Consumer(
       builder: (context, ref, _) => AnalyzeButton(
         label: 'Analyze',
         icon: Icons.troubleshoot_outlined,
+        currentPrimary: Theme.of(context).colorScheme.primary,
         onTap: () {
-          goTo(ref, ScreenDestination.searchSingle);
+          multi
+              ? goTo(ref, ScreenDestination.searchMulti)
+              : goTo(ref, ScreenDestination.searchSingle);
         },
       ),
     );

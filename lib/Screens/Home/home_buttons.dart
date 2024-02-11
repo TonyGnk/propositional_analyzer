@@ -69,7 +69,7 @@ class ButtonTemplate extends ConsumerStatefulWidget {
 class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
   //late scale 1.0
   late double scale = 1.0;
-  late int elev = 4;
+  int elev = 4;
 
   @override
   void initState() {

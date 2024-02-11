@@ -28,6 +28,12 @@ class MaterialThemeData extends TotalTheme {
             fontFamily: 'Play',
             fontWeight: FontWeight.normal,
           ),
+          headlineLarge: const TextStyle(
+            color: Color.fromARGB(255, 255, 246, 242),
+            fontSize: 16,
+            fontFamily: 'Play',
+            fontWeight: FontWeight.w500,
+          ),
           headlineSmall: const TextStyle(
             color: Color.fromARGB(255, 161, 64, 0),
             fontSize: 14,
@@ -153,6 +159,13 @@ class MaterialThemeData extends TotalTheme {
             fontSize: 19,
             fontFamily: 'Play',
             fontWeight: FontWeight.normal,
+          ),
+          headlineLarge: const TextStyle(
+            color: Color.fromARGB(255, 255, 246, 242),
+            //Color.fromARGB(255, 22, 22, 22),
+            fontSize: 16,
+            fontFamily: 'Play',
+            fontWeight: FontWeight.w500,
           ),
           headlineSmall: const TextStyle(
             color: Color.fromARGB(255, 230, 126, 78),
