@@ -123,7 +123,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
       }
     } while (stopList.length != stop);
     playSound();
-    //goTo(ref, ScreenDestination.chartSingle);
+    goTo(ref, ScreenDestination.chartSingle);
   }
 
   addSpot(double M, double average, double averageTime) {

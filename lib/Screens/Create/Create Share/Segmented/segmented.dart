@@ -35,17 +35,6 @@ class _SegmentedControlState extends State<SegmentedControl> {
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut,
               height: openedMenu ? 184 : 46,
-              // decoration: BoxDecoration(
-              //   borderRadius: BorderRadius.circular(cornerSize),
-              //   border: Border.all(
-              //     color: Theme.of(context)
-              //         .menuButtonTheme
-              //         .style!
-              //         .foregroundColor!
-              //         .resolve({})!,
-              //   ),
-              // ),
-              //clipBehavior: Clip.antiAlias,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

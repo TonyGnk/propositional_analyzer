@@ -65,7 +65,7 @@ class _ExamplesButtonState extends State<ExamplesButton> {
       );
 
   container(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(7, 0, 7, 8),
+        padding: const EdgeInsets.fromLTRB(8, 0, 0, 8),
         child: Card(
           elevation: elev.toDouble(),
           child: Container(

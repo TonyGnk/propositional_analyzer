@@ -118,7 +118,7 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
       );
 
   container() => Padding(
-        padding: const EdgeInsets.fromLTRB(7, 0, 7, 8),
+        padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
         child: Card(
           elevation: elev.toDouble(),
           child: AnimatedContainer(

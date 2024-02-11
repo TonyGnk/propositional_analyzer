@@ -34,7 +34,7 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
   }
 
   mobileView() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
         child: createColumn(),
       );
 
@@ -116,6 +116,7 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
   buttonRow() => Row(
         children: [
           Expanded(child: examplesContainer()),
+          const SizedBox(width: 5),
           Expanded(child: analyzeContainer()),
         ],
       );
