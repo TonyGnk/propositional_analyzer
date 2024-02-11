@@ -46,6 +46,7 @@ class MaterialThemeData extends TotalTheme {
             overlayColor: MaterialStateProperty.all<Color>(
               const Color.fromARGB(255, 22, 22, 22).withOpacity(0.1),
             ),
+            fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
           ),
         ),
         cardTheme: const CardTheme(
@@ -147,6 +148,7 @@ class MaterialThemeData extends TotalTheme {
             overlayColor: MaterialStateProperty.all<Color>(
               const Color.fromARGB(255, 255, 246, 242).withOpacity(0.1),
             ),
+            fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
           ),
         ),
         cardTheme: const CardTheme(

@@ -113,9 +113,6 @@ appBarIcon(
       tooltip: tooltip != '' ? tooltip : null,
       selectedIcon: selectedIcon,
       isSelected: isSelected,
-      style: ButtonStyle(
-        fixedSize: MaterialStateProperty.all<Size>(const Size(50, 50)),
-      ),
       onPressed: onPressed,
       icon: icon,
       highlightColor: Colors.grey.withOpacity(0.2),
