@@ -38,6 +38,16 @@ class MaterialThemeData extends TotalTheme {
             fontFamily: 'Play',
           ),
         ),
+        iconButtonTheme: IconButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(
+              const Color.fromARGB(255, 22, 22, 22),
+            ),
+            overlayColor: MaterialStateProperty.all<Color>(
+              const Color.fromARGB(255, 22, 22, 22).withOpacity(0.1),
+            ),
+          ),
+        ),
         cardTheme: const CardTheme(
           //E0FFFF
           elevation: 2,
@@ -129,6 +139,16 @@ class MaterialThemeData extends TotalTheme {
           ),
         ),
         //
+        iconButtonTheme: IconButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(
+              const Color.fromARGB(255, 255, 246, 242),
+            ),
+            overlayColor: MaterialStateProperty.all<Color>(
+              const Color.fromARGB(255, 255, 246, 242).withOpacity(0.1),
+            ),
+          ),
+        ),
         cardTheme: const CardTheme(
           //#002222
           elevation: 0,

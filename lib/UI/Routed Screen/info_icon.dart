@@ -12,8 +12,7 @@ Widget infoIcon() => Consumer(builder: (context, ref, _) {
         duration: basicDuration,
         child: enable
             ? appBarIcon(
-                Icon(Icons.info_outlined,
-                    color: Theme.of(context).colorScheme.onBackground),
+                const Icon(Icons.info_outlined),
                 () {
                   goTo(ref, ScreenDestination.about);
                 },
