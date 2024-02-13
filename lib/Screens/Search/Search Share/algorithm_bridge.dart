@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:audioplayers/audioplayers.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -108,10 +105,10 @@ scrollDown() async {
 }
 
 playSound() async {
-  if (speakerOn) {
-    await player.setSource(DeviceFileSource(songPath));
-    await player.resume();
-  }
+  // if (speakerOn) {
+  //   await player.setSource(DeviceFileSource(songPath));
+  //   await player.resume();
+  // }
 }
 
 String songPath = (UniversalPlatform.isWeb)
