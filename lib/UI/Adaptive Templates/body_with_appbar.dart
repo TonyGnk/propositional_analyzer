@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../global_variables.dart';
 
 Widget bodyWithAppBarGlass({
   required Widget appBar,
@@ -33,7 +36,7 @@ class BackgroundWall extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 Theme.of(context).splashColor,
-                Theme.of(context).scaffoldBackgroundColor
+                Theme.of(context).scaffoldBackgroundColor,
               ],
               stops: const [
                 0.01,

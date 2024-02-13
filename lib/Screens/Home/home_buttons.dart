@@ -69,7 +69,7 @@ class ButtonTemplate extends ConsumerStatefulWidget {
 class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
   //late scale 1.0
   late double scale = 1.0;
-  int elev = 4;
+  int elev = 3;
 
   @override
   void initState() {
@@ -82,13 +82,13 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
           onEnter: (event) {
             setState(() {
               scale = 0.97;
-              elev = 2;
+              elev = 1;
             });
           },
           onExit: (event) {
             setState(() {
               scale = 1.0;
-              elev = 4;
+              elev = 3;
             });
           },
           cursor: SystemMouseCursors.click,
@@ -113,17 +113,28 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
         ),
       );
 
-  container() => Card(
-        elevation: elev.toDouble(),
+  container() => Consumer(builder: (context, ref, _) {
+        final isDesktop = ref.watch(isDesktopProvider);
+        return isDesktop ? card(true) : card(false);
+      });
+
+  card(bool isDesktop) => Card(
+        elevation: isDesktop ? 0 : elev.toDouble(),
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context)
-                  .menuButtonTheme
-                  .style!
-                  .foregroundColor!
-                  .resolve({})!,
-            ),
+            border:
+                (isDesktop && Theme.of(context).brightness == Brightness.light)
+                    ? Border.all(
+                        color: Theme.of(context).splashColor,
+                        width: 2,
+                      )
+                    : Border.all(
+                        color: Theme.of(context)
+                            .menuButtonTheme
+                            .style!
+                            .foregroundColor!
+                            .resolve({})!,
+                      ),
             borderRadius: BorderRadius.circular(cornerSize),
           ),
           padding: const EdgeInsets.all(10),

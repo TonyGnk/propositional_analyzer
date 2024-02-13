@@ -55,6 +55,10 @@ class MaterialThemeData extends TotalTheme {
             fontFamily: 'Play',
           ),
         ),
+        navigationDrawerTheme: const NavigationDrawerThemeData(
+          backgroundColor: Color.fromARGB(255, 236, 233, 230),
+          // backgroundColor: Color.fromARGB(255, 231, 229, 226),
+        ),
         iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(
@@ -81,7 +85,6 @@ class MaterialThemeData extends TotalTheme {
           ),
         ),
         cardTheme: const CardTheme(
-          //E0FFFF
           elevation: 2,
           color: Color.fromARGB(255, 243, 241, 240),
           surfaceTintColor: Color.fromARGB(255, 243, 241, 240),
@@ -91,29 +94,6 @@ class MaterialThemeData extends TotalTheme {
         ),
         colorScheme: const ColorScheme(
           primary: Color.fromRGBO(161, 64, 0, 1),
-
-          //
-
-          //
-
-          //
-
-          //
-
-          //
-
-          //
-
-          //
-
-          //
-
-          //
-
-          //
-
-          //
-
           //
           onPrimary: Color.fromARGB(255, 255, 255, 255),
           secondary: Color.fromARGB(255, 232, 232, 232),
