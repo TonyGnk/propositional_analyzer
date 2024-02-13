@@ -8,6 +8,7 @@ import '../Create Share/create_helper.dart';
 import '../Create Share/slide_item.dart';
 import '../Create Share/slide_item_list.dart';
 import 'create_multi_state.dart';
+import '../../shared.dart';
 
 class CreateMulti extends ConsumerStatefulWidget {
   const CreateMulti({super.key});
@@ -82,6 +83,8 @@ class _CreateState extends ConsumerState<CreateMulti> {
             ),
           ],
         ),
+        800,
+        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       );
 
   mobileView() => Padding(
@@ -119,21 +122,3 @@ class _CreateState extends ConsumerState<CreateMulti> {
   updateStop(int value) => setState(() => stop = value.toInt());
   updateTime(int value) => setState(() => timeOut = value.toInt());
 }
-
-desktopFrame(BuildContext context, Column column) => Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          constraints: const BoxConstraints(maxHeight: 470),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Theme.of(context).dividerColor),
-            color: Theme.of(context).dividerColor.withOpacity(0.1),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          margin: const EdgeInsets.symmetric(horizontal: 18),
-          width: 800,
-          child: column,
-        ),
-      ],
-    );

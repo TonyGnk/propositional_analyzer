@@ -70,5 +70,7 @@ class _HomeState extends ConsumerState<Home> {
             const Expanded(flex: 5, child: SizedBox()),
           ],
         ),
+        500,
+        const EdgeInsets.symmetric(horizontal: 42),
       );
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-desktopFrame(BuildContext context, Column column) => Column(
+desktopFrame(BuildContext context, Column column, double width,
+        EdgeInsets padding) =>
+    Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
@@ -10,8 +12,8 @@ desktopFrame(BuildContext context, Column column) => Column(
             border: Border.all(color: Theme.of(context).dividerColor),
             color: Theme.of(context).dividerColor.withOpacity(0.1),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 42),
-          width: 500,
+          padding: padding,
+          width: width,
           child: column,
         ),
       ],

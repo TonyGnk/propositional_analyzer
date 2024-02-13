@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../global_variables.dart';
+import '../../shared.dart';
 import '../Create Share/create_helper.dart';
 import '../Create Share/Segmented/desktop_segmented.dart';
 import '../Create Share/Segmented/segmented.dart';
@@ -87,6 +88,8 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
             ),
           ],
         ),
+        800,
+        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       );
 
   createColumn() => Column(
@@ -132,24 +135,4 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
   updateTests(int value) => setState(() => numberOfTests = value.toInt());
   updateStop(int value) => setState(() => stop = value.toInt());
   updateTime(int value) => setState(() => timeOut = value.toInt());
-
-//
 }
-
-desktopFrame(BuildContext context, Column column) => Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          constraints: const BoxConstraints(maxHeight: 470),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Theme.of(context).dividerColor),
-            color: Theme.of(context).dividerColor.withOpacity(0.1),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          margin: const EdgeInsets.symmetric(horizontal: 18),
-          width: 800,
-          child: column,
-        ),
-      ],
-    );
