@@ -24,7 +24,7 @@ slideN(Function(int value) updateN) => SliderItem(
 slideTests(Function(int value) updateTests) => SliderItem(
       currentValue: numberOfTests.toDouble(),
       min: 1,
-      max: 15,
+      max: 20,
       hint: 'Make $numberOfTests',
       extraHint: (numberOfTests == 1) ? 'test' : 'tests',
       iconData: Icons.workspaces_outlined,
@@ -34,7 +34,7 @@ slideTests(Function(int value) updateTests) => SliderItem(
 slideStop(Function(int value) updateStop) => SliderItem(
       currentValue: stop.toDouble(),
       min: 1,
-      max: 10,
+      max: 15,
       hint: 'Stop after $stop',
       extraHint: (stop == 1) ? 'failure' : 'failures',
       iconData: Icons.remove_done_outlined,
