@@ -75,12 +75,6 @@ class _DesktopSegmentedState extends State<DesktopSegmented> {
               ? BoxDecoration(
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
                   borderRadius: BorderRadius.circular(cornerSize - 2),
-                  border: Border.all(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .secondary
-                        .withOpacity(0.2),
-                  ),
                 )
               : BoxDecoration(
                   borderRadius: BorderRadius.circular(cornerSize - 2),

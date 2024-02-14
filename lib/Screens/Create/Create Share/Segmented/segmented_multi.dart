@@ -62,20 +62,14 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
             ? BoxDecoration(
                 color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(cornerSize - 2),
-                border: Border.all(
-                  color:
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-                ),
               )
             : BoxDecoration(
-                borderRadius: BorderRadius.circular(cornerSize - 3),
+                borderRadius: BorderRadius.circular(cornerSize - 2),
               ),
         clipBehavior: Clip.antiAlias,
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            // splashColor:
-            //     Theme.of(context).colorScheme.secondary.withOpacity(0.1),
             overlayColor: MaterialStateProperty.all<Color>(
                 const Color.fromARGB(255, 139, 120, 112).withOpacity(0.1)),
             onTap: () => setState(() => algorithmFunctionMap[id]!()),
@@ -127,7 +121,6 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
             height: isDesktop ? 50 : 117,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(cornerSize - 1),
-              //color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
               border: Border.all(
                 color: Theme.of(context)
                     .menuButtonTheme

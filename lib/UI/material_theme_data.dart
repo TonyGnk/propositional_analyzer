@@ -32,7 +32,7 @@ class MaterialThemeData extends TotalTheme {
             color: Color.fromARGB(255, 255, 246, 242),
             fontSize: 16,
             fontFamily: 'Play',
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
           headlineSmall: const TextStyle(
             color: Color.fromARGB(255, 161, 64, 0),
@@ -49,6 +49,7 @@ class MaterialThemeData extends TotalTheme {
             fontSize: 16,
             color: Color.fromARGB(255, 22, 22, 22),
             fontFamily: 'Play',
+            fontWeight: FontWeight.w400,
           ),
           bodySmall: TextStyle(
             color: const Color.fromARGB(255, 31, 31, 31).withOpacity(0.8),
@@ -142,10 +143,9 @@ class MaterialThemeData extends TotalTheme {
           ),
           headlineLarge: const TextStyle(
             color: Color.fromARGB(255, 255, 246, 242),
-            //Color.fromARGB(255, 22, 22, 22),
             fontSize: 16,
             fontFamily: 'Play',
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
           headlineSmall: const TextStyle(
             color: Color.fromARGB(255, 230, 126, 78),
@@ -163,6 +163,7 @@ class MaterialThemeData extends TotalTheme {
             fontSize: 16,
             color: Color.fromARGB(255, 255, 246, 242),
             fontFamily: 'Play',
+            fontWeight: FontWeight.w400,
           ),
           bodySmall: TextStyle(
             color: const Color.fromARGB(255, 232, 232, 232).withOpacity(0.8),
