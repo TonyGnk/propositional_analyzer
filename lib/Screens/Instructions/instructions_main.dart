@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../global_variables.dart';
 import '../../UI/Components/filled_button.dart';
-import '../Create/Create Share/Segmented/segmented_multi.dart';
-import '../Create/Create Share/analyze_button.dart';
-import '../Create/Create Share/create_helper.dart';
 import '../Create/Create Share/instructions_button.dart';
-import '../Create/Create Share/slide_item.dart';
-import '../Create/Create Share/slide_item_list.dart';
-import '../screen_list.dart';
 import 'instructions_state.dart';
 import 'instructions_strings.dart';
 
@@ -47,7 +41,7 @@ class _InstructionsState extends ConsumerState<Instructions> {
     setState(() {
       opacity = 0;
     });
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 200));
     setState(() {
       index = newIndex;
       page = instructionsText[index]!;
@@ -68,8 +62,9 @@ class _InstructionsState extends ConsumerState<Instructions> {
 
   movingPart(BuildContext context) => AnimatedOpacity(
         opacity: opacity,
-        duration: basicDuration,
+        duration: const Duration(milliseconds: 150),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),

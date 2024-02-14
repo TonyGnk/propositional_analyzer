@@ -42,49 +42,66 @@ Widget row(BuildContext context) => Consumer(
         final themeIconOpacity = ref.watch(appBarIsEnableThemeButtonOpacity);
         final isEnableInfoButton = ref.watch(appBarIsEnableInfoButtonProvider);
         final infoIconOpacity = ref.watch(appBarIsEnableInfoButtonOpacity);
-        return Row(
+        final theFloor = ref.watch(appBarSecondFloor);
+        final theFloorOpacity = ref.watch(appBarSecondFloorOpacity);
+        return Stack(
           children: [
-            const SizedBox(width: 2),
-            AnimatedOpacity(
-              opacity: backButtonOpacity,
-              duration: basicDuration,
-              child: isEnableBackButton
-                  ? appBarIcon(
-                      const Icon(Icons.arrow_back_ios_outlined),
-                      () => goBack(ref, backButtonTimes),
-                    )
-                  : const SizedBox(),
+            Row(
+              children: [
+                const SizedBox(width: 2),
+                AnimatedOpacity(
+                  opacity: backButtonOpacity,
+                  duration: basicDuration,
+                  child: isEnableBackButton
+                      ? appBarIcon(
+                          const Icon(Icons.arrow_back_ios_outlined),
+                          () => goBack(ref, backButtonTimes),
+                        )
+                      : const SizedBox(),
+                ),
+                AnimatedOpacity(
+                  opacity: labelOpacity,
+                  duration: basicDuration,
+                  child: Text(
+                    label ?? '',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                ),
+                const Expanded(child: SizedBox()),
+                AnimatedOpacity(
+                  opacity: customIconOpacity,
+                  duration: basicDuration,
+                  child: customIcon1 ?? const SizedBox(),
+                ),
+                AnimatedOpacity(
+                  opacity: themeIconOpacity,
+                  duration: basicDuration,
+                  child: isEnableThemeButton
+                      ? themeIcon(context, ref)
+                      : const SizedBox(),
+                ),
+                AnimatedOpacity(
+                  opacity: infoIconOpacity,
+                  duration: basicDuration,
+                  child: isEnableInfoButton ? infoIcon() : const SizedBox(),
+                ),
+                const SizedBox(width: 2),
+              ],
             ),
-            AnimatedOpacity(
-              opacity: labelOpacity,
-              duration: basicDuration,
-              child: Text(
-                label ?? '',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
-            const Expanded(child: SizedBox()),
-            AnimatedOpacity(
-              opacity: customIconOpacity,
-              duration: basicDuration,
-              child: customIcon1 ?? const SizedBox(),
-            ),
-            AnimatedOpacity(
-              opacity: themeIconOpacity,
-              duration: basicDuration,
-              child: isEnableThemeButton
-                  ? themeIcon(context, ref)
-                  : const SizedBox(),
-            ),
-            AnimatedOpacity(
-              opacity: infoIconOpacity,
-              duration: basicDuration,
-              child: isEnableInfoButton ? infoIcon() : const SizedBox(),
-            ),
-            const SizedBox(width: 2),
+            secondFloor(theFloor, theFloorOpacity),
           ],
         );
       },
+    );
+
+secondFloor(Widget theFloor, double theFloorOpacity) => Row(
+      children: [
+        AnimatedOpacity(
+          duration: basicDuration,
+          opacity: theFloorOpacity,
+          child: theFloor,
+        ),
+      ],
     );
 
 filledBoxDecoration(BuildContext context) => BoxDecoration(
@@ -121,6 +138,14 @@ appBarIcon(
 updateAppBarLabel(WidgetRef ref, String label, bool isReturn) {
   ref.read(appBarLabel.notifier).state = label;
   ref.read(appBarLabelOpacity.notifier).state = isReturn ? 1 : 0;
+}
+
+final appBarSecondFloor = StateProvider<Widget>((ref) => const SizedBox());
+final appBarSecondFloorOpacity = StateProvider<double>((ref) => 0);
+updateSecondFloor(WidgetRef ref, Widget newFloor, bool isReturn) {
+  ref.read(appBarSecondFloor.notifier).state =
+      isReturn ? newFloor : const SizedBox();
+  ref.read(appBarSecondFloorOpacity.notifier).state = isReturn ? 1 : 0;
 }
 
 // A provider for a custom icon in the app bar
