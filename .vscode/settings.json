@@ -28,6 +28,7 @@
 		"**/.vscode": true,
 		//hide analysis_options.yaml
 		"**/analysis_options.yaml": true,
+		"**/devtools_options.yaml": true,
 		//also assets
 		"**/assets": falsse
 	}

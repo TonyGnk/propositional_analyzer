@@ -2,14 +2,12 @@
 
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
 import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
-import '../../Search/Search Share/algorithm_bridge.dart';
 import 'charts_single_state.dart';
 
 class ChartSingle extends ConsumerStatefulWidget {
@@ -36,18 +34,17 @@ class _ChartSingleState extends ConsumerState<ChartSingle> {
   ];
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
       chartsSingleReturn(ref);
     });
     playAgainAnimationUp();
     playAgainAnimationDown();
-    unawaited(player.setSource(DeviceFileSource(songPath)));
-    unawaited(player.resume());
+    // unawaited(player.setAsset(songPath));
+    // unawaited(player.play());
   }
 
-  //Find the first FlSpot of spots1 which is not 1. Remove from start to this FlSpot
   shortUp() {
     for (var i = 0; i < spots1.length; i++) {
       if (spots1[i].y != 1) {

@@ -1,4 +1,4 @@
-import 'package:audioplayers/audioplayers.dart';
+//import 'package:audioplayers/audioplayers.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -38,7 +38,7 @@ List<FlSpot> spotsWalkSearch = [];
 
 enum Algorithms { hillClimbing, depthFirst, dpll, walkSat }
 
-final player = AudioPlayer();
+//final player = AudioPlayer();
 
 const double cornerSize = 13;
 

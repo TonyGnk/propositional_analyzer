@@ -1,4 +1,4 @@
-import 'package:audioplayers/audioplayers.dart';
+//import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -57,7 +57,6 @@ runAlgorithm() async {
   } else if (selected == 1) {
     return await depthFirst(problem);
   } else if (selected == 2) {
-    print('DPLL');
     return await solveWithDpll(problem);
   } else if (selected == 3) {
     return await walkSat(problem);
