@@ -18,10 +18,8 @@ Widget themeIcon(BuildContext context, WidgetRef ref) {
             ? 'System Mode'
             : 'Light Mode',
     mode == 'AdaptiveThemeMode.dark'
-        ? Icon(Icons.dark_mode_outlined,
-            color: Theme.of(context).colorScheme.onBackground)
-        : Icon(Icons.contrast_outlined,
-            color: Theme.of(context).colorScheme.onBackground),
+        ? const Icon(Icons.dark_mode_outlined)
+        : const Icon(Icons.contrast_outlined),
     mode == 'AdaptiveThemeMode.dark' || mode == 'AdaptiveThemeMode.system',
   );
 }
