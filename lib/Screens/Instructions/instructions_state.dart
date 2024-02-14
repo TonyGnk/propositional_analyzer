@@ -23,7 +23,7 @@ instructionsReturn(WidgetRef ref) {
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateThemeButton(ref, !isReturn);
   updateInfoButton(ref, !isReturn);
-  updateAppBarCustomIcon1(ref, exitIconButton(), isReturn);
+  //updateAppBarCustomIcon1(ref, exitIconButton(), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
 }
 
@@ -33,9 +33,4 @@ animatedColumn(Widget child) => Consumer(
         duration: basicDuration,
         child: child,
       ),
-    );
-
-exitIconButton() => appBarIcon(
-      const Icon(Icons.exit_to_app),
-      () {},
     );

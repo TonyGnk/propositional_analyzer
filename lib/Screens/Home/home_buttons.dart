@@ -33,7 +33,7 @@ const newLoadButton = ButtonTemplate(
 
 const helpContainer = ButtonTemplate(
   title: 'Instructions',
-  slogan: 'How to use the app',
+  slogan: 'How app works',
   icon: Icons.help_outline_outlined,
   screenDestination: ScreenDestination.instructions,
 );

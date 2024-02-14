@@ -41,17 +41,17 @@ class _InstructionsState extends ConsumerState<Instructions> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 4),
-            Text(stringAContentGeek),
-            Text(strToExampleEl),
+            const Text(stringAContentGeek),
+            const Text(strToExampleEl),
             const Expanded(
               child: SizedBox(),
             ),
-            buttonRow(),
+            buttonRow(context),
           ],
         ),
       );
 
-  buttonRow() => Row(
+  buttonRow(BuildContext context) => Row(
         children: [
           //ElevatedButton Back
           TextButton(
@@ -66,9 +66,11 @@ class _InstructionsState extends ConsumerState<Instructions> {
             child: SizedBox(),
           ),
           //ElevatedButton Next
-          FilledButton(
-            onPressed: () {},
-            child: const Text('Next'),
+          AnalyzeButton(
+            label: 'Next',
+            icon: Icons.arrow_forward,
+            onTap: () {},
+            currentPrimary: Theme.of(context).colorScheme.primary,
           ),
         ],
       );
