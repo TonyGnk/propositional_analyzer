@@ -9,10 +9,12 @@ import '../screen_list.dart';
 final opacity = StateProvider<double>((ref) => 0);
 
 homeGo(WidgetRef ref, ScreenDestination destination) {
+  ref.read(appBarDownloadAppOpacity.notifier).state = 0;
   updateAppBarItems(ref, false);
 }
 
 homeReturn(WidgetRef ref) {
+  ref.read(appBarDownloadAppOpacity.notifier).state = 1;
   updateAppBarInfoButton(ref, true);
   updateAppBarItems(ref, true);
 }

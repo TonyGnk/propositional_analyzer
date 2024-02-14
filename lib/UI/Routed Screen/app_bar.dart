@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 import '../../Screens/screen_list.dart';
 import '../../global_variables.dart';
@@ -13,6 +14,7 @@ final appBarLabelOpacity = StateProvider<double>((ref) => 0);
 final appBarCurrentScreen = StateProvider<ScreenDestination?>((ref) => null);
 final appBarPreviousScreen = StateProvider<ScreenDestination?>((ref) => null);
 final appBarBackButtonTimes = StateProvider<int>((ref) => 1);
+final appBarDownloadAppOpacity = StateProvider<double>((ref) => 1);
 
 Widget adaptAppBar() => Consumer(builder: (context, ref, _) {
       final isEnable = ref.watch(appBarIsEnableProvider);
@@ -44,6 +46,8 @@ Widget row(BuildContext context) => Consumer(
         final infoIconOpacity = ref.watch(appBarIsEnableInfoButtonOpacity);
         final theFloor = ref.watch(appBarSecondFloor);
         final theFloorOpacity = ref.watch(appBarSecondFloorOpacity);
+        final isDesktop = ref.watch(isDesktopProvider);
+        final downloadAppOpacity = ref.watch(appBarDownloadAppOpacity);
         return Stack(
           children: [
             Row(
@@ -68,6 +72,21 @@ Widget row(BuildContext context) => Consumer(
                   ),
                 ),
                 const Expanded(child: SizedBox()),
+                (UniversalPlatform.isWindows && isDesktop)
+                    ? AnimatedOpacity(
+                        opacity: downloadAppOpacity,
+                        duration: basicDuration,
+                        child: TextButton.icon(
+                          style: ButtonStyle(
+                            fixedSize:
+                                MaterialStateProperty.all(const Size(160, 44)),
+                          ),
+                          onPressed: () {},
+                          label: const Text('Download App'),
+                          icon: const Icon(Icons.download),
+                        ),
+                      )
+                    : const SizedBox(),
                 AnimatedOpacity(
                   opacity: customIconOpacity,
                   duration: basicDuration,
