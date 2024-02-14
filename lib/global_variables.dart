@@ -38,7 +38,7 @@ List<FlSpot> spotsWalkSearch = [];
 
 enum Algorithms { hillClimbing, depthFirst, dpll, walkSat }
 
-//final player = AudioPlayer();
+//final player = AudioPlayer(); TODO:Add audio player after the issue is fixed
 
 const double cornerSize = 13;
 

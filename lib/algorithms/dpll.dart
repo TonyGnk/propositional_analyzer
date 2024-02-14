@@ -26,7 +26,9 @@ solveWithDpll(List<List<int>> clauses) async {
 
   if (result) {
     return Search(
-        win: true, time: nowTimeDPLL.difference(startTimeDPLL).inSeconds);
+      win: true,
+      time: nowTimeDPLL.difference(startTimeDPLL).inMilliseconds,
+    );
   } else {
     return const Search(win: false);
   }

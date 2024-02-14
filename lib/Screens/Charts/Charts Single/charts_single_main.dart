@@ -43,6 +43,15 @@ class _ChartSingleState extends ConsumerState<ChartSingle> {
     playAgainAnimationDown();
     // unawaited(player.setAsset(songPath));
     // unawaited(player.play());
+    findAverageOfSpots2AndPrintIt();
+  }
+
+  findAverageOfSpots2AndPrintIt() {
+    double sum = 0;
+    for (var i = 0; i < spots2.length; i++) {
+      sum += spots2[i].y;
+    }
+    print('Average of spots2: ${sum / spots2.length}');
   }
 
   shortUp() {
@@ -267,7 +276,7 @@ class _ChartSingleState extends ConsumerState<ChartSingle> {
           ),
           // minX: collapsedUp ? firstNotOneUp.toDouble() : spots1[0].x,
           maxX: spots1[spots1.length - 1].x,
-          maxY: isFirst ? 1 : spots2[spots2.length - 1].y,
+          maxY: isFirst ? 1 : null,
           minY: isFirst ? 0 : 0,
           lineBarsData: [
             LineChartBarData(

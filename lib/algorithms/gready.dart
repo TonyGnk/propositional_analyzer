@@ -1,19 +1,15 @@
-// ignore_for_file: avoid_print
-
 import 'dart:math';
 
 import '../Screens/Search/Search Share/track.dart';
 import '../global_variables.dart';
 
-hillClimbing(List<List<int>> problem) async {
+Future<Search> solveHillClimbing(List<List<int>> problem) async {
   List<int> vector = List.filled(N, 0);
   int h, h1, h2;
-  //int restarts = 0, steps = 0;
   int bestChange;
 
   DateTime t1 = DateTime.now();
 
-  // Initialization steps
   vector = initialize(vector);
   h = count(vector, problem, M);
 
@@ -21,14 +17,9 @@ hillClimbing(List<List<int>> problem) async {
     await Future.delayed(Duration.zero, () {});
     DateTime t = DateTime.now();
     if (t.difference(t1).inSeconds > timeOut) {
-      DateTime t2 = DateTime.now();
-      return Search(
-        win: false,
-        time: t2.difference(t1).inSeconds,
-      );
+      return const Search(win: false);
     }
 
-    //steps++;
     h2 = h;
     bestChange = -1;
     for (int i = 0; i < N; i++) {
@@ -45,17 +36,14 @@ hillClimbing(List<List<int>> problem) async {
       vector[bestChange] = -vector[bestChange];
     } else {
       vector = initialize(vector);
-      //restarts++;
     }
     h = count(vector, problem, M);
   }
 
   DateTime t2 = DateTime.now();
-  //print("Solution found with hill-climbing!");
-  //print("Time spent: ${t2.difference(t1).inSeconds} secs");
   return Search(
     win: true,
-    time: t2.difference(t1).inSeconds,
+    time: t2.difference(t1).inMilliseconds,
   );
 }
 

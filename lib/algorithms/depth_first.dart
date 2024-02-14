@@ -31,7 +31,7 @@ depthFirst(List<List<int>> problem) async {
         //print('The solution is: $vector');
         return Search(
           win: true,
-          time: nowTime.difference(startTime).inSeconds,
+          time: nowTime.difference(startTime).inMilliseconds,
         );
       }
     } else {

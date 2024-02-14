@@ -28,7 +28,7 @@ walkSat(List<List<int>> problem) async {
     if (unmetClauses.isEmpty) {
       return Search(
         win: true,
-        time: time.difference(t1).inSeconds,
+        time: time.difference(t1).inMilliseconds,
       );
     }
 

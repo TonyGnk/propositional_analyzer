@@ -53,7 +53,7 @@ initializeData() {
 runAlgorithm() async {
   List<List<int>> problem = newProblem();
   if (selected == 0) {
-    return await hillClimbing(problem);
+    return await solveHillClimbing(problem);
   } else if (selected == 1) {
     return await depthFirst(problem);
   } else if (selected == 2) {
@@ -66,7 +66,7 @@ runAlgorithm() async {
 
 //Map with Algorithm type and the function to call
 Map<Algorithms, Function> algorithmMap = {
-  Algorithms.hillClimbing: hillClimbing,
+  Algorithms.hillClimbing: solveHillClimbing,
   Algorithms.depthFirst: depthFirst,
   Algorithms.dpll: solveWithDpll,
   Algorithms.walkSat: walkSat,
