@@ -42,10 +42,6 @@ class _MyFilledButtonState extends State<MyFilledButton> {
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
           onTap: () async {
-            setState(() {
-              elev = 0;
-            });
-            await Future.delayed(const Duration(milliseconds: 300));
             widget.onTap();
           },
           child: AnimatedScale(

@@ -4,19 +4,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
 import '../screen_list.dart';
+import 'instructions_main.dart';
 
 final opacity = StateProvider<double>((ref) => 0);
 
 instructionsGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
 
-  if (destination == ScreenDestination.home) {
-    updateAppBarBackButton(ref, false);
-  }
+  // if (destination == ScreenDestination.home) {
+  //   updateAppBarBackButton(ref, false);
+  // }
 }
 
 instructionsReturn(WidgetRef ref) {
-  updateAppBarBackButton(ref, true);
+  //updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
 }
 
@@ -25,6 +26,7 @@ updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateInfoButton(ref, !isReturn);
   //updateAppBarCustomIcon1(ref, exitIconButton(), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
+  updateSecondFloor(ref, container(ref), isReturn);
 }
 
 animatedColumn(Widget child) => Consumer(
@@ -32,5 +34,25 @@ animatedColumn(Widget child) => Consumer(
         opacity: ref.watch(opacity),
         duration: basicDuration,
         child: child,
+      ),
+    );
+
+container(WidgetRef oldRef) => Consumer(
+      builder: (context, ref, _) => Row(
+        children: [
+          IconButton(
+            onPressed: () {
+              goBack(oldRef);
+            },
+            icon: const Icon(Icons.exit_to_app),
+          ),
+          IconButton(
+            onPressed: () {
+              ref.read(instructionsLanguageIsEnglish.notifier).state =
+                  !ref.read(instructionsLanguageIsEnglish.notifier).state;
+            },
+            icon: const Icon(Icons.language),
+          ),
+        ],
       ),
     );

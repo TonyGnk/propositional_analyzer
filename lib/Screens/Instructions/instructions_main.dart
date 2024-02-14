@@ -6,6 +6,10 @@ import '../Create/Create Share/instructions_button.dart';
 import 'instructions_state.dart';
 import 'instructions_strings.dart';
 
+//StateProvider
+final instructionsIndex = StateProvider<int>((ref) => 1);
+final instructionsLanguageIsEnglish = StateProvider<bool>((ref) => true);
+
 class Instructions extends ConsumerStatefulWidget {
   const Instructions({super.key});
 
@@ -14,7 +18,6 @@ class Instructions extends ConsumerStatefulWidget {
 }
 
 class _InstructionsState extends ConsumerState<Instructions> {
-  int index = 1;
   //List?<Widget> page = null;
   List<Widget> Function(BuildContext context) page = instructionsText[1]!;
   double opacity = 0;
@@ -37,59 +40,62 @@ class _InstructionsState extends ConsumerState<Instructions> {
     );
   }
 
-  updatePage(int newIndex) async {
-    setState(() {
-      opacity = 0;
-    });
-    await Future.delayed(const Duration(milliseconds: 200));
-    setState(() {
-      index = newIndex;
-      page = instructionsText[index]!;
-      opacity = 1;
-    });
-  }
+  // updatePage(int newIndex) async {
+  //   setState(() {
+  //     opacity = 0;
+  //   });
+  //   await Future.delayed(const Duration(milliseconds: 200));
+  //   setState(() {
+  //     index = newIndex;
+  //     page = instructionsText[index]!;
+  //     opacity = 1;
+  //   });
+  // }
 
   mobileView(BuildContext context) => Padding(
         padding: const EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(child: movingPart(context)),
-            buttonRow(context),
-          ],
-        ),
+        child: Consumer(builder: (context, ref, _) {
+          final pageIndex = ref.watch(instructionsIndex);
+          final isEnglish = ref.watch(instructionsLanguageIsEnglish);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: movingPart(context, ref, pageIndex, isEnglish)),
+              buttonRow(context, ref, pageIndex),
+            ],
+          );
+        }),
       );
 
-  movingPart(BuildContext context) => AnimatedOpacity(
-        opacity: opacity,
-        duration: const Duration(milliseconds: 150),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: icon(context),
-            ),
-            Expanded(child: text(context)),
-          ],
-        ),
+  movingPart(
+          BuildContext context, WidgetRef ref, int pageIndex, bool isEnglish) =>
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: icon(context, pageIndex, isEnglish),
+          ),
+          Expanded(child: text(context, ref, pageIndex, isEnglish)),
+        ],
       );
 
-  icon(BuildContext context) => SizedBox(
+  icon(BuildContext context, int pageIndex, bool isEnglish) => SizedBox(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                page(context)[0],
+                instructionsMaps[isEnglish]?[pageIndex](context)[0],
               ],
             ),
           ],
         ),
       );
 
-  text(BuildContext context) => Row(
+  text(BuildContext context, WidgetRef ref, int pageIndex, bool isEnglish) =>
+      Row(
         children: [
           Expanded(
             child: Column(
@@ -97,34 +103,43 @@ class _InstructionsState extends ConsumerState<Instructions> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
-                  child: page(context)[1],
+                  child: instructionsMaps[isEnglish]?[pageIndex](context)[1],
+                  //page(context)[1],
                 ),
                 const SizedBox(height: 17),
-                viewOtherText(context),
+                viewOtherText(context, ref, pageIndex, isEnglish),
               ],
             ),
           ),
         ],
       );
 
-  viewOtherText(BuildContext context) => Expanded(
+  viewOtherText(
+          BuildContext context, WidgetRef ref, int pageIndex, bool isEnglish) =>
+      Expanded(
         child: ListView.builder(
-          itemCount: page(context).length - 2,
+          itemCount:
+              instructionsMaps[isEnglish]?[pageIndex](context).length - 2,
+          // page(context).length - 2,
           itemBuilder: (BuildContext context, int index) => Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 14),
-            child: page(context)[index + 2],
+            child: instructionsMaps[isEnglish]?[pageIndex](context)[index + 2],
+            // page(context)[index + 2],
           ),
         ),
       );
 
-  buttonRow(BuildContext context) => Row(
+  buttonRow(BuildContext context, WidgetRef ref, int index) => Row(
         children: [
           Expanded(
             child: ExamplesButton(
               label: 'Previous',
               icon: Icons.arrow_back,
               onTap: () {
-                updatePage(1);
+                if (index > 1) {
+                  ref.read(instructionsIndex.notifier).state =
+                      ref.read(instructionsIndex.notifier).state - 1;
+                }
               },
             ),
           ),
@@ -133,7 +148,10 @@ class _InstructionsState extends ConsumerState<Instructions> {
               label: 'Next',
               icon: Icons.arrow_forward,
               onTap: () {
-                updatePage(2);
+                if (index < 3) {
+                  ref.read(instructionsIndex.notifier).state =
+                      ref.read(instructionsIndex.notifier).state + 1;
+                }
               },
             ),
           ),

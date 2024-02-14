@@ -88,7 +88,12 @@ Widget row(BuildContext context) => Consumer(
                 const SizedBox(width: 2),
               ],
             ),
-            secondFloor(theFloor, theFloorOpacity),
+            Row(
+              children: [
+                const Expanded(child: SizedBox()),
+                secondFloor(theFloor, theFloorOpacity),
+              ],
+            )
           ],
         );
       },

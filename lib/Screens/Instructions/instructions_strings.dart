@@ -158,7 +158,7 @@ List<Widget> page2EnglishText(BuildContext context) => [
           '-Hill climbing algorithm\n-Depth-first search\n-DPLL algorithm\n-WalkSAT algorithm'),
     ];
 
-    List<Widget> page3EnglishText(BuildContext context) => [
+List<Widget> page3EnglishText(BuildContext context) => [
       Icon(
         Icons.query_stats_outlined,
         color: Theme.of(context).colorScheme.primary,
@@ -216,3 +216,18 @@ Map<int, List<Widget> Function(BuildContext context)> instructionsText = {
   // 2: page2GreekText,
   2: page2EnglishText,
 };
+
+Map<bool, Map> instructionsMaps = {
+  true: {
+    1: page1EnglishText,
+    2: page2EnglishText,
+    3: page3EnglishText,
+  },
+  false: {
+    1: page1GreekText,
+    2: page2GreekText,
+    3: page3GreekText,
+  },
+};
+//You can the page3GreekText widget writing:
+//instructionsMaps[false][3](context)
