@@ -127,6 +127,7 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
                     ? 0
                     : elev.toDouble(),
             child: AnimatedContainer(
+              width: 120,
               duration: const Duration(seconds: 1),
               height: 52,
               decoration: BoxDecoration(
@@ -144,16 +145,16 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
                   width: 2,
                 ),
                 borderRadius:
-                    const BorderRadius.all(Radius.circular(cornerSize + 1)),
+                    const BorderRadius.all(Radius.circular(cornerSize)),
               ),
               clipBehavior: Clip.antiAlias,
-              child: theColumn(context),
+              child: theRow(context),
             ),
           ),
         );
       });
 
-  Widget theColumn(BuildContext context) => Row(
+  Widget theRow(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(

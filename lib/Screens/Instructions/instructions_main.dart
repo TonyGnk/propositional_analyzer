@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../global_variables.dart';
+import '../../UI/Components/filled_button.dart';
 import '../Create/Create Share/Segmented/segmented_multi.dart';
 import '../Create/Create Share/analyze_button.dart';
 import '../Create/Create Share/create_helper.dart';
+import '../Create/Create Share/instructions_button.dart';
 import '../Create/Create Share/slide_item.dart';
 import '../Create/Create Share/slide_item_list.dart';
 import '../screen_list.dart';
@@ -54,23 +56,19 @@ class _InstructionsState extends ConsumerState<Instructions> {
   buttonRow(BuildContext context) => Row(
         children: [
           //ElevatedButton Back
-          TextButton(
-            onPressed: () {},
-            child: const Text('Back'),
+          ExamplesButton(
+            label: 'Previous',
+            icon: Icons.arrow_back,
+            onTap: () {},
           ),
-          const Expanded(
-            child: SizedBox(),
-          ),
+          const Expanded(child: SizedBox()),
           circleProgress(),
-          const Expanded(
-            child: SizedBox(),
-          ),
+          const Expanded(child: SizedBox()),
           //ElevatedButton Next
-          AnalyzeButton(
+          MyFilledButton(
             label: 'Next',
             icon: Icons.arrow_forward,
             onTap: () {},
-            currentPrimary: Theme.of(context).colorScheme.primary,
           ),
         ],
       );

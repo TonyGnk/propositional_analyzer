@@ -1,12 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../global_variables.dart';
 
-final isHoveredProviderModernButton = StateProvider<bool>((ref) => false);
-
-class ExamplesButton extends StatefulWidget {
-  const ExamplesButton({
+class MyFilledButton extends StatefulWidget {
+  const MyFilledButton({
     required this.label,
     required this.icon,
     required this.onTap,
@@ -18,23 +18,12 @@ class ExamplesButton extends StatefulWidget {
   final VoidCallback onTap;
 
   @override
-  State<ExamplesButton> createState() => _ExamplesButtonState();
+  State<MyFilledButton> createState() => _MyFilledButtonState();
 }
 
-class _ExamplesButtonState extends State<ExamplesButton> {
-  int gradientIndex = 0;
+class _MyFilledButtonState extends State<MyFilledButton> {
   double scale = 1.0;
   int elev = 4;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) => MouseRegion(
@@ -52,19 +41,22 @@ class _ExamplesButtonState extends State<ExamplesButton> {
         },
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
-          onTap: () {
-            setState(() {});
+          onTap: () async {
+            setState(() {
+              elev = 0;
+            });
+            await Future.delayed(const Duration(milliseconds: 300));
             widget.onTap();
           },
           child: AnimatedScale(
             scale: scale,
             duration: basicDuration,
-            child: container(context),
+            child: container(),
           ),
         ),
       );
 
-  container(BuildContext context) => Consumer(builder: (context, ref, _) {
+  container() => Consumer(builder: (context, ref, _) {
         final isDesktop = ref.watch(isDesktopProvider);
         return Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
@@ -73,41 +65,36 @@ class _ExamplesButtonState extends State<ExamplesButton> {
                 (isDesktop && Theme.of(context).brightness == Brightness.dark)
                     ? 0
                     : elev.toDouble(),
-            child: Container(
+            child: AnimatedContainer(
               width: 120,
+              duration: const Duration(seconds: 1),
               height: 52,
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context)
-                      .menuButtonTheme
-                      .style!
-                      .foregroundColor!
-                      .resolve({})!,
-                ),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
                 borderRadius:
                     const BorderRadius.all(Radius.circular(cornerSize)),
               ),
               clipBehavior: Clip.antiAlias,
-              child: theColumn(context),
+              child: theRow(context),
             ),
           ),
         );
       });
 
-  Widget theColumn(BuildContext context) => Row(
+  Widget theRow(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
             child: Icon(
               widget.icon,
               size: 23,
+              color: Theme.of(context).textTheme.headlineLarge!.color,
             ),
           ),
           const SizedBox(width: 8),
           Text(
             widget.label,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
         ],
       );
