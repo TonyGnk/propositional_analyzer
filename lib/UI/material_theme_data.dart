@@ -16,6 +16,12 @@ class MaterialThemeData extends TotalTheme {
             fontFamily: 'Play',
             fontWeight: FontWeight.w800,
           ),
+          titleMedium: const TextStyle(
+            color: Color.fromARGB(255, 22, 22, 22),
+            fontSize: 25,
+            fontFamily: 'Play',
+            fontWeight: FontWeight.w500,
+          ),
           titleSmall: const TextStyle(
             color: Color.fromARGB(255, 22, 22, 22),
             fontSize: 27,
@@ -128,6 +134,12 @@ class MaterialThemeData extends TotalTheme {
             fontSize: 34,
             fontWeight: FontWeight.w800,
             fontFamily: 'Play',
+          ),
+          titleMedium: const TextStyle(
+            color: Color.fromARGB(255, 255, 246, 242),
+            fontSize: 25,
+            fontFamily: 'Play',
+            fontWeight: FontWeight.w500,
           ),
           titleSmall: const TextStyle(
             color: Color.fromARGB(255, 255, 246, 242),

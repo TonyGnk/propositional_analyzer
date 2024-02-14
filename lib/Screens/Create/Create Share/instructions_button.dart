@@ -67,7 +67,7 @@ class _ExamplesButtonState extends State<ExamplesButton> {
   container(BuildContext context) => Consumer(builder: (context, ref, _) {
         final isDesktop = ref.watch(isDesktopProvider);
         return Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
           child: Card(
             elevation:
                 (isDesktop && Theme.of(context).brightness == Brightness.dark)
