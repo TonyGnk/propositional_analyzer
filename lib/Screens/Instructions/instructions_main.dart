@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../global_variables.dart';
 import '../../UI/Components/filled_button.dart';
 import '../Create/Create Share/instructions_button.dart';
+import '../screen_list.dart';
+import '../shared.dart';
 import 'instructions_state.dart';
 import 'instructions_strings.dart';
 
@@ -18,9 +20,7 @@ class Instructions extends ConsumerStatefulWidget {
 }
 
 class _InstructionsState extends ConsumerState<Instructions> {
-  //List?<Widget> page = null;
   List<Widget> Function(BuildContext context) page = instructionsText[1]!;
-  double opacity = 0;
 
   @override
   void initState() {
@@ -28,29 +28,33 @@ class _InstructionsState extends ConsumerState<Instructions> {
     Future.delayed(Duration.zero, () {
       instructionsReturn(ref);
     });
-    opacity = 1;
   }
 
   @override
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
     return animatedColumn(
-      // isDesktop ? desktopView() :
-      mobileView(context),
+      isDesktop ? desktopView(context) : mobileView(context),
     );
   }
 
-  // updatePage(int newIndex) async {
-  //   setState(() {
-  //     opacity = 0;
-  //   });
-  //   await Future.delayed(const Duration(milliseconds: 200));
-  //   setState(() {
-  //     index = newIndex;
-  //     page = instructionsText[index]!;
-  //     opacity = 1;
-  //   });
-  // }
+  desktopView(BuildContext context) => Consumer(builder: (context, ref, _) {
+        final pageIndex = ref.watch(instructionsIndex);
+        final isEnglish = ref.watch(instructionsLanguageIsEnglish);
+        return desktopFrame(
+            context,
+            Column(
+              children: [
+                Expanded(
+                  child: movingPart(context, ref, pageIndex, isEnglish),
+                ),
+                const SizedBox(height: 6),
+                buttonRowDesktop(context, ref, pageIndex),
+              ],
+            ),
+            850,
+            const EdgeInsets.all(10));
+      });
 
   mobileView(BuildContext context) => Padding(
         padding: const EdgeInsets.all(8),
@@ -61,6 +65,7 @@ class _InstructionsState extends ConsumerState<Instructions> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(child: movingPart(context, ref, pageIndex, isEnglish)),
+              const SizedBox(height: 6),
               buttonRow(context, ref, pageIndex),
             ],
           );
@@ -86,9 +91,7 @@ class _InstructionsState extends ConsumerState<Instructions> {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                instructionsMaps[isEnglish]?[pageIndex](context)[0],
-              ],
+              children: [instructionsMaps[isEnglish]?[pageIndex](context)[0]],
             ),
           ],
         ),
@@ -104,7 +107,6 @@ class _InstructionsState extends ConsumerState<Instructions> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: instructionsMaps[isEnglish]?[pageIndex](context)[1],
-                  //page(context)[1],
                 ),
                 const SizedBox(height: 17),
                 viewOtherText(context, ref, pageIndex, isEnglish),
@@ -120,11 +122,9 @@ class _InstructionsState extends ConsumerState<Instructions> {
         child: ListView.builder(
           itemCount:
               instructionsMaps[isEnglish]?[pageIndex](context).length - 2,
-          // page(context).length - 2,
           itemBuilder: (BuildContext context, int index) => Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 14),
             child: instructionsMaps[isEnglish]?[pageIndex](context)[index + 2],
-            // page(context)[index + 2],
           ),
         ),
       );
@@ -132,82 +132,85 @@ class _InstructionsState extends ConsumerState<Instructions> {
   buttonRow(BuildContext context, WidgetRef ref, int index) => Row(
         children: [
           Expanded(
-            child: ExamplesButton(
-              label: 'Previous',
-              icon: Icons.arrow_back,
-              onTap: () {
-                if (index > 1) {
-                  ref.read(instructionsIndex.notifier).state =
-                      ref.read(instructionsIndex.notifier).state - 1;
-                }
-              },
-            ),
+            child: (index > 1)
+                ? ExamplesButton(
+                    label: 'Previous',
+                    icon: Icons.arrow_back,
+                    onTap: () {
+                      ref.read(instructionsIndex.notifier).state =
+                          ref.read(instructionsIndex.notifier).state - 1;
+                    },
+                  )
+                : const SizedBox(),
           ),
           Expanded(
-            child: MyFilledButton(
-              label: 'Next',
-              icon: Icons.arrow_forward,
-              onTap: () {
-                if (index < 3) {
-                  ref.read(instructionsIndex.notifier).state =
-                      ref.read(instructionsIndex.notifier).state + 1;
-                }
-              },
-            ),
+            child: (index < 3)
+                ? MyFilledButton(
+                    label: 'Next',
+                    icon: Icons.arrow_forward,
+                    onTap: () {
+                      ref.read(instructionsIndex.notifier).state =
+                          ref.read(instructionsIndex.notifier).state + 1;
+                    },
+                  )
+                : MyFilledButton(
+                    label: 'Exit',
+                    icon: Icons.exit_to_app,
+                    onTap: () {
+                      goBack(ref);
+                    },
+                  ),
           ),
         ],
       );
 
-  circleProgress() => Row(
+  buttonRowDesktop(BuildContext context, WidgetRef ref, int index) => Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          //Circle 1 Bold
-          Container(
-            width: 8,
-            height: 8,
-            margin: const EdgeInsets.all(3),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-          ),
-          //Circle 2
-          Container(
-            width: 8,
-            height: 8,
-            margin: const EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white.withOpacity(0.3),
-            ),
-          ),
-          //Circle 3
-          Container(
-            width: 8,
-            height: 8,
-            margin: const EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white.withOpacity(0.3),
-            ),
-          ),
+          (index > 1)
+              ? ExamplesButton(
+                  label: 'Previous',
+                  icon: Icons.arrow_back,
+                  onTap: () {
+                    ref.read(instructionsIndex.notifier).state =
+                        ref.read(instructionsIndex.notifier).state - 1;
+                  },
+                )
+              : const SizedBox(),
+          (index < 3)
+              ? MyFilledButton(
+                  label: 'Next',
+                  icon: Icons.arrow_forward,
+                  onTap: () {
+                    ref.read(instructionsIndex.notifier).state =
+                        ref.read(instructionsIndex.notifier).state + 1;
+                  },
+                )
+              : MyFilledButton(
+                  label: 'Exit',
+                  icon: Icons.exit_to_app,
+                  onTap: () {
+                    goBack(ref);
+                  },
+                ),
         ],
       );
 }
 
-desktopFrame(BuildContext context, Column column) => Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          constraints: const BoxConstraints(maxHeight: 470),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Theme.of(context).dividerColor),
-            color: Theme.of(context).dividerColor.withOpacity(0.1),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          margin: const EdgeInsets.symmetric(horizontal: 18),
-          width: 800,
-          child: column,
-        ),
-      ],
-    );
+// desktopFrame(BuildContext context, Column column) => Column(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Container(
+//           constraints: const BoxConstraints(maxHeight: 470),
+//           decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(16),
+//             border: Border.all(color: Theme.of(context).dividerColor),
+//             color: Theme.of(context).dividerColor.withOpacity(0.1),
+//           ),
+//           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+//           margin: const EdgeInsets.symmetric(horizontal: 18),
+//           width: 800,
+//           child: column,
+//         ),
+//       ],
+//     );

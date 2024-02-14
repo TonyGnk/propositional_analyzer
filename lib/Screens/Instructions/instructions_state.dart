@@ -19,6 +19,7 @@ instructionsGo(WidgetRef ref, ScreenDestination destination) {
 instructionsReturn(WidgetRef ref) {
   //updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
+  ref.read(instructionsIndex.notifier).state = 1;
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
@@ -26,7 +27,7 @@ updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateInfoButton(ref, !isReturn);
   //updateAppBarCustomIcon1(ref, exitIconButton(), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
-  updateSecondFloor(ref, container(ref), isReturn);
+  updateSecondFloor(ref, circles(), container(ref), isReturn);
 }
 
 animatedColumn(Widget child) => Consumer(
@@ -56,3 +57,43 @@ container(WidgetRef oldRef) => Consumer(
         ],
       ),
     );
+
+//A row of 3 circles
+circles() => Consumer(builder: (context, ref, _) {
+      final index = ref.watch(instructionsIndex);
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(width: 20),
+          AnimatedContainer(
+            duration: basicDuration,
+            width: 11,
+            height: 11,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: (index == 1) ? Colors.grey : Colors.grey.withOpacity(0.4),
+            ),
+          ),
+          const SizedBox(width: 3),
+          AnimatedContainer(
+            duration: basicDuration,
+            width: 11,
+            height: 11,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: (index == 2) ? Colors.grey : Colors.grey.withOpacity(0.4),
+            ),
+          ),
+          const SizedBox(width: 3),
+          AnimatedContainer(
+            duration: basicDuration,
+            width: 11,
+            height: 11,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: (index == 3) ? Colors.grey : Colors.grey.withOpacity(0.4),
+            ),
+          ),
+        ],
+      );
+    });

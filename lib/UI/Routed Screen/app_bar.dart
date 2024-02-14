@@ -90,8 +90,9 @@ Widget row(BuildContext context) => Consumer(
             ),
             Row(
               children: [
+                secondFloor1(theFloor, theFloorOpacity),
                 const Expanded(child: SizedBox()),
-                secondFloor(theFloor, theFloorOpacity),
+                secondFloor2(theFloor, theFloorOpacity),
               ],
             )
           ],
@@ -99,12 +100,22 @@ Widget row(BuildContext context) => Consumer(
       },
     );
 
-secondFloor(Widget theFloor, double theFloorOpacity) => Row(
+secondFloor1(List<Widget> theFloor, double theFloorOpacity) => Row(
       children: [
         AnimatedOpacity(
           duration: basicDuration,
           opacity: theFloorOpacity,
-          child: theFloor,
+          child: theFloor[0],
+        ),
+      ],
+    );
+
+secondFloor2(List<Widget> theFloor, double theFloorOpacity) => Row(
+      children: [
+        AnimatedOpacity(
+          duration: basicDuration,
+          opacity: theFloorOpacity,
+          child: theFloor[1],
         ),
       ],
     );
@@ -145,11 +156,14 @@ updateAppBarLabel(WidgetRef ref, String label, bool isReturn) {
   ref.read(appBarLabelOpacity.notifier).state = isReturn ? 1 : 0;
 }
 
-final appBarSecondFloor = StateProvider<Widget>((ref) => const SizedBox());
+final appBarSecondFloor =
+    StateProvider<List<Widget>>((ref) => [const SizedBox(), const SizedBox()]);
 final appBarSecondFloorOpacity = StateProvider<double>((ref) => 0);
-updateSecondFloor(WidgetRef ref, Widget newFloor, bool isReturn) {
-  ref.read(appBarSecondFloor.notifier).state =
-      isReturn ? newFloor : const SizedBox();
+updateSecondFloor(
+    WidgetRef ref, Widget newFloorLeft, Widget newFloorRight, bool isReturn) {
+  ref.read(appBarSecondFloor.notifier).state = isReturn
+      ? [newFloorLeft, newFloorRight]
+      : [const SizedBox(), const SizedBox()];
   ref.read(appBarSecondFloorOpacity.notifier).state = isReturn ? 1 : 0;
 }
 

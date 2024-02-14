@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../global_variables.dart';
 
-desktopFrame(BuildContext context, Column column, double width,
-        EdgeInsets padding) =>
+desktopFrame(BuildContext context, Column column,
+        [double width = 800, EdgeInsets padding = const EdgeInsets.all(5)]) =>
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

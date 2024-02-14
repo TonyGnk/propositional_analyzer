@@ -88,8 +88,6 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
             ),
           ],
         ),
-        800,
-        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       );
 
   createColumn() => Column(

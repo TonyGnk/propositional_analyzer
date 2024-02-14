@@ -8,7 +8,7 @@ speakerIcon() => Consumer(
         final isMute = ref.watch(isMuteProvider);
         return IconButton(
           isSelected: isMute,
-          tooltip: 'Play Sound At The End',
+          tooltip: 'Something happened and it stopped working.',
           selectedIcon: const Icon(Icons.volume_off_outlined),
           onPressed: () {
             ref.read(isMuteProvider.notifier).state = !isMute;
