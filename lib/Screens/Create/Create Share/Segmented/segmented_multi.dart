@@ -60,12 +60,11 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
         height: 50,
         decoration: isSelected(id)
             ? BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(cornerSize - 3),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                borderRadius: BorderRadius.circular(cornerSize - 2),
                 border: Border.all(
                   color:
                       Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-                  width: 1,
                 ),
               )
             : BoxDecoration(
@@ -75,8 +74,10 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            splashColor:
-                Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+            // splashColor:
+            //     Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+            overlayColor: MaterialStateProperty.all<Color>(
+                const Color.fromARGB(255, 139, 120, 112).withOpacity(0.1)),
             onTap: () => setState(() => algorithmFunctionMap[id]!()),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(12, 3, 12, 3),
@@ -86,20 +87,17 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
                   Center(
                     child: Icon(
                       algorithmIconMap[id]!,
-                      color: Theme.of(context).canvasColor,
+                      color: (isSelected(id))
+                          ? Theme.of(context).textTheme.headlineLarge!.color
+                          : Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     algorithmNamesMap[id]!,
-                    style: TextStyle(
-                      fontFamily: 'Play',
-                      fontSize: 16,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onBackground
-                          .withOpacity(0.9),
-                    ),
+                    style: (isSelected(id))
+                        ? Theme.of(context).textTheme.headlineLarge
+                        : Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),
@@ -122,20 +120,27 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
     }
   }
 
-  container(Widget child, bool isDesktop) => Container(
-        height: isDesktop ? 50 : 117,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(cornerSize - 1),
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-            width: 1,
+  container(Widget child, bool isDesktop) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Card(
+          child: Container(
+            height: isDesktop ? 50 : 117,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(cornerSize - 1),
+              //color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+              border: Border.all(
+                color: Theme.of(context)
+                    .menuButtonTheme
+                    .style!
+                    .foregroundColor!
+                    .resolve({})!,
+              ),
+            ),
+            padding: const EdgeInsets.all(5),
+            clipBehavior: Clip.antiAlias,
+            child: child,
           ),
         ),
-        padding: const EdgeInsets.all(5),
-        clipBehavior: Clip.antiAlias,
-        margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
-        child: child,
       );
 }
 

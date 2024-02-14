@@ -33,7 +33,6 @@ class _DesktopSegmentedState extends State<DesktopSegmented> {
               ),
             ),
             clipBehavior: Clip.antiAlias,
-            // margin: const EdgeInsets.fromLTRB(7, 0, 7, 8),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
