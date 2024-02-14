@@ -117,35 +117,41 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
         ),
       );
 
-  container() => Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
-        child: Card(
-          elevation: elev.toDouble(),
-          child: AnimatedContainer(
-            duration: const Duration(seconds: 1),
-            height: 52,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                  isFade ? color : Theme.of(context).colorScheme.primary
-                    ..withOpacity(0.8),
-                ],
-                begin: alignmentGeometryA,
-                end: alignmentGeometryB,
+  container() => Consumer(builder: (context, ref, _) {
+        final isDesktop = ref.watch(isDesktopProvider);
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
+          child: Card(
+            elevation:
+                (isDesktop && Theme.of(context).brightness == Brightness.dark)
+                    ? 0
+                    : elev.toDouble(),
+            child: AnimatedContainer(
+              duration: const Duration(seconds: 1),
+              height: 52,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                    isFade ? color : Theme.of(context).colorScheme.primary
+                      ..withOpacity(0.8),
+                  ],
+                  begin: alignmentGeometryA,
+                  end: alignmentGeometryB,
+                ),
+                border: Border.all(
+                  color: borderColor,
+                  width: 2,
+                ),
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(cornerSize + 1)),
               ),
-              border: Border.all(
-                color: borderColor,
-                width: 2,
-              ),
-              borderRadius:
-                  const BorderRadius.all(Radius.circular(cornerSize + 1)),
+              clipBehavior: Clip.antiAlias,
+              child: theColumn(context),
             ),
-            clipBehavior: Clip.antiAlias,
-            child: theColumn(context),
           ),
-        ),
-      );
+        );
+      });
 
   Widget theColumn(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,

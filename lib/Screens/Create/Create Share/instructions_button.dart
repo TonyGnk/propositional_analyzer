@@ -64,27 +64,34 @@ class _ExamplesButtonState extends State<ExamplesButton> {
         ),
       );
 
-  container(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(8, 0, 0, 8),
-        child: Card(
-          elevation: elev.toDouble(),
-          child: Container(
-            height: 52,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Theme.of(context)
-                    .menuButtonTheme
-                    .style!
-                    .foregroundColor!
-                    .resolve({})!,
+  container(BuildContext context) => Consumer(builder: (context, ref, _) {
+        final isDesktop = ref.watch(isDesktopProvider);
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
+          child: Card(
+            elevation:
+                (isDesktop && Theme.of(context).brightness == Brightness.dark)
+                    ? 0
+                    : elev.toDouble(),
+            child: Container(
+              height: 52,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context)
+                      .menuButtonTheme
+                      .style!
+                      .foregroundColor!
+                      .resolve({})!,
+                ),
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(cornerSize)),
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(cornerSize)),
+              clipBehavior: Clip.antiAlias,
+              child: theColumn(context),
             ),
-            clipBehavior: Clip.antiAlias,
-            child: theColumn(context),
           ),
-        ),
-      );
+        );
+      });
 
   Widget theColumn(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
