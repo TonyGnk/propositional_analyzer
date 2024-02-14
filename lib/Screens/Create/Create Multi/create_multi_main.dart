@@ -104,10 +104,17 @@ class _CreateState extends ConsumerState<CreateMulti> {
               slideTime(updateTime),
             ]),
             const Expanded(flex: 1, child: SizedBox()),
-            examplesContainer(),
-            analyzeContainer(true),
+            buttonRow(),
           ],
         ),
+      );
+
+  buttonRow() => Row(
+        children: [
+          Expanded(child: examplesContainer()),
+          const SizedBox(width: 5),
+          Expanded(child: analyzeContainer(true)),
+        ],
       );
 
   updateK(int value) => setState(() {
