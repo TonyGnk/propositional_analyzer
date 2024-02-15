@@ -7,9 +7,10 @@ import 'package:fullscreen_window/fullscreen_window.dart';
 import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
 import '../../Create/Create Single/create_single_helper.dart';
-import 'chart_single_line.dart';
 import 'chart_single_line_extra.dart';
 import 'charts_single_state.dart';
+import 'success_line.dart';
+import 'time_line.dart';
 
 bool show1 = true;
 bool show2 = true;
@@ -29,25 +30,6 @@ class ChartSingleState extends ConsumerState<ChartSingle> {
   initState() {
     super.initState();
     Future.delayed(Duration.zero, () => chartsSingleReturn(ref));
-  }
-
-  playAgainAnimationUp() {
-    animatedSpotUp = [];
-    Timer.periodic(const Duration(milliseconds: 10), (timer) {
-      setState(() {
-        if (animatedSpotUp.length < spots1.length) {
-          for (var i = 0; i < 10; i++) {
-            if (animatedSpotUp.length < spots1.length) {
-              animatedSpotUp.add(spots1[animatedSpotUp.length]);
-            } else {
-              break;
-            }
-          }
-        } else {
-          timer.cancel();
-        }
-      });
-    });
   }
 
   playAgainAnimationDown() {
@@ -75,13 +57,8 @@ class ChartSingleState extends ConsumerState<ChartSingle> {
         child: animatedColumn(
           Column(
             children: [
-              Expanded(
-                flex: 2,
-                child: ChartSuccess(spots1),
-              ),
-              //Expanded(child: lineChart(true)),
-              //aSecondWidget(context),
-              //Expanded(flex: 1, child: lineChart(false)),
+              Expanded(child: ChartSuccess(spots1)),
+              Expanded(child: ChartTime(spots2)),
             ],
           ),
         ),
@@ -119,92 +96,4 @@ class ChartSingleState extends ConsumerState<ChartSingle> {
   //     FullScreenWindow.setFullScreen(true);
   //   }
   // }
-
-  lineChart(bool isFirst) => LineChart(
-        duration: const Duration(milliseconds: 1000),
-        LineChartData(
-          lineTouchData: LineTouchData(
-            getTouchedSpotIndicator: (
-              LineChartBarData barData,
-              List<int> spotIndexes,
-            ) {
-              return spotIndexes
-                  .map((spotIndex) => TouchedSpotIndicatorData(
-                        const FlLine(
-                          color: Color.fromRGBO(148, 99, 60, 1),
-                          strokeWidth: 3,
-                        ),
-                        FlDotData(
-                          getDotPainter: (spot, percent, barData, index) =>
-                              FlDotCirclePainter(
-                            radius: 6,
-                            color: Colors.white,
-                            strokeWidth: 3,
-                            strokeColor: const Color.fromRGBO(112, 72, 40, 1),
-                          ),
-                        ),
-                      ))
-                  .toList();
-            },
-            touchTooltipData: LineTouchTooltipData(
-              tooltipBgColor: Colors.grey,
-              getTooltipItems: (List<LineBarSpot> touchedBarSpots) =>
-                  touchedBarSpots.map((barSpot) {
-                final flSpot = barSpot;
-
-                return LineTooltipItem(
-                  isFirst
-                      ? '${flSpot.x.toString()}  M=${(N * flSpot.x).toInt()}'
-                      : '${flSpot.y.toStringAsFixed(1)} sec  M=${(N * flSpot.x).toInt()}',
-                  const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Play'),
-                );
-              }).toList(),
-            ),
-          ),
-
-          borderData: FlBorderData(
-            show: true,
-            border: Border.all(color: const Color(0xff37434d)),
-          ),
-          titlesData: FlTitlesData(
-            show: true,
-            topTitles: AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            leftTitles: AxisTitles(
-                sideTitles: SideTitles(
-                    reservedSize: 32,
-                    interval: (numberOfTests > 10) ? 2 : 1,
-                    showTitles: true)),
-          ),
-          gridData: const FlGridData(
-            drawHorizontalLine: true,
-          ),
-          // minX: collapsedUp ? firstNotOneUp.toDouble() : spots1[0].x,
-          maxX: spots1[spots1.length - 1].x,
-          maxY: isFirst ? numberOfTests.toDouble() : null,
-          minY: isFirst ? 0 : 0,
-          lineBarsData: [
-            LineChartBarData(
-              barWidth: 3,
-              isCurved: false,
-              spots: isFirst ? animatedSpotUp : animatedSpotDown,
-              gradient: LinearGradient(colors: gradientColors),
-              isStrokeCapRound: true,
-              dotData: const FlDotData(show: false),
-              belowBarData: BarAreaData(
-                show: true,
-                gradient: LinearGradient(
-                  colors: gradientColors
-                      .map((color) => color.withOpacity(0.3))
-                      .toList(),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
 }

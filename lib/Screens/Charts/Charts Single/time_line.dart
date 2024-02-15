@@ -8,36 +8,40 @@ import '../../../global_variables.dart';
 import '../../Create/Create Single/create_single_helper.dart';
 import 'chart_single_line_extra.dart';
 
-List<FlSpot> animatedSpotUp = [];
-
-class ChartSuccess extends ConsumerStatefulWidget {
-  const ChartSuccess(this.spots, {super.key});
+class ChartTime extends ConsumerStatefulWidget {
+  const ChartTime(this.spots, {super.key});
 
   final List<FlSpot> spots;
 
   @override
-  ConsumerState<ChartSuccess> createState() => ChartSuccessState();
+  ConsumerState<ChartTime> createState() => ChartTimeState();
 }
 
-class ChartSuccessState extends ConsumerState<ChartSuccess> {
+class ChartTimeState extends ConsumerState<ChartTime> {
   Duration stepDuration = const Duration(milliseconds: 30);
+  List<FlSpot> animatedSpot = [];
+  int step = 1;
+  double maxY = 0;
 
   @override
   initState() {
     super.initState();
-    playAgainAnimationUp();
+    playAgainAnimation();
+    maxY = findMaxY(widget.spots);
+    //print all the widget.spots
+    print('widget.spots: ${widget.spots}');
   }
 
-  playAgainAnimationUp() {
-    int step = findRightStep();
+  playAgainAnimation() {
+    step = findRightStep();
     print('Length spots: ${widget.spots.length}');
-    animatedSpotUp = [];
+    animatedSpot = [];
     Timer.periodic(stepDuration, (timer) {
       setState(() {
-        if (animatedSpotUp.length < widget.spots.length) {
+        if (animatedSpot.length < widget.spots.length) {
           for (var i = 0; i < step; i++) {
-            if (animatedSpotUp.length < widget.spots.length) {
-              animatedSpotUp.add(widget.spots[animatedSpotUp.length]);
+            if (animatedSpot.length < widget.spots.length) {
+              animatedSpot.add(widget.spots[animatedSpot.length]);
             } else {
               break;
             }
@@ -49,7 +53,7 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
     });
   }
 
-  findRightStep() {
+  int findRightStep() {
     stepDuration = const Duration(milliseconds: 30);
     if (widget.spots.length < 25) {
       stepDuration = const Duration(milliseconds: 300);
@@ -62,32 +66,35 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          chartHeaderSuccess(
-            'Attainability to M/N',
-            playAgainAnimationUp,
+          chartHeaderTime(
+            'Run Time to M/N',
+            playAgainAnimation,
           ),
           Expanded(child: chart()),
         ],
       );
 
-  chart() => (animatedSpotUp.isNotEmpty)
+  chart() => (animatedSpot.isNotEmpty)
       ? LineChart(
           duration: const Duration(milliseconds: 1000),
           LineChartData(
-            lineTouchData: lineTouchData(context, LineType.success),
+            lineTouchData: lineTouchData(context, LineType.time),
             borderData: FlBorderData(
               show: true,
               border: Border.all(
                 color: const Color.fromARGB(255, 54, 54, 54),
               ),
             ),
-            titlesData: titleData(LineType.success),
-            gridData: const FlGridData(drawHorizontalLine: true),
+            titlesData: titleData(LineType.time),
+            gridData: const FlGridData(drawHorizontalLine: false),
             minX: widget.spots[0].x.toDouble(),
             maxX: widget.spots[widget.spots.length - 1].x.toDouble(),
             minY: 0,
-            maxY: numberOfTests.toDouble(),
-            lineBarsData: singleBarDataSuccess(animatedSpotUp),
+            //timeout is in seconds convert to milliseconds
+            maxY:
+                //((timeOut + 1) * 1000).toDouble(),
+                maxY,
+            lineBarsData: singleBarDataSuccess(animatedSpot),
           ),
         )
       : const SizedBox();

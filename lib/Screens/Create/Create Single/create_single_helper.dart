@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,40 +11,42 @@ class ChartSingle extends ConsumerStatefulWidget {
   ConsumerState<ChartSingle> createState() => ChartSingleState();
 }
 
-// shortUp() {
-//   for (var i = 0; i < spots1.length; i++) {
-//     if (spots1[i].y != 1) {
-//       firstNotOneUpSpot = spots1[i];
-//       break;
-//     }
-//   }
-//   setState(() {
-//     firstNotOneUp = (firstNotOneUpSpot.x * N).round();
-//     for (var i = 0; i < firstNotOneUp; i++) {
-//       animatedSpotUp.removeAt(0);
-//     }
-//   });
-// }
-
 chartHeaderSuccess(
+  String label,
+  void Function() onPressedRepeat,
+  void Function() onPressedCollapse,
+  bool isCollapsed,
+) =>
+    Consumer(
+      builder: (context, ref, _) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 44),
+        child: Row(
+          children: [
+            Text(label, style: Theme.of(context).textTheme.labelSmall),
+            const Expanded(child: SizedBox()),
+            repeatIcon(context, onPressedRepeat),
+            collapseIcon(context, onPressedCollapse, isCollapsed),
+            // fullScreenIcon(),
+          ],
+        ),
+      ),
+    );
+
+chartHeaderTime(
   String label,
   void Function() onPressedRepeat,
 ) =>
     Consumer(
       builder: (context, ref, _) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 44),
-        child: show2
-            ? Row(
-                children: [
-                  Text(label, style: Theme.of(context).textTheme.labelSmall),
-                  const Expanded(child: SizedBox()),
-                  repeatIcon(context, onPressedRepeat),
-
-                  // collapseIcon(context),
-                  // fullScreenIcon(),
-                ],
-              )
-            : const SizedBox(),
+        child: Row(
+          children: [
+            Text(label, style: Theme.of(context).textTheme.labelSmall),
+            const Expanded(child: SizedBox()),
+            repeatIcon(context, onPressedRepeat),
+            // fullScreenIcon(),
+          ],
+        ),
       ),
     );
 
@@ -56,23 +59,16 @@ repeatIcon(BuildContext context, void Function() onPressed) =>
           )
         : const SizedBox();
 
-// collapseIcon(BuildContext context) => (MediaQuery.of(context).size.width > 350)
-//     ? IconButton(
-//         icon: const Icon(Icons.auto_graph_outlined),
-//         onPressed: () async {
-//           if (isFirst) {
-//             setState(() {
-//               collapsedUp = !collapsedUp;
-//               //shortUp();
-//             });
-//           } else {
-//             setState(() {
-//               collapsedDown = !collapsedDown;
-//             });
-//           }
-//         },
-//       )
-//     : const SizedBox();
+collapseIcon(
+        BuildContext context, void Function() onPressed, bool isSelected) =>
+    (MediaQuery.of(context).size.width > 350)
+        ? IconButton(
+            icon: const Icon(Icons.zoom_in_outlined),
+            onPressed: onPressed,
+            isSelected: isSelected,
+            selectedIcon: const Icon(Icons.zoom_out_outlined),
+          )
+        : const SizedBox();
 
 // fullScreenIcon()=> IconButton(
 //       icon: isFullScreen
@@ -82,3 +78,13 @@ repeatIcon(BuildContext context, void Function() onPressed) =>
 //         fullScreen(ref, isFirst);
 //       },
 //     );
+
+double findMaxY(List<FlSpot> spots) {
+  double maxY = 0;
+  for (var i = 0; i < spots.length; i++) {
+    if (spots[i].y > maxY) {
+      maxY = spots[i].y;
+    }
+  }
+  return maxY;
+}

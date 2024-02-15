@@ -47,13 +47,13 @@ LineTouchTooltipData lineTooltip(BuildContext context, LineType type) =>
     );
 
 LineTooltipItem lineTooltipItemSuccess(LineBarSpot flSpot) => LineTooltipItem(
-      '${flSpot.x.toString()}  M=${(N * flSpot.x).toInt()}',
+      '${flSpot.y.toInt()}/$numberOfTests  M=${(N * flSpot.x).toInt()}',
       const TextStyle(
           color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Play'),
     );
 
 LineTooltipItem lineTooltipItemTime(LineBarSpot flSpot) => LineTooltipItem(
-      '${flSpot.y.toStringAsFixed(1)} sec  M=${(N * flSpot.x).toInt()}',
+      '${flSpot.y.toStringAsFixed(1)} ms  M=${(N * flSpot.x).toInt()}',
       const TextStyle(
           color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Play'),
     );
@@ -87,18 +87,18 @@ FlTitlesData titleDataTime() => const FlTitlesData(
       topTitles: AxisTitles(
         sideTitles: SideTitles(showTitles: false),
       ),
-      leftTitles: AxisTitles(
-        sideTitles: SideTitles(
-          reservedSize: 30,
-          showTitles: true,
-        ),
-      ),
-      rightTitles: AxisTitles(
-        sideTitles: SideTitles(
-          reservedSize: 30,
-          showTitles: true,
-        ),
-      ),
+      // leftTitles: AxisTitles(
+      //   sideTitles: SideTitles(
+      //     reservedSize: 30,
+      //     showTitles: true,
+      //   ),
+      // ),
+      // rightTitles: AxisTitles(
+      //   sideTitles: SideTitles(
+      //     reservedSize: 30,
+      //     showTitles: true,
+      //   ),
+      // ),
     );
 
 List<LineChartBarData> singleBarDataSuccess(List<FlSpot> spots) {
@@ -123,4 +123,15 @@ List<LineChartBarData> singleBarDataSuccess(List<FlSpot> spots) {
       ),
     ),
   ];
+}
+
+//Find the index of FlSpot where the y become different to 1
+int? findCurvingIndex(List<FlSpot> list) {
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].y != numberOfTests.toDouble()) {
+      if (i == 0) return 0;
+      return i - 1;
+    }
+  }
+  return null;
 }

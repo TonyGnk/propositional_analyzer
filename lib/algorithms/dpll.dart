@@ -25,6 +25,8 @@ solveWithDpll(List<List<int>> clauses) async {
   bool result = dpllRecursive(solution, clauses, 0);
 
   if (result) {
+    //print Time
+    print('Time: ${nowTimeDPLL.difference(startTimeDPLL).inMilliseconds} ms');
     return Search(
       win: true,
       time: nowTimeDPLL.difference(startTimeDPLL).inMilliseconds,
