@@ -3,6 +3,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:universal_platform/universal_platform.dart';
 import '../../global_variables.dart';
 import 'root_config.dart';
 import '../Theme Services/ui_change.dart';
@@ -48,9 +49,13 @@ class _AdaptiveRootState extends ConsumerState<AdaptiveRoot>
 
   @override
   void didChangeMetrics() {
-    bool newState = View.of(context).physicalSize.width > 550;
-    if (ref.read(isDesktopProvider.notifier).state != newState) {
-      ref.read(isDesktopProvider.notifier).state = newState;
+    if (UniversalPlatform.isAndroid) {
+      ref.read(isDesktopProvider.notifier).state = false;
+    } else {
+      bool newState = View.of(context).physicalSize.width > 600;
+      if (ref.read(isDesktopProvider.notifier).state != newState) {
+        ref.read(isDesktopProvider.notifier).state = newState;
+      }
     }
   }
 

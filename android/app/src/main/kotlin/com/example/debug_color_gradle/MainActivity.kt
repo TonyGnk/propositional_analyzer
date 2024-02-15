@@ -1,4 +1,4 @@
-package com.example.propositional_analyzer
+package com.example.debug_color_gradle
 
 import io.flutter.embedding.android.FlutterActivity
 

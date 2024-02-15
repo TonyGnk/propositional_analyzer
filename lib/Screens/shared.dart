@@ -11,27 +11,31 @@ desktopFrame(
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Card(
-          color: Theme.of(context).navigationDrawerTheme.backgroundColor,
-          elevation: (Theme.of(context).brightness == Brightness.dark) ? 0 : 2,
-          child: Container(
-            constraints: const BoxConstraints(maxHeight: 550),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(cornerSize),
-              border: (Theme.of(context).brightness == Brightness.dark)
-                  ? Border.all(
-                      width: 2,
-                      color: Theme.of(context)
-                          .menuButtonTheme
-                          .style!
-                          .foregroundColor!
-                          .resolve({})!,
-                    )
-                  : null,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Card(
+            color: Theme.of(context).navigationDrawerTheme.backgroundColor,
+            elevation:
+                (Theme.of(context).brightness == Brightness.dark) ? 0 : 2,
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 550),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(cornerSize),
+                border: (Theme.of(context).brightness == Brightness.dark)
+                    ? Border.all(
+                        width: 2,
+                        color: Theme.of(context)
+                            .menuButtonTheme
+                            .style!
+                            .foregroundColor!
+                            .resolve({})!,
+                      )
+                    : null,
+              ),
+              padding: padding,
+              width: width,
+              child: column,
             ),
-            padding: padding,
-            width: width,
-            child: column,
           ),
         ),
       ],

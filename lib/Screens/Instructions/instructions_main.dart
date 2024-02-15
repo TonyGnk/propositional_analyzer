@@ -52,7 +52,7 @@ class _InstructionsState extends ConsumerState<Instructions> {
                 buttonRowDesktop(context, ref, pageIndex),
               ],
             ),
-            850,
+            900,
             const EdgeInsets.all(10));
       });
 
@@ -73,7 +73,11 @@ class _InstructionsState extends ConsumerState<Instructions> {
       );
 
   movingPart(
-          BuildContext context, WidgetRef ref, int pageIndex, bool isEnglish) =>
+    BuildContext context,
+    WidgetRef ref,
+    int pageIndex,
+    bool isEnglish,
+  ) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

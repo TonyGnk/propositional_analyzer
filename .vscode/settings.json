@@ -22,7 +22,7 @@
 		"**/linux": true,
 		"**/.idea": true,
 		"**/build": true,
-		"**/android": true,
+		//"**/android": true,
 		//hide readme
 		// hide .vscode
 		"**/.vscode": true,

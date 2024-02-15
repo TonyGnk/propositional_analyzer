@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../global_variables.dart';
+import '../../screen_list.dart';
 import '../../shared.dart';
 import '../Create Share/create_helper.dart';
 import '../Create Share/Segmented/desktop_segmented.dart';
@@ -29,6 +30,11 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
   @override
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
+//     return PopScope(
+//   onPopInvoked: (value) => goBack(ref),
+//   child: MaterialApp(...),
+// );
+
     return animatedColumn(
       isDesktop ? desktopView() : mobileView(),
     );

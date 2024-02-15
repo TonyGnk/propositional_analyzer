@@ -9,7 +9,7 @@ import 'algorithms/playground.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!UniversalPlatform.isWeb) {
+  if (UniversalPlatform.isWindows) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
       fullScreen: false,
