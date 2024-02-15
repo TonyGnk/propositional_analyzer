@@ -276,7 +276,7 @@ class _ChartSingleState extends ConsumerState<ChartSingle> {
           ),
           // minX: collapsedUp ? firstNotOneUp.toDouble() : spots1[0].x,
           maxX: spots1[spots1.length - 1].x,
-          maxY: isFirst ? 1 : null,
+          maxY: isFirst ? numberOfTests.toDouble() : null,
           minY: isFirst ? 0 : 0,
           lineBarsData: [
             LineChartBarData(

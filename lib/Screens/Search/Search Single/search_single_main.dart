@@ -1,16 +1,13 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 import '../../../global_variables.dart';
-import '../../Charts/Charts Multi/line_data.dart';
 import '../../screen_list.dart';
 import '../Search Multi/multi_chart_bar.dart';
 import '../Search Share/search_layout.dart';
 import '../Search Share/track.dart';
 import '../Search Share/algorithm_bridge.dart';
-import '../Search Share/search_circle.dart';
 import 'search_single_layout.dart';
 import 'search_single_state.dart';
 
@@ -58,7 +55,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
                 duration: const Duration(milliseconds: 1000),
                 LineChartData(
                   minY: 0,
-                  maxY: 1.01,
+                  maxY: numberOfTests.toDouble(),
                   lineTouchData: const LineTouchData(enabled: false),
                   clipData: const FlClipData.all(),
                   gridData: const FlGridData(
@@ -96,7 +93,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
         await Future.delayed(Duration.zero, () {
           setState(() {
             str = 'M=$M';
-            str2 = '$sampleSum/$numberOfTests';
+            str2 = '$j/$numberOfTests';
 
             stop1 = stopsPrimary[j - 1];
             stop2 = stopsSecondary[j - 1];
@@ -105,12 +102,11 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
           });
         });
       }
-      double n = sampleSum / numberOfTests;
       double averageTime = timeSum / numberOfTests;
 
       await Future.delayed(Duration.zero, () {
         setState(() {
-          addSpot(M.toDouble(), n, averageTime);
+          addSpot(M.toDouble(), sampleSum.toDouble(), averageTime);
         });
       });
 
