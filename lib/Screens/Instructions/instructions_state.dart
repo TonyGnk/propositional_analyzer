@@ -71,7 +71,7 @@ circles() => Consumer(builder: (context, ref, _) {
             height: 11,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: (index == 1) ? Colors.grey : Colors.grey.withOpacity(0.4),
+              color: (index == 1) ? Colors.grey : Colors.grey.withOpacity(0.2),
             ),
           ),
           const SizedBox(width: 3),
