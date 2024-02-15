@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../global_variables.dart';
 import 'segmented_share.dart';
@@ -19,30 +20,42 @@ class _DesktopSegmentedState extends State<DesktopSegmented> {
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Card(
-          child: Container(
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(cornerSize),
-              border: Border.all(
-                color: Theme.of(context)
-                    .menuButtonTheme
-                    .style!
-                    .foregroundColor!
-                    .resolve({})!,
+        child: Consumer(
+          builder: (context, ref, _) {
+            final isDesktop = ref.watch(isDesktopProvider);
+            return Card(
+              elevation: isDesktop ? 0 : null,
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(cornerSize),
+                  border: (isDesktop &&
+                          Theme.of(context).brightness == Brightness.light)
+                      ? Border.all(
+                          color: Theme.of(context).splashColor,
+                          width: 2,
+                        )
+                      : Border.all(
+                          color: Theme.of(context)
+                              .menuButtonTheme
+                              .style!
+                              .foregroundColor!
+                              .resolve({})!,
+                        ),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    selectItem1(0),
+                    selectItem2(1),
+                    selectItem3(2),
+                    selectItem4(3),
+                  ],
+                ),
               ),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                selectItem1(0),
-                selectItem2(1),
-                selectItem3(2),
-                selectItem4(3),
-              ],
-            ),
-          ),
+            );
+          },
         ),
       );
 
@@ -56,17 +69,12 @@ class _DesktopSegmentedState extends State<DesktopSegmented> {
     });
   }
 
-  selectItem1(int id) => openedRow(id, 12);
-  selectItem2(int id) => openedRow(id, 11);
-  selectItem3(int id) => openedRow(id, 7);
-  selectItem4(int id) => openedRow(id, 10);
+  selectItem1(int id) => openedRow(id);
+  selectItem2(int id) => openedRow(id);
+  selectItem3(int id) => openedRow(id);
+  selectItem4(int id) => openedRow(id);
 
-  openedRow(
-    int id,
-    int flex,
-  ) =>
-      Expanded(
-        flex: flex,
+  openedRow(int id) => Expanded(
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           margin: const EdgeInsets.all(5),

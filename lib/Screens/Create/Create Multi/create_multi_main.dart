@@ -48,14 +48,14 @@ class _CreateState extends ConsumerState<CreateMulti> {
                 Expanded(
                   child: group(
                     context,
-                    183,
+                    185,
                     [slideK(updateK), slideN(updateN), slideTests(updateTests)],
                   ),
                 ),
                 Expanded(
                   child: group(
                     context,
-                    183,
+                    185,
                     [
                       const Expanded(child: SizedBox()),
                       slideStop(updateStop),

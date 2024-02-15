@@ -32,6 +32,7 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
           Expanded(child: checkRow(3)),
         ],
       );
+
   mobileSegmentedMulti() => Row(
         children: [
           Expanded(
@@ -116,23 +117,35 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
 
   container(Widget child, bool isDesktop) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Card(
-          child: Container(
-            height: isDesktop ? 50 : 117,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(cornerSize - 1),
-              border: Border.all(
-                color: Theme.of(context)
-                    .menuButtonTheme
-                    .style!
-                    .foregroundColor!
-                    .resolve({})!,
+        child: Consumer(
+          builder: (context, ref, _) {
+            final isDesktop = ref.watch(isDesktopProvider);
+            return Card(
+              elevation: isDesktop ? 0 : null,
+              child: Container(
+                height: isDesktop ? 50 : 117,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(cornerSize - 1),
+                  border: (isDesktop &&
+                          Theme.of(context).brightness == Brightness.light)
+                      ? Border.all(
+                          color: Theme.of(context).splashColor,
+                          width: 2,
+                        )
+                      : Border.all(
+                          color: Theme.of(context)
+                              .menuButtonTheme
+                              .style!
+                              .foregroundColor!
+                              .resolve({})!,
+                        ),
+                ),
+                padding: const EdgeInsets.all(5),
+                clipBehavior: Clip.antiAlias,
+                child: child,
               ),
-            ),
-            padding: const EdgeInsets.all(5),
-            clipBehavior: Clip.antiAlias,
-            child: child,
-          ),
+            );
+          },
         ),
       );
 }

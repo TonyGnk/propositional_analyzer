@@ -1,28 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../global_variables.dart';
 
 group(BuildContext context, double height, List<Widget> list) => Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Card(
+    padding: const EdgeInsets.symmetric(horizontal: 8),
+    child: Consumer(builder: (context, ref, _) {
+      final isDesktop = ref.watch(isDesktopProvider);
+      return Card(
+        elevation: isDesktop ? 0 : null,
         child: Container(
           height: height,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(cornerSize),
-            border: Border.all(
-              color: Theme.of(context)
-                  .menuButtonTheme
-                  .style!
-                  .foregroundColor!
-                  .resolve({})!,
-            ),
+            border:
+                (isDesktop && Theme.of(context).brightness == Brightness.light)
+                    ? Border.all(
+                        color: Theme.of(context).splashColor,
+                        width: 2,
+                      )
+                    : Border.all(
+                        color: Theme.of(context)
+                            .menuButtonTheme
+                            .style!
+                            .foregroundColor!
+                            .resolve({})!,
+                      ),
           ),
           padding: const EdgeInsets.fromLTRB(0, 15, 0, 4),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start, children: list),
         ),
-      ),
-    );
+      );
+    }));
 
 class SliderItem extends StatefulWidget {
   const SliderItem({

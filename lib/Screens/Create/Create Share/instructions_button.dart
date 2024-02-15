@@ -40,7 +40,7 @@ class _ExamplesButtonState extends State<ExamplesButton> {
   Widget build(BuildContext context) => MouseRegion(
         onEnter: (event) {
           setState(() {
-            scale = 0.97;
+            scale = 0.95;
             elev = 2;
           });
         },
@@ -70,20 +70,26 @@ class _ExamplesButtonState extends State<ExamplesButton> {
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
           child: Card(
             elevation:
-                (isDesktop && Theme.of(context).brightness == Brightness.dark)
+                (isDesktop && Theme.of(context).brightness == Brightness.light)
                     ? 0
-                    : elev.toDouble(),
+                    : null,
             child: Container(
               width: 120,
               height: 52,
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context)
-                      .menuButtonTheme
-                      .style!
-                      .foregroundColor!
-                      .resolve({})!,
-                ),
+                border: (isDesktop &&
+                        Theme.of(context).brightness == Brightness.light)
+                    ? Border.all(
+                        color: Theme.of(context).splashColor,
+                        width: 2,
+                      )
+                    : Border.all(
+                        color: Theme.of(context)
+                            .menuButtonTheme
+                            .style!
+                            .foregroundColor!
+                            .resolve({})!,
+                      ),
                 borderRadius:
                     const BorderRadius.all(Radius.circular(cornerSize)),
               ),

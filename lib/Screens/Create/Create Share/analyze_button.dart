@@ -86,7 +86,7 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
   Widget build(BuildContext context) => MouseRegion(
         onEnter: (event) {
           setState(() {
-            scale = 0.97;
+            scale = 0.95;
             elev = 2;
           });
         },
@@ -123,9 +123,9 @@ class _AnalyzeButtonState extends State<AnalyzeButton> {
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
           child: Card(
             elevation:
-                (isDesktop && Theme.of(context).brightness == Brightness.dark)
+                (isDesktop && Theme.of(context).brightness == Brightness.light)
                     ? 0
-                    : elev.toDouble(),
+                    : null,
             child: AnimatedContainer(
               width: 120,
               duration: const Duration(seconds: 1),
