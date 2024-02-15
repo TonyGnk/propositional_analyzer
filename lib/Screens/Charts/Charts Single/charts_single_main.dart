@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:async';
 
 import 'package:fl_chart/fl_chart.dart';
@@ -8,26 +6,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
 import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
+import '../../Create/Create Single/create_single_helper.dart';
+import 'chart_single_line.dart';
+import 'chart_single_line_extra.dart';
 import 'charts_single_state.dart';
-
-class ChartSingle extends ConsumerStatefulWidget {
-  const ChartSingle({super.key});
-
-  @override
-  ConsumerState<ChartSingle> createState() => _ChartSingleState();
-}
 
 bool show1 = true;
 bool show2 = true;
 bool collapsedUp = false;
 bool collapsedDown = false;
-List<FlSpot> animatedSpotUp = [const FlSpot(1, 1)];
 List<FlSpot> animatedSpotDown = [const FlSpot(1, 1)];
-//First FlSpot of spots1 which is not 1
 int firstNotOneUp = 1;
 FlSpot firstNotOneUpSpot = const FlSpot(1, 1);
 
-class _ChartSingleState extends ConsumerState<ChartSingle> {
+class ChartSingleState extends ConsumerState<ChartSingle> {
   List<Color> gradientColors = [
     const Color.fromRGBO(199, 109, 35, 1),
     const Color.fromRGBO(167, 123, 3, 1),
@@ -36,39 +28,7 @@ class _ChartSingleState extends ConsumerState<ChartSingle> {
   @override
   initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
-      chartsSingleReturn(ref);
-    });
-    playAgainAnimationUp();
-    playAgainAnimationDown();
-    // unawaited(player.setAsset(songPath));
-    // unawaited(player.play());
-    findAverageOfSpots2AndPrintIt();
-  }
-
-  findAverageOfSpots2AndPrintIt() {
-    double sum = 0;
-    for (var i = 0; i < spots2.length; i++) {
-      sum += spots2[i].y;
-    }
-    print('Average of spots2: ${sum / spots2.length}');
-  }
-
-  shortUp() {
-    for (var i = 0; i < spots1.length; i++) {
-      if (spots1[i].y != 1) {
-        firstNotOneUpSpot = spots1[i];
-        break;
-      }
-    }
-    setState(() {
-      firstNotOneUp = (firstNotOneUpSpot.x * N).round();
-      //print('index: $index');
-      //Remove from start to this FlSpot
-      for (var i = 0; i < firstNotOneUp; i++) {
-        animatedSpotUp.removeAt(0);
-      }
-    });
+    Future.delayed(Duration.zero, () => chartsSingleReturn(ref));
   }
 
   playAgainAnimationUp() {
@@ -110,113 +70,55 @@ class _ChartSingleState extends ConsumerState<ChartSingle> {
   }
 
   @override
-  Widget build(BuildContext context) => Consumer(
-        builder: (context, ref, _) => Container(
-          padding: const EdgeInsets.all(7.0),
-          child: animatedColumn(
-            Column(
-              children: [
-                show1 ? row(true) : const SizedBox(),
-                show1 ? Expanded(child: lineChart(true)) : const SizedBox(),
-                (show1 && show2)
-                    ? const SizedBox(height: 20)
-                    : const SizedBox(),
-                show2 ? row(false) : const SizedBox(),
-                show2 ? Expanded(child: lineChart(false)) : const SizedBox(),
-              ],
-            ),
-          ),
-        ),
-      );
-
-  row(bool isFirst) => Consumer(
-        builder: (context, ref, _) => Container(
-          padding: const EdgeInsets.symmetric(horizontal: 44),
-          child: Row(
+  Widget build(BuildContext context) => Container(
+        padding: const EdgeInsets.all(7.0),
+        child: animatedColumn(
+          Column(
             children: [
-              Text(
-                isFirst ? 'Attainability to M/N' : 'Run Time to M/N',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+              Expanded(
+                flex: 2,
+                child: ChartSuccess(spots1),
               ),
-              const Expanded(child: SizedBox()),
-              (MediaQuery.of(context).size.width > 410)
-                  ? IconButton(
-                      tooltip: 'Repeat Animation',
-                      icon: const Icon(Icons.animation_outlined),
-                      onPressed: () async {
-                        if (isFirst) {
-                          playAgainAnimationUp();
-                        } else {
-                          playAgainAnimationDown();
-                        }
-                      },
-                    )
-                  : const SizedBox(),
-              (MediaQuery.of(context).size.width > 350)
-                  ? IconButton(
-                      icon: const Icon(Icons.auto_graph_outlined),
-                      onPressed: () async {
-                        if (isFirst) {
-                          setState(() {
-                            collapsedUp = !collapsedUp;
-                            shortUp();
-                          });
-                        } else {
-                          setState(() {
-                            collapsedDown = !collapsedDown;
-                          });
-                        }
-                      },
-                    )
-                  : const SizedBox(),
-              IconButton(
-                icon: isFullScreen
-                    ? const Icon(Icons.fullscreen_exit)
-                    : const Icon(Icons.fullscreen),
-                onPressed: () async {
-                  fullScreen(ref, isFirst);
-                },
-              )
+              //Expanded(child: lineChart(true)),
+              //aSecondWidget(context),
+              //Expanded(flex: 1, child: lineChart(false)),
             ],
           ),
         ),
       );
 
-  findIcon(isFirst, WidgetRef ref) => isFirst
-      ? IconButton(
-          icon: isFullScreen
-              ? const Icon(Icons.fullscreen_exit)
-              : const Icon(Icons.fullscreen),
-          onPressed: () async {},
-        )
-      : IconButton(
-          icon: isFullScreen
-              ? const Icon(Icons.fullscreen_exit)
-              : const Icon(Icons.fullscreen),
-          onPressed: () async {},
-        );
+  // findIcon(isFirst, WidgetRef ref) => isFirst
+  //     ? IconButton(
+  //         icon: isFullScreen
+  //             ? const Icon(Icons.fullscreen_exit)
+  //             : const Icon(Icons.fullscreen),
+  //         onPressed: () async {},
+  //       )
+  //     : IconButton(
+  //         icon: isFullScreen
+  //             ? const Icon(Icons.fullscreen_exit)
+  //             : const Icon(Icons.fullscreen),
+  //         onPressed: () async {},
+  //       );
 
-  bool isFullScreen = false;
-  fullScreen(WidgetRef ref, bool isFirst) async {
-    if (isFullScreen) {
-      setState(() {
-        isFirst ? show2 = true : show1 = true;
-        ref.read(appBarIsEnableProvider.notifier).state = true;
-        isFullScreen = false;
-      });
-      FullScreenWindow.setFullScreen(false);
-    } else {
-      setState(() {
-        isFirst ? show2 = false : show1 = false;
-        ref.read(appBarIsEnableProvider.notifier).state = false;
-        isFullScreen = true;
-      });
-      FullScreenWindow.setFullScreen(true);
-    }
-  }
+  // bool isFullScreen = false;
+  // fullScreen(WidgetRef ref, bool isFirst) async {
+  //   if (isFullScreen) {
+  //     setState(() {
+  //       isFirst ? show2 = true : show1 = true;
+  //       ref.read(appBarIsEnableProvider.notifier).state = true;
+  //       isFullScreen = false;
+  //     });
+  //     FullScreenWindow.setFullScreen(false);
+  //   } else {
+  //     setState(() {
+  //       isFirst ? show2 = false : show1 = false;
+  //       ref.read(appBarIsEnableProvider.notifier).state = false;
+  //       isFullScreen = true;
+  //     });
+  //     FullScreenWindow.setFullScreen(true);
+  //   }
+  // }
 
   lineChart(bool isFirst) => LineChart(
         duration: const Duration(milliseconds: 1000),
@@ -225,24 +127,25 @@ class _ChartSingleState extends ConsumerState<ChartSingle> {
             getTouchedSpotIndicator: (
               LineChartBarData barData,
               List<int> spotIndexes,
-            ) =>
-                spotIndexes
-                    .map((spotIndex) => TouchedSpotIndicatorData(
-                          const FlLine(
-                            color: Color.fromRGBO(148, 99, 60, 1),
+            ) {
+              return spotIndexes
+                  .map((spotIndex) => TouchedSpotIndicatorData(
+                        const FlLine(
+                          color: Color.fromRGBO(148, 99, 60, 1),
+                          strokeWidth: 3,
+                        ),
+                        FlDotData(
+                          getDotPainter: (spot, percent, barData, index) =>
+                              FlDotCirclePainter(
+                            radius: 6,
+                            color: Colors.white,
                             strokeWidth: 3,
+                            strokeColor: const Color.fromRGBO(112, 72, 40, 1),
                           ),
-                          FlDotData(
-                            getDotPainter: (spot, percent, barData, index) =>
-                                FlDotCirclePainter(
-                              radius: 6,
-                              color: Colors.white,
-                              strokeWidth: 3,
-                              strokeColor: const Color.fromRGBO(112, 72, 40, 1),
-                            ),
-                          ),
-                        ))
-                    .toList(),
+                        ),
+                      ))
+                  .toList();
+            },
             touchTooltipData: LineTouchTooltipData(
               tooltipBgColor: Colors.grey,
               getTooltipItems: (List<LineBarSpot> touchedBarSpots) =>
@@ -261,18 +164,24 @@ class _ChartSingleState extends ConsumerState<ChartSingle> {
               }).toList(),
             ),
           ),
+
           borderData: FlBorderData(
             show: true,
             border: Border.all(color: const Color(0xff37434d)),
           ),
-          titlesData: const FlTitlesData(
+          titlesData: FlTitlesData(
             show: true,
             topTitles: AxisTitles(
               sideTitles: SideTitles(showTitles: false),
             ),
+            leftTitles: AxisTitles(
+                sideTitles: SideTitles(
+                    reservedSize: 32,
+                    interval: (numberOfTests > 10) ? 2 : 1,
+                    showTitles: true)),
           ),
           gridData: const FlGridData(
-            drawHorizontalLine: false,
+            drawHorizontalLine: true,
           ),
           // minX: collapsedUp ? firstNotOneUp.toDouble() : spots1[0].x,
           maxX: spots1[spots1.length - 1].x,
