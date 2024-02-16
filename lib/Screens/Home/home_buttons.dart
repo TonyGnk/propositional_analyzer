@@ -117,7 +117,10 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
 
   container() => Consumer(builder: (context, ref, _) {
         final isDesktop = ref.watch(isDesktopProvider);
-        return isDesktop ? card(true) : card(false);
+        //isDesktop or mediaQuery.size.width > 600
+        return (MediaQuery.of(context).size.width > 600)
+            ? card(true)
+            : card(false);
       });
 
   card(bool isDesktop) => Card(

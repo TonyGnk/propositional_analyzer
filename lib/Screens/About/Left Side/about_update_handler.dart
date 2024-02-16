@@ -13,9 +13,9 @@ Future<void> getLatestVersion(
     WidgetRef ref, String currentVersion, String updateLink) async {
   final String latestVersion;
   final String latestLinkVersion;
-  print('Current Version $currentVersion');
   //Find the latest version
   final response = await Dio().get(githubApiUrl);
+  print(response.statusCode);
   if (response.statusCode == 200) {
     final jsonResponse = response.data;
     log(jsonResponse['tag_name']);

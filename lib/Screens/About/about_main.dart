@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
@@ -58,11 +60,71 @@ class _AboutState extends ConsumerState<AboutScreen> {
 
   desktopView(String updateLink) => desktopFrame(
         context,
-        Column(children: [
-          const Expanded(child: SizedBox()),
-          const SizedBox(width: 10),
-          actionsRow(version ?? ''),
-        ]),
+        Row(
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Basket(
+                          icon: Icons.person_outline_rounded,
+                          title: 'Created by\nTonyGnk',
+                          onTap: callProfile,
+                        ),
+                        Basket(
+                          icon: Icons.handyman_outlined,
+                          title: 'Build With\nFlutter',
+                          onTap: callFlutter,
+                        ),
+                        Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: BasketQr(
+                                    onTap: callCode,
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Basket(
+                          icon: Icons.code,
+                          title: 'View web\nversion',
+                          onTap: callWebVersion,
+                        ),
+                        Basket(
+                          icon: Icons.security_update_outlined,
+                          title: 'Check for\nupdate',
+                          onTapCheck: checkForUpdate,
+                          updateLink: updateLink,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Expanded(
+            //     flex: 1,
+            //     child: Column(
+            //       children: [
+            //         Expanded(
+            //           child: BasketQr(
+            //             onTap: callCode,
+            //           ),
+            //         ),
+            //       ],
+            //     )),
+          ],
+        ),
       );
 
   mobileView(String updateLink) => Padding(
@@ -72,7 +134,7 @@ class _AboutState extends ConsumerState<AboutScreen> {
             const Expanded(
                 flex: 2,
                 child: BasketQr(
-                  onTap: callFlutter,
+                  onTap: callCode,
                 )),
             const Expanded(
               child: Row(
@@ -95,14 +157,15 @@ class _AboutState extends ConsumerState<AboutScreen> {
                 children: [
                   const Basket(
                     icon: Icons.code,
-                    title: 'View web version\n(Slow)',
+                    title: 'View web\nversion',
                     onTap: callWebVersion,
                   ),
                   Basket(
-                      icon: Icons.security_update_outlined,
-                      title: 'Check for\nupdate',
-                      onTapCheck: checkForUpdate,
-                      updateLink: updateLink),
+                    icon: Icons.security_update_outlined,
+                    title: 'Check for\nupdate',
+                    onTapCheck: checkForUpdate,
+                    updateLink: updateLink,
+                  ),
                 ],
               ),
             ),

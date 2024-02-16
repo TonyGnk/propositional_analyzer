@@ -4,7 +4,7 @@ import '../global_variables.dart';
 
 desktopFrame(
   BuildContext context,
-  Column column, [
+  Widget child, [
   double width = 800,
   EdgeInsets padding = const EdgeInsets.all(5),
 ]) =>
@@ -34,7 +34,7 @@ desktopFrame(
               ),
               padding: padding,
               width: width,
-              child: column,
+              child: child,
             ),
           ),
         ),

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,6 +11,14 @@ Future<void> callWebVersion() async {
     await launchUrl(webUrl);
   } else {
     throw 'Could not launch $webUrl';
+  }
+}
+
+Future<void> callCode() async {
+  if (await canLaunchUrl(codeUrl)) {
+    await launchUrl(codeUrl);
+  } else {
+    throw 'Could not launch $codeUrl';
   }
 }
 
@@ -90,8 +97,8 @@ snackBar(
               textColor: Theme.of(context).colorScheme.onBackground,
               label: 'Update',
               onPressed: () async {
-                if (await canLaunchUrl(Uri.parse('updateLink'))) {
-                  await launchUrl(Uri.parse('updateLink'));
+                if (await canLaunchUrl(Uri.parse(updateLink))) {
+                  await launchUrl(Uri.parse(updateLink));
                 } else {
                   throw 'Could not launch $updateLink';
                 }

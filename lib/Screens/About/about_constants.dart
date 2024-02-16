@@ -10,7 +10,7 @@ const String githubApiUrl =
 final codeUrl = Uri(
   scheme: 'https',
   host: 'github.com',
-  path: 'TonyGnk/Node-Odyssey',
+  path: 'TonyGnk/propositional_analyzer',
 );
 
 final webUrl = Uri(

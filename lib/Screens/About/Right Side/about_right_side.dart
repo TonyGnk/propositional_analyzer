@@ -3,21 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../global_variables.dart';
 
-imageQr() => Consumer(
-      builder: (context, ref, _) => SizedBox(
-        width: 500,
-        child: Theme.of(context).brightness == Brightness.dark
-            ? Image.asset(
-                filterQuality: FilterQuality.high,
-                'assets/images/qrCodeD.png',
-              )
-            : Image.asset(
-                filterQuality: FilterQuality.high,
-                'assets/images/qrCodeL.png',
-              ),
-      ),
-    );
-
 class Basket extends ConsumerStatefulWidget {
   const Basket({
     required this.title,
@@ -67,26 +52,34 @@ class _BasketState extends ConsumerState<Basket> {
             child: GestureDetector(
               onTap: widget.onTap ??
                   () async => widget.onTapCheck!(widget.updateLink),
-              child: card(),
+              child: Consumer(builder: (context, ref, _) {
+                final isDesktop = ref.watch(isDesktopProvider);
+                return card(isDesktop);
+              }),
             ),
           ),
         ),
       );
 
-  card() => Card(
-        elevation: elev.toDouble(),
+  card(bool isDesktop) => Card(
+        elevation: isDesktop ? 0 : elev.toDouble(),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(cornerSize),
-            border: (Theme.of(context).brightness == Brightness.dark)
-                ? Border.all(
-                    color: Theme.of(context)
-                        .menuButtonTheme
-                        .style!
-                        .foregroundColor!
-                        .resolve({})!)
-                : null,
+            border:
+                (isDesktop && Theme.of(context).brightness == Brightness.light)
+                    ? Border.all(
+                        color: Theme.of(context).splashColor,
+                        width: 2,
+                      )
+                    : Border.all(
+                        color: Theme.of(context)
+                            .menuButtonTheme
+                            .style!
+                            .foregroundColor!
+                            .resolve({})!,
+                      ),
           ),
           padding: const EdgeInsets.all(19),
           clipBehavior: Clip.antiAlias,
@@ -101,6 +94,7 @@ class _BasketState extends ConsumerState<Basket> {
                   size: 44,
                   color: Theme.of(context).colorScheme.primary,
                 ),
+                const SizedBox(height: 3),
                 Text(
                   textAlign: TextAlign.center,
                   widget.title,
@@ -150,25 +144,35 @@ class _BasketQrState extends ConsumerState<BasketQr> {
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: widget.onTap,
-            child: card(),
+            child: Consumer(
+              builder: (context, ref, _) {
+                final isDesktop = ref.watch(isDesktopProvider);
+                return card(isDesktop);
+              },
+            ),
           ),
         ),
       );
 
-  card() => Card(
-        elevation: elev.toDouble(),
+  card(bool isDesktop) => Card(
+        elevation: isDesktop ? 0 : elev.toDouble(),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(cornerSize),
-            border: (Theme.of(context).brightness == Brightness.dark)
-                ? Border.all(
-                    color: Theme.of(context)
-                        .menuButtonTheme
-                        .style!
-                        .foregroundColor!
-                        .resolve({})!)
-                : null,
+            border:
+                (isDesktop && Theme.of(context).brightness == Brightness.light)
+                    ? Border.all(
+                        color: Theme.of(context).splashColor,
+                        width: 2,
+                      )
+                    : Border.all(
+                        color: Theme.of(context)
+                            .menuButtonTheme
+                            .style!
+                            .foregroundColor!
+                            .resolve({})!,
+                      ),
           ),
           clipBehavior: Clip.antiAlias,
           child: AnimatedScale(
