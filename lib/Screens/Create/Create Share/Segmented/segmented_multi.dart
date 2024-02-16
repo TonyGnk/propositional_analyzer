@@ -16,7 +16,7 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
   Widget build(BuildContext context) => Consumer(
         builder: (context, ref, _) {
           final isDesktop = ref.watch(isDesktopProvider);
-          return isDesktop
+          return (MediaQuery.of(context).size.width > 600)
               ? container(desktopSegmentedMulti(), true)
               : container(mobileSegmentedMulti(), false);
         },

@@ -38,10 +38,18 @@ enum ScreenDestination {
 }
 
 goTo(WidgetRef ref, ScreenDestination destination) async {
-  screenGo[screenStack.last]!(
-    ref,
-    destination,
-  );
+  if (screenStack.isNotEmpty) {
+    screenGo[screenStack.last]!(
+      ref,
+      destination,
+    );
+  } else {
+    screenStack.add(ScreenDestination.home);
+    screenGo[screenStack.last]!(
+      ref,
+      destination,
+    );
+  }
   Future.delayed(basicDuration, () {
     ref.read(currentScreenProvider.notifier).state = destination;
     screenStack.add(destination);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:universal_platform/universal_platform.dart';
 
+import '../../Screens/About/about_actions_row.dart';
 import '../../Screens/screen_list.dart';
 import '../../global_variables.dart';
 import 'info_icon.dart';
@@ -24,12 +25,12 @@ Widget adaptAppBar() => Consumer(builder: (context, ref, _) {
               decoration: filled
                   ? filledBoxDecoration(context)
                   : boxDecoration(context),
-              child: row(context),
+              child: row(),
             )
           : const SizedBox();
     });
 
-Widget row(BuildContext context) => Consumer(
+Widget row() => Consumer(
       builder: (context, ref, _) {
         final isEnableBackButton = ref.watch(appBarIsEnableBackButton);
         final backButtonOpacity = ref.watch(appBarBackButtonOpacity);
@@ -72,7 +73,8 @@ Widget row(BuildContext context) => Consumer(
                   ),
                 ),
                 const Expanded(child: SizedBox()),
-                (UniversalPlatform.isWindows && isDesktop)
+                (UniversalPlatform.isWeb &&
+                        (MediaQuery.of(context).size.width > 600))
                     ? AnimatedOpacity(
                         opacity: downloadAppOpacity,
                         duration: basicDuration,
@@ -81,7 +83,7 @@ Widget row(BuildContext context) => Consumer(
                             fixedSize:
                                 MaterialStateProperty.all(const Size(160, 44)),
                           ),
-                          onPressed: () {},
+                          onPressed: () async => callDownloadApp(),
                           label: const Text('Download App'),
                           icon: const Icon(Icons.download),
                         ),

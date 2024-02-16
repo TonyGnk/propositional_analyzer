@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -5,6 +6,30 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../global_variables.dart';
 import 'about_constants.dart';
 import 'about_update_handler.dart';
+
+Future<String> downloadApp() async {
+  String browserDownloadUrl = '';
+  final response = await Dio().get(githubApiUrl);
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    final jsonResponse = response.data;
+    browserDownloadUrl = jsonResponse['assets'][0]['browser_download_url'];
+  } else {
+    throw Exception('Failed to fetch version from GitHub');
+  }
+
+  return browserDownloadUrl;
+}
+
+Future<void> callDownloadApp() async {
+  String downloadUrl = await downloadApp();
+  Uri downloadUri = Uri.parse(downloadUrl);
+  if (await canLaunchUrl(downloadUri)) {
+    await launchUrl(downloadUri);
+  } else {
+    throw 'Could not launch $downloadUri';
+  }
+}
 
 Future<void> callWebVersion() async {
   if (await canLaunchUrl(webUrl)) {
