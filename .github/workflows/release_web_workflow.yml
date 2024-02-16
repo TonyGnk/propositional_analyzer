@@ -37,7 +37,7 @@ jobs:
             - run: flutter clean
             # Get flutter dependencies.
             - run: flutter pub get
-            - run: flutter build web --release --base-href="/propositional_analyzer/"
+            - run: flutter build web --release --base-href="/propositional_analyzer/" --web-renderer skwasm
             - name: Setup Pages
               uses: actions/configure-pages@v3
             - name: Build with Jekyll
