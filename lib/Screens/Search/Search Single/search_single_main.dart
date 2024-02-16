@@ -124,6 +124,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
   addSpot(double M, double average, double averageTime) {
     M = M / N;
     M = double.parse(M.toStringAsFixed(1));
+    averageTime = double.parse(averageTime.toStringAsFixed(2));
 
     spotsSearch.add(FlSpot(M, average));
     spots1.add(FlSpot(M, average));

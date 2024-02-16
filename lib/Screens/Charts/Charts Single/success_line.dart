@@ -87,13 +87,16 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
     }
   }
 
-  findRightStep() {
-    stepDuration = const Duration(milliseconds: 30);
-    if (widget.spots.length < 25) {
-      stepDuration = const Duration(milliseconds: 300);
+  int findRightStep() {
+    stepDuration = const Duration(milliseconds: 20);
+    if (widget.spots.length > 40) {
+      return (widget.spots.length / 25).round();
+    } else if (widget.spots.length > 25) {
+      stepDuration = const Duration(milliseconds: 35);
       return 1;
     } else {
-      return (widget.spots.length / 25).round();
+      stepDuration = const Duration(milliseconds: 50);
+      return 1;
     }
   }
 
@@ -122,7 +125,7 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
               ),
             ),
             titlesData: titleData(LineType.success),
-            gridData: const FlGridData(drawHorizontalLine: true),
+            gridData: const FlGridData(drawHorizontalLine: false),
             minX: isCollapsed ? minXVariable : widget.spots[0].x.toDouble(),
             maxX: widget.spots[widget.spots.length - 1].x.toDouble(),
             minY: 0,
