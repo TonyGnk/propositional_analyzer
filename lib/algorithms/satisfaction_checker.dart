@@ -1,19 +1,3 @@
-/*
-A typical bool problem: 
-List<List<int>> problem = [
-    [1, -2],
-    [2],
-    [3, 1],
-    [-2, -3],
-  ];
-
-    That means:
-    (x1 or not x2) and (x2) and (x3 or x1) and (not x2 or not x3)
-
-    Solution has to be a list of true and false values like this:
-    [true, false, true]
-  ];*/
-
 findUnmetIndexes(List<bool> solution, List<List<int>> problem) {
   //Collect all the unsatisfied indexes in a list
   List<int> unsatisfiedClauses = [];

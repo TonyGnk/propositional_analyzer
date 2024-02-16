@@ -78,7 +78,7 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
               children: [
                 SizedBox(
                   width: 173,
-                  child: examplesContainer(),
+                  child: examplesContainer(false),
                 ),
                 SizedBox(
                   width: 172,
@@ -116,7 +116,7 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
 
   buttonRow() => Row(
         children: [
-          Expanded(child: examplesContainer()),
+          Expanded(child: examplesContainer(false)),
           const SizedBox(width: 5),
           Expanded(child: analyzeContainer()),
         ],

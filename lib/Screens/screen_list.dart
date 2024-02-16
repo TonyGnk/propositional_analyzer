@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'Charts/Charts Multi/charts_multi_main.dart';
 import 'Charts/Charts Multi/charts_multi_state.dart';
 import 'Charts/Charts Single/charts_single_state.dart';
+import 'Collection/collection_main.dart';
+import 'Collection/collection_state.dart';
 import 'Create/Create Multi/create_multi_main.dart';
 import 'Create/Create Multi/create_multi_state.dart';
 import 'Create/Create Single/create_single_helper.dart';
@@ -18,7 +20,7 @@ import 'Home/home_state.dart';
 import 'Home/home_main.dart';
 import 'Instructions/instructions_main.dart';
 import 'Instructions/instructions_state.dart';
-import 'Search/Search Multi/search_multi_layout.dart';
+import 'Search/Search Multi/search_multi_main.dart';
 import 'Search/Search Multi/search_multi_state.dart';
 import 'Search/Search Single/search_single_layout.dart';
 import 'Search/Search Single/search_single_state.dart';
@@ -34,6 +36,7 @@ enum ScreenDestination {
   mix,
   settings,
   about,
+  collection,
   instructions,
 }
 
@@ -77,6 +80,7 @@ final Map<ScreenDestination, Widget> screenMap = {
   ScreenDestination.chartMulti: const ChartMulti(),
   ScreenDestination.searchMulti: const SearchMulti(),
   ScreenDestination.createMulti: const CreateMulti(),
+  ScreenDestination.collection: const Collection(),
   ScreenDestination.settings: const Settings(),
   ScreenDestination.about: const AboutScreen(),
   ScreenDestination.instructions: const Instructions(),
@@ -91,6 +95,7 @@ final Map<ScreenDestination, void Function(WidgetRef, ScreenDestination)>
   ScreenDestination.chartMulti: chartsMultiGo,
   ScreenDestination.createMulti: createMultiGo,
   ScreenDestination.searchMulti: searchMultiGo,
+  ScreenDestination.collection: collectionGo,
   ScreenDestination.settings: settingsGo,
   ScreenDestination.about: aboutGo,
   ScreenDestination.instructions: instructionsGo,

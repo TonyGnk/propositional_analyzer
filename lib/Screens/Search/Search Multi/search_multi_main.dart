@@ -12,8 +12,14 @@ import '../Search Share/algorithm_bridge.dart';
 import '../Search Share/search_layout.dart';
 import '../Search Share/track.dart';
 import 'multi_chart_bar.dart';
-import 'search_multi_layout.dart';
 import 'search_multi_state.dart';
+
+class SearchMulti extends ConsumerStatefulWidget {
+  const SearchMulti({super.key});
+
+  @override
+  ConsumerState<SearchMulti> createState() => SearchMultiState();
+}
 
 class SearchMultiState extends ConsumerState<SearchMulti> {
   List<Widget> trackList = [];

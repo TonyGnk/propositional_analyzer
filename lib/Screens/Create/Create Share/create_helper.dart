@@ -23,9 +23,9 @@ analyzeContainer([bool multi = false]) => Consumer(
       ),
     );
 
-examplesContainer() => Consumer(
+examplesContainer(bool isMulti) => Consumer(
       builder: (context, ref, _) => ExamplesButton(
-        label: 'Examples',
+        label: 'Collection',
         icon: Icons.subscriptions_outlined,
         onTap: () {
           //goTo(ref, ScreenDestination.result);

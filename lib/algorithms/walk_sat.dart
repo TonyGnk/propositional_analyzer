@@ -1,10 +1,8 @@
-// ignore_for_file: avoid_print
-
 import 'dart:math';
 
 import '../Screens/Search/Search Share/track.dart';
 import '../global_variables.dart';
-import 'al2.dart';
+import 'satisfaction_checker.dart';
 
 walkSat(List<List<int>> problem) async {
   final Random random = Random();

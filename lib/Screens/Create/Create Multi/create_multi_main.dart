@@ -71,7 +71,7 @@ class _CreateState extends ConsumerState<CreateMulti> {
               children: [
                 SizedBox(
                   width: 173,
-                  child: examplesContainer(),
+                  child: examplesContainer(true),
                 ),
                 SizedBox(
                   width: 172,
@@ -109,7 +109,7 @@ class _CreateState extends ConsumerState<CreateMulti> {
 
   buttonRow() => Row(
         children: [
-          Expanded(child: examplesContainer()),
+          Expanded(child: examplesContainer(true)),
           const SizedBox(width: 5),
           Expanded(child: analyzeContainer(true)),
         ],

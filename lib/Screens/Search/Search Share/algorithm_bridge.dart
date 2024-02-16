@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:universal_platform/universal_platform.dart';
 
+import '../../../algorithms/hill_climbing.dart';
 import '../../../global_variables.dart';
 import '../../../algorithms/depth_first.dart';
 import '../../../algorithms/dpll.dart';
-import '../../../algorithms/gready.dart';
 import '../../../algorithms/new_value.dart';
 import '../../../algorithms/walk_sat.dart';
 import 'track.dart';
