@@ -1,0 +1,66 @@
+name: Release New Version
+on:
+    push:
+        branches:
+            - release
+    workflow_dispatch:
+
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+concurrency:
+    group: "pages"
+    cancel-in-progress: false
+
+jobs:
+    build:
+        runs-on: windows-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup yq
+              uses: vegardit/gha-setup-yq@1.0.0
+
+            - name: Setup Java
+              uses: actions/setup-java@v1
+              with:
+                  java-version: "13.x"
+
+            - name: Setup Flutter
+              uses: subosito/flutter-action@v2
+
+            - name: Get Dependencies
+              run: flutter pub get
+
+            - name: Build Windows Executable
+              run: flutter build windows
+
+            - name: Archive Release
+              uses: thedoctor0/zip-release@0.7.5
+              with:
+                  filename: "release.zip"
+                  directory: "build/windows/x64/runner"
+                  path: "Release"
+
+            - name: Show version
+              run: |
+                  yq -r .version pubspec.yaml
+
+            # Traditional way of getting the version
+            - name: Get version from pubspec.yaml
+              id: vars
+              run: echo "::set-output name=version::$(yq -r .version pubspec.yaml)"
+
+            # Trigger automatic release
+            - name: Trigger Pre-release
+              uses: marvinpinto/action-automatic-releases@latest
+              with:
+                  repo_token: "${{ secrets.RELEASE_TOKEN }}"
+                  #Paste the txt value here
+                  automatic_release_tag: ${{ steps.vars.outputs.version }}
+                  prerelease: false
+                  files: |
+                      build/windows/x64/runner/release.zip
