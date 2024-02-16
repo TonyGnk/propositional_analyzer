@@ -11,28 +11,7 @@ class ChartSingle extends ConsumerStatefulWidget {
   ConsumerState<ChartSingle> createState() => ChartSingleState();
 }
 
-chartHeaderSuccess(
-  String label,
-  void Function() onPressedRepeat,
-  void Function() onPressedCollapse,
-  bool isCollapsed,
-) =>
-    Consumer(
-      builder: (context, ref, _) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 44),
-        child: Row(
-          children: [
-            Text(label, style: Theme.of(context).textTheme.labelSmall),
-            const Expanded(child: SizedBox()),
-            repeatIcon(context, onPressedRepeat),
-            collapseIcon(context, onPressedCollapse, isCollapsed),
-            // fullScreenIcon(),
-          ],
-        ),
-      ),
-    );
-
-chartHeaderTime(
+chartHeaderSingle(
   String label,
   void Function() onPressedRepeat,
   void Function() onPressedCollapse,

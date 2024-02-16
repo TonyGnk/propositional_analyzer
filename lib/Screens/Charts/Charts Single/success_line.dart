@@ -100,7 +100,7 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          chartHeaderSuccess(
+          chartHeaderSingle(
             'Attainability to M/N',
             playAgainAnimation,
             collapseLine,

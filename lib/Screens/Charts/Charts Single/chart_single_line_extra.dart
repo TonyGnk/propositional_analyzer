@@ -86,18 +86,6 @@ FlTitlesData titleDataTime() => const FlTitlesData(
       topTitles: AxisTitles(
         sideTitles: SideTitles(showTitles: false),
       ),
-      // leftTitles: AxisTitles(
-      //   sideTitles: SideTitles(
-      //     reservedSize: 30,
-      //     showTitles: true,
-      //   ),
-      // ),
-      // rightTitles: AxisTitles(
-      //   sideTitles: SideTitles(
-      //     reservedSize: 30,
-      //     showTitles: true,
-      //   ),
-      // ),
     );
 
 List<LineChartBarData> singleBarDataSuccess(List<FlSpot> spots) {

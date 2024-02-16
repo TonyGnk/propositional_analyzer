@@ -78,7 +78,7 @@ class ChartTimeState extends ConsumerState<ChartTime> {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          chartHeaderTime(
+          chartHeaderSingle(
             'Run Time to M/N',
             playAgainAnimation,
             collapseLine,
