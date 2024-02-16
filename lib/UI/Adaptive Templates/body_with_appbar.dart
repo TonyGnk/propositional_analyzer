@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../global_variables.dart';
 
 Widget bodyWithAppBarGlass({
   required Widget appBar,

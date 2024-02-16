@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../global_variables.dart';
-import '../../screen_list.dart';
 import '../Create Share/Segmented/segmented_multi.dart';
-import '../Create Share/analyze_button.dart';
 import '../Create Share/create_helper.dart';
 import '../Create Share/slide_item.dart';
 import '../Create Share/slide_item_list.dart';

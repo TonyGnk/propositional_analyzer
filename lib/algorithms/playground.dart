@@ -7,6 +7,7 @@ import 'dpll.dart';
 import 'new_value.dart';
 import 'walk_sat.dart';
 
+//TODO Improve the walkSat
 myFunction() async {
   N = 3; //12;
   M = 22; //400; //23;

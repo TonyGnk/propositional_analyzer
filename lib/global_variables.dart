@@ -1,6 +1,6 @@
-//import 'package:audioplayers/audioplayers.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:just_audio/just_audio.dart';
 
 int numberOfTests = 1;
 int N = 7;
@@ -30,7 +30,7 @@ List<FlSpot> spotsSearch = [];
 
 enum Algorithms { hillClimbing, depthFirst, dpll, walkSat }
 
-//final player = AudioPlayer(); TODO:Add audio player after the issue is fixed
+final player = AudioPlayer(); //TODO:Add audio player after the issue is fixed
 
 const double cornerSize = 13;
 
