@@ -31,14 +31,11 @@ class _InstructionsState extends ConsumerState<Instructions> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final isDesktop = ref.watch(isDesktopProvider);
-    return animatedColumn(
-      (MediaQuery.of(context).size.width > 600)
-          ? desktopView(context)
-          : mobileView(context),
-    );
-  }
+  Widget build(BuildContext context) => animatedColumn(
+        (MediaQuery.of(context).size.width > 600)
+            ? desktopView(context)
+            : mobileView(context),
+      );
 
   desktopView(BuildContext context) => Consumer(builder: (context, ref, _) {
         final pageIndex = ref.watch(instructionsIndex);

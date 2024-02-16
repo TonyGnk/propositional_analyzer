@@ -19,7 +19,17 @@ void collectionReturn(WidgetRef ref) {
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateAppBarLabel(ref, 'Collection', isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
+  updateSecondFloor(ref, const SizedBox(), container(), isReturn);
 }
+
+container() => const Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Manage your collections from Collection folder'),
+        SizedBox(width: 110, height: 50),
+      ],
+    );
 
 animatedColumn(Widget child) => Consumer(
       builder: (context, ref, _) => AnimatedOpacity(

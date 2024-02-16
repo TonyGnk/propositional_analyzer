@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
+import '../../../UI/Adaptive Folder/synthesizer.dart';
 import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
 import 'save_icon.dart';
@@ -15,6 +16,7 @@ void chartsMultiGo(WidgetRef ref, ScreenDestination destination) {
   resetFullScreen();
 
   updateAppBarItems(ref, false);
+  ref.read(appBarBackButtonTimes.notifier).state = 1;
 
   if (destination == ScreenDestination.home) {
     updateAppBarBackButton(ref, false);
@@ -24,13 +26,19 @@ void chartsMultiGo(WidgetRef ref, ScreenDestination destination) {
 void chartsMultiReturn(WidgetRef ref) {
   updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
+
+  //If last-1 is collection
+  if (screenStack[screenStack.length - 2] == ScreenDestination.collection) {
+    ref.read(appBarBackButtonTimes.notifier).state = 1;
+  } else {
+    ref.read(appBarBackButtonTimes.notifier).state = 2;
+  }
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateAppBarLabel(ref, 'Results', isReturn);
   updateAppBarCustomIcon1(ref, saveIcon(saveAnalysisMulti), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
-  ref.read(appBarBackButtonTimes.notifier).state = isReturn ? 2 : 1;
 }
 
 animatedColumn(Widget child) => Consumer(
