@@ -1,13 +1,3 @@
-/// This file contains the implementation of the `versionAction`, `profileAction`, `flutterAction`, `updateAction`, `actionButton`, and `snackBar` functions.
-/// These functions are used in the `about_actions_row.dart` file to create various action buttons and snack bars for the About screen.
-/// The `versionAction` function creates an action button with the provided version number.
-/// The `profileAction` function creates an action button that opens a URL when pressed.
-/// The `flutterAction` function creates an action button that opens a URL when pressed.
-/// The `updateAction` function creates an action button that triggers an update check when pressed.
-/// The `actionButton` function creates a custom text button with an icon.
-/// The `snackBar` function creates a snack bar with an optional action button.
-library;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -34,6 +24,14 @@ final profileAction = actionButton(
   const Icon(Icons.person_outline_rounded),
 );
 
+Future<void> callProfile() async {
+  if (await canLaunchUrl(tonyGnkUrl)) {
+    await launchUrl(tonyGnkUrl);
+  } else {
+    throw 'Could not launch $tonyGnkUrl';
+  }
+}
+
 final flutterAction = actionButton(
   () async {
     if (await canLaunchUrl(flutterUrl)) {
@@ -45,6 +43,14 @@ final flutterAction = actionButton(
   'Build With Flutter',
   const Icon(Icons.handyman_outlined),
 );
+
+Future<void> callFlutter() async {
+  if (await canLaunchUrl(flutterUrl)) {
+    await launchUrl(flutterUrl);
+  } else {
+    throw 'Could not launch $flutterUrl';
+  }
+}
 
 updateAction(WidgetRef ref, String version, Uri updateLink) => actionButton(
       () async {

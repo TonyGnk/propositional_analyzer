@@ -29,6 +29,8 @@ class AdaptiveRoot extends ConsumerStatefulWidget {
   ConsumerState<AdaptiveRoot> createState() => _AdaptiveRootState();
 }
 
+bool isFirstTime = true;
+
 class _AdaptiveRootState extends ConsumerState<AdaptiveRoot>
     with WidgetsBindingObserver {
   TotalTheme? theme;
@@ -52,7 +54,7 @@ class _AdaptiveRootState extends ConsumerState<AdaptiveRoot>
     if (UniversalPlatform.isAndroid) {
       ref.read(isDesktopProvider.notifier).state = false;
     } else {
-      bool newState = View.of(context).physicalSize.width > 600;
+      bool newState = View.of(context).physicalSize.width > 520;
       if (ref.read(isDesktopProvider.notifier).state != newState) {
         ref.read(isDesktopProvider.notifier).state = newState;
       }

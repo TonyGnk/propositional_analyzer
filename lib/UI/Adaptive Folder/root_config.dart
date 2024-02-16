@@ -1,9 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import '../Screens/list.dart';
 import '../material_theme_data.dart';
 import 'synthesizer.dart';
-import '../Archive/screen/Settings Items/ap.dart';
 import '../Routed Screen/routed_screen.dart';
 
 Widget rootConfig(
@@ -36,11 +34,6 @@ Map<String, WidgetBuilder> generateRoutes(List<RoutedScreen> screens) {
     routes[labelWithSlash] =
         (BuildContext context) => screens[i].build(context);
   }
-
-  // Manually specify routes
-  routes['/settings/appearance'] =
-      (BuildContext context) => const BasicScreen();
-  routes['/about'] = (BuildContext context) => aboutScreen();
 
   return routes;
 }

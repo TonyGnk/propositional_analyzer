@@ -1,12 +1,12 @@
-/// This file contains the main screen of the about section. It contains the left and right side of the about screen. The left side contains the header text and action buttons. The right side contains the QR code.
-library;
-
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../global_variables.dart';
+import '../shared.dart';
+import 'Left Side/about_actions_row.dart';
 import 'Left Side/about_left_side.dart';
 import 'about_state.dart';
 import 'Right Side/about_right_side.dart';
@@ -47,15 +47,65 @@ class _AboutState extends ConsumerState<AboutScreen> {
   }
 
   @override
-  build(BuildContext context) => animatedColumn(
-        Row(
+  build(BuildContext context) {
+    final isDesktop = ref.watch(isDesktopProvider);
+    return animatedColumn(
+      isDesktop ? desktopView() : mobileView(),
+    );
+  }
+
+  desktopView() => desktopFrame(
+        context,
+        Column(children: [
+          const Expanded(child: SizedBox()),
+          const SizedBox(width: 10),
+          actionsRow(version ?? ''),
+        ]),
+      );
+
+  mobileView() => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
           children: [
-            const SizedBox(width: 10),
-            Expanded(child: leftColumnAbout(version)),
-            const SizedBox(width: 10),
-            customAboutRightColumn(),
-            const SizedBox(width: 10),
+            Expanded(
+              flex: 2,
+              child: Card(child: imageQr()),
+            ),
+            const Expanded(
+              child: Row(
+                children: [
+                  Basket(
+                    icon: Icons.person_outline_rounded,
+                    title: 'Created by TonyGnk',
+                    onTap: callProfile,
+                  ),
+                  Basket(
+                    icon: Icons.handyman_outlined,
+                    title: 'Build With Flutter',
+                    onTap: callFlutter,
+                  ),
+                ],
+              ),
+            ),
+            const Expanded(
+              child: Row(
+                children: [
+                  Basket(
+                    icon: Icons.person_outline_rounded,
+                    title: 'Created by TonyGnk',
+                    onTap: callProfile,
+                  ),
+                  Basket(
+                    icon: Icons.handyman_outlined,
+                    title: 'Build With Flutter',
+                    onTap: callFlutter,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       );
 }
+
+nothing() {}
