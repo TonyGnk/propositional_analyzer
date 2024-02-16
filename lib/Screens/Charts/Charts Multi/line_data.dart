@@ -13,10 +13,10 @@ Color orange3 = const Color.fromRGBO(255, 145, 0, 1);
 Color orange4 = const Color.fromRGBO(255, 109, 0, 1);
 
 List<LineChartBarData> linesChartBarData() => [
-      lineChartBarData(spots1Hill, orange1),
-      lineChartBarData(spots1Depth, orange2),
-      lineChartBarData(spots1DPLL, orange3),
-      lineChartBarData(spots1Walk, orange4),
+      // lineChartBarData(spots1Hill, orange1),
+      // lineChartBarData(spots1Depth, orange2),
+      // lineChartBarData(spots1DPLL, orange3),
+      // lineChartBarData(spots1Walk, orange4),
     ];
 
 List<LineChartBarData> linesChartBarData2() => [

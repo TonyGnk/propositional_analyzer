@@ -20,7 +20,10 @@ walkSat(List<List<int>> problem) async {
     await Future.delayed(Duration.zero, () {});
     DateTime time = DateTime.now();
     if (time.difference(t1).inSeconds > timeOut) {
-      return const Search(win: false);
+      return Search(
+        win: false,
+        time: time.difference(t1).inMilliseconds,
+      );
     }
 
     //Collect all the unmet indexes in a list

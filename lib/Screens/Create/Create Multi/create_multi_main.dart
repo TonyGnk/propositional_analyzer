@@ -77,7 +77,7 @@ class _CreateState extends ConsumerState<CreateMulti> {
                 ),
                 SizedBox(
                   width: 172,
-                  child: analyzeContainer(),
+                  child: analyzeContainer(true),
                 ),
               ],
             ),

@@ -17,8 +17,6 @@ Future<Search> solveHillClimbing(List<List<int>> problem) async {
     await Future.delayed(Duration.zero, () {});
     DateTime t = DateTime.now();
     if (t.difference(t1).inSeconds > timeOut) {
-      //Print Time
-      print('TimeOUT - Time: ${t.difference(t1).inMilliseconds} ms');
       return Search(
         win: false,
         time: t.difference(t1).inMilliseconds,

@@ -4,44 +4,44 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../UI/Routed Screen/app_bar.dart';
 import '../../../global_variables.dart';
 import '../../Create/Create Single/create_single_helper.dart';
-import 'chart_single_line_extra.dart';
+import '../Charts Single/chart_single_line_extra.dart';
 
-class ChartSuccess extends ConsumerStatefulWidget {
-  const ChartSuccess(this.spots, {super.key});
+class ChartTime extends ConsumerStatefulWidget {
+  const ChartTime(this.spots, {super.key});
 
   final List<FlSpot> spots;
 
   @override
-  ConsumerState<ChartSuccess> createState() => ChartSuccessState();
+  ConsumerState<ChartTime> createState() => ChartTimeState();
 }
 
-class ChartSuccessState extends ConsumerState<ChartSuccess> {
-  Duration stepDuration = const Duration(milliseconds: 30);
-  List<FlSpot> animatedSpotUp = [];
-  bool isCollapsed = false;
-  int? curvingIndex;
-  double minXVariable = 0;
+class ChartTimeState extends ConsumerState<ChartTime> {
+  Duration stepDuration = const Duration(milliseconds: 20);
+  List<FlSpot> animatedSpot = [];
   int step = 1;
+  double maxY = 0;
+  bool isCollapsed = true;
+  bool isFullScreen = false;
 
   @override
   initState() {
     super.initState();
     playAgainAnimation();
-    curvingIndex = findCurvingIndex(widget.spots);
-    minXVariable = widget.spots[curvingIndex!].x;
+    maxY = findMaxY(widget.spots);
   }
 
   playAgainAnimation() {
     step = findRightStep();
-    animatedSpotUp = [];
+    animatedSpot = [];
     Timer.periodic(stepDuration, (timer) {
       setState(() {
-        if (animatedSpotUp.length < widget.spots.length) {
+        if (animatedSpot.length < widget.spots.length) {
           for (var i = 0; i < step; i++) {
-            if (animatedSpotUp.length < widget.spots.length) {
-              animatedSpotUp.add(widget.spots[animatedSpotUp.length]);
+            if (animatedSpot.length < widget.spots.length) {
+              animatedSpot.add(widget.spots[animatedSpot.length]);
             } else {
               break;
             }
@@ -51,39 +51,27 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
         }
       });
     });
-    setState(() {
-      isCollapsed = false;
-    });
   }
 
   collapseLine() {
     if (isCollapsed) {
-      playAgainAnimation();
       setState(() {
         isCollapsed = false;
       });
     } else {
-      animatedSpotUp = [];
-      Timer.periodic(stepDuration, (timer) {
-        setState(() {
-          if (animatedSpotUp.length < (widget.spots.length - curvingIndex!)) {
-            for (var i = 0; i < step; i++) {
-              if (animatedSpotUp.length <
-                  (widget.spots.length - curvingIndex!)) {
-                animatedSpotUp
-                    .add(widget.spots[curvingIndex! + animatedSpotUp.length]);
-              } else {
-                break;
-              }
-            }
-          } else {
-            timer.cancel();
-          }
-        });
-      });
       setState(() {
         isCollapsed = true;
       });
+    }
+  }
+
+  fullScreen() {
+    if (isFullScreen) {
+      ref.read(appBarIsEnableProvider.notifier).state = true;
+      isFullScreen = false;
+    } else {
+      ref.read(appBarIsEnableProvider.notifier).state = false;
+      isFullScreen = true;
     }
   }
 
@@ -104,33 +92,35 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
   Widget build(BuildContext context) => Column(
         children: [
           chartHeaderSingle(
-            'Attainability to M/N',
+            'Run Time to M/N',
             playAgainAnimation,
             collapseLine,
+            fullScreen,
             isCollapsed,
+            isFullScreen,
           ),
           Expanded(child: chart()),
         ],
       );
 
-  chart() => (animatedSpotUp.isNotEmpty)
+  chart() => (animatedSpot.isNotEmpty)
       ? LineChart(
-          duration: const Duration(milliseconds: 1000),
+          duration: const Duration(milliseconds: 100),
           LineChartData(
-            lineTouchData: lineTouchData(context, LineType.success),
+            lineTouchData: lineTouchData(context, LineType.time),
             borderData: FlBorderData(
               show: true,
               border: Border.all(
                 color: const Color.fromARGB(255, 54, 54, 54),
               ),
             ),
-            titlesData: titleData(LineType.success),
+            titlesData: titleData(LineType.time),
             gridData: const FlGridData(drawHorizontalLine: false),
-            minX: isCollapsed ? minXVariable : widget.spots[0].x.toDouble(),
+            minX: widget.spots[0].x.toDouble(),
             maxX: widget.spots[widget.spots.length - 1].x.toDouble(),
             minY: 0,
-            maxY: numberOfTests.toDouble(),
-            lineBarsData: singleBarDataSuccess(animatedSpotUp),
+            maxY: isCollapsed ? maxY : ((timeOut + 1) * 1000).toDouble(),
+            lineBarsData: singleBarDataSuccess(animatedSpot),
           ),
         )
       : const SizedBox();

@@ -15,7 +15,9 @@ chartHeaderSingle(
   String label,
   void Function() onPressedRepeat,
   void Function() onPressedCollapse,
+  void Function() onPressedFullScreen,
   bool isCollapsed,
+  bool isFullScreen,
 ) =>
     Consumer(
       builder: (context, ref, _) => Container(
@@ -26,13 +28,16 @@ chartHeaderSingle(
             const Expanded(child: SizedBox()),
             repeatIcon(context, onPressedRepeat),
             collapseIcon(context, onPressedCollapse, isCollapsed),
-            // fullScreenIcon(),
+            fullScreenIcon(context, onPressedFullScreen, isFullScreen),
           ],
         ),
       ),
     );
 
-repeatIcon(BuildContext context, void Function() onPressed) =>
+repeatIcon(
+  BuildContext context,
+  void Function() onPressed,
+) =>
     (MediaQuery.of(context).size.width > 410)
         ? IconButton(
             tooltip: 'Repeat Animation',
@@ -42,7 +47,10 @@ repeatIcon(BuildContext context, void Function() onPressed) =>
         : const SizedBox();
 
 collapseIcon(
-        BuildContext context, void Function() onPressed, bool isSelected) =>
+  BuildContext context,
+  void Function() onPressed,
+  bool isSelected,
+) =>
     (MediaQuery.of(context).size.width > 350)
         ? IconButton(
             icon: const Icon(Icons.zoom_in_outlined),
@@ -52,14 +60,17 @@ collapseIcon(
           )
         : const SizedBox();
 
-// fullScreenIcon()=> IconButton(
-//       icon: isFullScreen
-//           ? const Icon(Icons.fullscreen_exit)
-//           : const Icon(Icons.fullscreen),
-//       onPressed: () async {
-//         fullScreen(ref, isFirst);
-//       },
-//     );
+fullScreenIcon(
+  BuildContext context,
+  void Function() onPressed,
+  bool isSelected,
+) =>
+    IconButton(
+      icon: const Icon(Icons.zoom_in_outlined),
+      onPressed: onPressed,
+      isSelected: isSelected,
+      selectedIcon: const Icon(Icons.zoom_out_outlined),
+    );
 
 double findMaxY(List<FlSpot> spots) {
   double maxY = 0;
@@ -69,4 +80,28 @@ double findMaxY(List<FlSpot> spots) {
     }
   }
   return maxY;
+}
+
+double findMaxYMulti(List<List<FlSpot>> spots) {
+  double maxY = 0;
+  for (var i = 0; i < spots.length; i++) {
+    for (var j = 0; j < spots[i].length; j++) {
+      if (spots[i][j].y > maxY) {
+        maxY = spots[i][j].y;
+      }
+    }
+  }
+  return maxY;
+}
+
+double findMaxXMulti(List<List<FlSpot>> spots) {
+  double maxX = 0;
+  for (var i = 0; i < spots.length; i++) {
+    for (var j = 0; j < spots[i].length; j++) {
+      if (spots[i][j].x > maxX) {
+        maxX = spots[i][j].x;
+      }
+    }
+  }
+  return maxX;
 }

@@ -23,7 +23,10 @@ depthFirst(List<List<int>> problem) async {
     await Future.delayed(Duration.zero, () {});
     if (nowTime.difference(startTime).inSeconds > timeOut) {
       //print('Time out in Depth First');
-      return const Search(win: false);
+      return Search(
+        win: false,
+        time: nowTime.difference(startTime).inMilliseconds,
+      );
     }
 
     if (complete(vector)) {

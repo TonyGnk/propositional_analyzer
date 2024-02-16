@@ -1,4 +1,5 @@
 //import 'package:audioplayers/audioplayers.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -36,18 +37,10 @@ initializeData() {
   spotsSearch.clear();
   spots1.clear();
   spots2.clear();
-  spots1Hill.clear();
   spots2Hill.clear();
-  spots1Depth.clear();
   spots2Depth.clear();
-  spots1DPLL.clear();
   spots2DPLL.clear();
-  spots1Walk.clear();
   spots2Walk.clear();
-  spotsHillSearch.clear();
-  spotsDepthSearch.clear();
-  spotsDPLLSearch.clear();
-  spotsWalkSearch.clear();
 }
 
 runAlgorithm() async {
@@ -186,12 +179,32 @@ bool isStopListLengthEqualToStop(Algorithms type) {
   return false;
 }
 
-//at least one is not empty
-isNotEmptyMultiSpots() {
-  //spotsHillSearch
-  if (spotsHillSearch.isNotEmpty) return true;
-  if (spotsDepthSearch.isNotEmpty) return true;
-  if (spotsDPLLSearch.isNotEmpty) return true;
-  if (spotsWalkSearch.isNotEmpty) return true;
-  return false;
+equalizeMultiTimeSpots() {
+  List<FlSpot> notEmpty = [];
+  if (spots2Hill.isNotEmpty) notEmpty = List.from(spots2Hill);
+  if (spots2Depth.isNotEmpty) notEmpty = List.from(spots2Depth);
+  if (spots2DPLL.isNotEmpty) notEmpty = List.from(spots2DPLL);
+  if (spots2Walk.isNotEmpty) notEmpty = List.from(spots2Walk);
+
+  if (spots2Hill.length < notEmpty.length) {
+    print('Here');
+    for (int i = spots2Hill.length; i < notEmpty.length; i++) {
+      spots2Hill.add(FlSpot(notEmpty.first.x, notEmpty.first.y));
+    }
+  }
+  if (spots2Depth.length < notEmpty.length) {
+    for (int i = spots2Depth.length; i < notEmpty.length; i++) {
+      spots2Depth.add(FlSpot(notEmpty.first.x, notEmpty.first.y));
+    }
+  }
+  if (spots2DPLL.length < notEmpty.length) {
+    for (int i = spots2DPLL.length; i < notEmpty.length; i++) {
+      spots2DPLL.add(FlSpot(notEmpty.first.x, notEmpty.first.y));
+    }
+  }
+  if (spots2Walk.length < notEmpty.length) {
+    for (int i = spots2Walk.length; i < notEmpty.length; i++) {
+      spots2Walk.add(FlSpot(notEmpty.first.x, notEmpty.first.y));
+    }
+  }
 }
