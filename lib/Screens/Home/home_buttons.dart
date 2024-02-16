@@ -31,10 +31,10 @@ const newLoadButton = ButtonTemplate(
 );
 
 const helpContainer = ButtonTemplate(
-  title: 'Instructions',
-  slogan: 'How app works',
-  icon: Icons.help_outline_outlined,
-  screenDestination: ScreenDestination.instructions,
+  title: 'Collection',
+  slogan: 'Your saved analysis',
+  icon: Icons.subscriptions_outlined,
+  screenDestination: ScreenDestination.collection,
 );
 
 class ButtonTemplate extends ConsumerStatefulWidget {

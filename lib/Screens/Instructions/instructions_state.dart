@@ -10,10 +10,6 @@ final opacity = StateProvider<double>((ref) => 0);
 
 instructionsGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
-
-  // if (destination == ScreenDestination.home) {
-  //   updateAppBarBackButton(ref, false);
-  // }
 }
 
 instructionsReturn(WidgetRef ref) {
@@ -27,7 +23,7 @@ updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateInfoButton(ref, !isReturn);
   //updateAppBarCustomIcon1(ref, exitIconButton(), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
-  updateSecondFloor(ref, circles(), container(ref), isReturn);
+  updateSecondFloor(ref, const SizedBox(), container(ref), isReturn);
 }
 
 animatedColumn(Widget child) => Consumer(
@@ -41,12 +37,7 @@ animatedColumn(Widget child) => Consumer(
 container(WidgetRef oldRef) => Consumer(
       builder: (context, ref, _) => Row(
         children: [
-          IconButton(
-            onPressed: () {
-              goBack(oldRef);
-            },
-            icon: const Icon(Icons.exit_to_app),
-          ),
+          circles(),
           IconButton(
             onPressed: () {
               ref.read(instructionsLanguageIsEnglish.notifier).state =
