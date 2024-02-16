@@ -31,7 +31,7 @@ class CollectionState extends ConsumerState<Collection> {
   //Print the count of txt files from 'collection/' folder
   void loadFiles() {
     if (UniversalPlatform.isWindows) {
-      final directory = Directory('collection/');
+      final directory = Directory('assets/collection/');
       final txtFiles = directory
           .listSync()
           .whereType<File>()
@@ -69,7 +69,12 @@ class CollectionState extends ConsumerState<Collection> {
         padding: const EdgeInsets.symmetric(vertical: 6),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1000),
-          child: Row(children: [
+          child: Column(children: [
+            const Text(
+              'Manage your collections from Collection folder',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14),
+            ),
             Expanded(
               child: ListView.builder(
                 itemCount: filesLoaded.length,
@@ -87,6 +92,11 @@ class CollectionState extends ConsumerState<Collection> {
         padding: const EdgeInsets.all(6.0),
         child: Column(
           children: [
+            const Text(
+              'Manage your collections from Collection folder',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14),
+            ),
             Expanded(
               child: ListView.builder(
                 itemCount: filesLoaded.length,

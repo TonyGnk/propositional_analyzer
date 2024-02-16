@@ -73,6 +73,7 @@ flutter:
         - assets/images/qrCode.png
         - assets/images/qr.svg
         - assets/audio/finish.mp3
+        - assets/collection/analysisSingle.txt
 
     fonts:
         - family: Play
