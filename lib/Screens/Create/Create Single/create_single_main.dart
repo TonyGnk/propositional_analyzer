@@ -29,13 +29,8 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
   @override
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
-//     return PopScope(
-//   onPopInvoked: (value) => goBack(ref),
-//   child: MaterialApp(...),
-// );
-
     return animatedColumn(
-      isDesktop ? desktopView() : mobileView(),
+      (MediaQuery.of(context).size.width > 600) ? desktopView() : mobileView(),
     );
   }
 

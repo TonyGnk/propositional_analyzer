@@ -28,7 +28,7 @@ class _CreateState extends ConsumerState<CreateMulti> {
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
     return animatedColumn(
-      isDesktop ? desktopView() : mobileView(),
+      (MediaQuery.of(context).size.width > 600) ? desktopView() : mobileView(),
     );
   }
 

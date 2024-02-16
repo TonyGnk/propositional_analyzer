@@ -28,7 +28,7 @@ class _HomeState extends ConsumerState<Home> {
     final isDesktop = ref.watch(isDesktopProvider);
     return animatedColumn(
       //const LineChartSample10()
-      isDesktop ? desktopView() : mobileView(),
+      (MediaQuery.of(context).size.width > 600) ? desktopView() : mobileView(),
     );
   }
 
