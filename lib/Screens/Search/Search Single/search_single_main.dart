@@ -98,7 +98,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
             stop1 = stopsPrimary[j - 1];
             stop2 = stopsSecondary[j - 1];
 
-            if (founded != 1) addTrack(trackList, j);
+            if (founded != 1) addTrack(ref, trackList, j);
           });
         });
       }

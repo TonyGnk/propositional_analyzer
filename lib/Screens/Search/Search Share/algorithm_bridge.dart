@@ -1,6 +1,7 @@
 //import 'package:audioplayers/audioplayers.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 import '../../../global_variables.dart';
@@ -65,34 +66,54 @@ Map<Algorithms, Function> algorithmMap = {
   Algorithms.walkSat: walkSat,
 };
 
-// runAlgorithmNew(Algorithms type) async {
-//   return
-// }
-
-addTrack(List<TrackContainer> trackList, int j, [String type = '']) {
+addTrack(WidgetRef ref, List<Widget> trackList, int j,
+    [bool isMulti = false, Algorithms type = Algorithms.hillClimbing]) {
   trackList.add(
     TrackContainer(
-      child: Text(
-        '$type Test $j with M=$M failed',
-        style: const TextStyle(
-          fontSize: 14,
-          fontFamily: 'Play',
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Test $j with M=$M failed',
+            style: const TextStyle(
+              fontSize: 14,
+              fontFamily: 'Play',
+            ),
+          ),
+          isMulti
+              ? Text(
+                  '${algorithmNames[type]!}  ',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontFamily: 'Play',
+                  ),
+                )
+              : const SizedBox(),
+        ],
       ),
     ),
   );
-  print('$type Test $j with M=$M failed');
-  scrollDown();
+  //print('$type Test $j with M=$M failed');
+  scrollDown(ref);
 }
 
-ScrollController controller = ScrollController();
-scrollDown() async {
+Map<Algorithms, String> algorithmNames = {
+  Algorithms.hillClimbing: 'Hill Climbing',
+  Algorithms.depthFirst: 'Depth First',
+  Algorithms.dpll: 'DPLL',
+  Algorithms.walkSat: 'Walk Sat',
+};
+
+final controllerProvider =
+    StateProvider<ScrollController>((ref) => ScrollController());
+
+scrollDown(WidgetRef ref) async {
   if (!hover) {
-    controller.animateTo(
-      controller.position.maxScrollExtent,
-      duration: const Duration(milliseconds: 700),
-      curve: Curves.fastOutSlowIn,
-    );
+    ref.read(controllerProvider.notifier).state.animateTo(
+          ref.read(controllerProvider.notifier).state.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.fastOutSlowIn,
+        );
   }
 }
 

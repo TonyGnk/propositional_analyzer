@@ -16,7 +16,7 @@ import 'search_multi_layout.dart';
 import 'search_multi_state.dart';
 
 class SearchMultiState extends ConsumerState<SearchMulti> {
-  List<TrackContainer> trackList = [];
+  List<Widget> trackList = [];
 
   Color color1 = Colors.orangeAccent;
   String str = 'M0';
@@ -128,7 +128,7 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
           stop1 = stopsPrimary[j - 1];
           stop2 = stopsSecondary[j - 1];
 
-          if (founded != 1) addTrack(trackList, j, type.toString());
+          if (founded != 1) addTrack(ref, trackList, j, true, type);
         });
       });
     }
