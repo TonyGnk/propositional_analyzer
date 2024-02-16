@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../global_variables.dart';
+import '../../../global_variables.dart';
 import 'about_down_of_qr.dart';
 
 /// Builds a custom column for the right side of the about screen.

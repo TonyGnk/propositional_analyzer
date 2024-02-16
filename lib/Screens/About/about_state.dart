@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Screens/screen_list.dart';
-import '../../../global_variables.dart';
-import '../../Routed Screen/app_bar.dart';
-import '../../Routed Screen/info_icon.dart';
+import '../screen_list.dart';
+import '../../global_variables.dart';
+import '../../UI/Routed Screen/app_bar.dart';
+import '../../UI/Routed Screen/info_icon.dart';
 
 final opacityAboutState = StateProvider<double>((ref) => 1);
 
