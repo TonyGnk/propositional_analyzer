@@ -102,10 +102,10 @@ class ChartMultiTimeState extends ConsumerState<ChartMultiTime> {
     if (widget.listSpots[0].length > 40) {
       return (widget.listSpots[0].length / 25).round();
     } else if (widget.listSpots[0].length > 25) {
-      stepDuration = const Duration(milliseconds: 35);
+      stepDuration = const Duration(milliseconds: 30);
       return 1;
     } else {
-      stepDuration = const Duration(milliseconds: 50);
+      stepDuration = const Duration(milliseconds: 40);
       return 1;
     }
   }

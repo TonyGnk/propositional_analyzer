@@ -108,10 +108,10 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
     if (widget.spots.length > 40) {
       return (widget.spots.length / 25).round();
     } else if (widget.spots.length > 25) {
-      stepDuration = const Duration(milliseconds: 35);
+      stepDuration = const Duration(milliseconds: 30);
       return 1;
     } else {
-      stepDuration = const Duration(milliseconds: 50);
+      stepDuration = const Duration(milliseconds: 40);
       return 1;
     }
   }
