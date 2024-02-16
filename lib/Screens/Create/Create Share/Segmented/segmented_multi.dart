@@ -13,14 +13,11 @@ class SegmentedControlMulti extends StatefulWidget {
 
 class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
   @override
-  Widget build(BuildContext context) => Consumer(
-        builder: (context, ref, _) {
-          final isDesktop = ref.watch(isDesktopProvider);
-          return (MediaQuery.of(context).size.width > 600)
-              ? container(desktopSegmentedMulti(), true)
-              : container(mobileSegmentedMulti(), false);
-        },
-      );
+  Widget build(BuildContext context) =>
+      (MediaQuery.of(context).size.width > 600)
+          ? container(desktopSegmentedMulti(), true)
+          : container(mobileSegmentedMulti(), false);
+
   desktopSegmentedMulti() => Row(
         children: [
           Expanded(child: checkRow(0)),
@@ -115,37 +112,29 @@ class _SegmentedControlMultiState extends State<SegmentedControlMulti> {
     }
   }
 
-  container(Widget child, bool isDesktop) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Consumer(
-          builder: (context, ref, _) {
-            final isDesktop = ref.watch(isDesktopProvider);
-            return Card(
-              elevation: isDesktop ? 0 : null,
-              child: Container(
-                height: isDesktop ? 50 : 117,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(cornerSize - 1),
-                  border: (isDesktop &&
-                          Theme.of(context).brightness == Brightness.light)
-                      ? Border.all(
-                          color: Theme.of(context).splashColor,
-                          width: 2,
-                        )
-                      : Border.all(
-                          color: Theme.of(context)
-                              .menuButtonTheme
-                              .style!
-                              .foregroundColor!
-                              .resolve({})!,
-                        ),
-                ),
-                padding: const EdgeInsets.all(5),
-                clipBehavior: Clip.antiAlias,
-                child: child,
-              ),
-            );
-          },
+  container(Widget child, bool isDesktop) => Card(
+        elevation: isDesktop ? 0 : null,
+        child: Container(
+          height: isDesktop ? 50 : 117,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(cornerSize - 1),
+            border:
+                (isDesktop && Theme.of(context).brightness == Brightness.light)
+                    ? Border.all(
+                        color: Theme.of(context).splashColor,
+                        width: 2,
+                      )
+                    : Border.all(
+                        color: Theme.of(context)
+                            .menuButtonTheme
+                            .style!
+                            .foregroundColor!
+                            .resolve({})!,
+                      ),
+          ),
+          padding: const EdgeInsets.all(5),
+          clipBehavior: Clip.antiAlias,
+          child: child,
         ),
       );
 }

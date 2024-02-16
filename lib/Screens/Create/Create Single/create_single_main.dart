@@ -27,15 +27,14 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final isDesktop = ref.watch(isDesktopProvider);
-    return animatedColumn(
-      (MediaQuery.of(context).size.width > 600) ? desktopView() : mobileView(),
-    );
-  }
+  Widget build(BuildContext context) => animatedColumn(
+        (MediaQuery.of(context).size.width > 600)
+            ? desktopView()
+            : mobileView(),
+      );
 
   mobileView() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
         child: createColumn(),
       );
 
@@ -47,30 +46,38 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
             const SizedBox(height: 8),
             const DesktopSegmented(),
             const SizedBox(height: 4),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: group(
-                    context,
-                    185,
-                    [slideK(updateK), slideN(updateN), slideTests(updateTests)],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: group(
+                      context,
+                      185,
+                      [
+                        slideK(updateK),
+                        slideN(updateN),
+                        slideTests(updateTests)
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: group(
-                    context,
-                    185,
-                    [
-                      const Expanded(child: SizedBox()),
-                      slideStop(updateStop),
-                      const Expanded(child: SizedBox()),
-                      slideTime(updateTime),
-                      const Expanded(child: SizedBox()),
-                    ],
+                  const SizedBox(width: 3),
+                  Expanded(
+                    child: group(
+                      context,
+                      185,
+                      [
+                        const Expanded(child: SizedBox()),
+                        slideStop(updateStop),
+                        const Expanded(child: SizedBox()),
+                        slideTime(updateTime),
+                        const Expanded(child: SizedBox()),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             const Expanded(flex: 1, child: SizedBox()),
             Row(
@@ -93,7 +100,6 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
   createColumn() => Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          //const SizedBox(height: 2),
           group(
             context,
             183,
@@ -108,18 +114,19 @@ class _CreateSingleState extends ConsumerState<CreateSingle> {
           const SizedBox(height: 5),
           const SegmentedControl(),
           const Expanded(flex: 1, child: SizedBox()),
-          //examplesContainer(),
           buttonRow(),
-          //analyzeContainer(),
         ],
       );
 
-  buttonRow() => Row(
-        children: [
-          Expanded(child: examplesContainer(false)),
-          const SizedBox(width: 5),
-          Expanded(child: analyzeContainer()),
-        ],
+  buttonRow() => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 7),
+        child: Row(
+          children: [
+            Expanded(child: examplesContainer(false)),
+            const SizedBox(width: 5),
+            Expanded(child: analyzeContainer()),
+          ],
+        ),
       );
 
   updateK(int value) => setState(() {

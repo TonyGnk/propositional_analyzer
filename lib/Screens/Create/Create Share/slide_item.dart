@@ -3,9 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../global_variables.dart';
 
-group(BuildContext context, double height, List<Widget> list) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 8),
-    child: Consumer(builder: (context, ref, _) {
+group(BuildContext context, double height, List<Widget> list) =>
+    Consumer(builder: (context, ref, _) {
       final isDesktop = ref.watch(isDesktopProvider);
       return Card(
         elevation: isDesktop ? 0 : null,
@@ -32,7 +31,7 @@ group(BuildContext context, double height, List<Widget> list) => Padding(
               crossAxisAlignment: CrossAxisAlignment.start, children: list),
         ),
       );
-    }));
+    });
 
 class SliderItem extends StatefulWidget {
   const SliderItem({

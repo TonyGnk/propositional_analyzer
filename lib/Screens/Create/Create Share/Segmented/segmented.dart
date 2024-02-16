@@ -17,34 +17,31 @@ class _SegmentedControlState extends State<SegmentedControl> {
   bool matrix = false;
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Card(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(cornerSize),
-              border: Border.all(
-                color: Theme.of(context)
-                    .menuButtonTheme
-                    .style!
-                    .foregroundColor!
-                    .resolve({})!,
-              ),
+  Widget build(BuildContext context) => Card(
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(cornerSize),
+            border: Border.all(
+              color: Theme.of(context)
+                  .menuButtonTheme
+                  .style!
+                  .foregroundColor!
+                  .resolve({})!,
             ),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-              height: openedMenu ? 184 : 46,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  selectItem1(0),
-                  selectItem2(1),
-                  selectItem3(2),
-                  selectItem4(3),
-                  selectItem5(4),
-                ],
-              ),
+          ),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            height: openedMenu ? 184 : 46,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                selectItem1(0),
+                selectItem2(1),
+                selectItem3(2),
+                selectItem4(3),
+                selectItem5(4),
+              ],
             ),
           ),
         ),

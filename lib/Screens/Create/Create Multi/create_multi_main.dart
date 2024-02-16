@@ -25,68 +25,75 @@ class _CreateState extends ConsumerState<CreateMulti> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final isDesktop = ref.watch(isDesktopProvider);
-    return animatedColumn(
-      (MediaQuery.of(context).size.width > 600) ? desktopView() : mobileView(),
-    );
-  }
+  Widget build(BuildContext context) => animatedColumn(
+        (MediaQuery.of(context).size.width > 600)
+            ? desktopView()
+            : mobileView(),
+      );
 
   desktopView() => desktopFrame(
         context,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 8),
-            const SegmentedControlMulti(),
-            const SizedBox(height: 4),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: group(
-                    context,
-                    185,
-                    [slideK(updateK), slideN(updateN), slideTests(updateTests)],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 8),
+              const SegmentedControlMulti(),
+              const SizedBox(height: 4),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: group(
+                      context,
+                      185,
+                      [
+                        slideK(updateK),
+                        slideN(updateN),
+                        slideTests(updateTests)
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: group(
-                    context,
-                    185,
-                    [
-                      const Expanded(child: SizedBox()),
-                      slideStop(updateStop),
-                      const Expanded(child: SizedBox()),
-                      slideTime(updateTime),
-                      const Expanded(child: SizedBox()),
-                    ],
+                  const SizedBox(width: 3),
+                  Expanded(
+                    child: group(
+                      context,
+                      185,
+                      [
+                        const Expanded(child: SizedBox()),
+                        slideStop(updateStop),
+                        const Expanded(child: SizedBox()),
+                        slideTime(updateTime),
+                        const Expanded(child: SizedBox()),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const Expanded(flex: 1, child: SizedBox()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: 173,
-                  child: examplesContainer(true),
-                ),
-                SizedBox(
-                  width: 172,
-                  child: analyzeContainer(true),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              const Expanded(flex: 1, child: SizedBox()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    width: 173,
+                    child: examplesContainer(true),
+                  ),
+                  SizedBox(
+                    width: 172,
+                    child: analyzeContainer(true),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         800,
         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       );
 
   mobileView() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -107,12 +114,15 @@ class _CreateState extends ConsumerState<CreateMulti> {
         ),
       );
 
-  buttonRow() => Row(
-        children: [
-          Expanded(child: examplesContainer(true)),
-          const SizedBox(width: 5),
-          Expanded(child: analyzeContainer(true)),
-        ],
+  buttonRow() => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 7.0),
+        child: Row(
+          children: [
+            Expanded(child: examplesContainer(true)),
+            const SizedBox(width: 5),
+            Expanded(child: analyzeContainer(true)),
+          ],
+        ),
       );
 
   updateK(int value) => setState(() {
