@@ -31,8 +31,8 @@ jobs:
 
               # Setup the flutter environment.
             - uses: mobiledevops/flutter-sdk-action@v1.0.0
-              #with:
-              #flutter-version: "3.13.4" # you can also specify exact version of flutter
+              with:
+                  flutter-sdk-version: "3.16.9" # you can also specify exact version of flutter
 
             - run: flutter clean
             # Get flutter dependencies.
