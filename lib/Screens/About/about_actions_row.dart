@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../global_variables.dart';
-import '../about_constants.dart';
+import '../../global_variables.dart';
+import 'about_constants.dart';
 import 'about_update_handler.dart';
 
 Future<void> callWebVersion() async {

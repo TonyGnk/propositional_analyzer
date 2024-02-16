@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../global_variables.dart';
+import '../../global_variables.dart';
 
 class Basket extends ConsumerStatefulWidget {
   const Basket({

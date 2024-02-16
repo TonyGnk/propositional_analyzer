@@ -8,11 +8,11 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../global_variables.dart';
 import '../shared.dart';
-import 'Left Side/about_actions_row.dart';
-import 'Left Side/about_update_handler.dart';
+import 'about_actions_row.dart';
+import 'about_update_handler.dart';
 import 'about_constants.dart';
 import 'about_state.dart';
-import 'Right Side/about_right_side.dart';
+import 'about_right_side.dart';
 
 class AboutScreen extends ConsumerStatefulWidget {
   const AboutScreen({super.key});

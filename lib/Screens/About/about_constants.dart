@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'Left Side/about_actions_row.dart';
+import 'about_actions_row.dart';
 
 const String githubApiUrl =
     'https://api.github.com/repos/TonyGnk/propositional_analyzer/releases/latest';
