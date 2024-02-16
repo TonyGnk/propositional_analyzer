@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../global_variables.dart';
 
-//Enum with values success and time
 enum LineType { success, time }
 
 LineTouchData lineTouchData(BuildContext context, LineType type) =>

@@ -31,12 +31,10 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
     playAgainAnimation();
     curvingIndex = findCurvingIndex(widget.spots);
     minXVariable = widget.spots[curvingIndex!].x;
-    print('Curving index: $curvingIndex');
   }
 
   playAgainAnimation() {
     step = findRightStep();
-    print('Length spots: ${widget.spots.length}');
     animatedSpotUp = [];
     Timer.periodic(stepDuration, (timer) {
       setState(() {

@@ -35,6 +35,8 @@ chartHeaderSuccess(
 chartHeaderTime(
   String label,
   void Function() onPressedRepeat,
+  void Function() onPressedCollapse,
+  bool isCollapsed,
 ) =>
     Consumer(
       builder: (context, ref, _) => Container(
@@ -44,6 +46,7 @@ chartHeaderTime(
             Text(label, style: Theme.of(context).textTheme.labelSmall),
             const Expanded(child: SizedBox()),
             repeatIcon(context, onPressedRepeat),
+            collapseIcon(context, onPressedCollapse, isCollapsed),
             // fullScreenIcon(),
           ],
         ),

@@ -16,39 +16,14 @@ bool show1 = true;
 bool show2 = true;
 bool collapsedUp = false;
 bool collapsedDown = false;
-List<FlSpot> animatedSpotDown = [const FlSpot(1, 1)];
 int firstNotOneUp = 1;
 FlSpot firstNotOneUpSpot = const FlSpot(1, 1);
 
 class ChartSingleState extends ConsumerState<ChartSingle> {
-  List<Color> gradientColors = [
-    const Color.fromRGBO(199, 109, 35, 1),
-    const Color.fromRGBO(167, 123, 3, 1),
-  ];
-
   @override
   initState() {
     super.initState();
     Future.delayed(Duration.zero, () => chartsSingleReturn(ref));
-  }
-
-  playAgainAnimationDown() {
-    animatedSpotDown = [];
-    Timer.periodic(const Duration(milliseconds: 10), (timer) {
-      setState(() {
-        if (animatedSpotDown.length < spots2.length) {
-          for (var i = 0; i < 10; i++) {
-            if (animatedSpotDown.length < spots2.length) {
-              animatedSpotDown.add(spots2[animatedSpotDown.length]);
-            } else {
-              break;
-            }
-          }
-        } else {
-          timer.cancel();
-        }
-      });
-    });
   }
 
   @override

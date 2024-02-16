@@ -22,13 +22,13 @@ class ChartTimeState extends ConsumerState<ChartTime> {
   List<FlSpot> animatedSpot = [];
   int step = 1;
   double maxY = 0;
+  bool isCollapsed = false;
 
   @override
   initState() {
     super.initState();
     playAgainAnimation();
     maxY = findMaxY(widget.spots);
-    //print all the widget.spots
     print('widget.spots: ${widget.spots}');
   }
 
@@ -53,10 +53,22 @@ class ChartTimeState extends ConsumerState<ChartTime> {
     });
   }
 
+  collapseLine() {
+    if (isCollapsed) {
+      setState(() {
+        isCollapsed = false;
+      });
+    } else {
+      setState(() {
+        isCollapsed = true;
+      });
+    }
+  }
+
   int findRightStep() {
     stepDuration = const Duration(milliseconds: 30);
     if (widget.spots.length < 25) {
-      stepDuration = const Duration(milliseconds: 300);
+      stepDuration = const Duration(milliseconds: 200);
       return 1;
     } else {
       return (widget.spots.length / 25).round();
@@ -69,6 +81,8 @@ class ChartTimeState extends ConsumerState<ChartTime> {
           chartHeaderTime(
             'Run Time to M/N',
             playAgainAnimation,
+            collapseLine,
+            isCollapsed,
           ),
           Expanded(child: chart()),
         ],
@@ -76,7 +90,7 @@ class ChartTimeState extends ConsumerState<ChartTime> {
 
   chart() => (animatedSpot.isNotEmpty)
       ? LineChart(
-          duration: const Duration(milliseconds: 1000),
+          duration: const Duration(milliseconds: 100),
           LineChartData(
             lineTouchData: lineTouchData(context, LineType.time),
             borderData: FlBorderData(
@@ -90,10 +104,7 @@ class ChartTimeState extends ConsumerState<ChartTime> {
             minX: widget.spots[0].x.toDouble(),
             maxX: widget.spots[widget.spots.length - 1].x.toDouble(),
             minY: 0,
-            //timeout is in seconds convert to milliseconds
-            maxY:
-                //((timeOut + 1) * 1000).toDouble(),
-                maxY,
+            maxY: isCollapsed ? maxY : ((timeOut + 1) * 1000).toDouble(),
             lineBarsData: singleBarDataSuccess(animatedSpot),
           ),
         )
