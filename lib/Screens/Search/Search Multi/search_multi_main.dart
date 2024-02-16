@@ -99,7 +99,7 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
       M++;
     } while (countOfFalseHasMore() != runningList.length);
     print('All algorithms have finished');
-    playSound();
+    //playSound();
     equalizeMultiTimeSpots();
     goTo(ref, ScreenDestination.chartMulti);
   }

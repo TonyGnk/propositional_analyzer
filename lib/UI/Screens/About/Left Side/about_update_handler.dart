@@ -4,8 +4,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:dio/dio.dart';
 
 import '../about_constants.dart';
 import 'about_actions_row.dart';
@@ -16,9 +17,9 @@ Future<void> getLatestVersion(
   final String latestLinkVersion;
   print('Current Version $currentVersion');
   //Find the latest version
-  final response = await http.get(Uri.parse(githubApiUrl));
+  final response = await Dio().get(githubApiUrl);
   if (response.statusCode == 200) {
-    final jsonResponse = json.decode(response.body);
+    final jsonResponse = response.data;
     log(jsonResponse['tag_name']);
     latestVersion = jsonResponse['tag_name'];
     print('Latest Version $latestVersion');

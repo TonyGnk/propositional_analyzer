@@ -117,7 +117,7 @@ class SearchSingleState extends ConsumerState<SearchSingle> {
         stopList.clear();
       }
     } while (stopList.length != stop);
-    playSound();
+    //playSound();
     goTo(ref, ScreenDestination.chartSingle);
   }
 

@@ -1,14 +1,13 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:just_audio/just_audio.dart';
 
 int numberOfTests = 1;
-int N = 7;
-int K = 6;
+int N = 6;
+int K = 5;
 int M = 1;
 int stop = 1;
 
-int timeOut = 2;
+int timeOut = 10;
 
 int selected = 0;
 bool selectedHill = true;
@@ -30,7 +29,7 @@ List<FlSpot> spotsSearch = [];
 
 enum Algorithms { hillClimbing, depthFirst, dpll, walkSat }
 
-final player = AudioPlayer(); //TODO:Add audio player after the issue is fixed
+//final player = AudioPlayer();
 
 const double cornerSize = 13;
 

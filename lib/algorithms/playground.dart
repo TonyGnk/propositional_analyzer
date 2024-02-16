@@ -5,7 +5,6 @@ import '../global_variables.dart';
 import 'depth_first.dart';
 import 'dpll.dart';
 import 'new_value.dart';
-import 'walk_sat.dart';
 
 //TODO Improve the walkSat
 myFunction() async {

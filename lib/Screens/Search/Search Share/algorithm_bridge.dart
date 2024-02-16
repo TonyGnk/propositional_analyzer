@@ -3,7 +3,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:universal_platform/universal_platform.dart';
-import 'package:just_audio/just_audio.dart';
 
 import '../../../global_variables.dart';
 import '../../../algorithms/depth_first.dart';
@@ -118,14 +117,16 @@ scrollDown(WidgetRef ref) async {
   }
 }
 
-playSound() async {
-  if (speakerOn) {
-    // await player.setSource(DeviceFileSource(songPath));
-    // await player.resume();
-    await player.setFilePath(songPath);
-    await player.play();
-  }
-}
+// playSound() async {
+//   AudioPlayer player = AudioPlayer();
+//   if (speakerOn) {
+//     // await player.setSource(DeviceFileSource(songPath));
+//     // await player.resume();
+//     //await player.setFilePath(songPath);
+//     //await player.setAsset(songPath);
+//     //await player.play();
+//   }
+// }
 
 String songPath = (UniversalPlatform.isWeb)
     ? 'assets/assets/audio/finish.mp3'
