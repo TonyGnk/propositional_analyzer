@@ -59,15 +59,17 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
   }
 
   fullScreen() {
-    if (isFullScreen) {
-      ref.read(appBarIsEnableProvider.notifier).state = true;
-      ref.read(hideTimeProvider.notifier).state = false;
-      isFullScreen = false;
-    } else {
-      ref.read(appBarIsEnableProvider.notifier).state = false;
-      ref.read(hideTimeProvider.notifier).state = true;
-      isFullScreen = true;
-    }
+    setState(() {
+      if (isFullScreen) {
+        ref.read(appBarIsEnableProvider.notifier).state = true;
+        ref.read(hideTimeProvider.notifier).state = false;
+        isFullScreen = false;
+      } else {
+        ref.read(appBarIsEnableProvider.notifier).state = false;
+        ref.read(hideTimeProvider.notifier).state = true;
+        isFullScreen = true;
+      }
+    });
   }
 
   collapseLine() {

@@ -66,15 +66,17 @@ class ChartTimeState extends ConsumerState<ChartTime> {
   }
 
   fullScreen() {
-    if (isFullScreen) {
-      ref.read(appBarIsEnableProvider.notifier).state = true;
-      ref.read(hideSuccessProvider.notifier).state = false;
-      isFullScreen = false;
-    } else {
-      ref.read(appBarIsEnableProvider.notifier).state = false;
-      ref.read(hideSuccessProvider.notifier).state = true;
-      isFullScreen = true;
-    }
+    setState(() {
+      if (isFullScreen) {
+        ref.read(appBarIsEnableProvider.notifier).state = true;
+        ref.read(hideSuccessProvider.notifier).state = false;
+        isFullScreen = false;
+      } else {
+        ref.read(appBarIsEnableProvider.notifier).state = false;
+        ref.read(hideSuccessProvider.notifier).state = true;
+        isFullScreen = true;
+      }
+    });
   }
 
   int findRightStep() {
