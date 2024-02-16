@@ -4,7 +4,7 @@ import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
 
 import '../../../Screens/screen_list.dart';
-import 'save_icon.dart';
+import '../Charts Multi/save_icon.dart';
 
 final opacity = StateProvider<double>((ref) => 1);
 
@@ -23,7 +23,7 @@ void chartsSingleReturn(WidgetRef ref) {
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateAppBarLabel(ref, 'Results', isReturn);
-  updateAppBarCustomIcon1(ref, saveIcon(), isReturn);
+  updateAppBarCustomIcon1(ref, saveIcon(saveAnalysisSingle), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
   ref.read(appBarBackButtonTimes.notifier).state = isReturn ? 2 : 1;
 }

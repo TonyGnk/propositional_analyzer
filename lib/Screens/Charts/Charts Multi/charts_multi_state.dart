@@ -28,7 +28,7 @@ void chartsMultiReturn(WidgetRef ref) {
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateAppBarLabel(ref, 'Results', isReturn);
-  updateAppBarCustomIcon1(ref, saveIcon2(), isReturn);
+  updateAppBarCustomIcon1(ref, saveIcon(saveAnalysisMulti), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
   ref.read(appBarBackButtonTimes.notifier).state = isReturn ? 2 : 1;
 }

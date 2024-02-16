@@ -67,14 +67,14 @@ FlTitlesData titleDataSuccess() => FlTitlesData(
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
-          reservedSize: 30,
+          reservedSize: 43,
           interval: (numberOfTests > 10) ? 2 : 1,
           showTitles: true,
         ),
       ),
       rightTitles: AxisTitles(
         sideTitles: SideTitles(
-          reservedSize: 30,
+          reservedSize: 43,
           interval: (numberOfTests > 10) ? 2 : 1,
           showTitles: true,
         ),
@@ -85,6 +85,18 @@ FlTitlesData titleDataTime() => const FlTitlesData(
       show: true,
       topTitles: AxisTitles(
         sideTitles: SideTitles(showTitles: false),
+      ),
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          reservedSize: 43,
+          showTitles: true,
+        ),
+      ),
+      rightTitles: AxisTitles(
+        sideTitles: SideTitles(
+          reservedSize: 43,
+          showTitles: true,
+        ),
       ),
     );
 

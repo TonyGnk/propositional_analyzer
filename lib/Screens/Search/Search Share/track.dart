@@ -49,7 +49,7 @@ class TrackContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(left: 11, right: 11, bottom: 0),
+        padding: const EdgeInsets.only(left: 7, right: 7, bottom: 0),
         child: Card(
           elevation: 0,
           child: Container(

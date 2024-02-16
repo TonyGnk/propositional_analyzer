@@ -152,7 +152,7 @@ class ChartSuccessState extends ConsumerState<ChartSuccess> {
             titlesData: titleData(LineType.success),
             gridData: const FlGridData(drawHorizontalLine: false),
             minX: isCollapsed ? minXVariable : widget.spots[0].x.toDouble(),
-            maxX: widget.spots[widget.spots.length - 1].x.toDouble(),
+            maxX: spots1[widget.spots.length - 1].x.toDouble(),
             minY: 0,
             maxY: numberOfTests.toDouble(),
             lineBarsData: singleBarDataSuccess(animatedSpotUp),

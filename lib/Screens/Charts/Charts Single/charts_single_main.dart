@@ -21,8 +21,8 @@ class ChartSingleState extends ConsumerState<ChartSingle> {
         child: animatedColumn(
           Column(
             children: [
-              Expanded(child: ChartSuccess(spots1)),
-              Expanded(child: ChartTime(spots2)),
+              ChartSuccess(spots1),
+              ChartTime(spots2),
             ],
           ),
         ),

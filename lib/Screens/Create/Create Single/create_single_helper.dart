@@ -27,6 +27,7 @@ chartHeaderSingle(
       builder: (context, ref, _) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 44),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(label, style: Theme.of(context).textTheme.labelSmall),
             const Expanded(child: SizedBox()),

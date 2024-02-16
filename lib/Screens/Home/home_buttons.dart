@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../global_variables.dart';
 import '../../UI/Adaptive Folder/synthesizer.dart';
-import '../Charts/Charts Single/save_icon.dart';
+import '../Charts/Charts Multi/save_icon.dart';
 import '../screen_list.dart';
 
 //Create a new analysis with one Algorithm
@@ -28,7 +28,6 @@ const newLoadButton = ButtonTemplate(
   slogan: 'Now Available!',
   icon: Icons.file_upload_outlined,
   isLoading: true,
-  screenDestination: ScreenDestination.chartSingle,
 );
 
 const helpContainer = ButtonTemplate(
@@ -99,9 +98,12 @@ class _ButtonTemplateState extends ConsumerState<ButtonTemplate> {
                   ? (await loadAnalysis())
                       ? {
                           screenStack.add(ScreenDestination.createSingle),
-                          goTo(ref, widget.screenDestination!)
+                          goTo(ref, ScreenDestination.chartSingle)
                         }
-                      : null
+                      : {
+                          screenStack.add(ScreenDestination.createMulti),
+                          goTo(ref, ScreenDestination.chartMulti)
+                        }
                   : goTo(ref, widget.screenDestination!);
             },
             child: AnimatedScale(
