@@ -27,7 +27,7 @@ List<LineChartBarData> linesChartBarData2() => [
     ];
 
 lineChartBarData(List<FlSpot> spots, Color gradient) => LineChartBarData(
-      barWidth: 3,
+      barWidth: 2,
       isCurved: false,
       spots: spots,
       color: gradient,

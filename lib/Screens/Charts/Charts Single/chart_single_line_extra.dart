@@ -107,7 +107,7 @@ List<LineChartBarData> singleBarDataSuccess(List<FlSpot> spots) {
   ];
   return [
     LineChartBarData(
-      barWidth: 3,
+      barWidth: 2,
       isCurved: false,
       spots: spots,
       gradient: LinearGradient(colors: gradientColors),

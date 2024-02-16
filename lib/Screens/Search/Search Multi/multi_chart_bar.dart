@@ -12,7 +12,7 @@ LineChartBarData line(
         colors: [color.withOpacity(0), color],
         stops: const [0.1, 1.0],
       ),
-      barWidth: 4,
+      barWidth: 3,
     );
 
 List<FlSpot> emptySpots = [
