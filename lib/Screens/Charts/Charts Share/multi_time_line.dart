@@ -41,7 +41,7 @@ class ChartMultiTimeState extends ConsumerState<ChartMultiTime> {
   }
 
   playAgainAnimation() {
-    // step = findRightStep();
+    step = findRightStep();
     print('Length spots: ${widget.listSpots.length}');
     animatedSpotHill = [];
     animatedSpotDepth = [];
@@ -86,9 +86,11 @@ class ChartMultiTimeState extends ConsumerState<ChartMultiTime> {
   fullScreen() {
     if (isFullScreen) {
       ref.read(appBarIsEnableProvider.notifier).state = true;
+      ref.read(hideSuccessProvider.notifier).state = false;
       isFullScreen = false;
     } else {
       ref.read(appBarIsEnableProvider.notifier).state = false;
+      ref.read(hideSuccessProvider.notifier).state = true;
       isFullScreen = true;
     }
   }
@@ -107,19 +109,26 @@ class ChartMultiTimeState extends ConsumerState<ChartMultiTime> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          chartHeaderSingle(
-            'Run Time to M/N',
-            playAgainAnimation,
-            collapseLine,
-            fullScreen,
-            isCollapsed,
-            isFullScreen,
-          ),
-          Expanded(child: chart()),
-        ],
-      );
+  Widget build(BuildContext context) {
+    final hideWidget = ref.watch(hideTimeProvider);
+    return !hideWidget
+        ? Expanded(
+            child: Column(
+              children: [
+                chartHeaderSingle(
+                  'Run Time to M/N',
+                  playAgainAnimation,
+                  collapseLine,
+                  fullScreen,
+                  isCollapsed,
+                  isFullScreen,
+                ),
+                Expanded(child: chart()),
+              ],
+            ),
+          )
+        : const SizedBox();
+  }
 
   chart() => (animatedSpotHill.isNotEmpty)
       ? LineChart(

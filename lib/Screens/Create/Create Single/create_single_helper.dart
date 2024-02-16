@@ -11,6 +11,10 @@ class ChartSingle extends ConsumerStatefulWidget {
   ConsumerState<ChartSingle> createState() => ChartSingleState();
 }
 
+final hideSuccessProvider = StateProvider<bool>((ref) => false);
+
+final hideTimeProvider = StateProvider<bool>((ref) => false);
+
 chartHeaderSingle(
   String label,
   void Function() onPressedRepeat,
@@ -66,10 +70,10 @@ fullScreenIcon(
   bool isSelected,
 ) =>
     IconButton(
-      icon: const Icon(Icons.zoom_in_outlined),
+      icon: const Icon(Icons.fullscreen_outlined),
       onPressed: onPressed,
       isSelected: isSelected,
-      selectedIcon: const Icon(Icons.zoom_out_outlined),
+      selectedIcon: const Icon(Icons.fullscreen_exit_outlined),
     );
 
 double findMaxY(List<FlSpot> spots) {

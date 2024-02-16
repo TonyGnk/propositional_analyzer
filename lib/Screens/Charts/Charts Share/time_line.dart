@@ -68,9 +68,11 @@ class ChartTimeState extends ConsumerState<ChartTime> {
   fullScreen() {
     if (isFullScreen) {
       ref.read(appBarIsEnableProvider.notifier).state = true;
+      ref.read(hideSuccessProvider.notifier).state = false;
       isFullScreen = false;
     } else {
       ref.read(appBarIsEnableProvider.notifier).state = false;
+      ref.read(hideSuccessProvider.notifier).state = true;
       isFullScreen = true;
     }
   }
@@ -89,19 +91,26 @@ class ChartTimeState extends ConsumerState<ChartTime> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          chartHeaderSingle(
-            'Run Time to M/N',
-            playAgainAnimation,
-            collapseLine,
-            fullScreen,
-            isCollapsed,
-            isFullScreen,
-          ),
-          Expanded(child: chart()),
-        ],
-      );
+  Widget build(BuildContext context) {
+    final hideWidget = ref.watch(hideTimeProvider);
+    return !hideWidget
+        ? Expanded(
+            child: Column(
+              children: [
+                chartHeaderSingle(
+                  'Run Time to M/N',
+                  playAgainAnimation,
+                  collapseLine,
+                  fullScreen,
+                  isCollapsed,
+                  isFullScreen,
+                ),
+                Expanded(child: chart()),
+              ],
+            ),
+          )
+        : const SizedBox();
+  }
 
   chart() => (animatedSpot.isNotEmpty)
       ? LineChart(
