@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'Left Side/about_actions_row.dart';
+
 const String githubApiUrl =
-    'https://api.github.com/repos/TonyGnk/algorithms/releases/latest';
+    'https://api.github.com/repos/TonyGnk/propositional_analyzer/releases/latest';
 
 //Urls
 final codeUrl = Uri(
@@ -13,7 +16,7 @@ final codeUrl = Uri(
 final webUrl = Uri(
   scheme: 'https',
   host: 'tonygnk.github.io',
-  path: 'Node-Odyssey',
+  path: 'propositional_analyzer',
 );
 
 final flutterUrl = Uri(
@@ -29,21 +32,19 @@ final tonyGnkUrl = Uri(
 
 enum AboutTextSize { small, medium, large }
 
-double findFontSize(AboutTextSize type) {
-  switch (type) {
-    case AboutTextSize.small:
-      return 15;
-    case AboutTextSize.medium:
-      return 22;
-    case AboutTextSize.large:
-      return 27;
-    default:
-      return 22;
-  }
-}
+final updateLinkProvider = StateProvider<String>((ref) =>
+    'https://github.com/TonyGnk/propositional_analyzer/releases/latest');
 
-final updateLinkProvider = StateProvider<Uri>((ref) => Uri(
-      scheme: 'https',
-      host: 'github.com',
-      path: 'TonyGnk/propositional_analyzer/releases/latest',
-    ));
+actionsRow(String version) => Consumer(
+      builder: (context, ref, _) {
+        final updateLink = ref.watch(updateLinkProvider);
+        return SizedBox(
+          height: 40,
+          child: Row(
+            children: [
+              updateAction(ref, version, updateLink),
+            ],
+          ),
+        );
+      },
+    );

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -6,23 +7,13 @@ import '../../../global_variables.dart';
 import '../about_constants.dart';
 import 'about_update_handler.dart';
 
-versionAction(String version) => actionButton(
-      () {},
-      'Version $version',
-      const Icon(Icons.info_outline_rounded),
-    );
-
-final profileAction = actionButton(
-  () async {
-    if (await canLaunchUrl(tonyGnkUrl)) {
-      await launchUrl(tonyGnkUrl);
-    } else {
-      throw 'Could not launch $tonyGnkUrl';
-    }
-  },
-  'Created by TonyGnk',
-  const Icon(Icons.person_outline_rounded),
-);
+Future<void> callWebVersion() async {
+  if (await canLaunchUrl(webUrl)) {
+    await launchUrl(webUrl);
+  } else {
+    throw 'Could not launch $webUrl';
+  }
+}
 
 Future<void> callProfile() async {
   if (await canLaunchUrl(tonyGnkUrl)) {
@@ -32,18 +23,6 @@ Future<void> callProfile() async {
   }
 }
 
-final flutterAction = actionButton(
-  () async {
-    if (await canLaunchUrl(flutterUrl)) {
-      await launchUrl(flutterUrl);
-    } else {
-      throw 'Could not launch $flutterUrl';
-    }
-  },
-  'Build With Flutter',
-  const Icon(Icons.handyman_outlined),
-);
-
 Future<void> callFlutter() async {
   if (await canLaunchUrl(flutterUrl)) {
     await launchUrl(flutterUrl);
@@ -52,7 +31,7 @@ Future<void> callFlutter() async {
   }
 }
 
-updateAction(WidgetRef ref, String version, Uri updateLink) => actionButton(
+updateAction(WidgetRef ref, String version, String updateLink) => actionButton(
       () async {
         getLatestVersion(
           ref,
@@ -61,7 +40,7 @@ updateAction(WidgetRef ref, String version, Uri updateLink) => actionButton(
         );
       },
       'Check for updates',
-      const Icon(Icons.update_outlined),
+      const Icon(Icons.security_update_good_outlined),
     );
 
 actionButton(
@@ -96,7 +75,7 @@ snackBar(
   BuildContext context,
   String message,
   bool showAction,
-  Uri updateLink,
+  String updateLink,
 ) =>
     SnackBar(
       content: Text(
@@ -111,8 +90,8 @@ snackBar(
               textColor: Theme.of(context).colorScheme.onBackground,
               label: 'Update',
               onPressed: () async {
-                if (await canLaunchUrl(updateLink)) {
-                  await launchUrl(updateLink);
+                if (await canLaunchUrl(Uri.parse('updateLink'))) {
+                  await launchUrl(Uri.parse('updateLink'));
                 } else {
                   throw 'Could not launch $updateLink';
                 }

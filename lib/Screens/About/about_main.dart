@@ -7,7 +7,8 @@ import 'package:package_info_plus/package_info_plus.dart';
 import '../../global_variables.dart';
 import '../shared.dart';
 import 'Left Side/about_actions_row.dart';
-import 'Left Side/about_left_side.dart';
+import 'Left Side/about_update_handler.dart';
+import 'about_constants.dart';
 import 'about_state.dart';
 import 'Right Side/about_right_side.dart';
 
@@ -49,12 +50,13 @@ class _AboutState extends ConsumerState<AboutScreen> {
   @override
   build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
+    final updateLink = ref.watch(updateLinkProvider);
     return animatedColumn(
-      isDesktop ? desktopView() : mobileView(),
+      isDesktop ? desktopView(updateLink) : mobileView(updateLink),
     );
   }
 
-  desktopView() => desktopFrame(
+  desktopView(String updateLink) => desktopFrame(
         context,
         Column(children: [
           const Expanded(child: SizedBox()),
@@ -63,49 +65,51 @@ class _AboutState extends ConsumerState<AboutScreen> {
         ]),
       );
 
-  mobileView() => Padding(
+  mobileView(String updateLink) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Expanded(
-              flex: 2,
-              child: Card(child: imageQr()),
-            ),
+            const Expanded(
+                flex: 2,
+                child: BasketQr(
+                  onTap: callFlutter,
+                )),
             const Expanded(
               child: Row(
                 children: [
                   Basket(
                     icon: Icons.person_outline_rounded,
-                    title: 'Created by TonyGnk',
+                    title: 'Created by\nTonyGnk',
                     onTap: callProfile,
                   ),
                   Basket(
                     icon: Icons.handyman_outlined,
-                    title: 'Build With Flutter',
+                    title: 'Build With\nFlutter',
                     onTap: callFlutter,
                   ),
                 ],
               ),
             ),
-            const Expanded(
+            Expanded(
               child: Row(
                 children: [
-                  Basket(
-                    icon: Icons.person_outline_rounded,
-                    title: 'Created by TonyGnk',
-                    onTap: callProfile,
+                  const Basket(
+                    icon: Icons.code,
+                    title: 'View web version\n(Slow)',
+                    onTap: callWebVersion,
                   ),
                   Basket(
-                    icon: Icons.handyman_outlined,
-                    title: 'Build With Flutter',
-                    onTap: callFlutter,
-                  ),
+                      icon: Icons.security_update_outlined,
+                      title: 'Check for\nupdate',
+                      onTapCheck: checkForUpdate,
+                      updateLink: updateLink),
                 ],
               ),
             ),
           ],
         ),
       );
-}
 
-nothing() {}
+  void checkForUpdate(String updateLink) async =>
+      await getLatestVersion(ref, version ?? '', updateLink);
+}

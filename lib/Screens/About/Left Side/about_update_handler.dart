@@ -4,14 +4,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-//import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
 import '../about_constants.dart';
 import 'about_actions_row.dart';
 
 Future<void> getLatestVersion(
-    WidgetRef ref, String currentVersion, Uri updateLink) async {
+    WidgetRef ref, String currentVersion, String updateLink) async {
   final String latestVersion;
   final String latestLinkVersion;
   print('Current Version $currentVersion');
@@ -24,9 +23,7 @@ Future<void> getLatestVersion(
     print('Latest Version $latestVersion');
     latestLinkVersion = jsonResponse['html_url'];
     //Set the latest version provider  updateLinkProvider
-    ref.read(updateLinkProvider.notifier).state = Uri.parse(
-      latestLinkVersion.toString(),
-    );
+    ref.read(updateLinkProvider.notifier).state = latestLinkVersion.toString();
   } else {
     throw Exception('Failed to fetch version from GitHub');
   }
@@ -79,7 +76,8 @@ findUpdate(
   return noUpdate;
 }
 
-shouldUpdate(BuildContext context, String text, bool update, Uri updateLink) {
+shouldUpdate(
+    BuildContext context, String text, bool update, String updateLink) {
   print(text);
   ScaffoldMessenger.of(context).showSnackBar(
     snackBar(context, text, update, updateLink),
