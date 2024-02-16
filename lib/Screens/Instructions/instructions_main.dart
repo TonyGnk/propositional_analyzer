@@ -34,7 +34,9 @@ class _InstructionsState extends ConsumerState<Instructions> {
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
     return animatedColumn(
-      isDesktop ? desktopView(context) : mobileView(context),
+      (MediaQuery.of(context).size.width > 600)
+          ? desktopView(context)
+          : mobileView(context),
     );
   }
 

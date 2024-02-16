@@ -52,7 +52,9 @@ class _AboutState extends ConsumerState<AboutScreen> {
     final isDesktop = ref.watch(isDesktopProvider);
     final updateLink = ref.watch(updateLinkProvider);
     return animatedColumn(
-      isDesktop ? desktopView(updateLink) : mobileView(updateLink),
+      (MediaQuery.of(context).size.width > 600)
+          ? desktopView(updateLink)
+          : mobileView(updateLink),
     );
   }
 

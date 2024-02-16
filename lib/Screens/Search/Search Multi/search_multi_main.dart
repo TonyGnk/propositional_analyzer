@@ -35,7 +35,7 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
   Widget build(BuildContext context) {
     final isDesktop = ref.watch(isDesktopProvider);
     return animatedColumn(
-      isDesktop
+      (MediaQuery.of(context).size.width > 600)
           ? desktopView(
               context,
               isDesktop,
