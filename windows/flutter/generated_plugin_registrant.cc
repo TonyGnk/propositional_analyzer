@@ -6,6 +6,7 @@
 
 #include "generated_plugin_registrant.h"
 
+#include <file_saver/file_saver_plugin.h>
 #include <fullscreen_window/fullscreen_window_plugin_c_api.h>
 #include <just_audio_windows/just_audio_windows_plugin.h>
 #include <permission_handler_windows/permission_handler_windows_plugin.h>
@@ -14,6 +15,8 @@
 #include <window_manager/window_manager_plugin.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
+  FileSaverPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FileSaverPlugin"));
   FullscreenWindowPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FullscreenWindowPluginCApi"));
   JustAudioWindowsPluginRegisterWithRegistrar(

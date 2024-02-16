@@ -10,7 +10,6 @@
 		"**/.metadata": true,
 		//hide .gitignore
 		"**/.gitignore": true,
-		//Hide all of: algorithms.iml, .flutter-plugins, .flutter-plugins-dependencies, windows, macos, web, .dart_tool, .github, linux, android
 		"**/propositional_analyzer.iml": true,
 		"**/.flutter-plugins": true,
 		"**/.flutter-plugins-dependencies": true,
