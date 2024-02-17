@@ -31,18 +31,17 @@ class CollectionState extends ConsumerState<Collection> {
   //Print the count of txt files from 'collection/' folder
   void loadFiles() {
     if (UniversalPlatform.isWindows) {
-      final directory = Directory('assets/collection/');
-      final txtFiles = directory
-          .listSync()
-          .whereType<File>()
-          .where((file) => file.path.endsWith('.txt'));
+      List<FileSystemEntity> txtFiles = [
+        File('assets/collection/analysisSingle.txt'),
+      ];
 
-      //Add the files to filesLoaded
       for (final file in txtFiles) {
-        filesLoaded.add(SavedAnalysis(
-          file.readAsStringSync(),
-          nameFormatter(file.path.split('/').last),
-        ));
+        filesLoaded.add(
+          SavedAnalysis(
+            File(file.path).readAsStringSync(),
+            file.path.split('/').last,
+          ),
+        );
       }
     }
   }
@@ -50,7 +49,6 @@ class CollectionState extends ConsumerState<Collection> {
   nameFormatter(String name) {
     String newName = name.substring(0, name.length - 4);
 
-    //If is too long remove the extra characters and replace with '...'
     if (newName.length > 29) {
       newName = '${newName.substring(0, 29)}...';
     }
@@ -70,11 +68,6 @@ class CollectionState extends ConsumerState<Collection> {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1000),
           child: Column(children: [
-            const Text(
-              'Manage your collections from Collection folder',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14),
-            ),
             Expanded(
               child: ListView.builder(
                 itemCount: filesLoaded.length,
@@ -92,11 +85,6 @@ class CollectionState extends ConsumerState<Collection> {
         padding: const EdgeInsets.all(6.0),
         child: Column(
           children: [
-            const Text(
-              'Manage your collections from Collection folder',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14),
-            ),
             Expanded(
               child: ListView.builder(
                 itemCount: filesLoaded.length,
@@ -105,8 +93,6 @@ class CollectionState extends ConsumerState<Collection> {
               ),
             ),
           ],
-
-          //filesLoaded.map((file) => containerAnalysis(file)).toList(),
         ),
       );
 
@@ -226,12 +212,6 @@ class SavedAnalysis {
     return lines[0].split(',')[1];
   }
 
-  String getMN() {
-    final lines = stringFile.split('\n');
-    final lastLine = lines[lines.length - 2];
-    return lastLine.split(',')[0];
-  }
-
   String getTests() {
     final lines = stringFile.split('\n');
     return lines[0].split(',')[2];
@@ -268,4 +248,9 @@ const Map<int, String> typeMap = {
   23: 'Depth & DPLL',
   24: 'Depth & Walk',
   34: 'DPLL & Walk',
+  123: 'Not Walk',
+  124: 'Not DPLL',
+  134: 'Not Depth',
+  234: 'Not Hill',
+  1234: 'All',
 };

@@ -212,24 +212,23 @@ equalizeMultiTimeSpots() {
   if (spots2Walk.isNotEmpty) notEmpty = List.from(spots2Walk);
 
   if (spots2Hill.length < notEmpty.length) {
-    print('Here');
     for (int i = spots2Hill.length; i < notEmpty.length; i++) {
-      spots2Hill.add(FlSpot(notEmpty.first.x, notEmpty.first.y));
+      spots2Hill.add(FlSpot(notEmpty[i].x, 0));
     }
   }
   if (spots2Depth.length < notEmpty.length) {
     for (int i = spots2Depth.length; i < notEmpty.length; i++) {
-      spots2Depth.add(FlSpot(notEmpty.first.x, notEmpty.first.y));
+      spots2Depth.add(FlSpot(notEmpty[i].x, 0));
     }
   }
   if (spots2DPLL.length < notEmpty.length) {
     for (int i = spots2DPLL.length; i < notEmpty.length; i++) {
-      spots2DPLL.add(FlSpot(notEmpty.first.x, notEmpty.first.y));
+      spots2DPLL.add(FlSpot(notEmpty[i].x, 0));
     }
   }
   if (spots2Walk.length < notEmpty.length) {
     for (int i = spots2Walk.length; i < notEmpty.length; i++) {
-      spots2Walk.add(FlSpot(notEmpty.first.x, notEmpty.first.y));
+      spots2Walk.add(FlSpot(notEmpty[i].x, 0));
     }
   }
 }

@@ -21,7 +21,7 @@ final _jSaverPlugin = JSaver.instance;
 Future<void> saveAnalysisSingle() async {
   String stringFile = '';
 
-  stringFile += '$K,$N,$numberOfTests,$timeOut\n';
+  stringFile += '$K,$N,$numberOfTests,$timeOut,${selected + 1}\n';
 
   //For all the spots create a String
   for (int i = 0; i < spots1.length; i++) {
@@ -37,8 +37,13 @@ Future<void> saveAnalysisSingle() async {
 
 Future<void> saveAnalysisMulti() async {
   String stringFile = '';
+  String enableAlgorithms = '';
+  if (selectedHill) enableAlgorithms += '1';
+  if (selectedDepth) enableAlgorithms += '2';
+  if (selectedDPLL) enableAlgorithms += '3';
+  if (selectedWalk) enableAlgorithms += '4';
 
-  stringFile += '$K,$N,$numberOfTests,$timeOut\n';
+  stringFile += '$K,$N,$numberOfTests,$timeOut,$enableAlgorithms\n';
 
   //For all the spots create a String
   for (int i = 0; i < spots1.length; i++) {

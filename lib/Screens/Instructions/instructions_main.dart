@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../global_variables.dart';
 import '../../UI/Components/filled_button.dart';
 import '../Create/Create Share/instructions_button.dart';
 import '../screen_list.dart';
@@ -41,18 +40,19 @@ class _InstructionsState extends ConsumerState<Instructions> {
         final pageIndex = ref.watch(instructionsIndex);
         final isEnglish = ref.watch(instructionsLanguageIsEnglish);
         return desktopFrame(
-            context,
-            Column(
-              children: [
-                Expanded(
-                  child: movingPart(context, ref, pageIndex, isEnglish),
-                ),
-                const SizedBox(height: 6),
-                buttonRowDesktop(context, ref, pageIndex),
-              ],
-            ),
-            900,
-            const EdgeInsets.all(10));
+          context,
+          Column(
+            children: [
+              Expanded(
+                child: movingPart(context, ref, pageIndex, isEnglish),
+              ),
+              const SizedBox(height: 6),
+              buttonRowDesktop(context, ref, pageIndex),
+            ],
+          ),
+          900,
+          const EdgeInsets.all(10),
+        );
       });
 
   mobileView(BuildContext context) => Padding(

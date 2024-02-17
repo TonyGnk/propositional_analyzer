@@ -136,7 +136,7 @@ class ChartMultiTimeState extends ConsumerState<ChartMultiTime> {
       ? LineChart(
           duration: const Duration(milliseconds: 100),
           LineChartData(
-            lineTouchData: lineTouchData(context, LineType.time),
+            lineTouchData: lineTouchData(context, LineType.multi),
             borderData: FlBorderData(
               show: true,
               border: Border.all(

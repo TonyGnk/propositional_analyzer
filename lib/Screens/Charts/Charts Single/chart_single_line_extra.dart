@@ -2,8 +2,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../../global_variables.dart';
+import '../../Collection/collection_main.dart';
 
-enum LineType { success, time }
+enum LineType { success, time, multi }
 
 LineTouchData lineTouchData(BuildContext context, LineType type) =>
     LineTouchData(
@@ -30,7 +31,9 @@ LineTouchData lineTouchData(BuildContext context, LineType type) =>
                 ),
               )
               .toList(),
-      touchTooltipData: lineTooltip(context, type),
+      touchTooltipData: (type == LineType.multi)
+          ? lineTooltipMultiTime(context)
+          : lineTooltip(context, type),
     );
 
 LineTouchTooltipData lineTooltip(BuildContext context, LineType type) =>
@@ -45,8 +48,30 @@ LineTouchTooltipData lineTooltip(BuildContext context, LineType type) =>
       }).toList(),
     );
 
+LineTouchTooltipData lineTooltipMultiTime(BuildContext context) =>
+    LineTouchTooltipData(
+      tooltipPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      maxContentWidth: 170,
+      tooltipBgColor: Colors.grey,
+      getTooltipItems: (List<LineBarSpot> touchedBarSpots) =>
+          touchedBarSpots.map((barSpot) {
+        final flSpot = barSpot;
+        return lineTooltipItemTimeMulti(flSpot, touchedBarSpots);
+      }).toList(),
+    );
+
 LineTooltipItem lineTooltipItemSuccess(LineBarSpot flSpot) => LineTooltipItem(
       '${flSpot.y.toInt()}/$numberOfTests  M=${(N * flSpot.x).toInt()}',
+      const TextStyle(
+          color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Play'),
+    );
+
+LineTooltipItem lineTooltipItemTimeMulti(
+  LineBarSpot flSpot,
+  List<LineBarSpot> touchedBarSpots,
+) =>
+    LineTooltipItem(
+      '${typeMap[flSpot.barIndex + 1]} ${flSpot.y.toStringAsFixed(1)} ms  M=${(N * flSpot.x).toInt()}',
       const TextStyle(
           color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Play'),
     );
