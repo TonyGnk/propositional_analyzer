@@ -20,7 +20,7 @@ class ChartMultiTime extends ConsumerStatefulWidget {
 }
 
 class ChartMultiTimeState extends ConsumerState<ChartMultiTime> {
-  Duration stepDuration = const Duration(milliseconds: 20);
+  Duration stepDuration = const Duration(milliseconds: 15);
   List<FlSpot> animatedSpotHill = [];
   List<FlSpot> animatedSpotDepth = [];
   List<FlSpot> animatedSpotDPLL = [];
@@ -98,14 +98,14 @@ class ChartMultiTimeState extends ConsumerState<ChartMultiTime> {
   }
 
   int findRightStep() {
-    stepDuration = const Duration(milliseconds: 20);
+    stepDuration = const Duration(milliseconds: 15);
     if (widget.listSpots[0].length > 40) {
       return (widget.listSpots[0].length / 25).round();
     } else if (widget.listSpots[0].length > 25) {
-      stepDuration = const Duration(milliseconds: 30);
+      stepDuration = const Duration(milliseconds: 25);
       return 1;
     } else {
-      stepDuration = const Duration(milliseconds: 40);
+      stepDuration = const Duration(milliseconds: 35);
       return 1;
     }
   }

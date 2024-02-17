@@ -19,7 +19,7 @@ class ChartTime extends ConsumerStatefulWidget {
 }
 
 class ChartTimeState extends ConsumerState<ChartTime> {
-  Duration stepDuration = const Duration(milliseconds: 20);
+  Duration stepDuration = const Duration(milliseconds: 15);
   List<FlSpot> animatedSpot = [];
   int step = 1;
   double maxY = 0;
@@ -80,14 +80,14 @@ class ChartTimeState extends ConsumerState<ChartTime> {
   }
 
   int findRightStep() {
-    stepDuration = const Duration(milliseconds: 20);
+    stepDuration = const Duration(milliseconds: 15);
     if (widget.spots.length > 40) {
       return (widget.spots.length / 25).round();
     } else if (widget.spots.length > 25) {
-      stepDuration = const Duration(milliseconds: 30);
+      stepDuration = const Duration(milliseconds: 25);
       return 1;
     } else {
-      stepDuration = const Duration(milliseconds: 40);
+      stepDuration = const Duration(milliseconds: 35);
       return 1;
     }
   }
