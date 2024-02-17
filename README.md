@@ -35,3 +35,15 @@ Propositional Analyzer is a powerful tool built with Flutter for analyzing propo
 - Depth-First
 - DPLL
 - WalkSat
+
+## 🤝 Contributing
+
+#### Contributions are welcome! If you'd like to contribute, please follow these guidelines:
+
+1. Fork the repository and create a new branch for your feature.
+2. Make your changes and ensure they are well-tested.
+3. Submit a pull request describing your changes and their purpose.
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
