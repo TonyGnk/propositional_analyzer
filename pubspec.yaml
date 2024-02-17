@@ -2,7 +2,7 @@ name: propositional_analyzer
 description: "A useful tool for analyzing propositional logic expressions"
 publish_to: "none"
 
-version: 1.0.1+4
+version: 1.0.2+5
 
 environment:
     sdk: ">=3.2.3 <4.0.0"
