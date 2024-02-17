@@ -18,21 +18,23 @@ const newCreateButton = ButtonTemplate(
 const newCreateMultiButton = ButtonTemplate(
   //Create a new multiple analysis with multiple Algorithms/Compare each other
   title: 'New Multiple',
-  slogan: 'Create a new multiple analysis',
+  slogan: 'Let\'s compare!',
   icon: Icons.stacked_line_chart_outlined,
   screenDestination: ScreenDestination.createMulti,
 );
 
 const newLoadButton = ButtonTemplate(
   title: 'Load',
-  slogan: 'Now Available!',
+  slogan: 'Load a previous analysis',
   icon: Icons.file_upload_outlined,
   isLoading: true,
 );
 
+//This button is going to Collection Screen
+// The collection has a showcase of rare and good analysis ready to be used
 const helpContainer = ButtonTemplate(
   title: 'Collection',
-  slogan: 'Your saved analysis',
+  slogan: 'See some examples',
   icon: Icons.subscriptions_outlined,
   screenDestination: ScreenDestination.collection,
 );
