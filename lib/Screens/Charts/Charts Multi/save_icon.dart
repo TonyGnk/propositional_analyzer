@@ -60,7 +60,7 @@ Future<void> saveAnalysisMulti() async {
   Uint8List data2 = Uint8List.fromList(oneLine.codeUnits);
 
   await Future.delayed(const Duration(milliseconds: 200));
-  await _jSaverPlugin.saveFromData(data: data2, name: 'analysis.txt');
+  await _jSaverPlugin.saveFromData(data: data, name: 'analysis.txt');
 }
 
 printAllInOneLineWith(stringFile) {
