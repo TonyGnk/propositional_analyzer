@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
 import 'package:universal_platform/universal_platform.dart';
-import 'package:window_manager/window_manager.dart';
 import '../../../UI/Adaptive Folder/synthesizer.dart';
 import '../../../global_variables.dart';
 import '../../../UI/Routed Screen/app_bar.dart';
@@ -13,8 +12,6 @@ import '../../../Screens/screen_list.dart';
 final opacity = StateProvider<double>((ref) => 1);
 
 void chartsMultiGo(WidgetRef ref, ScreenDestination destination) {
-  resetFullScreen();
-
   updateAppBarItems(ref, false);
   ref.read(appBarBackButtonTimes.notifier).state = 1;
 
@@ -48,13 +45,3 @@ animatedColumn(Widget child) => Consumer(
         child: child,
       ),
     );
-
-resetFullScreen() async {
-  if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
-    if (await windowManager.isFullScreen()) {
-      windowManager.setFullScreen(false);
-    }
-  } else if (UniversalPlatform.isWeb) {
-    FullScreenWindow.setFullScreen(false);
-  }
-}

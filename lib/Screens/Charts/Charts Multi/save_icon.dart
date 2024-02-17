@@ -21,15 +21,17 @@ final _jSaverPlugin = JSaver.instance;
 Future<void> saveAnalysisSingle() async {
   String stringFile = '';
 
-  stringFile += '$K,$N,$numberOfTests,$timeOut,${selected + 1}\n';
+  stringFile += '$K,$N,$numberOfTests,$timeOut,${selected + 1},\n';
 
   //For all the spots create a String
   for (int i = 0; i < spots1.length; i++) {
-    stringFile += '${spots1[i].x},${spots1[i].y},${spots2[i].y}\n';
+    stringFile += '${spots1[i].x},${spots1[i].y},${spots2[i].y},\n';
   }
 
   //Create a Uint8List from the String
   Uint8List data = Uint8List.fromList(stringFile.codeUnits);
+
+  printAllInOneLineWithn(stringFile);
 
   await Future.delayed(const Duration(milliseconds: 200));
   await _jSaverPlugin.saveFromData(data: data, name: 'analysis.txt');
@@ -43,19 +45,33 @@ Future<void> saveAnalysisMulti() async {
   if (selectedDPLL) enableAlgorithms += '3';
   if (selectedWalk) enableAlgorithms += '4';
 
-  stringFile += '$K,$N,$numberOfTests,$timeOut,$enableAlgorithms\n';
+  stringFile += '$K,$N,$numberOfTests,$timeOut,$enableAlgorithms,\n';
 
   //For all the spots create a String
   for (int i = 0; i < spots1.length; i++) {
     stringFile +=
-        '${spots1[i].x},${spots1[i].y},${spots2Hill[i].y},${spots2Depth[i].y},${spots2DPLL[i].y},${spots2Walk[i].y}\n';
+        '${spots1[i].x},${spots1[i].y},${spots2Hill[i].y},${spots2Depth[i].y},${spots2DPLL[i].y},${spots2Walk[i].y},\n';
   }
+
+  printAllInOneLineWithn(stringFile);
 
   //Create a Uint8List from the String
   Uint8List data = Uint8List.fromList(stringFile.codeUnits);
 
   await Future.delayed(const Duration(milliseconds: 200));
   await _jSaverPlugin.saveFromData(data: data, name: 'analysis.txt');
+}
+
+printAllInOneLineWithn(stringFile) {
+  String oneLine = '';
+  //Print every character and every line add \\n
+  for (int i = 0; i < stringFile.length; i++) {
+    if (stringFile[i] == '\n')
+      oneLine += '\\n';
+    else
+      oneLine += stringFile[i];
+  }
+  print('$oneLine');
 }
 
 loadAnalysis() async {

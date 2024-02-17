@@ -1,9 +1,11 @@
-import 'dart:io';
+//import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:universal_platform/universal_platform.dart';
 
+import '../../Saved Files/problem1.dart';
 import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../Charts/Charts Multi/save_icon.dart';
 import '../screen_list.dart';
@@ -30,30 +32,12 @@ class CollectionState extends ConsumerState<Collection> {
 
   //Print the count of txt files from 'collection/' folder
   void loadFiles() {
-    if (UniversalPlatform.isWindows) {
-      Directory dir = Directory(
-        'data/flutter_assets/assets/collection/',
-      );
-      List<FileSystemEntity> txtFiles = dir.listSync(recursive: false);
-
-      for (final file in txtFiles) {
-        filesLoaded.add(
-          SavedAnalysis(
-            File(file.path).readAsStringSync(),
-            file.path.split('/').last,
-          ),
-        );
-      }
-    } else {
-      final file = File('assets/assets/collection/analysis.txt');
-
-      filesLoaded.add(
-        SavedAnalysis(
-          file.readAsStringSync(),
-          file.path.split('/').last,
-        ),
-      );
-    }
+    filesLoaded.add(
+      SavedAnalysis(
+        problem1,
+        'Depth VS DPLL',
+      ),
+    );
   }
 
   nameFormatter(String name) {

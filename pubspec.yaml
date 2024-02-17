@@ -2,7 +2,7 @@ name: propositional_analyzer
 description: "A useful tool for analyzing propositional logic expressions"
 publish_to: "none"
 
-version: 1.0.2+5
+version: 1.0.3+6
 
 environment:
     sdk: ">=3.2.3 <4.0.0"
@@ -19,7 +19,7 @@ dependencies:
     adaptive_theme: ^3.4.0
     package_info_plus: ^4.1.1
     flutter_animated_dialog: ^2.0.1
-    window_manager: ^0.3.7
+    #window_manager: ^0.3.7
     universal_platform: ^1.0.0+1
     app_settings: ^5.1.1
     url_launcher: ^6.2.2
