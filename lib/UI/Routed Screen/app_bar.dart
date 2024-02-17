@@ -47,7 +47,6 @@ Widget row() => Consumer(
         final infoIconOpacity = ref.watch(appBarIsEnableInfoButtonOpacity);
         final theFloor = ref.watch(appBarSecondFloor);
         final theFloorOpacity = ref.watch(appBarSecondFloorOpacity);
-        final isDesktop = ref.watch(isDesktopProvider);
         final downloadAppOpacity = ref.watch(appBarDownloadAppOpacity);
         return Stack(
           children: [

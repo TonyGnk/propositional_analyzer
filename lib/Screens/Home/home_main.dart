@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../global_variables.dart';
 import '../shared.dart';
 import 'home_buttons.dart';
 import 'home_state.dart';
@@ -24,13 +23,12 @@ class _HomeState extends ConsumerState<Home> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final isDesktop = ref.watch(isDesktopProvider);
-    return animatedColumn(
-      //const LineChartSample10()
-      (MediaQuery.of(context).size.width > 600) ? desktopView() : mobileView(),
-    );
-  }
+  Widget build(BuildContext context) => animatedColumn(
+        //const LineChartSample10()
+        (MediaQuery.of(context).size.width > 600)
+            ? desktopView()
+            : mobileView(),
+      );
 
   mobileView() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 37),

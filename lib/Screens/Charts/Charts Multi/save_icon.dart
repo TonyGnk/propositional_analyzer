@@ -31,7 +31,7 @@ Future<void> saveAnalysisSingle() async {
   //Create a Uint8List from the String
   Uint8List data = Uint8List.fromList(stringFile.codeUnits);
 
-  printAllInOneLineWithn(stringFile);
+  printAllInOneLineWith(stringFile);
 
   await Future.delayed(const Duration(milliseconds: 200));
   await _jSaverPlugin.saveFromData(data: data, name: 'analysis.txt');
@@ -53,7 +53,7 @@ Future<void> saveAnalysisMulti() async {
         '${spots1[i].x},${spots1[i].y},${spots2Hill[i].y},${spots2Depth[i].y},${spots2DPLL[i].y},${spots2Walk[i].y},\n';
   }
 
-  printAllInOneLineWithn(stringFile);
+  printAllInOneLineWith(stringFile);
 
   //Create a Uint8List from the String
   Uint8List data = Uint8List.fromList(stringFile.codeUnits);
@@ -62,16 +62,17 @@ Future<void> saveAnalysisMulti() async {
   await _jSaverPlugin.saveFromData(data: data, name: 'analysis.txt');
 }
 
-printAllInOneLineWithn(stringFile) {
+printAllInOneLineWith(stringFile) {
   String oneLine = '';
   //Print every character and every line add \\n
   for (int i = 0; i < stringFile.length; i++) {
-    if (stringFile[i] == '\n')
+    if (stringFile[i] == '\n') {
       oneLine += '\\n';
-    else
+    } else {
       oneLine += stringFile[i];
+    }
   }
-  print('$oneLine');
+  print(oneLine);
 }
 
 loadAnalysis() async {

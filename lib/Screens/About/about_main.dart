@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../global_variables.dart';
 import '../shared.dart';
 import 'about_actions_row.dart';
 import 'about_update_handler.dart';
@@ -49,7 +48,6 @@ class _AboutState extends ConsumerState<AboutScreen> {
 
   @override
   build(BuildContext context) {
-    final isDesktop = ref.watch(isDesktopProvider);
     final updateLink = ref.watch(updateLinkProvider);
     return animatedColumn(
       (MediaQuery.of(context).size.width > 600)

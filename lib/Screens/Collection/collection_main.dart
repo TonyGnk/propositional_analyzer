@@ -1,12 +1,7 @@
-//import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 import '../../Saved Files/problem1.dart';
-import '../../UI/Adaptive Folder/synthesizer.dart';
 import '../Charts/Charts Multi/save_icon.dart';
 import '../screen_list.dart';
 import 'collection_state.dart';
@@ -34,7 +29,7 @@ class CollectionState extends ConsumerState<Collection> {
   void loadFiles() {
     filesLoaded.add(
       SavedAnalysis(
-        problem1,
+        problem1DepthDpll,
         'Depth VS DPLL',
       ),
     );
