@@ -30,21 +30,30 @@ class CollectionState extends ConsumerState<Collection> {
 
   //Print the count of txt files from 'collection/' folder
   void loadFiles() {
-    // if (UniversalPlatform.isWindows) {
-    Directory dir = Directory(
-      'data/flutter_assets/assets/collection/',
-    );
-    List<FileSystemEntity> txtFiles = dir.listSync(recursive: false);
+    if (UniversalPlatform.isWindows) {
+      Directory dir = Directory(
+        'data/flutter_assets/assets/collection/',
+      );
+      List<FileSystemEntity> txtFiles = dir.listSync(recursive: false);
 
-    for (final file in txtFiles) {
+      for (final file in txtFiles) {
+        filesLoaded.add(
+          SavedAnalysis(
+            File(file.path).readAsStringSync(),
+            file.path.split('/').last,
+          ),
+        );
+      }
+    } else {
+      final file = File('assets/assets/collection/analysis.txt');
+
       filesLoaded.add(
         SavedAnalysis(
-          File(file.path).readAsStringSync(),
+          file.readAsStringSync(),
           file.path.split('/').last,
         ),
       );
     }
-    // }
   }
 
   nameFormatter(String name) {
