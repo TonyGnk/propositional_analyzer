@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Saved Files/problem1.dart';
+import '../../Saved Files/problem2.dart';
 import '../Charts/Charts Multi/save_icon.dart';
 import '../screen_list.dart';
 import 'collection_state.dart';
@@ -31,6 +32,12 @@ class CollectionState extends ConsumerState<Collection> {
       SavedAnalysis(
         problem1DepthDpll,
         'Depth VS DPLL',
+      ),
+    );
+    filesLoaded.add(
+      SavedAnalysis(
+        problem2LargeDPLL,
+        'DPLL in Scale',
       ),
     );
   }

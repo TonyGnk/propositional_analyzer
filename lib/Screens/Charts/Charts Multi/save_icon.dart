@@ -97,7 +97,7 @@ loadAnalysis() async {
 
 bool readAnalysis(String stringFile) {
   List<String> lines = stringFile.split('\n');
-  bool isSingle = lines[1].split(',').length < 4;
+  bool isSingle = lines[1].split(',').length < 5;
 
   //Read the properties from the first line
   List<String> properties = lines[0].split(',');
