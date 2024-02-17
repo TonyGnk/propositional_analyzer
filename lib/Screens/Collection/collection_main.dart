@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Saved Files/problem1.dart';
-import '../../Saved Files/problem2.dart';
-import '../../Saved Files/problem3.dart';
-import '../../Saved Files/problem4.dart';
-import '../../Saved Files/problem5.dart';
+import '../../Saved Files/depth_problem.dart';
+import '../../Saved Files/dpll_problem.dart';
+import '../../Saved Files/hill_problem.dart';
+import '../../Saved Files/multi_problem.dart';
+import '../../Saved Files/walk_sat_problem.dart';
 import '../Charts/Charts Multi/save_icon.dart';
 import '../screen_list.dart';
 import 'collection_state.dart';
@@ -33,32 +33,62 @@ class CollectionState extends ConsumerState<Collection> {
   void loadFiles() {
     filesLoaded.add(
       SavedAnalysis(
-        problem1DepthDpll,
-        'Depth VS DPLL',
+        hillProblem1,
+        'Hill Climbing Problem 1',
       ),
     );
     filesLoaded.add(
       SavedAnalysis(
-        problem2LargeDPLL,
-        'DPLL in Scale',
+        hillProblem2,
+        'Hill Climbing Problem 2',
       ),
     );
     filesLoaded.add(
       SavedAnalysis(
-        problem3Depth,
-        'Depth in Scale',
+        depthProblem1,
+        'Depth Problem 1',
       ),
     );
     filesLoaded.add(
       SavedAnalysis(
-        problem4All,
-        'The largest',
+        depthProblem2,
+        'Depth Problem 2',
       ),
     );
     filesLoaded.add(
       SavedAnalysis(
-        problem5HillWalk,
-        ' Hill VS Walk',
+        dpllProblem1,
+        'DPLL Problem 1',
+      ),
+    );
+    filesLoaded.add(
+      SavedAnalysis(
+        dpllProblem2,
+        'DPLL Problem 2',
+      ),
+    );
+    filesLoaded.add(
+      SavedAnalysis(
+        walkSatProblem1,
+        'WalkSat Problem 1',
+      ),
+    );
+    filesLoaded.add(
+      SavedAnalysis(
+        walkSatProblem2,
+        'WalkSat Problem 2',
+      ),
+    );
+    filesLoaded.add(
+      SavedAnalysis(
+        allProblem1,
+        'The biggest comparison',
+      ),
+    );
+    filesLoaded.add(
+      SavedAnalysis(
+        allProblemDepthDpll,
+        'Depth-First VS DPLL',
       ),
     );
   }
@@ -114,7 +144,7 @@ class CollectionState extends ConsumerState<Collection> {
       );
 
   Widget containerAnalysis(SavedAnalysis file) => SizedBox(
-        height: 104,
+        height: 96,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
@@ -139,7 +169,7 @@ class CollectionState extends ConsumerState<Collection> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(' ${file.getName()} '),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 4),
                       Row(
                         children: [
                           Container(
@@ -249,7 +279,6 @@ class SavedAnalysis {
   String getType() {
     final lines = stringFile.split('\n');
     int numberType = int.parse(lines[0].split(',')[4]);
-    print(numberType);
     return typeMap[numberType]!;
   }
 

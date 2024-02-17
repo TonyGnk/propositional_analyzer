@@ -38,6 +38,8 @@ LineTouchData lineTouchData(BuildContext context, LineType type) =>
 
 LineTouchTooltipData lineTooltip(BuildContext context, LineType type) =>
     LineTouchTooltipData(
+      tooltipPadding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+      maxContentWidth: 220,
       tooltipBgColor: Colors.grey,
       getTooltipItems: (List<LineBarSpot> touchedBarSpots) =>
           touchedBarSpots.map((barSpot) {
@@ -50,8 +52,8 @@ LineTouchTooltipData lineTooltip(BuildContext context, LineType type) =>
 
 LineTouchTooltipData lineTooltipMultiTime(BuildContext context) =>
     LineTouchTooltipData(
-      tooltipPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      maxContentWidth: 170,
+      tooltipPadding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+      maxContentWidth: 220,
       tooltipBgColor: Colors.grey,
       getTooltipItems: (List<LineBarSpot> touchedBarSpots) =>
           touchedBarSpots.map((barSpot) {
@@ -61,7 +63,7 @@ LineTouchTooltipData lineTooltipMultiTime(BuildContext context) =>
     );
 
 LineTooltipItem lineTooltipItemSuccess(LineBarSpot flSpot) => LineTooltipItem(
-      '${flSpot.y.toInt()}/$numberOfTests  M=${(N * flSpot.x).toInt()}',
+      '${flSpot.y.toInt()}/$numberOfTests, M=${(N * flSpot.x).toInt()} ${flSpot.x}',
       const TextStyle(
           color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Play'),
     );
@@ -71,13 +73,13 @@ LineTooltipItem lineTooltipItemTimeMulti(
   List<LineBarSpot> touchedBarSpots,
 ) =>
     LineTooltipItem(
-      '${typeMap[flSpot.barIndex + 1]} ${flSpot.y.toStringAsFixed(1)} ms  M=${(N * flSpot.x).toInt()}',
+      '${typeMap[flSpot.barIndex + 1]} ${flSpot.y.toStringAsFixed(1)} ms, M=${(N * flSpot.x).toInt()} ${flSpot.x}',
       const TextStyle(
           color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Play'),
     );
 
 LineTooltipItem lineTooltipItemTime(LineBarSpot flSpot) => LineTooltipItem(
-      '${flSpot.y.toStringAsFixed(1)} ms  M=${(N * flSpot.x).toInt()}',
+      '${flSpot.y.toStringAsFixed(1)} ms, M=${(N * flSpot.x).toInt()} ${flSpot.x}',
       const TextStyle(
           color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Play'),
     );

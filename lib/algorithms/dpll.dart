@@ -1,11 +1,3 @@
-// Implementation of the DPLL algorithm.
-// Input: List<List<int>> clauses for example [[1, 2], [-1, 3]
-// Output: a List<bool> of the model that satisfies the clauses for example [true, false]
-
-//Helper function findUnmetIndexes(List<bool> solution, List<List<int>> problem) finds the indexes of the clauses that are not satisfied by the solution.
-
-//Variable N is the number of variables in the problem.
-
 import '../Screens/Search/Search Share/track.dart';
 import '../global_variables.dart';
 import 'solution_dart.dart';
@@ -14,18 +6,15 @@ DateTime startTimeDPLL = DateTime.now();
 DateTime nowTimeDPLL = DateTime.now();
 
 solveWithDpll(List<List<int>> clauses) async {
-  //Create a list of N nulls
   List<bool?> solution = List.filled(N, null);
 
   setLiteralFrequencyList(clauses);
-  //print(literalFrequencyOrder);
   startTimeDPLL = DateTime.now();
 
   //Call the recursive function with the solution and the problem
   bool result = dpllRecursive(solution, clauses, 0);
 
   if (result) {
-    //print Time
     print('Time: ${nowTimeDPLL.difference(startTimeDPLL).inMilliseconds} ms');
     return Search(
       win: true,
@@ -42,8 +31,6 @@ dpllRecursive(
   List<List<int>> problem,
   int depth,
 ) {
-  //print('\nDepth: $depth');
-
   nowTimeDPLL = DateTime.now();
   if (nowTimeDPLL.difference(startTimeDPLL).inSeconds > timeOut) {
     //print('Time out in Depth First');

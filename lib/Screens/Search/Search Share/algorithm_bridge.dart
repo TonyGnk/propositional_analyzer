@@ -53,7 +53,7 @@ runAlgorithm() async {
   } else if (selected == 2) {
     return await solveWithDpll(problem);
   } else if (selected == 3) {
-    return await walkSat(problem);
+    return await solveWithWalkSat(problem);
   }
   problem.clear();
 }
@@ -63,7 +63,7 @@ Map<Algorithms, Function> algorithmMap = {
   Algorithms.hillClimbing: solveHillClimbing,
   Algorithms.depthFirst: depthFirst,
   Algorithms.dpll: solveWithDpll,
-  Algorithms.walkSat: walkSat,
+  Algorithms.walkSat: solveWithWalkSat,
 };
 
 addTrack(WidgetRef ref, List<Widget> trackList, int j,
