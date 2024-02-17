@@ -5,6 +5,7 @@ import '../../Saved Files/problem1.dart';
 import '../../Saved Files/problem2.dart';
 import '../../Saved Files/problem3.dart';
 import '../../Saved Files/problem4.dart';
+import '../../Saved Files/problem5.dart';
 import '../Charts/Charts Multi/save_icon.dart';
 import '../screen_list.dart';
 import 'collection_state.dart';
@@ -50,8 +51,14 @@ class CollectionState extends ConsumerState<Collection> {
     );
     filesLoaded.add(
       SavedAnalysis(
-        problem4HillWalk,
-        'Depth in Scale',
+        problem4All,
+        'The largest',
+      ),
+    );
+    filesLoaded.add(
+      SavedAnalysis(
+        problem5HillWalk,
+        ' Hill VS Walk',
       ),
     );
   }

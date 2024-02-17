@@ -5,6 +5,7 @@ import '../../../UI/Routed Screen/app_bar.dart';
 
 import '../../../Screens/screen_list.dart';
 import '../Charts Multi/save_icon.dart';
+import '../../../UI/Adaptive Folder/synthesizer.dart';
 
 final opacity = StateProvider<double>((ref) => 1);
 
@@ -17,8 +18,13 @@ void chartsSingleGo(WidgetRef ref, ScreenDestination destination) {
 }
 
 void chartsSingleReturn(WidgetRef ref) {
-  updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
+
+  if (screenStack[screenStack.length - 2] == ScreenDestination.collection) {
+    ref.read(appBarBackButtonTimes.notifier).state = 1;
+  } else {
+    ref.read(appBarBackButtonTimes.notifier).state = 2;
+  }
 }
 
 updateAppBarItems(WidgetRef ref, bool isReturn) {

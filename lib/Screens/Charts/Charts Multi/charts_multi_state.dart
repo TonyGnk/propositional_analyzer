@@ -22,7 +22,6 @@ void chartsMultiReturn(WidgetRef ref) {
   updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
 
-  //If last-1 is collection
   if (screenStack[screenStack.length - 2] == ScreenDestination.collection) {
     ref.read(appBarBackButtonTimes.notifier).state = 1;
   } else {
