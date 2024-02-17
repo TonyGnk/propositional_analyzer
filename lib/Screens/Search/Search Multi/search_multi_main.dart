@@ -117,15 +117,15 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
     int sampleSum = 0;
     Search solution;
     int founded;
-    int timeSum = 0;
-
-    timeSum = 0;
+    List<int> timeSumList = [];
 
     for (int j = 1; j <= numberOfTests; j++) {
       solution = await algorithmMap[type]!(problemList[j - 1]);
       founded = solution.win ? 1 : 0;
       sampleSum = sampleSum + founded;
-      timeSum = timeSum + solution.time;
+      if (founded == 1) {
+        timeSumList.add(solution.time);
+      }
       await Future.delayed(Duration.zero, () {
         setState(() {
           str = 'M=$M';
@@ -138,7 +138,13 @@ class SearchMultiState extends ConsumerState<SearchMulti> {
         });
       });
     }
-    double averageTime = timeSum / numberOfTests;
+    double sum = 0;
+    double averageTime = 0;
+    for (int i = 0; i < timeSumList.length; i++) {
+      sum = sum + timeSumList[i];
+    }
+    if (timeSumList.isNotEmpty) averageTime = sum / timeSumList.length;
+
     await Future.delayed(Duration.zero, () {
       setState(() {
         addMultipleSpot(M.toDouble(), averageTime.toDouble(), type);
