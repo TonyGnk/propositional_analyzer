@@ -11,6 +11,7 @@ final opacity = StateProvider<double>((ref) => 1);
 
 void chartsSingleGo(WidgetRef ref, ScreenDestination destination) {
   updateAppBarItems(ref, false);
+  ref.read(appBarBackButtonTimes.notifier).state = 1;
 
   if (destination == ScreenDestination.home) {
     updateAppBarBackButton(ref, false);
@@ -22,6 +23,10 @@ void chartsSingleReturn(WidgetRef ref) {
 
   if (screenStack[screenStack.length - 2] == ScreenDestination.collection) {
     ref.read(appBarBackButtonTimes.notifier).state = 1;
+  } else if (screenStack[screenStack.length - 2] ==
+      ScreenDestination.createSingle) {
+    ref.read(appBarBackButtonTimes.notifier).state = 2;
+    updateAppBarBackButton(ref, true);
   } else {
     ref.read(appBarBackButtonTimes.notifier).state = 2;
   }
@@ -31,7 +36,6 @@ updateAppBarItems(WidgetRef ref, bool isReturn) {
   updateAppBarLabel(ref, 'Results', isReturn);
   updateAppBarCustomIcon1(ref, saveIcon(saveAnalysisSingle), isReturn);
   ref.read(opacity.notifier).state = isReturn ? 1 : 0;
-  ref.read(appBarBackButtonTimes.notifier).state = isReturn ? 2 : 1;
 }
 
 animatedColumn(Widget child) => Consumer(

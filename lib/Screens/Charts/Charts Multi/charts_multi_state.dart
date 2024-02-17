@@ -19,11 +19,14 @@ void chartsMultiGo(WidgetRef ref, ScreenDestination destination) {
 }
 
 void chartsMultiReturn(WidgetRef ref) {
-  updateAppBarBackButton(ref, true);
   updateAppBarItems(ref, true);
 
   if (screenStack[screenStack.length - 2] == ScreenDestination.collection) {
     ref.read(appBarBackButtonTimes.notifier).state = 1;
+  } else if (screenStack[screenStack.length - 2] ==
+      ScreenDestination.createMulti) {
+    ref.read(appBarBackButtonTimes.notifier).state = 2;
+    updateAppBarBackButton(ref, true);
   } else {
     ref.read(appBarBackButtonTimes.notifier).state = 2;
   }
