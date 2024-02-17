@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Saved Files/problem1.dart';
 import '../../Saved Files/problem2.dart';
 import '../../Saved Files/problem3.dart';
+import '../../Saved Files/problem4.dart';
 import '../Charts/Charts Multi/save_icon.dart';
 import '../screen_list.dart';
 import 'collection_state.dart';
@@ -44,6 +45,12 @@ class CollectionState extends ConsumerState<Collection> {
     filesLoaded.add(
       SavedAnalysis(
         problem3Depth,
+        'Depth in Scale',
+      ),
+    );
+    filesLoaded.add(
+      SavedAnalysis(
+        problem4HillWalk,
         'Depth in Scale',
       ),
     );
@@ -105,94 +112,106 @@ class CollectionState extends ConsumerState<Collection> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 17.0),
-            child: Row(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(' ${file.getName()} '),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.1),
-                              border: Border.all(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Theme.of(context)
+                    .menuButtonTheme
+                    .style!
+                    .foregroundColor!
+                    .resolve({})!,
+              ),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 17.0),
+              child: Row(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(' ${file.getName()} '),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
                                 color: Theme.of(context)
                                     .colorScheme
                                     .primary
-                                    .withOpacity(0.3),
-                                width: 1,
+                                    .withOpacity(0.1),
+                                border: Border.all(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primary
+                                      .withOpacity(0.3),
+                                  width: 1,
+                                ),
                               ),
-                            ),
-                            padding: const EdgeInsets.all(4),
-                            child: Text(
-                              'K=${file.getK()}   N=${file.getN()}   ${file.getTests()} Tests',
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            )),
-                        const SizedBox(width: 10),
-                        Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.1),
-                              border: Border.all(
+                              padding: const EdgeInsets.all(4),
+                              child: Text(
+                                'K=${file.getK()}   N=${file.getN()}   ${file.getTests()} Tests',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              )),
+                          const SizedBox(width: 10),
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
                                 color: Theme.of(context)
                                     .colorScheme
                                     .primary
-                                    .withOpacity(0.3),
-                                width: 1,
+                                    .withOpacity(0.1),
+                                border: Border.all(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primary
+                                      .withOpacity(0.3),
+                                  width: 1,
+                                ),
                               ),
-                            ),
-                            padding: const EdgeInsets.all(4),
-                            child: Text(
-                              file.getType(),
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            )),
-                      ],
-                    ),
-                  ],
-                ),
-                const Expanded(child: SizedBox()),
-                IconButton(
-                  onPressed: () {
-                    file.play(ref);
-                  },
-                  icon: const Icon(
-                    Icons.play_arrow,
-                    color: Colors.white,
+                              padding: const EdgeInsets.all(4),
+                              child: Text(
+                                file.getType(),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              )),
+                        ],
+                      ),
+                    ],
                   ),
-                  splashColor: Theme.of(context)
-                      .navigationDrawerTheme
-                      .backgroundColor!
-                      .withOpacity(0.3),
-                  highlightColor: Theme.of(context)
-                      .navigationDrawerTheme
-                      .backgroundColor!
-                      .withOpacity(0.2),
-                  style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all(
-                      const Size(50, 50),
+                  const Expanded(child: SizedBox()),
+                  IconButton(
+                    onPressed: () {
+                      file.play(ref);
+                    },
+                    icon: const Icon(
+                      Icons.play_arrow,
+                      color: Colors.white,
                     ),
-                    backgroundColor: MaterialStateProperty.all(
-                      Theme.of(context).colorScheme.primary,
+                    splashColor: Theme.of(context)
+                        .navigationDrawerTheme
+                        .backgroundColor!
+                        .withOpacity(0.3),
+                    highlightColor: Theme.of(context)
+                        .navigationDrawerTheme
+                        .backgroundColor!
+                        .withOpacity(0.2),
+                    style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(
+                        const Size(50, 50),
+                      ),
+                      backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
